@@ -12,7 +12,7 @@ function PagesLayout({ children }) {
    return (
       <div className="font-rokhRegular">
          {isMobile ? <MobileHeader /> : <Header />}
-         <main>{children}</main>
+         <main className="bg-bgColor">{children}</main>
       </div>
    );
 }

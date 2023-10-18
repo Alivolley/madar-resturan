@@ -26,6 +26,9 @@ module.exports = {
             customOrange: '#FB9B40',
             buttonPink: '#FEF1E4',
             textOrange: '#8E4603',
+            crimson: '#6F0B0B',
+            textGray: '#6E7E85',
+            bgColor: '#f8f8f8',
          },
 
          backgroundImage: {
