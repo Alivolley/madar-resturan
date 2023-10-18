@@ -7,9 +7,9 @@ const getDesignTokens = mode => ({
    palette: {
       mode,
 
-      // textGray: {
-      //    main: '#A0AEC0',
-      // },
+      customOrange: {
+         main: '#FB9B40',
+      },
    },
 
    components: {

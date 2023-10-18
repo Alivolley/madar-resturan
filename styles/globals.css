@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer {
+   @font-face {
+      font-family: 'rokhFaNum';
+      src: url('../assets/fonts/RokhFaNum-Regular.ttf') format('truetype');
+   }
+
+   @font-face {
+      font-family: 'rokhRegular';
+      src: url('../assets/fonts/Rokh-Regular.otf') format('truetype');
+   }
+   @font-face {
+      font-family: 'elMessiri';
+      src: url('../assets/fonts/ElMessiri-Regular.ttf') format('truetype');
+   }
+}

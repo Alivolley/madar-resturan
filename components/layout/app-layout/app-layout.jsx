@@ -10,7 +10,9 @@ import store from '../../../store/store';
 // Components
 import getDesignTokens from '@/configs/theme';
 
+// Styles
 import 'react-toastify/dist/ReactToastify.css';
+import PagesLayout from '../pages-layout/pages-layout';
 
 function AppLayout({ children }) {
    const themeConfig = createTheme(getDesignTokens('light'));
@@ -19,7 +21,7 @@ function AppLayout({ children }) {
       <Provider store={store}>
          <ThemeProvider theme={themeConfig}>
             <ToastContainer />
-            {children}
+            <PagesLayout>{children}</PagesLayout>
          </ThemeProvider>
       </Provider>
    );
