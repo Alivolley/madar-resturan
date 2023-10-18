@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+   corePlugins: {
+      preflight: false,
+   },
    content: [
       './pages/**/*.{js,ts,jsx,tsx,mdx}',
       './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,6 +10,10 @@ module.exports = {
    ],
    theme: {
       extend: {
+         '@layer base': {
+            button: [],
+         },
+
          screens: {
             customXs: '350px',
             customSm: '600px',
@@ -17,6 +24,8 @@ module.exports = {
 
          colors: {
             customOrange: '#FB9B40',
+            buttonPink: '#FEF1E4',
+            textOrange: '#8E4603',
          },
 
          backgroundImage: {

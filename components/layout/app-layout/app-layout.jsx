@@ -8,11 +8,11 @@ import { Provider } from 'react-redux';
 import store from '../../../store/store';
 
 // Components
-import getDesignTokens from '@/configs/theme';
+import PagesLayout from '../pages-layout/pages-layout';
 
 // Styles
+import getDesignTokens from '@/configs/theme';
 import 'react-toastify/dist/ReactToastify.css';
-import PagesLayout from '../pages-layout/pages-layout';
 
 function AppLayout({ children }) {
    const themeConfig = createTheme(getDesignTokens('light'));

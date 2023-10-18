@@ -32,7 +32,10 @@ function MobileHeader() {
             <div className="flex items-center justify-between">
                <div className="space-y-2 text-white">
                   <p className="font-elMessiri">سلام علی ازقندی خوشتیپ</p>
-                  <button type="button" className="flex items-center gap-1 font-rokhRegular text-[11px]">
+                  <button
+                     type="button"
+                     className="flex items-center gap-1 border-none bg-transparent p-0 font-rokhRegular text-[11px] text-inherit"
+                  >
                      <FmdGoodOutlinedIcon fontSize="inherit" />
                      <p className="max-w-[190px] truncate pt-1 customXs:max-w-[240px]">
                         مشهد - خیابان فرامرز -فرامرز عمت - کوچخه12 -پلاک12
@@ -56,7 +59,7 @@ function MobileHeader() {
             </div>
             <div
                className="absolute inset-x-0 top-[135%] flex h-12 items-center justify-center
-             overflow-hidden rounded-2xl bg-white font-rokhRegular shadow-searchBoxShadow"
+             overflow-hidden rounded-2xl bg-white shadow-searchBoxShadow"
             >
                <IconButton sx={{ width: '40', height: '100%', borderRadius: 0 }}>
                   <Image src={searchIcon} alt="search Icon" />
@@ -64,7 +67,7 @@ function MobileHeader() {
                <input
                   type="text"
                   placeholder="جست و جو در رستوران مادر"
-                  className="h-full grow p-4 outline-none placeholder:text-sm placeholder:text-[#7E8AAB]"
+                  className="h-full grow border-none p-4 font-rokhRegular outline-none placeholder:text-sm placeholder:text-[#7E8AAB]"
                />
             </div>
          </div>
