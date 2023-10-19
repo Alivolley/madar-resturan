@@ -17,7 +17,7 @@ import categoryTitleIcon from '../../../../assets/icons/categoriesIcon.svg';
 
 function Categories() {
    return (
-      <section className="mb-80">
+      <section>
          <div className="mb-6 items-center justify-between space-y-1 text-center customMd:flex">
             <p
                className="relative mx-auto w-fit font-elMessiri text-2xl font-bold customMd:mx-0
