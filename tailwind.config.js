@@ -24,7 +24,9 @@ module.exports = {
 
          colors: {
             customOrange: '#FB9B40',
+            customOrange2: '#FA7E0A',
             buttonPink: '#FEF1E4',
+            buttonPink2: '#FEE2C9',
             textOrange: '#8E4603',
             crimson: '#6F0B0B',
             textGray: '#6E7E85',

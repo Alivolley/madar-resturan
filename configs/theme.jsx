@@ -2,7 +2,9 @@ const getDesignTokens = mode => ({
    direction: 'rtl',
    colors: {
       customOrange: '#FB9B40',
+      customOrange2: '#FA7E0A',
       buttonPink: '#FEF1E4',
+      buttonPink2: '#FEE2C9',
       textOrange: '#8E4603',
       crimson: '#6F0B0B',
       textGray: '#6E7E85',
@@ -14,6 +16,9 @@ const getDesignTokens = mode => ({
 
       customOrange: {
          main: '#FB9B40',
+      },
+      customOrange2: {
+         main: '#FA7E0A',
       },
       buttonPink: {
          main: '#FEF1E4',
@@ -29,6 +34,12 @@ const getDesignTokens = mode => ({
       },
       bgColor: {
          main: '#f8f8f8',
+      },
+      buttonPink2: {
+         main: '#FEE2C9',
+      },
+      white: {
+         main: '#ffffff',
       },
    },
 
