@@ -11,12 +11,12 @@ import AddIcon from '@mui/icons-material/Add';
 import foodTestPic from '../../../assets/images/20230820194614fpdl.jpg';
 import discountShape from '../../../assets/icons/discount-shape.svg';
 
-function FoodCard() {
+function FoodCardFirstTemplate({ className }) {
    return (
-      <div className="w-[178px] shrink-0 rounded-[10px] bg-white p-2 customMd:w-[200px]">
+      <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
          <Link href="/" className="relative block h-32 w-full">
-            <Image src={foodTestPic} alt="food" className="h-full w-full rounded-[10px] object-cover" />
-            <div className="absolute right-1 top-1 flex items-center rounded-[10px] bg-[#C1F7EE] px-1.5  pt-1 text-xs">
+            <Image src={foodTestPic} alt="food" className="h-full w-full rounded-10 object-cover" />
+            <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5  pt-1 text-xs">
                <div>
                   <Image src={discountShape} alt="discount" />
                </div>
@@ -32,8 +32,10 @@ function FoodCard() {
          >
             ۳۰۰ گرم برنج، یک پرس خورشت قورمه تهیه شده از ۴۰ گرم گوشت گوساله تازه
          </Link>
-
-         <Link href="/" className="mt-2 block text-left font-rokhFaNum text-sm font-bold text-[#D39090] line-through">
+         <Link
+            href="/"
+            className="mt-2 block h-5 text-left font-rokhFaNum text-sm font-bold text-[#D39090] line-through"
+         >
             {Number('420000').toLocaleString('fa-IR')}
          </Link>
 
@@ -62,4 +64,4 @@ function FoodCard() {
    );
 }
 
-export default FoodCard;
+export default FoodCardFirstTemplate;

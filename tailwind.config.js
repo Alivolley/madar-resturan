@@ -16,6 +16,7 @@ module.exports = {
 
          screens: {
             customXs: '350px',
+            custom400: '400px',
             customSm: '600px',
             customMd: '900px',
             customLg: '1200px',
@@ -45,6 +46,9 @@ module.exports = {
          },
          boxShadow: {
             searchBoxShadow: '0px 4px 7px 0px #C2C2C236',
+         },
+         borderRadius: {
+            10: '10px',
          },
       },
    },

@@ -36,10 +36,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic8} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -49,10 +49,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic1} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -62,10 +62,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic2} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -75,10 +75,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic3} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -88,10 +88,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic5} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -101,10 +101,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic6} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -114,10 +114,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic4} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
@@ -127,10 +127,10 @@ function Categories() {
             <Link
                href="/"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
-               customMd:flex-1 customMd:space-y-2 customMd:rounded-[10px] customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
+               customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-[10px]
+                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
                 bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
                >
                   <Image src={pic7} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
