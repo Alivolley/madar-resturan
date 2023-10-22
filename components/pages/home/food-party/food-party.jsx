@@ -62,7 +62,7 @@ function FoodParty() {
                   </RtlProvider>
                </Link>
             </div>
-            <div className="mt-5 flex items-center gap-5 overflow-auto pr-5 customMd:pr-0">
+            <div className="mt-5 flex items-center gap-5 overflow-auto pb-5 pr-5 customMd:pr-0">
                <FoodCard />
                <FoodCard />
                <FoodCard />

@@ -22,4 +22,25 @@
          cursor: default;
       }
    }
+
+   /* width */
+   ::-webkit-scrollbar {
+      width: 8px;
+      height: 5px;
+   }
+
+   /* Track */
+   ::-webkit-scrollbar-track {
+      background: #a7a3a3;
+   }
+
+   /* Handle */
+   ::-webkit-scrollbar-thumb {
+      background: #e27005;
+   }
+
+   /* Handle on hover */
+   ::-webkit-scrollbar-thumb:hover {
+      background: #fb9b40;
+   }
 }
