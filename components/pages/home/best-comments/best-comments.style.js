@@ -17,8 +17,6 @@ const BestCommentsStyle = styled.div(() => ({
       backgroundImage: 'none !important',
    },
 
-   /// ///////
-
    '.swiper-button-prev,.swiper-button-next': {
       backgroundColor: '#ffffff',
       color: '#ff6600',
