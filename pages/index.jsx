@@ -8,6 +8,7 @@ import Categories from '@/components/pages/home/categories/categories';
 import OurRestaurantSwiper from '@/components/pages/home/our-restaurant-swiper/our-restaurant-swiper';
 import FoodParty from '@/components/pages/home/food-party/food-party';
 import DailyMenu from '@/components/pages/home/daily-menu/daily-menu';
+import BestComments from '@/components/pages/home/best-comments/best-comments';
 
 export default function Home() {
    return (
@@ -26,6 +27,9 @@ export default function Home() {
          </div>
          <div className="mt-28 px-5 customMd:px-[60px]">
             <DailyMenu />
+         </div>
+         <div className="mt-28">
+            <BestComments />
          </div>
       </div>
    );

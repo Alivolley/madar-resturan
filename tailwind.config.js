@@ -50,6 +50,9 @@ module.exports = {
          borderRadius: {
             10: '10px',
          },
+         fontSize: {
+            10: '10px',
+         },
       },
    },
    plugins: [],

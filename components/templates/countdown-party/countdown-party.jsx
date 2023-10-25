@@ -25,19 +25,19 @@ function CountdownParty({ initialCount = 0 }) {
                <p className="flex h-9 w-9 items-center justify-center rounded-md bg-white font-bold text-customOrange">
                   {days}
                </p>
-               <p className="text-[10px]">روز</p>
+               <p className="text-10">روز</p>
             </div>
             <div className="flex flex-col items-center gap-2">
                <p className="flex h-9 w-9 items-center justify-center rounded-md bg-white font-bold text-customOrange">
                   {hours}
                </p>
-               <p className="text-[10px]">ساعت</p>
+               <p className="text-10">ساعت</p>
             </div>
             <div className="flex flex-col items-center gap-2">
                <p className="flex h-9 w-9 items-center justify-center rounded-md bg-white font-bold text-customOrange">
                   {minutes}
                </p>
-               <p className="text-[10px]">دقیقه</p>
+               <p className="text-10">دقیقه</p>
             </div>
          </>
       );
