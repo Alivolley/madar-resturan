@@ -5,6 +5,8 @@ import Image from 'next/image';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 
 // Assets
 import { IconButton } from '@mui/material';
@@ -25,7 +27,7 @@ function Footer() {
          </div>
 
          <div className="mt-10 flex justify-between gap-10 customLg:gap-[300px]">
-            <div className="flex gap-32">
+            <div className="flex gap-32 2xl:gap-[400px]">
                <div>
                   <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">دسته بندی های رستوران</p>
                   <div className="flex gap-10">
@@ -80,12 +82,24 @@ function Footer() {
             <div className="customXl:grow">
                <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">اطلاعات تماس</p>
                <div className="flex gap-10">
-                  <div className="flex flex-col gap-4">
-                     <p className="whitespace-nowrap">آدرس :</p>
-                     <p className="whitespace-nowrap">شماره تماس :</p>
+                  <div className="flex flex-col gap-9">
+                     <p className="flex items-center gap-2 whitespace-nowrap">
+                        <p className="text-[#8F0E0E]">
+                           <MyLocationIcon color="inherit" fontSize="inherit" />
+                        </p>
+                        آدرس :
+                     </p>
+                     <p className="flex items-center gap-2 whitespace-nowrap">
+                        <p className="text-[#8F0E0E]">
+                           <PhoneOutlinedIcon color="inherit" fontSize="inherit" />
+                        </p>
+                        شماره تماس :
+                     </p>
                   </div>
-                  <div className="flex flex-col gap-4">
-                     <address>کرمانشاه - کارمندان - ایستگاه ۵ - خیابان عصر انقلاب - روبروی استخر پاسارگاد</address>
+                  <div className="flex flex-col gap-8">
+                     <address className="h-8">
+                        کرمانشاه - کارمندان - ایستگاه ۵ - خیابان عصر انقلاب - روبروی استخر پاسارگاد
+                     </address>
                      <a className="text-right hover:font-bold hover:text-[#B31111]" href="tel:09376028877" dir="ltr">
                         ۰۹۳۷ ۶۰۲ ۸۸۷۷
                      </a>
