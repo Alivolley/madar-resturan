@@ -4,6 +4,7 @@ import { useMediaQuery, useTheme } from '@mui/material';
 // Components
 import Header from '../header/header';
 import MobileHeader from '../mobile-header/mobile-header';
+import Footer from '../footer/footer';
 
 function PagesLayout({ children }) {
    const theme = useTheme();
@@ -13,6 +14,7 @@ function PagesLayout({ children }) {
       <div className="font-rokhRegular">
          {isMobile ? <MobileHeader /> : <Header />}
          <main className="bg-bgColor">{children}</main>
+         <Footer />
       </div>
    );
 }
