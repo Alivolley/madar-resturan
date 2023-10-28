@@ -17,7 +17,7 @@ import HeaderStyle from './header.style';
 
 function Header() {
    return (
-      <header className="h-32 px-6 shadow-searchBoxShadow customMd:px-[60px]">
+      <header className="sticky top-0 z-[2] h-32 bg-white px-6 shadow-searchBoxShadow customMd:px-[60px]">
          <HeaderStyle className="flex h-full w-full">
             <Grid container alignItems="center">
                <Grid item sm={4.5} md={4.75}>
@@ -77,7 +77,7 @@ function Header() {
                         <Image src={basketIconOrange} alt="search Icon" />
                      </Fab>
 
-                     <Link href="/" className="text-textOrange">
+                     <Link href="/login" className="text-textOrange">
                         <Button variant="contained" color="buttonPink" className="h-full font-bold">
                            ورود / ثبت نام
                         </Button>

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 // MUi
 import { useMediaQuery, useTheme } from '@mui/material';
 
@@ -8,15 +10,16 @@ import Footer from '../footer/footer';
 import MobileFooter from '../mobile-footer/mobile-footer';
 
 function PagesLayout({ children }) {
+   const router = useRouter();
    const theme = useTheme();
    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
    const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
    return (
       <div className="font-rokhRegular">
-         {isMobile ? <MobileHeader /> : <Header />}
+         {router.pathname !== '/login' && (isMobile ? <MobileHeader /> : <Header />)}
          <main className="bg-bgColor">{children}</main>
-         {isTablet ? <MobileFooter /> : <Footer />}
+         {router.pathname !== '/login' && (isTablet ? <MobileFooter /> : <Footer />)}
       </div>
    );
 }

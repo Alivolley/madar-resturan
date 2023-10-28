@@ -62,12 +62,44 @@ const getDesignTokens = mode => ({
 
       MuiButton: {
          styleOverrides: {
-            root: {
+            root: props => ({
                fontFamily: 'rokhRegular',
                boxShadow: 'none',
                '&:hover': {
                   boxShadow: '0px 4px 7px 0px #C2C2C236',
                },
+               ...((props.ownerState.color === 'customOrange' || props.ownerState.color === 'customOrange2') && {
+                  color: 'white',
+               }),
+            }),
+         },
+      },
+
+      MuiInputLabel: {
+         styleOverrides: {
+            root: {
+               fontFamily: 'rokhRegular',
+            },
+         },
+      },
+      MuiInputBase: {
+         styleOverrides: {
+            root: {
+               fontFamily: 'rokhRegular',
+            },
+         },
+      },
+      MuiFormHelperText: {
+         styleOverrides: {
+            root: {
+               fontFamily: 'rokhRegular',
+            },
+         },
+      },
+      MuiOutlinedInput: {
+         styleOverrides: {
+            root: {
+               borderRadius: '10px',
             },
          },
       },

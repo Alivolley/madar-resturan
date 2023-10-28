@@ -29,7 +29,7 @@ const badgeStyles = {
 
 function MobileHeader() {
    return (
-      <header className="bg-customOrange px-5 pb-11 pt-6">
+      <header className="sticky top-0 z-[2] bg-customOrange px-5 pb-11 pt-6">
          <div className="relative">
             <div className="flex items-center justify-between">
                <div className="flex items-center gap-1">

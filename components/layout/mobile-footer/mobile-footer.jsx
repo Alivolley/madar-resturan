@@ -13,7 +13,7 @@ import footerSearch from '../../../assets/icons/footer/footer-search.svg';
 
 function MobileFooter() {
    return (
-      <footer className="fixed inset-x-0 bottom-0 bg-white">
+      <footer className="fixed inset-x-0 bottom-0 z-[2] bg-white">
          <div className="flex items-center justify-between p-4">
             <Link href="/" className="flex flex-1 flex-col items-center">
                <div>
