@@ -206,7 +206,7 @@ function Login() {
                      color="textGray"
                      onClick={() => router.back()}
                      fullWidth
-                     className="mt-4 !rounded-10 !p-3"
+                     className="!mt-4 !rounded-10 !p-3"
                   >
                      بعدا ثبت نام میکنم
                   </Button>
@@ -219,7 +219,7 @@ function Login() {
                      color="textGray"
                      onClick={() => setStep(1)}
                      fullWidth
-                     className="mt-4 !rounded-10 !p-2"
+                     className="!mt-4 !rounded-10 !p-2"
                   >
                      <div className="flex w-full items-center justify-between">
                         <BorderColorIcon className="rounded-xl bg-[#E4EAF0] p-2 text-[#626E94]" />
