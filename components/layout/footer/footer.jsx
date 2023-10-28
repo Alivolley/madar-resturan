@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+// MUI
+import { IconButton } from '@mui/material';
+
 // Icons
 import TelegramIcon from '@mui/icons-material/Telegram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -9,7 +12,6 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 
 // Assets
-import { IconButton } from '@mui/material';
 import footerLogo from '../../../assets/images/footerLogo.png';
 
 function Footer() {
@@ -83,18 +85,18 @@ function Footer() {
                <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">اطلاعات تماس</p>
                <div className="flex gap-10">
                   <div className="flex flex-col gap-9">
-                     <p className="flex items-center gap-2 whitespace-nowrap">
+                     <div className="flex items-center gap-2 whitespace-nowrap">
                         <p className="text-[#8F0E0E]">
                            <MyLocationIcon color="inherit" fontSize="inherit" />
                         </p>
                         آدرس :
-                     </p>
-                     <p className="flex items-center gap-2 whitespace-nowrap">
+                     </div>
+                     <div className="flex items-center gap-2 whitespace-nowrap">
                         <p className="text-[#8F0E0E]">
                            <PhoneOutlinedIcon color="inherit" fontSize="inherit" />
                         </p>
                         شماره تماس :
-                     </p>
+                     </div>
                   </div>
                   <div className="flex flex-col gap-8">
                      <address className="h-8">
