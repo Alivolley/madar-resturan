@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LoadingButton } from '@mui/lab';
+import CachedIcon from '@mui/icons-material/Cached';
 
 function CountdownLogin({ initialCount = 0, onComplete = () => {}, onResetClick = () => {}, loading = false }) {
    const [count, setCount] = useState(initialCount);
@@ -30,16 +31,16 @@ function CountdownLogin({ initialCount = 0, onComplete = () => {}, onResetClick 
    return (
       <div className="flex items-center justify-between">
          <LoadingButton
-            variant="outlined"
+            variant="text"
             type="submit"
-            size="medium"
             onClick={resetHandler}
             disabled={count !== 0}
             loading={loading}
+            startIcon={<CachedIcon />}
          >
             درخواست مجدد
          </LoadingButton>
-         <p>{formatTime(count)}</p>
+         <p className="font-rokhFaNum tracking-[1px]">{formatTime(count)}</p>
       </div>
    );
 }

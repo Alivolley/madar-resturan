@@ -21,6 +21,7 @@ import backGround2 from '../../assets/images/layer.png';
 
 // Components
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
+import CountdownLogin from '@/components/templates/countdown-Login/countdown-Login';
 
 function Login() {
    const theme = useTheme();
@@ -122,52 +123,62 @@ function Login() {
                            helperText={errors?.phone_number?.message}
                         />
                      )}
-                     {step === 2 && (
-                        <Controller
-                           control={control}
-                           name="code"
-                           rules={{
-                              required: 'لفطا کد را وارد کنید',
-                              minLength: {
-                                 value: 6,
-                                 message: 'لفطا کد را وارد کنید',
-                              },
-                           }}
-                           render={({ field: { onChange, value }, fieldState }) => (
-                              <>
-                                 <MuiOtpInput
-                                    value={value}
-                                    onChange={onChange}
-                                    length={6}
-                                    dir="ltr"
-                                    gap={1}
-                                    TextFieldsProps={{
-                                       color: 'customOrange2',
-                                       error: !!fieldState.invalid,
-                                       type: 'number',
-                                    }}
-                                    sx={{
-                                       input: {
-                                          fontFamily: 'rokhFaNum',
-                                          MozAppearance: 'textfield',
-                                          appearance: 'textfield',
-                                          '&::-webkit-inner-spin-button': {
-                                             WebkitAppearance: 'none',
-                                             appearance: 'none',
-                                          },
-                                       },
-                                    }}
-                                    onComplete={handleSubmit(formSubmit)}
-                                 />
 
-                                 {fieldState.invalid
-                                    ? errors?.code?.message && (
-                                         <FormHelperText error>{errors?.code?.message}</FormHelperText>
-                                      )
-                                    : null}
-                              </>
-                           )}
-                        />
+                     {step === 2 && (
+                        <>
+                           <Controller
+                              control={control}
+                              name="code"
+                              rules={{
+                                 required: 'لفطا کد را وارد کنید',
+                                 minLength: {
+                                    value: 6,
+                                    message: 'لفطا کد را وارد کنید',
+                                 },
+                              }}
+                              render={({ field: { onChange, value }, fieldState }) => (
+                                 <>
+                                    <MuiOtpInput
+                                       value={value}
+                                       onChange={onChange}
+                                       length={6}
+                                       dir="ltr"
+                                       gap={1}
+                                       TextFieldsProps={{
+                                          color: 'customOrange2',
+                                          error: !!fieldState.invalid,
+                                          type: 'number',
+                                       }}
+                                       sx={{
+                                          input: {
+                                             fontFamily: 'rokhFaNum',
+                                             MozAppearance: 'textfield',
+                                             appearance: 'textfield',
+                                             '&::-webkit-inner-spin-button': {
+                                                WebkitAppearance: 'none',
+                                                appearance: 'none',
+                                             },
+                                          },
+                                       }}
+                                       onComplete={handleSubmit(formSubmit)}
+                                    />
+
+                                    {fieldState.invalid
+                                       ? errors?.code?.message && (
+                                            <FormHelperText error>{errors?.code?.message}</FormHelperText>
+                                         )
+                                       : null}
+                                 </>
+                              )}
+                           />
+
+                           <CountdownLogin
+                              initialCount={120}
+                              onComplete={() => {}}
+                              onResetClick={() => {}}
+                              loading={false}
+                           />
+                        </>
                      )}
 
                      <LoadingButton
