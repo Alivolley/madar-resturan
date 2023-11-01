@@ -17,7 +17,7 @@ export default function Home() {
             <Image src={bannerPic} alt="banner" className="h-full w-full" />
          </div>
          <div className="mt-14 px-5 customMd:px-[60px]">
-            <Categories />
+            <Categories haveTitle />
          </div>
          <div className="mt-28 customMd:px-[60px]">
             <FoodParty />

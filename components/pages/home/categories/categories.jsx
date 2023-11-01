@@ -15,26 +15,28 @@ import pic7 from '../../../../assets/images/categories/Group 34823.png';
 import pic8 from '../../../../assets/images/categories/Group 34827.png';
 import categoryTitleIcon from '../../../../assets/icons/categoriesIcon.svg';
 
-function Categories() {
+function Categories({ haveTitle }) {
    return (
       <section>
-         <div className="mb-6 items-center justify-between space-y-1 text-center customMd:flex">
-            <p
-               className="relative mx-auto w-fit font-elMessiri text-2xl font-bold customMd:mx-0
+         {haveTitle && (
+            <div className="mb-6 items-center justify-between space-y-1 text-center customMd:flex">
+               <p
+                  className="relative mx-auto w-fit font-elMessiri text-2xl font-bold customMd:mx-0
              customMd:border-b-[3px] customMd:border-solid customMd:border-customOrange"
-            >
-               دسته بندی ها
-               <Image src={categoryTitleIcon} alt="category title" className="absolute -right-2 top-[-1px]" />
-            </p>
-            <Link href="/" className="hidden items-center gap-2 text-sm text-textGray customMd:flex">
-               مشاهده همه
-               <KeyboardArrowLeftIcon fontSize="small" />
-            </Link>
-            <p className="text-sm text-textGray customMd:hidden">دسته بندی غذاها در رستوران مادر</p>
-         </div>
+               >
+                  دسته بندی ها
+                  <Image src={categoryTitleIcon} alt="category title" className="absolute -right-2 top-[-1px]" />
+               </p>
+               <Link href="/category/some" className="hidden items-center gap-2 text-sm text-textGray customMd:flex">
+                  مشاهده همه
+                  <KeyboardArrowLeftIcon fontSize="small" />
+               </Link>
+               <p className="text-sm text-textGray customMd:hidden">دسته بندی غذاها در رستوران مادر</p>
+            </div>
+         )}
          <div className="flex flex-wrap items-center justify-center gap-1.5 customSm:gap-2 customMd:gap-4">
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -47,7 +49,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">منوی روز</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -60,7 +62,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">چلو ها</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -73,7 +75,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">خورشت ها</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -86,7 +88,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">آش و سوپ</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -99,7 +101,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">غذای ایرانی</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -112,7 +114,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">غذای فرنگی</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
@@ -125,7 +127,7 @@ function Categories() {
                <p className="text-center text-xs customLg:text-base">سالاد و پیش غذا</p>
             </Link>
             <Link
-               href="/"
+               href="/category/some"
                className="flex flex-col items-center space-y-4 transition-all duration-200 
                customMd:flex-1 customMd:space-y-2 customMd:rounded-10 customMd:bg-white customMd:py-2 customMd:hover:bg-crimson customMd:hover:text-white"
             >
