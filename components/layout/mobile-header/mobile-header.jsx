@@ -123,7 +123,7 @@ function MobileHeader() {
                               <div className="text-[#C66204]">
                                  <HistoryIcon fontSize="small" color="inherit" />
                               </div>
-                              <p>تاریخچه جستجو</p>
+                              <p className="text-sm">تاریخچه جستجو</p>
                            </div>
                            <IconButton>
                               <DeleteOutlineIcon />
@@ -166,7 +166,7 @@ function MobileHeader() {
                            <div className="text-[#C66204]">
                               <Image src={starIcon} alt="favorite" />
                            </div>
-                           <p>جستجو های پر طرفدار</p>
+                           <p className="text-sm">جستجو های پر طرفدار</p>
                         </div>
 
                         <div className="mt-4 flex flex-wrap items-center gap-2">

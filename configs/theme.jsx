@@ -9,6 +9,7 @@ const getDesignTokens = mode => ({
       crimson: '#6F0B0B',
       textGray: '#6E7E85',
       bgColor: '#f8f8f8',
+      gold: '#FBD100',
    },
 
    palette: {
@@ -40,6 +41,9 @@ const getDesignTokens = mode => ({
       },
       white: {
          main: '#ffffff',
+      },
+      gold: {
+         main: '#FBD100',
       },
    },
 

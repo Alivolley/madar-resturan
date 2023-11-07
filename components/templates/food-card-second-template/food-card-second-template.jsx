@@ -14,7 +14,7 @@ import discountShape from '../../../assets/icons/discount-shape.svg';
 function FoodCardSecondTemplate({ className }) {
    return (
       <div className={`flex shrink-0 gap-3 rounded-xl bg-white p-2 ${className}`}>
-         <Link href="/" className="relative block h-full w-[184px]">
+         <Link href="/product/some" className="relative block h-full w-[184px]">
             <Image src={foodTestPic} alt="food" className="h-full w-full rounded-xl object-cover" />
             <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5 pt-1 text-xs">
                <div>
@@ -25,21 +25,21 @@ function FoodCardSecondTemplate({ className }) {
          </Link>
          <div className="w-[184px]">
             <Link
-               href="/"
+               href="/product/some"
                className="my-3 h-4 overflow-hidden font-elMessiri font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]"
                title="رنگین پلو با سالاد شیرازی"
             >
                رنگین پلو با سالاد شیرازی
             </Link>
             <Link
-               href="/"
+               href="/product/some"
                className="h-8 overflow-hidden text-xs text-textGray [-webkit-box-orient:vertical] [display:-webkit-box] [-webkit-line-clamp:2]"
             >
                ۳۰۰ گرم برنج، یک پرس خورشت قورمه تهیه شده از ۴۰ گرم گوشت گوساله تازه
             </Link>
             <div className="mt-6">
                <Link
-                  href="/"
+                  href="/product/some"
                   className="mt-2 block h-5 text-left font-rokhFaNum text-sm font-bold text-[#D39090] line-through"
                >
                   {Number('420000').toLocaleString('fa-IR')}
@@ -59,7 +59,7 @@ function FoodCardSecondTemplate({ className }) {
                      <AddIcon color="customOrange" fontSize="small" />
                   </LoadingButton>
                   <Link
-                     href="/"
+                     href="/product/some"
                      className="mt-2 flex h-[25px] items-center gap-1 rounded bg-[#C1F7EE] px-2 text-sm text-[#139983]"
                   >
                      <p>{Number('378000').toLocaleString('fa-IR')}</p>
