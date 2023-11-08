@@ -33,6 +33,7 @@ module.exports = {
             textGray: '#6E7E85',
             bgColor: '#f8f8f8',
             gold: '#FBD100',
+            buttonBgGray: '#E4EAF0',
          },
 
          backgroundImage: {

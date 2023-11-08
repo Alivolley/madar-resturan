@@ -1,7 +1,9 @@
+import Link from 'next/link';
+import { useState } from 'react';
 import Image from 'next/image';
 
 // MUI
-import { Grid, IconButton } from '@mui/material';
+import { Button, Grid, IconButton } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // Icons
@@ -12,12 +14,25 @@ import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
 import OutboxOutlinedIcon from '@mui/icons-material/OutboxOutlined';
 import ForumIcon from '@mui/icons-material/Forum';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
+import categoryTitleIcon from '../../assets/icons/categoriesIcon.svg';
 import productDetailPic from '../../assets/images/productDetailPic.png';
 import productDetailPic2 from '../../assets/images/20230820194614fpdl.jpg';
+import amazingPic from '../../assets/images/amaz.png';
+
+// Components
+import Comment from '@/components/pages/product-detail/comment/comment';
+import AddComment from '@/components/pages/product-detail/add-comment/add-comment';
+import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
+import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
 
 function ProductDetail() {
+   const [showAddCommentSection, setShowAddCommentSection] = useState(false);
+
    return (
       <main className="px-5 pb-32 pt-14 customMd:px-[60px]">
          <Grid container spacing={{ md: 6 }}>
@@ -133,32 +148,102 @@ function ProductDetail() {
             </Grid>
          </Grid>
 
-         <div>
-            <div className="mt-7 flex items-center justify-between border-b border-t-[5px] border-solid border-[#E4EAF0] py-4 ">
-               <div className="flex items-center gap-2">
-                  <div>
-                     <ForumIcon fontSize="inherit" color="customOrange" />
-                  </div>
-                  <p className="font-bold text-customOrange">نظرات کاربران</p>
-               </div>
+         <div className="mt-9 border-y-[5px] border-solid border-[#E4EAF0] py-10">
+            <Grid container spacing={{ md: 6 }}>
+               <Grid item xs={12} md={7}>
+                  {showAddCommentSection ? (
+                     <>
+                        <div className="mb-7 flex items-center justify-between border-b border-solid border-[#E4EAF0] py-4">
+                           <div className="flex items-center gap-2">
+                              <div>
+                                 <AddCommentIcon fontSize="inherit" />
+                              </div>
+                              <p className="font-bold">افزودن دیدگاه جدید</p>
+                           </div>
+                        </div>
 
-               <div>
-                  <LoadingButton
-                     variant="contained"
-                     size="small"
-                     color="customOrange2"
-                     loading={false}
-                     fullWidth
-                     className="!rounded-10 !p-2"
-                  >
-                     <div className="flex w-full items-center justify-between">
-                        <p className="pl-7">ثبت نظر جدید</p>
+                        <div>
+                           <AddComment setShowAddCommentSection={setShowAddCommentSection} />
+                        </div>
+                     </>
+                  ) : (
+                     <>
+                        <div className="mb-7 flex items-center justify-between border-b border-solid border-[#E4EAF0] py-4">
+                           <div className="flex items-center gap-2">
+                              <div>
+                                 <ForumIcon fontSize="inherit" color="customOrange" />
+                              </div>
+                              <p className="font-bold text-customOrange">نظرات کاربران</p>
+                           </div>
 
-                        <OutboxOutlinedIcon className="rounded-xl bg-white p-1 text-customOrange" />
+                           <div>
+                              <Button
+                                 variant="contained"
+                                 size="small"
+                                 color="customOrange2"
+                                 loading={false}
+                                 fullWidth
+                                 className="!rounded-10 !p-2"
+                                 onClick={() => setShowAddCommentSection(true)}
+                              >
+                                 <div className="flex w-full items-center justify-between">
+                                    <p className="pl-7">ثبت نظر جدید</p>
+
+                                    <OutboxOutlinedIcon className="rounded-xl bg-white p-1 text-customOrange" />
+                                 </div>
+                              </Button>
+                           </div>
+                        </div>
+
+                        <div className="space-y-8">
+                           <Comment />
+                           <Comment />
+                           <Comment />
+                           <div className="flex justify-center">
+                              <RtlProvider>
+                                 <LoadingButton color="crimson" endIcon={<KeyboardArrowDownOutlinedIcon />}>
+                                    مشاهده ۲۳ کامنت دیگر
+                                 </LoadingButton>
+                              </RtlProvider>
+                           </div>
+                        </div>
+                     </>
+                  )}
+               </Grid>
+               <Grid item xs={12} md={5}>
+                  <div className="hidden flex-col gap-5 customMd:flex">
+                     <div>
+                        <Image src={amazingPic} alt="amazing" className="w-full" />
                      </div>
-                  </LoadingButton>
-               </div>
-            </div>
+                     <div>
+                        <Image src={amazingPic} alt="amazing" className="w-full" />
+                     </div>
+                  </div>
+               </Grid>
+            </Grid>
+         </div>
+
+         <div className="mb-6 mt-14 items-center justify-between space-y-1 border-b border-solid border-[#E4EAF0] text-center customMd:flex">
+            <p
+               className="relative mx-auto w-fit font-elMessiri text-2xl font-bold customMd:mx-0
+             customMd:border-b-[3px] customMd:border-solid customMd:border-customOrange"
+            >
+               محصولات مشابه
+               <Image src={categoryTitleIcon} alt="category title" className="absolute -right-2 top-[-1px]" />
+            </p>
+            <Link href="/category/some" className="hidden items-center gap-2 text-sm text-textGray customMd:flex">
+               مشاهده همه
+               <KeyboardArrowLeftIcon fontSize="small" />
+            </Link>
+         </div>
+
+         <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
+            <FoodCardFirstTemplate className="w-[200px]" />
+            <FoodCardFirstTemplate className="w-[200px]" />
+            <FoodCardFirstTemplate className="w-[200px]" />
+            <FoodCardFirstTemplate className="w-[200px]" />
+            <FoodCardFirstTemplate className="w-[200px]" />
+            <FoodCardFirstTemplate className="w-[200px]" />
          </div>
       </main>
    );

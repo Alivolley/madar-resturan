@@ -10,6 +10,7 @@ const getDesignTokens = mode => ({
       textGray: '#6E7E85',
       bgColor: '#f8f8f8',
       gold: '#FBD100',
+      buttonBgGray: '#E4EAF0',
    },
 
    palette: {
@@ -44,6 +45,9 @@ const getDesignTokens = mode => ({
       },
       gold: {
          main: '#FBD100',
+      },
+      buttonBgGray: {
+         main: '#E4EAF0',
       },
    },
 

@@ -31,6 +31,7 @@ module.exports = {
       'no-plusplus': 'off',
       'import/no-unresolved': 'off',
       'import/extensions': 'off',
+      'no-nested-ternary': 'off',
    },
 
    overrides: [
