@@ -18,7 +18,7 @@ function PagesLayout({ children }) {
    return (
       <div className="font-rokhRegular">
          {router.pathname !== '/login' && (isMobile ? <MobileHeader /> : <Header />)}
-         <main className="bg-bgColor">{children}</main>
+         <main className="bg-bgColor pb-32 customMd:pb-0">{children}</main>
          {router.pathname !== '/login' && (isTablet ? <MobileFooter /> : <Footer />)}
       </div>
    );

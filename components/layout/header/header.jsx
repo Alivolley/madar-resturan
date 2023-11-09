@@ -98,16 +98,18 @@ function Header() {
                      >
                         <Image src={searchIconOrange} alt="search Icon" />
                      </Fab>
-                     <Fab
-                        color="buttonPink"
-                        sx={{
-                           width: '47px',
-                           height: '47px',
-                           borderRadius: '10px',
-                        }}
-                     >
-                        <Image src={basketIconOrange} alt="basket Icon" />
-                     </Fab>
+                     <Link href="/basket">
+                        <Fab
+                           color="buttonPink"
+                           sx={{
+                              width: '47px',
+                              height: '47px',
+                              borderRadius: '10px',
+                           }}
+                        >
+                           <Image src={basketIconOrange} alt="basket Icon" />
+                        </Fab>
+                     </Link>
 
                      <Link href="/login" className="text-textOrange">
                         <Button variant="contained" color="buttonPink" className="h-full font-bold">

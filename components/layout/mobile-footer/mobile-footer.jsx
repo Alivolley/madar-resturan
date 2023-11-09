@@ -27,7 +27,7 @@ function MobileFooter() {
                </div>
                <p className="text-xs text-[#FCA95C]">جست و جو</p>
             </Link>
-            <Link href="/" className="flex flex-1 flex-col items-center">
+            <Link href="/basket" className="flex flex-1 flex-col items-center">
                <div>
                   <Image src={footerBasket} alt="footer icon" />
                </div>
