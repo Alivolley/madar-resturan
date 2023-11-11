@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 // MUI
@@ -14,11 +15,13 @@ function BasketProductCard() {
    return (
       <div className="flex items-center justify-between rounded-2xl bg-white p-5">
          <div className="flex flex-1 gap-3">
-            <div className="hidden h-32 w-32 shrink-0 rounded-10 customMd:block">
+            <Link href="/product/some" className="hidden h-32 w-32 shrink-0 rounded-10 customMd:block">
                <Image src={foodPic} alt="food" className="h-full w-full rounded-10" />
-            </div>
+            </Link>
             <div className="flex flex-col gap-3 customMd:mt-4">
-               <p className="text-sm font-bold customMd:text-base">ماکارانی با سالاد شیرازی</p>
+               <Link href="/product/some" className="text-sm font-bold customMd:text-base">
+                  ماکارانی با سالاد شیرازی
+               </Link>
                <p className="hidden h-12 overflow-hidden text-xs text-[#66839A] [-webkit-box-orient:vertical] [-webkit-line-clamp:3] customMd:[display:-webkit-box]">
                   ۴۵۰ گرم ماکارونی، تهیه شده از گوشت گوساله تازه و قارچ +سالاد شیرازی
                </p>

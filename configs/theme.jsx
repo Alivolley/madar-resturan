@@ -64,6 +64,7 @@ const getDesignTokens = mode => ({
          styleOverrides: {
             root: {
                boxShadow: 'none',
+               zIndex: 1,
             },
          },
       },
