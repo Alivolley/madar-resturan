@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 // MUI
 import { Button, TextField } from '@mui/material';
 
@@ -9,8 +11,11 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 // Components
 import BasketAddressCard from '../basket-address-card/basket-address-card';
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
+import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 
 function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
+   const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
+
    return (
       <section className="mb-7 customMd:mb-0">
          <div className="flex flex-col gap-7 rounded-2xl bg-white px-8 py-4 customMd:flex-row customMd:justify-between">
@@ -71,7 +76,11 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                      </div>
                      <div className="hidden customMd:block">
                         <RtlProvider>
-                           <Button className="!text-[#626E94]" endIcon={<AddIcon />}>
+                           <Button
+                              className="!text-[#626E94]"
+                              endIcon={<AddIcon />}
+                              onClick={() => setShowBasketAddressModal(true)}
+                           >
                               افزودن آدرس جدید
                            </Button>
                         </RtlProvider>
@@ -83,17 +92,21 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                      <BasketAddressCard />
 
                      <div className="mt-4 customMd:hidden">
-                        <RtlProvider>
-                           <Button
-                              className="!text-[#626E94]"
-                              endIcon={<AddIcon />}
-                              fullWidth
-                              variant="contained"
-                              color="buttonBgGray"
-                           >
-                              افزودن آدرس جدید
-                           </Button>
-                        </RtlProvider>
+                        <Button
+                           variant="contained"
+                           type="submit"
+                           size="large"
+                           color="buttonBgGray"
+                           fullWidth
+                           className="!rounded-10 !p-2"
+                           onClick={() => setShowBasketAddressModal(true)}
+                        >
+                           <div className="flex w-full items-center justify-between text-[#626E94]">
+                              <p>افزودن آدرس جدید</p>
+
+                              <AddIcon className="rounded-xl bg-[#BDCEDE] p-2 text-[#626E94]" />
+                           </div>
+                        </Button>
                      </div>
                   </div>
                </>
@@ -112,6 +125,8 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                </RtlProvider>
             </div>
          </div>
+
+         <BasketAddressModal show={showBasketAddressModal} onClose={() => setShowBasketAddressModal(false)} />
       </section>
    );
 }

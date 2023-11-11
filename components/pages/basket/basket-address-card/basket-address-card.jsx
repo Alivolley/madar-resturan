@@ -1,5 +1,7 @@
 /* eslint-disable no-self-compare */
 /* eslint-disable no-constant-condition */
+import { useState } from 'react';
+
 // MUI
 import { IconButton } from '@mui/material';
 
@@ -7,7 +9,14 @@ import { IconButton } from '@mui/material';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
+// Components
+import BasketAddressModal from '../basket-address-modal/basket-address-modal';
+import BasketDeleteAddressModal from '../basket-delete-address-modal/basket-delete-address-modal';
+
 function BasketAddressCard() {
+   const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
+   const [showDeleteAddressModal, setShowDeleteAddressModal] = useState(false);
+
    return (
       <div className="flex items-center justify-between rounded bg-white py-4 customMd:px-8">
          <button type="button" className="cursor-pointer border-none bg-transparent font-rokhRegular outline-none">
@@ -25,13 +34,16 @@ function BasketAddressCard() {
          </button>
 
          <div className="flex items-center">
-            <IconButton>
+            <IconButton onClick={() => setShowBasketAddressModal(true)}>
                <BorderColorIcon className="text-sm" />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={() => setShowDeleteAddressModal(true)}>
                <DeleteForeverOutlinedIcon className="text-base" />
             </IconButton>
          </div>
+
+         <BasketAddressModal show={showBasketAddressModal} onClose={() => setShowBasketAddressModal(false)} isEdit />
+         <BasketDeleteAddressModal show={showDeleteAddressModal} onClose={() => setShowDeleteAddressModal(false)} />
       </div>
    );
 }
