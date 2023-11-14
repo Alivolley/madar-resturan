@@ -13,7 +13,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 import BasketDeleteAddressModal from '../basket-delete-address-modal/basket-delete-address-modal';
 
-function BasketAddressCard() {
+function BasketAddressCard({ isClickable = false }) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const [showDeleteAddressModal, setShowDeleteAddressModal] = useState(false);
 
@@ -21,11 +21,13 @@ function BasketAddressCard() {
       <div className="flex items-center justify-between rounded bg-white py-4 customMd:px-8">
          <button type="button" className="cursor-pointer border-none bg-transparent font-rokhRegular outline-none">
             <div className="flex items-center gap-2 text-base font-bold customMd:text-lg">
-               <div
-                  className={`h-4 w-4 rounded-full border-[4px] border-solid ${
-                     'inPerson' === 'inPerson' ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
-                  }`}
-               />
+               {isClickable && (
+                  <div
+                     className={`h-4 w-4 rounded-full border-[4px] border-solid ${
+                        'inPerson' === 'inPerson' ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
+                     }`}
+                  />
+               )}
                علی ازقندی
             </div>
             <p className="text-xs text-[#7E8AAB] customMd:text-sm">

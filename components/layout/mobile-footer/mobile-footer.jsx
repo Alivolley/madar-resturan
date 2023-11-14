@@ -39,7 +39,7 @@ function MobileFooter() {
                </div>
                <p className="text-xs text-[#FCA95C]">منو</p>
             </Link>
-            <Link href="/" className="flex flex-1 flex-col items-center">
+            <Link href="/profile" className="flex flex-1 flex-col items-center">
                <div>
                   <Image src={footerProfile} alt="footer icon" />
                </div>

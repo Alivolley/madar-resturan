@@ -88,8 +88,8 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                   </div>
 
                   <div className="flex flex-col gap-2">
-                     <BasketAddressCard />
-                     <BasketAddressCard />
+                     <BasketAddressCard isClickable />
+                     <BasketAddressCard isClickable />
 
                      <div className="mt-4 customMd:hidden">
                         <Button

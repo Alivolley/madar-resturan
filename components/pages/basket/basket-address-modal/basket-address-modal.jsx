@@ -51,7 +51,7 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
                <p className="grow text-center text-lg font-bold">{isEdit ? 'ویرایش آدرس' : 'ثبت آدرس جدید'}</p>
             </div>
 
-            <p className="my-6 rounded-10 bg-[#F5F8FC] px-4 py-3 font-bold">اطلاعات ارسال</p>
+            <p className="my-6 rounded-10 bg-[#F5F8FC] px-4 py-3 font-bold">اطلاعات آدرس</p>
 
             <RtlProvider>
                <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">

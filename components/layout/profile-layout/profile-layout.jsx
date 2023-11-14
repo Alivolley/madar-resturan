@@ -19,8 +19,8 @@ function ProfileLayout({ children }) {
    const pathName = usePathname();
 
    return (
-      <div className="flex gap-6 py-16 customMd:px-[60px]">
-         <aside className="w-[378px] shrink-0 rounded-2xl bg-white px-11 py-7">
+      <div className="gap-6 px-5 py-16 customMd:flex customMd:px-[60px]">
+         <aside className="hidden w-[378px] shrink-0 rounded-2xl bg-white px-11 py-7 customMd:block">
             <div className="flex flex-col items-center border-b border-solid border-[#E4EAF0] pb-7">
                <div className="h-[75px] w-[75px]">
                   <Image alt="profile" src={profilePic} className="h-full w-full rounded-full" />
@@ -112,7 +112,7 @@ function ProfileLayout({ children }) {
                </div>
             </Button>
          </aside>
-         <section>{children}</section>
+         <section className="grow rounded-2xl bg-white px-11 py-7">{children}</section>
       </div>
    );
 }

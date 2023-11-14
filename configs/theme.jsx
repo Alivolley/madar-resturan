@@ -105,6 +105,19 @@ const getDesignTokens = mode => ({
             },
          },
       },
+
+      MuiTab: {
+         styleOverrides: {
+            root: props => ({
+               fontFamily: 'rokhRegular',
+               ...(props['aria-selected'] &&
+                  props.customOrange && {
+                     color: '#FB9B40 !important',
+                  }),
+            }),
+         },
+      },
+
       MuiOutlinedInput: {
          styleOverrides: {
             root: {
