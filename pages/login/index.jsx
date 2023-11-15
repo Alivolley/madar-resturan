@@ -13,6 +13,10 @@ import { MuiOtpInput } from 'mui-one-time-password-input';
 import WestIcon from '@mui/icons-material/West';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
+// Redux
+import { useDispatch } from 'react-redux';
+import { changeToLoginTrue } from '@/store/reducers/loginStatusReducer';
+
 // Assets
 import logo from '../../assets/images/loginLogo.png';
 import logo2 from '../../assets/images/Vector.png';
@@ -23,12 +27,17 @@ import backGround2 from '../../assets/images/layer.png';
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import CountdownLogin from '@/components/templates/countdown-Login/countdown-Login';
 
+// Api
+import useVerificationCode from '@/apis/login/useVerificationCode';
+
 function Login() {
    const theme = useTheme();
    const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
    const [step, setStep] = useState(1);
    const router = useRouter();
+   const dispatch = useDispatch();
+   const { trigger: verificationCodeTrigger, isMutating: verificationCodeIsMutating } = useVerificationCode();
 
    const {
       register,
@@ -45,8 +54,12 @@ function Login() {
    });
 
    const formSubmit = data => {
-      console.log(data);
-      setStep(2);
+      verificationCodeTrigger(data, {
+         onSuccess: () => {
+            dispatch(changeToLoginTrue());
+            router.back();
+         },
+      });
    };
 
    return (
@@ -99,6 +112,7 @@ function Login() {
                            color="customOrange"
                            type="number"
                            inputProps={{ className: '!font-rokhFaNum' }}
+                           disabled={verificationCodeIsMutating}
                            sx={{
                               input: {
                                  MozAppearance: 'textfield',
@@ -186,7 +200,7 @@ function Login() {
                         type="submit"
                         size="large"
                         color="customOrange2"
-                        loading={false}
+                        loading={verificationCodeIsMutating}
                         fullWidth
                         className="!rounded-10 !p-2"
                      >
@@ -207,6 +221,7 @@ function Login() {
                      onClick={() => router.back()}
                      fullWidth
                      className="!mt-4 !rounded-10 !p-3"
+                     disabled={verificationCodeIsMutating}
                   >
                      بعدا ثبت نام میکنم
                   </Button>

@@ -1,14 +1,31 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 // MUI
-import { Button, Dialog, Fab, FormControl, Grid, IconButton, InputAdornment, TextField } from '@mui/material';
+import {
+   Button,
+   Dialog,
+   Fab,
+   FormControl,
+   Grid,
+   Grow,
+   IconButton,
+   InputAdornment,
+   Paper,
+   Popper,
+   TextField,
+} from '@mui/material';
 
 // Icons
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 // Assets
 import { useForm } from 'react-hook-form';
@@ -21,9 +38,16 @@ import headerLogo from '../../../assets/images/momLogo.png';
 import HeaderStyle from './header.style';
 import RtlProvider from '../rtlProvider/rtlProvider';
 
-function Header() {
+// Components
+import LogoutModal from '@/components/templates/logout-modal/logout-modal';
+
+function Header({ isLogin }) {
    const [showSearch, setShowSearch] = useState(false);
+   const [profileDropDown, setProfileDropDown] = useState(false);
+   const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const [isUserLogin, setIsUserLogin] = useState();
    const router = useRouter();
+   const profileRef = useRef();
 
    const {
       register,
@@ -46,6 +70,10 @@ function Header() {
       router.push(`/search?food_name=${data.searchInput}`);
       closeModalHandler();
    };
+
+   useEffect(() => {
+      setIsUserLogin(isLogin);
+   }, [isLogin]);
 
    return (
       <header className="sticky top-0 z-[2] h-32 bg-white px-6 shadow-searchBoxShadow customMd:px-[60px]">
@@ -98,24 +126,106 @@ function Header() {
                      >
                         <Image src={searchIconOrange} alt="search Icon" />
                      </Fab>
-                     <Link href="/basket">
-                        <Fab
-                           color="buttonPink"
-                           sx={{
-                              width: '47px',
-                              height: '47px',
-                              borderRadius: '10px',
-                           }}
-                        >
-                           <Image src={basketIconOrange} alt="basket Icon" />
-                        </Fab>
-                     </Link>
 
-                     <Link href="/login" className="text-textOrange">
-                        <Button variant="contained" color="buttonPink" className="h-full font-bold">
-                           ورود / ثبت نام
-                        </Button>
-                     </Link>
+                     {!isUserLogin && (
+                        <Link href="/login" className="text-textOrange">
+                           <Button variant="contained" color="buttonPink" className="h-full font-bold">
+                              ورود / ثبت نام
+                           </Button>
+                        </Link>
+                     )}
+
+                     {isUserLogin && (
+                        <div className="flex items-stretch gap-3">
+                           <Link href="/basket">
+                              <Fab
+                                 color="buttonPink"
+                                 sx={{
+                                    width: '47px',
+                                    height: '47px',
+                                    borderRadius: '10px',
+                                 }}
+                              >
+                                 <Image src={basketIconOrange} alt="basket Icon" />
+                              </Fab>
+                           </Link>
+
+                           <Button
+                              variant="contained"
+                              color="buttonPink"
+                              className="h-full font-rokhFaNum font-bold text-textOrange"
+                              ref={profileRef}
+                              onMouseEnter={() => setProfileDropDown(true)}
+                              onMouseLeave={() => setProfileDropDown(false)}
+                           >
+                              <p className="flex gap-1">
+                                 <PersonOutlinedIcon fontSize="small" />
+                                 09383935719
+                                 <KeyboardArrowDownIcon
+                                    className={`transition-all duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
+                                 />
+                              </p>
+                           </Button>
+
+                           <Popper
+                              open={profileDropDown}
+                              anchorEl={profileRef.current}
+                              transition
+                              disablePortal
+                              onMouseEnter={() => setProfileDropDown(true)}
+                              onMouseLeave={() => setProfileDropDown(false)}
+                           >
+                              {({ TransitionProps, placement }) => (
+                                 <Grow
+                                    {...TransitionProps}
+                                    style={{
+                                       transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                                    }}
+                                 >
+                                    <Paper>
+                                       <div className="flex flex-col bg-buttonPink">
+                                          <Link
+                                             href="/profile/information"
+                                             className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <PersonOutlinedIcon fontSize="small" color="customOrange" />
+                                             اطلاعات حساب
+                                          </Link>
+                                          <Link
+                                             href="/profile/address"
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <LocationOnOutlinedIcon fontSize="small" color="customOrange" />
+                                             آدرس های من
+                                          </Link>
+                                          <Link
+                                             href="/profile/orders"
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <AccountBalanceWalletOutlinedIcon fontSize="small" color="customOrange" />
+                                             پیگیری سفارش ها
+                                          </Link>
+                                          <Button
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setShowLogoutModal(true)}
+                                          >
+                                             <LogoutOutlinedIcon
+                                                fontSize="small"
+                                                color="customOrange"
+                                                className="rotate-180"
+                                             />
+                                             خروج از حساب کاربری
+                                          </Button>
+                                       </div>
+                                    </Paper>
+                                 </Grow>
+                              )}
+                           </Popper>
+                        </div>
+                     )}
                   </div>
                </Grid>
             </Grid>
@@ -166,6 +276,8 @@ function Header() {
                </div>
             </div>
          </Dialog>
+
+         <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </header>
    );
 }

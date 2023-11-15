@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
-const isLogin = Boolean(Cookies.get('isLogin'));
+const isLogin = Boolean(Cookies.get('madar_isLogin'));
 
 const loginStatusReducer = createSlice({
    name: 'loginStatusReducer',

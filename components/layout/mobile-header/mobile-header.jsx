@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
 // MUI
-import { Badge, IconButton, Collapse } from '@mui/material';
+import { Badge, IconButton, Collapse, Button, Popper, Grow, Paper, ClickAwayListener } from '@mui/material';
 
 // Icons
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
@@ -13,12 +13,19 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import HistoryIcon from '@mui/icons-material/History';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 // Assets
 import documentIcon from '../../../assets/icons/document-text.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
 import headerLogo from '../../../assets/images/momLogo.png';
 import starIcon from '../../../assets/icons/star.svg';
+
+// Components
+import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -34,8 +41,11 @@ const badgeStyles = {
    },
 };
 
-function MobileHeader() {
+function MobileHeader({ isLogin }) {
    const [showSearchCollapse, setShowSearchCollapse] = useState(false);
+   const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const [profileDropDown, setProfileDropDown] = useState(false);
+   const profileRef = useRef();
    const router = useRouter();
    const foodName = router.query.food_name;
 
@@ -63,33 +73,109 @@ function MobileHeader() {
                   <Link href="/" className="h-11 w-11">
                      <Image src={headerLogo} alt="header logo" className="h-full w-full" />
                   </Link>
-                  <div className="space-y-2 text-white">
-                     <p className="font-elMessiri text-[13px] customXs:text-base">سلام علی ازقندی خوشتیپ</p>
-                     <button
-                        type="button"
-                        className="flex items-center gap-1 border-none bg-transparent p-0 font-rokhRegular text-[8px] text-inherit [word-spacing:1px]"
-                     >
-                        <FmdGoodOutlinedIcon fontSize="inherit" />
-                        <p className="max-w-[120px] truncate pt-1 customXs:max-w-[160px] ">
-                           مشهد - خیابان فرامرز -فرامرز عمت - کوچخه12 -پلاک12
-                        </p>
-                        <KeyboardArrowDownOutlinedIcon fontSize="inherit" />
-                     </button>
-                  </div>
+                  {isLogin && (
+                     <div className="space-y-2 text-white">
+                        <p className="font-elMessiri text-[13px] customXs:text-base">سلام علی ازقندی خوشتیپ</p>
+                        <button
+                           type="button"
+                           className="flex items-center gap-1 border-none bg-transparent p-0 font-rokhRegular text-[8px] text-inherit [word-spacing:1px]"
+                           ref={profileRef}
+                           onClick={() => setProfileDropDown(true)}
+                        >
+                           <FmdGoodOutlinedIcon fontSize="inherit" />
+                           <p className="max-w-[120px] truncate pt-1 customXs:max-w-[160px] ">
+                              مشهد - خیابان فرامرز -فرامرز عمت - کوچخه12 -پلاک12
+                           </p>
+                           <KeyboardArrowDownOutlinedIcon
+                              fontSize="small"
+                              className={`transition-all duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
+                           />
+                        </button>
+
+                        <Popper
+                           open={profileDropDown}
+                           anchorEl={profileRef.current}
+                           transition
+                           disablePortal
+                           sx={{
+                              zIndex: 1,
+                           }}
+                        >
+                           {({ TransitionProps, placement }) => (
+                              <Grow
+                                 {...TransitionProps}
+                                 style={{
+                                    transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                                 }}
+                              >
+                                 <Paper>
+                                    <ClickAwayListener onClickAway={() => setProfileDropDown(false)}>
+                                       <div className="flex flex-col rounded-md bg-buttonPink">
+                                          <Link
+                                             href="/profile/information"
+                                             className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <PersonOutlinedIcon fontSize="small" color="customOrange" />
+                                             اطلاعات حساب
+                                          </Link>
+                                          <Link
+                                             href="/profile/address"
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <LocationOnOutlinedIcon fontSize="small" color="customOrange" />
+                                             آدرس های من
+                                          </Link>
+                                          <Link
+                                             href="/profile/orders"
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <AccountBalanceWalletOutlinedIcon fontSize="small" color="customOrange" />
+                                             پیگیری سفارش ها
+                                          </Link>
+                                          <Button
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setShowLogoutModal(true)}
+                                          >
+                                             <LogoutOutlinedIcon
+                                                fontSize="small"
+                                                color="customOrange"
+                                                className="rotate-180"
+                                             />
+                                             خروج از حساب کاربری
+                                          </Button>
+                                       </div>
+                                    </ClickAwayListener>
+                                 </Paper>
+                              </Grow>
+                           )}
+                        </Popper>
+                     </div>
+                  )}
                </div>
-               <IconButton sx={{ border: '1px solid white', width: 32, height: 32 }}>
-                  <Badge
-                     badgeContent={6}
-                     color="error"
-                     anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                     }}
-                     sx={badgeStyles}
-                  >
-                     <Image src={documentIcon} alt="document Icon" />
-                  </Badge>
-               </IconButton>
+               {isLogin ? (
+                  <IconButton sx={{ border: '1px solid white', width: 32, height: 32 }}>
+                     <Badge
+                        badgeContent={6}
+                        color="error"
+                        anchorOrigin={{
+                           vertical: 'bottom',
+                           horizontal: 'right',
+                        }}
+                        sx={badgeStyles}
+                     >
+                        <Image src={documentIcon} alt="document Icon" />
+                     </Badge>
+                  </IconButton>
+               ) : (
+                  <Link href="/login">
+                     <Button variant="outlined" size="small" color="white">
+                        ورود / ثبت نام
+                     </Button>
+                  </Link>
+               )}
             </div>
 
             <div className="absolute inset-x-0 top-[135%]">
@@ -203,6 +289,7 @@ function MobileHeader() {
                </Collapse>
             </div>
          </div>
+         <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </header>
    );
 }

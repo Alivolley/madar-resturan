@@ -11,7 +11,7 @@ import footerProfileActive from '../../../assets/icons/footer/footer-profile-act
 import footerProfile from '../../../assets/icons/footer/footer-profile.svg';
 import footerSearch from '../../../assets/icons/footer/footer-search.svg';
 
-function MobileFooter() {
+function MobileFooter({ isLogin }) {
    return (
       <footer className="fixed inset-x-0 bottom-0 z-[2] bg-white">
          <div className="flex items-center justify-between p-4">

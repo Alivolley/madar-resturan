@@ -14,7 +14,7 @@ import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 // Assets
 import footerLogo from '../../../assets/images/footerLogo.png';
 
-function Footer() {
+function Footer({ isLogin }) {
    return (
       <footer className="mt-28 px-5 pb-11 customMd:px-[60px]">
          <div className="flex items-center gap-4">

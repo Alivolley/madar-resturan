@@ -45,7 +45,7 @@ function Search() {
             نتایج جستجو برای :<span className="text-[#C66204]">{foodName}</span>
          </p>
          {foodName && (
-            <form className="mt-5 hidden items-center customSm:flex" onSubmit={handleSubmit(formSubmit)}>
+            <form className="mt-5 hidden items-center customMd:flex" onSubmit={handleSubmit(formSubmit)}>
                <div className="flex w-full justify-center">
                   <RtlProvider>
                      <FormControl variant="outlined">

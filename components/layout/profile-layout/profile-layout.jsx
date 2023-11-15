@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,7 +16,11 @@ import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 // Assets
 import profilePic from '../../../assets/images/userProfile.png';
 
+// Components
+import LogoutModal from '@/components/templates/logout-modal/logout-modal';
+
 function ProfileLayout({ children }) {
+   const [showLogoutModal, setShowLogoutModal] = useState(false);
    const pathName = usePathname();
 
    return (
@@ -105,7 +110,14 @@ function ProfileLayout({ children }) {
                </Link>
             </div>
 
-            <Button variant="contained" type="submit" size="large" color="white" className="!rounded-10 !p-2">
+            <Button
+               variant="contained"
+               type="submit"
+               size="large"
+               color="white"
+               className="!rounded-10 !p-2"
+               onClick={() => setShowLogoutModal(true)}
+            >
                <div className="flex w-full items-center gap-3">
                   <LogoutOutlinedIcon className="rotate-180 rounded-xl bg-customOrange2 p-2 text-white" />
                   <p className="pt-1 font-bold text-customOrange2">خروج از حساب کاربری</p>
@@ -113,6 +125,8 @@ function ProfileLayout({ children }) {
             </Button>
          </aside>
          <section className="grow rounded-2xl bg-white px-11 py-7">{children}</section>
+
+         <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </div>
    );
 }

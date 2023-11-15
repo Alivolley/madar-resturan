@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -18,8 +19,11 @@ import userProfilePic from '../../assets/images/userProfile.png';
 
 // Components
 import ProfileLayout from '@/components/layout/profile-layout/profile-layout';
+import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 function Profile() {
+   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
    return (
       <main>
          <div className="hidden customMd:block">
@@ -134,9 +138,9 @@ function Profile() {
                   type="submit"
                   size="large"
                   color="white"
-                  loading={false}
                   fullWidth
                   className="!rounded-10 !px-4 !py-2.5"
+                  onClick={() => setShowLogoutModal(true)}
                >
                   <div className="flex w-full items-center gap-4">
                      <div className="flex h-[44px] w-[44px] items-center justify-center rounded-10 bg-buttonPink p-2 text-customOrange2">
@@ -147,6 +151,8 @@ function Profile() {
                </Button>
             </div>
          </div>
+
+         <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
       </main>
    );
 }

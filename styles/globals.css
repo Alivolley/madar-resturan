@@ -17,6 +17,10 @@
       src: url('../assets/fonts/ElMessiri-Regular.ttf') format('truetype');
    }
 
+   .Toastify__toast-container--top-right {
+      right: 0 !important;
+   }
+
    @media only screen and (max-width: 900px) {
       * {
          cursor: default !important;

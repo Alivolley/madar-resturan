@@ -13,7 +13,7 @@ import BestComments from '@/components/pages/home/best-comments/best-comments';
 export default function Home() {
    return (
       <div className="pb-20">
-         <div className="customSm:bg-customOrange customSm:p-6 customMd:p-[60px]">
+         <div className="customMd:bg-customOrange customMd:p-[60px]">
             <Image src={bannerPic} alt="banner" className="h-full w-full" />
          </div>
          <div className="mt-14 px-5 customMd:px-[60px]">
