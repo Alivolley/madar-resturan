@@ -10,14 +10,17 @@ import FoodParty from '@/components/pages/home/food-party/food-party';
 import DailyMenu from '@/components/pages/home/daily-menu/daily-menu';
 import BestComments from '@/components/pages/home/best-comments/best-comments';
 
-export default function Home() {
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
+
+export default function Home({ categoryList }) {
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
             <Image src={bannerPic} alt="banner" className="h-full w-full" />
          </div>
          <div className="mt-14 px-5 customMd:px-[60px]">
-            <Categories haveTitle />
+            <Categories haveTitle categoryList={categoryList} />
          </div>
          <div className="mt-28 customMd:px-[60px]">
             <FoodParty />
@@ -33,4 +36,14 @@ export default function Home() {
          </div>
       </div>
    );
+}
+
+export async function getStaticProps() {
+   const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
+   return {
+      props: {
+         categoryList,
+      },
+      revalidate: 300,
+   };
 }

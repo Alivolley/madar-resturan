@@ -32,6 +32,7 @@ module.exports = {
       'import/no-unresolved': 'off',
       'import/extensions': 'off',
       'no-nested-ternary': 'off',
+      'react-refresh/only-export-components': 'off',
    },
 
    overrides: [
