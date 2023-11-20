@@ -13,21 +13,22 @@ import discountShape from '../../../assets/icons/discount-shape.svg';
 function FoodCardFirstTemplate({ className, detail }) {
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
-         <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full">
+         <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full" title={detail?.title}>
             <img src={detail?.cover} alt="food" className="h-full w-full rounded-10 object-cover" />
             {detail?.percentage !== 0 && (
                <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5  pt-1 text-xs">
                   <div>
                      <Image src={discountShape} alt="discount" />
                   </div>
-                  <p>{detail?.percentage}٪</p>
+                  <p>{detail?.percentage.toLocaleString('fa-IR')}٪</p>
                </div>
             )}
          </Link>
-         <Link href={`/product/${detail?.title}`} className="my-3 block font-elMessiri font-bold">
+         <Link href={`/product/${detail?.title}`} className="my-3 block font-elMessiri font-bold" title={detail?.title}>
             {detail?.title}
          </Link>
          <Link
+            title={detail?.content}
             href={`/product/${detail?.title}`}
             className="h-8 overflow-hidden text-xs text-textGray [-webkit-box-orient:vertical] [-webkit-line-clamp:2] [display:-webkit-box]"
          >

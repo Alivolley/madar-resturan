@@ -13,7 +13,7 @@ import BestComments from '@/components/pages/home/best-comments/best-comments';
 // Configs
 import axiosInstance from '@/configs/axiosInstance';
 
-export default function Home({ categoryList, foodPartyList }) {
+export default function Home({ categoryList, foodPartyList, dailyMenuList }) {
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
@@ -31,7 +31,7 @@ export default function Home({ categoryList, foodPartyList }) {
             <OurRestaurantSwiper />
          </div>
          <div className="mt-28 px-5 customMd:px-[60px]">
-            <DailyMenu />
+            <DailyMenu dailyMenuList={dailyMenuList} />
          </div>
          <div className="mt-28">
             <BestComments />
@@ -43,11 +43,13 @@ export default function Home({ categoryList, foodPartyList }) {
 export async function getStaticProps() {
    const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
    const foodPartyList = await axiosInstance('restaurant/foods/list_create/?discounted=true').then(res => res.data);
+   const dailyMenuList = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
 
    return {
       props: {
          categoryList,
          foodPartyList,
+         dailyMenuList,
       },
       revalidate: 300,
    };

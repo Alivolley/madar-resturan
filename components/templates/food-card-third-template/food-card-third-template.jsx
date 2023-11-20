@@ -14,7 +14,11 @@ import discountShape from '../../../assets/icons/discount-shape.svg';
 function FoodCardThirdTemplate({ className, details }) {
    return (
       <div className={`flex max-w-[620px] shrink-0 rounded-xl bg-white p-2 ${className}`}>
-         <Link href={`/product/${details?.title}`} className="relative aspect-square h-[100px] shrink-0">
+         <Link
+            href={`/product/${details?.title}`}
+            className="relative aspect-square h-[100px] shrink-0"
+            title={details?.title}
+         >
             <img src={details?.cover} alt="food" className="h-full w-full rounded-xl object-cover" />
             {details?.percentage !== 0 && (
                <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1 pt-1 text-10">
@@ -34,12 +38,13 @@ function FoodCardThirdTemplate({ className, details }) {
                {details?.title}
             </Link>
             <Link
+               title={details?.content}
                href={`/product/${details?.title}`}
                className="h-8 overflow-hidden text-[11px] leading-4 text-textGray [-webkit-box-orient:vertical] [display:-webkit-box] [-webkit-line-clamp:2]"
             >
                {details?.content}
             </Link>
-            <div className="flex items-center gap-1.5">
+            <div className="mt-4 flex items-center gap-1.5">
                <IconButton className="border border-solid border-customOrange" sx={{ width: '18px', height: '18px' }}>
                   <AddIcon color="customOrange" className="text-sm" />
                </IconButton>
