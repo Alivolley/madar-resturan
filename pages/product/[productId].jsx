@@ -181,7 +181,6 @@ function ProductDetail() {
                                  variant="contained"
                                  size="small"
                                  color="customOrange2"
-                                 loading={false}
                                  fullWidth
                                  className="!rounded-10 !p-2"
                                  onClick={() => setShowAddCommentSection(true)}

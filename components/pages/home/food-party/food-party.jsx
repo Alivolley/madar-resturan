@@ -13,11 +13,10 @@ import shapeIcon from '../../../../assets/images/a.png';
 import plate from '../../../../assets/images/Group 34826.png';
 
 // Components
-import CountdownParty from '@/components/templates/countdown-party/countdown-party';
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
-function FoodParty() {
+function FoodParty({ foodPartyList }) {
    return (
       <div>
          <div className="px-5 customMd:hidden customMd:px-[60px]">
@@ -30,9 +29,6 @@ function FoodParty() {
                      <p className="font-elMessiri">فود پارتی</p>
                      <p className="text-[9px] [word-spacing:1px]">جدیدترین تخفیفات غذاها</p>
                   </div>
-               </div>
-               <div>
-                  <CountdownParty initialCount={400000} />
                </div>
             </div>
          </div>
@@ -63,18 +59,9 @@ function FoodParty() {
                </Link>
             </div>
             <div className="mt-5 flex items-center gap-5 overflow-auto pb-5 pr-5 customMd:pr-0">
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
-               <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" />
+               {foodPartyList?.result?.map(item => (
+                  <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" key={item.id} detail={item} />
+               ))}
             </div>
          </div>
       </div>

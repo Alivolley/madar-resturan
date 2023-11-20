@@ -13,7 +13,7 @@ import BestComments from '@/components/pages/home/best-comments/best-comments';
 // Configs
 import axiosInstance from '@/configs/axiosInstance';
 
-export default function Home({ categoryList }) {
+export default function Home({ categoryList, foodPartyList }) {
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
@@ -22,9 +22,11 @@ export default function Home({ categoryList }) {
          <div className="mt-14 px-5 customMd:px-[60px]">
             <Categories haveTitle categoryList={categoryList} />
          </div>
-         <div className="mt-28 customMd:px-[60px]">
-            <FoodParty />
-         </div>
+         {foodPartyList?.result?.length ? (
+            <div className="mt-28 customMd:px-[60px]">
+               <FoodParty foodPartyList={foodPartyList} />
+            </div>
+         ) : null}
          <div className="mt-28">
             <OurRestaurantSwiper />
          </div>
@@ -40,9 +42,12 @@ export default function Home({ categoryList }) {
 
 export async function getStaticProps() {
    const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
+   const foodPartyList = await axiosInstance('restaurant/foods/list_create/?discounted=true').then(res => res.data);
+
    return {
       props: {
          categoryList,
+         foodPartyList,
       },
       revalidate: 300,
    };
