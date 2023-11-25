@@ -22,7 +22,7 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList }) {
          <div className="mt-14 px-5 customMd:px-[60px]">
             <Categories haveTitle categoryList={categoryList} />
          </div>
-         {foodPartyList?.result?.length ? (
+         {foodPartyList?.length ? (
             <div className="mt-28 customMd:px-[60px]">
                <FoodParty foodPartyList={foodPartyList} />
             </div>
@@ -42,7 +42,7 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList }) {
 
 export async function getStaticProps() {
    const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
-   const foodPartyList = await axiosInstance('restaurant/foods/list_create/?discounted=true').then(res => res.data);
+   const foodPartyList = await axiosInstance('restaurant/foods/discounted/').then(res => res.data);
    const dailyMenuList = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
 
    return {

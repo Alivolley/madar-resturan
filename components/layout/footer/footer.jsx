@@ -14,17 +14,22 @@ import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 // Assets
 import footerLogo from '../../../assets/images/footerLogo.png';
 
-function Footer({ isLogin }) {
+// Apis
+import useCategories from '@/apis/categories/useCategories';
+
+function Footer() {
+   const { data: categoryList } = useCategories();
+
    return (
-      <footer className="mt-28 px-5 pb-11 customMd:px-[60px]">
+      <footer className="mt-7 px-5 pb-11 customMd:px-[60px]">
          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3">
                <Image src={footerLogo} alt="footer logo" />
                <div className="space-y-1">
                   <p className="font-elMessiri text-lg font-bold text-[#8F0E0E]">رستوران مادر</p>
                   <p className="text-sm text-[#626E94]">غذاهای لذیذ و خانگی</p>
                </div>
-            </div>
+            </Link>
             <div className="h-[1px] grow bg-[#BDCEDE]" />
          </div>
 
@@ -34,32 +39,38 @@ function Footer({ isLogin }) {
                   <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">دسته بندی های رستوران</p>
                   <div className="flex gap-10">
                      <div className="flex flex-col gap-4">
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
+                        <Link
+                           className="whitespace-nowrap hover:font-bold hover:text-[#B31111]"
+                           href="/category/منوی روز/1"
+                        >
                            منوی روز
                         </Link>
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           خورشت ها
-                        </Link>
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           آش و سوپ
-                        </Link>
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           غذای ایرانی
-                        </Link>
+                        {categoryList?.map(
+                           (item, index) =>
+                              index < 4 && (
+                                 <Link
+                                    className="whitespace-nowrap hover:font-bold hover:text-[#B31111]"
+                                    href={`/category/${item?.title}/1`}
+                                    key={item?.id}
+                                 >
+                                    {item?.title}
+                                 </Link>
+                              )
+                        )}
                      </div>
                      <div className="flex flex-col gap-4">
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           چلوها
-                        </Link>
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           غذای فرنگی
-                        </Link>
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           نوشیدنی
-                        </Link>
-                        <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                           سالاد پیش غذا
-                        </Link>
+                        {categoryList?.map(
+                           (item, index) =>
+                              index >= 4 && (
+                                 <Link
+                                    className="whitespace-nowrap hover:font-bold hover:text-[#B31111]"
+                                    href={`/category/${item?.title}/1`}
+                                    key={item?.id}
+                                 >
+                                    {item?.title}
+                                 </Link>
+                              )
+                        )}
                      </div>
                   </div>
                </div>

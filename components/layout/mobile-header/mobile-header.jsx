@@ -17,15 +17,21 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // Assets
-import documentIcon from '../../../assets/icons/document-text.svg';
 import searchIcon from '../../../assets/icons/search-normal.svg';
 import headerLogo from '../../../assets/images/momLogo.png';
 import starIcon from '../../../assets/icons/star.svg';
 
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
+
+// Apis
+import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -48,6 +54,9 @@ function MobileHeader({ isLogin }) {
    const profileRef = useRef();
    const router = useRouter();
    const foodName = router.query.food_name;
+   const userInfo = useSelector(state => state?.userInfoReducer);
+   // eslint-disable-next-line no-unused-vars
+   const getUserInfo = useGetUserInfo(isLogin);
 
    const { register, handleSubmit, setValue } = useForm({
       defaultValues: {
@@ -75,7 +84,9 @@ function MobileHeader({ isLogin }) {
                   </Link>
                   {isLogin && (
                      <div className="space-y-2 text-white">
-                        <p className="font-elMessiri text-[13px] customXs:text-base">سلام علی ازقندی خوشتیپ</p>
+                        <p className="font-rokhFaNum text-[13px] font-bold customXs:text-base">
+                           سلام {userInfo?.name || userInfo?.phone_number}
+                        </p>
                         <button
                            type="button"
                            className="flex items-center gap-1 border-none bg-transparent p-0 font-rokhRegular text-[8px] text-inherit [word-spacing:1px]"
@@ -84,7 +95,7 @@ function MobileHeader({ isLogin }) {
                         >
                            <FmdGoodOutlinedIcon fontSize="inherit" />
                            <p className="max-w-[120px] truncate pt-1 customXs:max-w-[160px] ">
-                              مشهد - خیابان فرامرز -فرامرز عمت - کوچخه12 -پلاک12
+                              {userInfo?.default_address}
                            </p>
                            <KeyboardArrowDownOutlinedIcon
                               fontSize="small"
@@ -166,7 +177,7 @@ function MobileHeader({ isLogin }) {
                         }}
                         sx={badgeStyles}
                      >
-                        <Image src={documentIcon} alt="document Icon" />
+                        <ShoppingBasketOutlinedIcon color="white" fontSize="small" />
                      </Badge>
                   </IconButton>
                ) : (

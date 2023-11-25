@@ -1,11 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
-
-// MUI
-import { Button } from '@mui/material';
-
-// Icons
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 // Assets
 import foodPartyIcon from '../../../../assets/icons/foodParty.svg';
@@ -14,7 +7,6 @@ import plate from '../../../../assets/images/Group 34826.png';
 
 // Components
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
-import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
 function FoodParty({ foodPartyList }) {
    return (
@@ -44,22 +36,9 @@ function FoodParty({ foodPartyList }) {
                <div className="">
                   <Image src={plate} alt="food party" className="h-full w-full" />
                </div>
-               <Link href="/" className="text-[#8E4603]">
-                  <RtlProvider>
-                     <Button
-                        variant="contained"
-                        color="white"
-                        endIcon={<KeyboardBackspaceIcon />}
-                        className="!py-3 !font-bold"
-                        sx={{ borderRadius: '10px' }}
-                     >
-                        ورود به فود پارتی
-                     </Button>
-                  </RtlProvider>
-               </Link>
             </div>
             <div className="mt-5 flex items-center gap-5 overflow-auto pb-5 pr-5 customMd:pr-0">
-               {foodPartyList?.result?.map(item => (
+               {foodPartyList?.map(item => (
                   <FoodCardFirstTemplate className="w-[178px] customMd:w-[200px]" key={item.id} detail={item} />
                ))}
             </div>

@@ -41,7 +41,7 @@ function DailyMenu({ dailyMenuList }) {
             <p className="w-fit border-b-[3px] border-solid border-customOrange font-elMessiri text-2xl font-bold">
                منوی روز
             </p>
-            <Link href="/" className="flex items-center gap-2 text-sm text-textGray">
+            <Link href="/category/منوی روز/1" className="flex items-center gap-2 text-sm text-textGray">
                مشاهده همه
                <KeyboardArrowLeftIcon fontSize="small" />
             </Link>
@@ -63,7 +63,7 @@ function DailyMenu({ dailyMenuList }) {
                      <Image src={testPic1} alt="daily menu" className="h-full w-full object-cover" />
                   </div>
 
-                  <Link href="/" className="flex items-center px-6 py-5 font-bold text-[#050F2C]">
+                  <Link href="/category/منوی روز/1" className="flex items-center px-6 py-5 font-bold text-[#050F2C]">
                      مشاهده ی منوی روز <KeyboardArrowLeftIcon />
                   </Link>
                </div>

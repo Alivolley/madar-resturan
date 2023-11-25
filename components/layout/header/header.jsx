@@ -27,6 +27,9 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // Assets
 import { useForm } from 'react-hook-form';
 import searchIconOrange from '../../../assets/icons/search-normal-orange.svg';
@@ -41,6 +44,9 @@ import RtlProvider from '../rtlProvider/rtlProvider';
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
+// Apis
+import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
+
 function Header({ isLogin }) {
    const [showSearch, setShowSearch] = useState(false);
    const [profileDropDown, setProfileDropDown] = useState(false);
@@ -48,6 +54,9 @@ function Header({ isLogin }) {
    const [isUserLogin, setIsUserLogin] = useState();
    const router = useRouter();
    const profileRef = useRef();
+   const userInfo = useSelector(state => state?.userInfoReducer);
+   // eslint-disable-next-line no-unused-vars
+   const getUserInfo = useGetUserInfo(isLogin);
 
    const {
       register,
@@ -160,7 +169,7 @@ function Header({ isLogin }) {
                            >
                               <p className="flex gap-1">
                                  <PersonOutlinedIcon fontSize="small" />
-                                 09383935719
+                                 {userInfo?.name || userInfo?.phone_number}
                                  <KeyboardArrowDownIcon
                                     className={`transition-all duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
                                  />

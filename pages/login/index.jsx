@@ -57,7 +57,7 @@ function Login() {
       verificationCodeTrigger(data, {
          onSuccess: () => {
             dispatch(changeToLoginTrue());
-            router.back();
+            window.history.back();
          },
       });
    };

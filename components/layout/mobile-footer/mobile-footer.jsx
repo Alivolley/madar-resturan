@@ -21,30 +21,34 @@ function MobileFooter({ isLogin }) {
                </div>
                <p className="text-xs text-[#FCA95C]">خانه</p>
             </Link>
-            <Link href="/" className="flex flex-1 flex-col items-center">
+            <Link href="/some" className="flex flex-1 flex-col items-center">
                <div>
                   <Image src={footerSearch} alt="footer icon" />
                </div>
                <p className="text-xs text-[#FCA95C]">جست و جو</p>
             </Link>
-            <Link href="/basket" className="flex flex-1 flex-col items-center">
-               <div>
-                  <Image src={footerBasket} alt="footer icon" />
-               </div>
-               <p className="text-xs text-[#FCA95C]">سبد خرید</p>
-            </Link>
+            {isLogin && (
+               <Link href="/basket" className="flex flex-1 flex-col items-center">
+                  <div>
+                     <Image src={footerBasket} alt="footer icon" />
+                  </div>
+                  <p className="text-xs text-[#FCA95C]">سبد خرید</p>
+               </Link>
+            )}
             <Link href="/" className="flex flex-1 flex-col items-center">
                <div>
                   <Image src={footerMessage} alt="footer icon" />
                </div>
                <p className="text-xs text-[#FCA95C]">منو</p>
             </Link>
-            <Link href="/profile" className="flex flex-1 flex-col items-center">
-               <div>
-                  <Image src={footerProfile} alt="footer icon" />
-               </div>
-               <p className="text-xs text-[#FCA95C]">پروفایل</p>
-            </Link>
+            {isLogin && (
+               <Link href="/profile" className="flex flex-1 flex-col items-center">
+                  <div>
+                     <Image src={footerProfile} alt="footer icon" />
+                  </div>
+                  <p className="text-xs text-[#FCA95C]">پروفایل</p>
+               </Link>
+            )}
          </div>
       </footer>
    );

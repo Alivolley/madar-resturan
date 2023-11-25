@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import useSWRMutation from 'swr/mutation';
 import Cookies from 'js-cookie';
+
 import axiosInstance from '@/configs/axiosInstance';
 
 const useVerificationCode = () =>
@@ -15,10 +16,6 @@ const useVerificationCode = () =>
                Cookies.set('madar_accessToken', innerRes?.data?.access, { expires: 7 });
                Cookies.set('madar_refreshToken', innerRes?.data?.refresh, { expires: 7 });
                Cookies.set('madar_isLogin', true, { expires: 7 });
-               axiosInstance.interceptors.request.use(config => {
-                  config.headers.Authorization = `Bearer ${res?.data?.access}`;
-                  return config;
-               });
             });
       })
    );
