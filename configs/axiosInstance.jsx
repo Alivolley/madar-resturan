@@ -38,28 +38,26 @@ axiosInstance.interceptors.response.use(
       console.log(error);
       const originalReq = error.config;
 
-      if (error?.response?.data?.detail === 'Given token not valid for any token type') {
+      if (error?.response?.status === 401) {
          // access expired
-         // if (refreshToken) {
-         //    const res = await axiosInstance.post('accounts/token/refresh/', {
-         //       refresh: refreshToken,
-         //    });
-         //    Cookies.set('madar_accessToken', res.data.access, { expires: 7 });
-         //    originalReq.headers.Authorization = `Bearer ${res.data.access}`;
-         //    return axiosInstance(originalReq);
-         // }
-         // Cookies.remove('madar_accessToken');
-         // Cookies.remove('madar_refreshToken');
-         // Cookies.remove('madar_isLogin');
-         // axiosInstance.interceptors.response.clear();
-         // location.href = '/login';
-      } else if (error?.response?.data?.detail === 'Token is invalid or expired') {
+         if (refreshToken) {
+            const res = await axiosInstance.post('accounts/token/refresh/', {
+               refresh: refreshToken,
+            });
+            Cookies.set('madar_accessToken', res.data.access, { expires: 7 });
+            originalReq.headers.Authorization = `Bearer ${res.data.access}`;
+            return axiosInstance(originalReq);
+         }
+         Cookies.remove('madar_accessToken');
+         Cookies.remove('madar_refreshToken');
+         Cookies.remove('madar_isLogin');
+         location.href = '/login';
+      } else if (error?.response?.status === 410) {
          // refresh expired
-         // Cookies.remove('madar_accessToken');
-         // Cookies.remove('madar_refreshToken');
-         // Cookies.remove('madar_isLogin');
-         // axiosInstance.interceptors.response.clear();
-         // location.href = '/login';
+         Cookies.remove('madar_accessToken');
+         Cookies.remove('madar_refreshToken');
+         Cookies.remove('madar_isLogin');
+         location.href = '/login';
       } else if (error?.response?.data?.detail) {
          toast.error(error?.response?.data?.detail, {
             style: {
