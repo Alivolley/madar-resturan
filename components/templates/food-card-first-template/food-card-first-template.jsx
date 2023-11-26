@@ -11,8 +11,6 @@ import AddIcon from '@mui/icons-material/Add';
 import discountShape from '../../../assets/icons/discount-shape.svg';
 
 function FoodCardFirstTemplate({ className, detail }) {
-   console.log(detail);
-
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
          <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full" title={detail?.title}>

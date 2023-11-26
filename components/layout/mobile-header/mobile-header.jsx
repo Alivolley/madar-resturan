@@ -95,7 +95,7 @@ function MobileHeader({ isLogin }) {
                         >
                            <FmdGoodOutlinedIcon fontSize="inherit" />
                            <p className="max-w-[120px] truncate pt-1 customXs:max-w-[160px] ">
-                              {userInfo?.default_address}
+                              {userInfo?.default_address || 'آدرس های من'}
                            </p>
                            <KeyboardArrowDownOutlinedIcon
                               fontSize="small"
