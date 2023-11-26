@@ -11,6 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import discountShape from '../../../assets/icons/discount-shape.svg';
 
 function FoodCardFirstTemplate({ className, detail }) {
+   console.log(detail);
+
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
          <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full" title={detail?.title}>
@@ -36,9 +38,15 @@ function FoodCardFirstTemplate({ className, detail }) {
          </Link>
          <Link
             href={`/product/${detail?.title}`}
+            className="mt-2 block h-5 text-left font-rokhFaNum text-xs font-bold text-[#D39090]"
+         >
+            {detail?.stock <= 5 ? `${detail?.stock} عدد موجود است` : null}
+         </Link>
+         <Link
+            href={`/product/${detail?.title}`}
             className="mt-2 block h-5 text-left font-rokhFaNum text-sm font-bold text-[#D39090] line-through"
          >
-            {Number(detail?.before_discount_price).toLocaleString('fa-IR')}
+            {detail?.percentage ? Number(detail?.before_discount_price).toLocaleString('fa-IR') : null}
          </Link>
 
          <div className="flex items-end justify-between">

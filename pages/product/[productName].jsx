@@ -20,8 +20,6 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
 import categoryTitleIcon from '../../assets/icons/categoriesIcon.svg';
-import productDetailPic from '../../assets/images/productDetailPic.png';
-import productDetailPic2 from '../../assets/images/20230820194614fpdl.jpg';
 import amazingPic from '../../assets/images/amaz.png';
 
 // Components
@@ -29,53 +27,25 @@ import Comment from '@/components/pages/product-detail/comment/comment';
 import AddComment from '@/components/pages/product-detail/add-comment/add-comment';
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
+import axiosInstance from '@/configs/axiosInstance';
 
-function ProductDetail() {
+function ProductDetail({ productDetail, categoryItems, comments }) {
    const [showAddCommentSection, setShowAddCommentSection] = useState(false);
 
+   console.log(comments);
+
    return (
-      <main className="px-5 pb-32 pt-14 customMd:px-[60px]">
+      <main className="mx-auto max-w-[1300px] px-5 pb-32 pt-14 customMd:px-[60px]">
          <Grid container spacing={{ md: 6 }}>
-            <Grid item xs={12} md={7}>
-               <div>
-                  <Grid container spacing={1}>
-                     <Grid item xs={12} md={9}>
-                        <div className="h-full rounded-10">
-                           <Image alt="food" src={productDetailPic} className="h-full w-full rounded-10 object-cover" />
-                        </div>
-                     </Grid>
-                     <Grid item xs={12} md={3}>
-                        <div className="flex items-center gap-2 customMd:h-full customMd:flex-col">
-                           <div className="flex-1 rounded-10">
-                              <Image
-                                 alt="food"
-                                 src={productDetailPic2}
-                                 className="h-full w-full rounded-10 object-cover"
-                              />
-                           </div>
-                           <div className="flex-1 rounded-10">
-                              <Image
-                                 alt="food"
-                                 src={productDetailPic2}
-                                 className="h-full w-full rounded-10 object-cover"
-                              />
-                           </div>
-                           <div className="flex-1 rounded-10">
-                              <Image
-                                 alt="food"
-                                 src={productDetailPic2}
-                                 className="h-full w-full rounded-10 object-cover"
-                              />
-                           </div>
-                        </div>
-                     </Grid>
-                  </Grid>
+            <Grid item xs={12} md={6}>
+               <div className="h-full rounded-10">
+                  <img alt="food" src={productDetail?.cover} className="h-full w-full rounded-10 object-cover" />
                </div>
             </Grid>
-            <Grid item xs={12} md={5}>
+            <Grid item xs={12} md={6}>
                <div className="mt-14 flex h-full flex-col customMd:mt-0">
                   <div className="flex items-center justify-between customMd:flex-col-reverse customMd:items-start customMd:gap-3">
-                     <p className="font-elMessiri text-lg font-bold customMd:text-2xl">رنگین پلو با سالاد کلم </p>
+                     <p className="font-elMessiri text-lg font-bold customMd:text-2xl">{productDetail?.title}</p>
                      <div className="flex items-center gap-2 whitespace-nowrap">
                         <div className="text-[#E394AA]">
                            <ForumOutlinedIcon fontSize="inherit" color="inherit" />
@@ -92,18 +62,26 @@ function ProductDetail() {
                   </div>
 
                   <div className="mt-4 customMd:mt-5">
-                     <p className="text-sm text-[#66839A] customMd:text-lg">
-                        ۳۰۰ گرم چلله و گوسفند تازه ۳۰۰ گرم چلوکره، ۱۲۰ گرم گوشت مخلوط گوساله و گوسفند تازه
-                     </p>
+                     <p className="text-sm text-[#66839A] customMd:text-lg">{productDetail?.content}</p>
                   </div>
 
                   <div className="mt-5 border-t border-solid border-[#B1B5C4] pt-5 customMd:mt-auto customMd:border-none">
-                     <div className="flex items-center justify-end gap-2">
-                        <p className="rounded-md bg-[#C1F7EE] px-1 pt-1 text-xs text-[#139983]">۲۲٪</p>
-                        <p className="font-rokhFaNum text-sm font-bold text-[#8F0E0E] line-through">
-                           {Number('420000').toLocaleString('fa-IR')} تومان
+                     <div className="mb-2 items-center">
+                        <p className="font-rokhFaNum text-xs font-bold text-[#8F0E0E]">
+                           {productDetail?.stock <= 5 ? `${productDetail?.stock} عدد موجود است` : null}
                         </p>
                      </div>
+
+                     {productDetail?.percentage ? (
+                        <div className="flex items-center justify-end gap-2">
+                           <p className="rounded-md bg-[#C1F7EE] px-1 pt-1 font-rokhFaNum text-xs text-[#139983]">
+                              {productDetail?.percentage}٪
+                           </p>
+                           <p className="font-rokhFaNum text-sm font-bold text-[#8F0E0E] line-through">
+                              {Number(productDetail?.before_discount_price).toLocaleString('fa-IR')} تومان
+                           </p>
+                        </div>
+                     ) : null}
 
                      <div className="flex items-end justify-between">
                         <div className="flex items-center gap-1.5">
@@ -113,7 +91,7 @@ function ProductDetail() {
                            >
                               <AddIcon color="customOrange" className="text-sm" />
                            </IconButton>
-                           <p className="pt-1.5 font-rokhFaNum text-xl font-bold">2</p>
+                           <p className="pt-1.5 font-rokhFaNum text-xl font-bold">0</p>
                            <IconButton
                               className="border border-solid border-textGray"
                               sx={{ width: '22px', height: '22px' }}
@@ -122,7 +100,7 @@ function ProductDetail() {
                            </IconButton>
                         </div>
                         <div className="mt-2 flex items-center gap-1 rounded bg-[#C1F7EE] px-3 pt-1 text-lg font-bold text-[#139983] customMd:text-xl">
-                           <p>{Number('378000').toLocaleString('fa-IR')}</p>
+                           <p>{Number(productDetail?.price).toLocaleString('fa-IR')}</p>
                            <p>تومان</p>
                         </div>
                      </div>
@@ -230,22 +208,74 @@ function ProductDetail() {
                محصولات مشابه
                <Image src={categoryTitleIcon} alt="category title" className="absolute -right-2 top-[-1px]" />
             </p>
-            <Link href="/category/some" className="hidden items-center gap-2 text-sm text-textGray customMd:flex">
+            <Link
+               href={`/category/${productDetail?.category}/1`}
+               className="hidden items-center gap-2 text-sm text-textGray customMd:flex"
+            >
                مشاهده همه
                <KeyboardArrowLeftIcon fontSize="small" />
             </Link>
          </div>
 
-         <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-         </div>
+         {categoryItems?.length ? (
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
+               {categoryItems?.map(item => (
+                  <FoodCardFirstTemplate className="w-[200px]" key={item?.id} detail={item} />
+               ))}
+            </div>
+         ) : (
+            <p className="rounded-10 bg-buttonPink p-6 text-center font-bold">محصول مشابه ای موجود نیست</p>
+         )}
       </main>
    );
 }
 
 export default ProductDetail;
+
+export async function getStaticPaths() {
+   return {
+      paths: [
+         {
+            params: {
+               productName: 'نوشابه',
+            },
+         },
+      ],
+      fallback: 'blocking',
+   };
+}
+
+export async function getStaticProps(context) {
+   try {
+      const productDetail = await axiosInstance('restaurant/foods/get_update_delete/', {
+         params: {
+            title: context?.params?.productName,
+         },
+      }).then(res => res.data);
+
+      const categoryItems = await axiosInstance(`restaurant/foods/list_create/`, {
+         params: {
+            category__title: productDetail?.category,
+         },
+      }).then(res => res.data.result?.filter(item => item?.title !== productDetail?.title));
+
+      const comments = await axiosInstance(`restaurant/comments/list_create/`, {
+         params: {
+            food_id: productDetail?.id,
+         },
+      }).then(res => res.data);
+
+      return {
+         props: {
+            productDetail,
+            categoryItems,
+            comments,
+         },
+         revalidate: 60,
+      };
+   } catch (error) {
+      return {
+         notFound: true,
+      };
+   }
+}

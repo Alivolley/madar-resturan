@@ -174,7 +174,7 @@ export async function getStaticProps(context) {
             categoryItems,
             dailyMenu,
          },
-         revalidate: 300,
+         revalidate: 60,
       };
    } catch (error) {
       return {

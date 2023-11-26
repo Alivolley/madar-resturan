@@ -13,10 +13,6 @@ import { MuiOtpInput } from 'mui-one-time-password-input';
 import WestIcon from '@mui/icons-material/West';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 
-// Redux
-import { useDispatch } from 'react-redux';
-import { changeToLoginTrue } from '@/store/reducers/loginStatusReducer';
-
 // Assets
 import logo from '../../assets/images/loginLogo.png';
 import logo2 from '../../assets/images/Vector.png';
@@ -36,7 +32,6 @@ function Login() {
 
    const [step, setStep] = useState(1);
    const router = useRouter();
-   const dispatch = useDispatch();
    const { trigger: verificationCodeTrigger, isMutating: verificationCodeIsMutating } = useVerificationCode();
 
    const {
@@ -54,12 +49,7 @@ function Login() {
    });
 
    const formSubmit = data => {
-      verificationCodeTrigger(data, {
-         onSuccess: () => {
-            dispatch(changeToLoginTrue());
-            window.history.back();
-         },
-      });
+      verificationCodeTrigger(data);
    };
 
    return (

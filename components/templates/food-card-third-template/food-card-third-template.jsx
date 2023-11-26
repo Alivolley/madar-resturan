@@ -16,7 +16,7 @@ function FoodCardThirdTemplate({ className, details }) {
       <div className={`flex max-w-[620px] shrink-0 rounded-xl bg-white p-2 ${className}`}>
          <Link
             href={`/product/${details?.title}`}
-            className="relative aspect-square h-[100px] shrink-0"
+            className="relative aspect-square h-[134px] shrink-0"
             title={details?.title}
          >
             <img src={details?.cover} alt="food" className="h-full w-full rounded-xl object-cover" />
@@ -44,6 +44,14 @@ function FoodCardThirdTemplate({ className, details }) {
             >
                {details?.content}
             </Link>
+
+            <p
+               href={`/product/${details?.title}`}
+               className="mt-2 h-4 font-rokhFaNum text-[11px] font-bold text-[#D39090]"
+            >
+               {details?.stock <= 5 ? `${details?.stock} عدد موجود است` : null}
+            </p>
+
             <div className="mt-4 flex items-center gap-1.5">
                <IconButton className="border border-solid border-customOrange" sx={{ width: '18px', height: '18px' }}>
                   <AddIcon color="customOrange" className="text-sm" />
@@ -55,14 +63,12 @@ function FoodCardThirdTemplate({ className, details }) {
             </div>
          </div>
          <div className="flex flex-col justify-end">
-            {details?.percentage !== 0 && (
-               <Link
-                  href={`/product/${details?.title}`}
-                  className="block h-4 text-left font-rokhFaNum text-xs font-bold text-[#D39090] line-through"
-               >
-                  {Number(details?.before_discount_price).toLocaleString('fa-IR')}
-               </Link>
-            )}
+            <Link
+               href={`/product/${details?.title}`}
+               className="block h-4 text-left font-rokhFaNum text-xs font-bold text-[#D39090] line-through"
+            >
+               {details?.percentage ? Number(details?.before_discount_price).toLocaleString('fa-IR') : null}
+            </Link>
 
             <Link
                href={`/product/${details?.title}`}

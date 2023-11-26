@@ -28,20 +28,23 @@ function BasketProductCard() {
             </div>
          </div>
 
-         <div className="flex flex-1 items-center justify-center gap-1.5">
-            <IconButton
-               className="border border-solid border-customOrange"
-               sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
-            >
-               <AddIcon color="customOrange" className="text-sm" />
-            </IconButton>
-            <p className="pt-1.5 font-rokhFaNum text-sm font-bold customMd:text-xl">2</p>
-            <IconButton
-               className="border border-solid border-textGray"
-               sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
-            >
-               <RemoveIcon color="textGray" className="text-sm" />
-            </IconButton>
+         <div className="flex-1">
+            <p className="mb-3 h-3 text-center font-rokhFaNum text-10 font-bold text-[#D39090]">{`${5} عدد باقی مانده`}</p>
+            <div className="flex items-center justify-center gap-1.5">
+               <IconButton
+                  className="border border-solid border-customOrange"
+                  sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
+               >
+                  <AddIcon color="customOrange" className="text-sm" />
+               </IconButton>
+               <p className="pt-1.5 font-rokhFaNum text-sm font-bold customMd:text-xl">2</p>
+               <IconButton
+                  className="border border-solid border-textGray"
+                  sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
+               >
+                  <RemoveIcon color="textGray" className="text-sm" />
+               </IconButton>
+            </div>
          </div>
 
          <div className="flex flex-1 flex-col items-end">

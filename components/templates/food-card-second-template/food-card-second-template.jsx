@@ -13,7 +13,7 @@ import discountShape from '../../../assets/icons/discount-shape.svg';
 function FoodCardSecondTemplate({ className, detail }) {
    return (
       <div className={`flex shrink-0 gap-3 rounded-xl bg-white p-2 ${className}`} title={detail?.title}>
-         <Link href={`/product/${detail?.title}`} className="relative block h-[150px] w-[184px]">
+         <Link href={`/product/${detail?.title}`} className="relative block h-[175px] w-[184px]">
             <img src={detail?.cover} alt="food" className="h-full w-full rounded-xl object-cover" />
             {detail?.percentage !== 0 && (
                <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5 pt-1 text-xs">
@@ -40,6 +40,13 @@ function FoodCardSecondTemplate({ className, detail }) {
                {detail?.content}
             </Link>
             <div className="mt-6">
+               <Link
+                  href={`/product/${detail?.title}`}
+                  className="mt-2 block h-5 text-left font-rokhFaNum text-xs font-bold text-[#D39090]"
+               >
+                  {detail?.stock <= 5 ? `${detail?.stock} عدد موجود است` : null}
+               </Link>
+
                <Link
                   href={`/product/${detail?.title}`}
                   className="mt-2 block h-5 text-left font-rokhFaNum text-sm font-bold text-[#D39090] line-through"

@@ -51,6 +51,6 @@ export async function getStaticProps() {
          foodPartyList,
          dailyMenuList,
       },
-      revalidate: 300,
+      revalidate: 60,
    };
 }
