@@ -32,6 +32,7 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
+import useGetBasket from '@/apis/basket/useGetBasket';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -57,6 +58,7 @@ function MobileHeader({ isLogin }) {
    const userInfo = useSelector(state => state?.userInfoReducer);
    // eslint-disable-next-line no-unused-vars
    const getUserInfo = useGetUserInfo(isLogin);
+   const { data: basketData } = useGetBasket(isLogin);
 
    const { register, handleSubmit, setValue } = useForm({
       defaultValues: {
@@ -167,19 +169,25 @@ function MobileHeader({ isLogin }) {
                   )}
                </div>
                {isLogin ? (
-                  <IconButton sx={{ border: '1px solid white', width: 32, height: 32 }}>
-                     <Badge
-                        badgeContent={6}
-                        color="error"
-                        anchorOrigin={{
-                           vertical: 'bottom',
-                           horizontal: 'right',
-                        }}
-                        sx={badgeStyles}
-                     >
-                        <ShoppingBasketOutlinedIcon color="white" fontSize="small" />
-                     </Badge>
-                  </IconButton>
+                  <Link href="/basket">
+                     <IconButton sx={{ border: '1px solid white', width: 32, height: 32 }}>
+                        {basketData?.orders?.length ? (
+                           <Badge
+                              badgeContent={basketData?.orders?.length}
+                              color="error"
+                              anchorOrigin={{
+                                 vertical: 'bottom',
+                                 horizontal: 'right',
+                              }}
+                              sx={badgeStyles}
+                           >
+                              <ShoppingBasketOutlinedIcon color="white" fontSize="small" />
+                           </Badge>
+                        ) : (
+                           <ShoppingBasketOutlinedIcon color="white" fontSize="small" />
+                        )}
+                     </IconButton>
+                  </Link>
                ) : (
                   <Link href="/login">
                      <Button variant="outlined" size="small" color="white">

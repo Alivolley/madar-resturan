@@ -8,6 +8,10 @@ import { Button, Dialog } from '@mui/material';
 import deleteBasketPic from '../../../../assets/images/deleteBasket.png';
 
 function DeleteBasketModal({ show, onClose }) {
+   const deleteBasketHandler = () => {
+      //
+   };
+
    return (
       <Dialog open={show} onClose={onClose}>
          <div className="flex flex-col gap-3 bg-white px-10 py-5">
@@ -20,7 +24,7 @@ function DeleteBasketModal({ show, onClose }) {
                <Button variant="contained" color="buttonBgGray" fullWidth onClick={onClose}>
                   خیر
                </Button>
-               <LoadingButton variant="contained" color="customOrange" fullWidth>
+               <LoadingButton variant="contained" color="customOrange" fullWidth onClick={deleteBasketHandler}>
                   بله
                </LoadingButton>
             </div>

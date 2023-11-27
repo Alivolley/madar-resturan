@@ -22,7 +22,6 @@ const useVerificationCode = () => {
                Cookies.set('madar_refreshToken', innerRes?.data?.refresh, { expires: 7 });
                Cookies.set('madar_isLogin', true, { expires: 7 });
                dispatch(changeToLoginTrue());
-               window.history.back();
             });
       })
    );

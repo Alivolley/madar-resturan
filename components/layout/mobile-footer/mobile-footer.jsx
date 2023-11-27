@@ -2,6 +2,9 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// MUI
+import { Badge } from '@mui/material';
+
 // Icons
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
@@ -15,8 +18,25 @@ import footerMenuActive from '../../../assets/icons/footer/footer-menu-active.sv
 import footerProfile from '../../../assets/icons/footer/footer-profile.svg';
 import footerProfileActive from '../../../assets/icons/footer/footer-profile-active.svg';
 
+// Apis
+import useGetBasket from '@/apis/basket/useGetBasket';
+
+const badgeStyles = {
+   '& .MuiBadge-badge': {
+      fontSize: 10,
+      width: 14,
+      height: 14,
+      minWidth: 14,
+      right: -2,
+      fontFamily: 'rokhFaNum',
+      paddingLeft: 1,
+      paddingTop: 0.5,
+   },
+};
+
 function MobileFooter({ isLogin }) {
    const router = useRouter();
+   const { data: basketData } = useGetBasket(isLogin);
 
    return (
       <footer className="fixed inset-x-0 bottom-0 z-[2] bg-white">
@@ -38,13 +58,35 @@ function MobileFooter({ isLogin }) {
 
             {isLogin && (
                <Link href="/basket" className="flex flex-1 flex-col items-center">
-                  <div>
-                     <Image src={router.pathname === '/basket' ? footerBasketActive : footerBasket} alt="footer icon" />
-                  </div>
+                  {basketData?.orders?.length ? (
+                     <Badge
+                        badgeContent={basketData?.orders?.length}
+                        color="error"
+                        anchorOrigin={{
+                           vertical: 'top',
+                           horizontal: 'right',
+                        }}
+                        sx={badgeStyles}
+                     >
+                        <div>
+                           <Image
+                              src={router.pathname === '/basket' ? footerBasketActive : footerBasket}
+                              alt="footer icon"
+                           />
+                        </div>
+                     </Badge>
+                  ) : (
+                     <div>
+                        <Image
+                           src={router.pathname === '/basket' ? footerBasketActive : footerBasket}
+                           alt="footer icon"
+                        />
+                     </div>
+                  )}
                   {router.pathname === '/basket' && <p className="text-xs text-[#FCA95C]">سبد خرید</p>}
                </Link>
             )}
-            <Link href="/category/منوی روز/1" className="flex flex-1 flex-col items-center">
+            <Link href="/category/همه غذاها/1" className="flex flex-1 flex-col items-center">
                <div>
                   <Image
                      src={router.pathname.startsWith('/category') ? footerMenuActive : footerMenu}

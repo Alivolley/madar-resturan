@@ -1,10 +1,10 @@
+import Link from 'next/link';
 import Image from 'next/image';
 
 // Icons
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
-import Link from 'next/link';
 import categoryTitleIcon from '../../../../assets/icons/categoriesIcon.svg';
 import dailyMenuPic from '../../../../assets/images/categories/Group 34827.png';
 

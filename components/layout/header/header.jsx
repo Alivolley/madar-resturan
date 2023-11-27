@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 
 // MUI
 import {
+   Badge,
    Button,
    Dialog,
    Fab,
@@ -46,6 +47,21 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
+import useGetBasket from '@/apis/basket/useGetBasket';
+
+const badgeStyles = {
+   '& .MuiBadge-badge': {
+      fontSize: 10,
+      width: 14,
+      height: 14,
+      minWidth: 14,
+      top: 10,
+      right: -2,
+      fontFamily: 'rokhFaNum',
+      paddingLeft: 1,
+      paddingTop: 0.5,
+   },
+};
 
 function Header({ isLogin }) {
    const [showSearch, setShowSearch] = useState(false);
@@ -57,6 +73,7 @@ function Header({ isLogin }) {
    const userInfo = useSelector(state => state?.userInfoReducer);
    // eslint-disable-next-line no-unused-vars
    const getUserInfo = useGetUserInfo(isLogin);
+   const { data: basketData } = useGetBasket(isLogin);
 
    const {
       register,
@@ -155,7 +172,21 @@ function Header({ isLogin }) {
                                     borderRadius: '10px',
                                  }}
                               >
-                                 <Image src={basketIconOrange} alt="basket Icon" />
+                                 {basketData?.orders?.length ? (
+                                    <Badge
+                                       badgeContent={basketData?.orders?.length}
+                                       color="error"
+                                       anchorOrigin={{
+                                          vertical: 'bottom',
+                                          horizontal: 'right',
+                                       }}
+                                       sx={badgeStyles}
+                                    >
+                                       <Image src={basketIconOrange} alt="basket Icon" />
+                                    </Badge>
+                                 ) : (
+                                    <Image src={basketIconOrange} alt="basket Icon" />
+                                 )}
                               </Fab>
                            </Link>
 

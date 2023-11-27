@@ -1,3 +1,5 @@
+import { Grid } from '@mui/material';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
@@ -5,8 +7,6 @@ import Link from 'next/link';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
-import { Grid } from '@mui/material';
-import Image from 'next/image';
 import categoryPic from '../../../assets/images/categories/categoryPic.png';
 
 // Components

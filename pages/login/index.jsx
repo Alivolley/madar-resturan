@@ -49,7 +49,11 @@ function Login() {
    });
 
    const formSubmit = data => {
-      verificationCodeTrigger(data);
+      verificationCodeTrigger(data, {
+         onSuccess: () => {
+            router.back();
+         },
+      });
    };
 
    return (

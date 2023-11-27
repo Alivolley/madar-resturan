@@ -4,12 +4,14 @@ import { LoadingButton } from '@mui/lab';
 // Icons
 import WestIcon from '@mui/icons-material/West';
 
-function BasketDescription({ basketStep, setBasketStep }) {
+function BasketDescription({ basketStep, setBasketStep, detail }) {
    const basketClickHandler = () => {
       if (basketStep === 1) {
          setBasketStep(2);
       }
    };
+
+   console.log(detail);
 
    return (
       <div className={`rounded-2xl bg-white ${basketStep === 1 ? 'mt-3' : ''}`}>
@@ -17,22 +19,26 @@ function BasketDescription({ basketStep, setBasketStep }) {
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>تعداد</p>
-            <p className="font-rokhFaNum font-bold">2 کالا</p>
+            <p className="font-rokhFaNum font-bold">{detail?.orders?.length} کالا</p>
          </div>
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>جمع سفارشات</p>
-            <p className="font-rokhFaNum font-bold">{(415000).toLocaleString('fa-IR')} تومان</p>
+            <p className="font-rokhFaNum font-bold">{Number(detail?.before_price).toLocaleString('fa-IR')} تومان</p>
          </div>
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>هزینه ارسال</p>
-            <p className="font-rokhFaNum font-bold text-[#FF9F1C]">{(13000).toLocaleString('fa-IR')} تومان</p>
+            <p className="font-rokhFaNum font-bold text-[#FF9F1C]">
+               {Number(detail?.current_shipping_cost).toLocaleString('fa-IR')} تومان
+            </p>
          </div>
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>مبلغ کل</p>
-            <p className="font-rokhFaNum font-bold text-[#D14D72]">{(785000).toLocaleString('fa-IR')} تومان</p>
+            <p className="font-rokhFaNum font-bold text-[#D14D72]">
+               {Number(detail?.final_price).toLocaleString('fa-IR')} تومان
+            </p>
          </div>
 
          <div className="p-5">

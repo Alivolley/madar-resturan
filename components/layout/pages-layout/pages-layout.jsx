@@ -22,7 +22,7 @@ function PagesLayout({ children }) {
       <div className="font-rokhRegular">
          {router.pathname !== '/login' &&
             (isTablet ? <MobileHeader isLogin={isLogin} /> : <Header isLogin={isLogin} />)}
-         <main className="bg-bgColor pb-32 customMd:pb-0">{children}</main>
+         <main className="bg-bgColor pb-20 customMd:pb-0">{children}</main>
          {router.pathname !== '/login' &&
             (isTablet ? <MobileFooter isLogin={isLogin} /> : <Footer isLogin={isLogin} />)}
       </div>

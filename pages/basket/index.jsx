@@ -22,10 +22,16 @@ import BasketProductCard from '@/components/pages/basket/basket-product-card/bas
 import DeleteBasketModal from '@/components/pages/basket/delete-basket-modal/delete-basket-modal';
 import BasketSecondStep from '@/components/pages/basket/basket-second-step/basket-second-step';
 
+// Apis
+import useGetBasket from '@/apis/basket/useGetBasket';
+
 function Basket() {
    const [showDeleteBasketModal, setShowDeleteBasketModal] = useState(false);
    const [basketStep, setBasketStep] = useState(1);
    const [deliveryMethod, setDeliveryMethod] = useState('delivery');
+
+   const { data: basketData } = useGetBasket(true);
+   console.log(basketData);
 
    return (
       <main className="px-5 pt-6 customMd:px-[60px]">
@@ -110,9 +116,9 @@ function Basket() {
                         </div>
 
                         <div className="mt-4 flex flex-col gap-4">
-                           <BasketProductCard />
-                           <BasketProductCard />
-                           <BasketProductCard />
+                           {basketData?.orders?.map(item => (
+                              <BasketProductCard key={item?.menu_item?.id} detail={item} />
+                           ))}
                         </div>
                      </>
                   ) : (
@@ -120,7 +126,7 @@ function Basket() {
                   )}
                </Grid>
                <Grid item xs={12} md={3}>
-                  <BasketDescription basketStep={basketStep} setBasketStep={setBasketStep} />
+                  <BasketDescription basketStep={basketStep} setBasketStep={setBasketStep} detail={basketData} />
                </Grid>
             </Grid>
          </div>

@@ -3,20 +3,22 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 
-const accessToken = Cookies.get('madar_accessToken');
-const refreshToken = Cookies.get('madar_refreshToken');
-
 const axiosInstance = axios.create({
    baseURL: 'https://test-restaurant.iran.liara.run/api/',
-
-   ...(accessToken && {
-      headers: {
-         Authorization: `Bearer ${accessToken}`,
-      },
-   }),
 });
 
-axiosInstance.interceptors.request.use(async config => config);
+axiosInstance.interceptors.request.use(
+   config => {
+      const accessToken = Cookies.get('madar_accessToken');
+
+      if (accessToken) {
+         // eslint-disable-next-line no-param-reassign
+         config.headers.Authorization = `Bearer ${accessToken}`;
+      }
+      return config;
+   },
+   error => Promise.reject(error)
+);
 
 axiosInstance.interceptors.response.use(
    res => {
@@ -36,6 +38,7 @@ axiosInstance.interceptors.response.use(
    },
    async error => {
       console.log(error);
+      const refreshToken = Cookies.get('madar_refreshToken');
       const originalReq = error.config;
 
       if (error?.response?.status === 401) {

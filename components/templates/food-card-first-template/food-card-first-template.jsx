@@ -10,7 +10,22 @@ import AddIcon from '@mui/icons-material/Add';
 // Assets
 import discountShape from '../../../assets/icons/discount-shape.svg';
 
+// Apis
+import useAddToBasket from '@/apis/basket/useAddToBasket';
+
 function FoodCardFirstTemplate({ className, detail }) {
+   const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
+
+   // console.log(detail);
+   const addToBasketHandler = () => {
+      const foodObj = {
+         food_id: detail?.id,
+         food_count: detail?.quantity_in_cart ? Number(detail?.quantity_in_cart) + 1 : 1,
+      };
+
+      addToBasketTrigger(foodObj);
+   };
+
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
          <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full" title={detail?.title}>
@@ -57,6 +72,8 @@ function FoodCardFirstTemplate({ className, detail }) {
                   height: 25,
                   width: 30,
                }}
+               onClick={addToBasketHandler}
+               loading={addToBasketIsMutating}
             >
                <AddIcon color="customOrange" fontSize="small" />
             </LoadingButton>
