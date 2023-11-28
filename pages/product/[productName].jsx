@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useSelector } from 'react-redux';
 
 // MUI
-import { Button, Grid, IconButton } from '@mui/material';
+import { Button, CircularProgress, Grid, IconButton } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // Icons
@@ -37,13 +37,25 @@ import axiosInstance from '@/configs/axiosInstance';
 import useAddToBasket from '@/apis/basket/useAddToBasket';
 import useRemoveFromBasket from '@/apis/basket/useRemoveFromBasket';
 import useGetBasket from '@/apis/basket/useGetBasket';
+import useGetComments from '@/apis/comments/useGetComments';
 
-function ProductDetail({ productDetail, categoryItems, comments }) {
+function ProductDetail({ productDetail, categoryItems }) {
    const [showAddCommentSection, setShowAddCommentSection] = useState(false);
    const isLogin = useSelector(state => state?.loginStatusReducer);
+
    const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
    const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
    const { data: basketData } = useGetBasket(isLogin);
+   const {
+      data: commentsData,
+      isLoading: commentsIsLoading,
+      size: commentsSize,
+      setSize: commentsSetSize,
+      isValidating: commentsIsValidating,
+   } = useGetComments(productDetail?.id);
+
+   console.log(commentsIsValidating);
+
    const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === productDetail?.title)?.menu_item
       ?.quantity_in_cart;
 
@@ -81,7 +93,7 @@ function ProductDetail({ productDetail, categoryItems, comments }) {
                         <div className="text-[#E394AA]">
                            <ForumOutlinedIcon fontSize="inherit" color="inherit" />
                         </div>
-                        <p className="text-[13px] text-[#66839A]">۲ دیدگاه</p>
+                        <p className="text-[13px] text-[#66839A]">{commentsData?.[0]?.total_objects} دیدگاه</p>
 
                         <div className="flex items-center whitespace-nowrap rounded-md bg-[#FFFAE2] px-1 pt-0.5">
                            <p className="text-xs text-gold">۴.۵</p>
@@ -176,7 +188,11 @@ function ProductDetail({ productDetail, categoryItems, comments }) {
          <div className="mt-9 border-y-[5px] border-solid border-[#E4EAF0] py-10">
             <Grid container spacing={{ md: 6 }}>
                <Grid item xs={12} md={7}>
-                  {showAddCommentSection ? (
+                  {commentsIsLoading ? (
+                     <div className="flex items-center justify-center">
+                        <CircularProgress color="customOrange2" />
+                     </div>
+                  ) : showAddCommentSection ? (
                      <>
                         <div className="mb-7 flex items-center justify-between border-b border-solid border-[#E4EAF0] py-4">
                            <div className="flex items-center gap-2">
@@ -220,16 +236,24 @@ function ProductDetail({ productDetail, categoryItems, comments }) {
                         </div>
 
                         <div className="space-y-8">
-                           <Comment />
-                           <Comment />
-                           <Comment />
-                           <div className="flex justify-center">
-                              <RtlProvider>
-                                 <LoadingButton color="crimson" endIcon={<KeyboardArrowDownOutlinedIcon />}>
-                                    مشاهده ۲۳ کامنت دیگر
-                                 </LoadingButton>
-                              </RtlProvider>
-                           </div>
+                           {commentsData?.map(item =>
+                              item?.result?.map(innerItem => <Comment key={innerItem?.id} detail={innerItem} />)
+                           )}
+
+                           {commentsData?.length !== commentsData?.[Number(commentsData?.length) - 1]?.total_pages && (
+                              <div className="flex justify-center">
+                                 <RtlProvider>
+                                    <LoadingButton
+                                       color="crimson"
+                                       endIcon={<KeyboardArrowDownOutlinedIcon />}
+                                       onClick={() => commentsSetSize(commentsSize + 1)}
+                                       loading={commentsIsValidating}
+                                    >
+                                       مشاهده کامنت های بیشتر
+                                    </LoadingButton>
+                                 </RtlProvider>
+                              </div>
+                           )}
                         </div>
                      </>
                   )}
@@ -237,10 +261,10 @@ function ProductDetail({ productDetail, categoryItems, comments }) {
                <Grid item xs={12} md={5}>
                   <div className="hidden flex-col gap-5 customMd:flex">
                      <div>
-                        <Image src={amazingPic} alt="amazing" className="w-full" />
+                        <Image src={amazingPic} alt="amazing" className="h-full w-full" priority />
                      </div>
                      <div>
-                        <Image src={amazingPic} alt="amazing" className="w-full" />
+                        <Image src={amazingPic} alt="amazing" className="h-full w-full" priority />
                      </div>
                   </div>
                </Grid>
@@ -306,17 +330,10 @@ export async function getStaticProps(context) {
          },
       }).then(res => res.data.result?.filter(item => item?.title !== productDetail?.title));
 
-      const comments = await axiosInstance(`restaurant/comments/list_create/`, {
-         params: {
-            food_id: productDetail?.id,
-         },
-      }).then(res => res.data);
-
       return {
          props: {
             productDetail,
             categoryItems,
-            comments,
          },
          revalidate: 60,
       };
