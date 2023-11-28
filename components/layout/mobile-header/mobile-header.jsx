@@ -67,8 +67,7 @@ function MobileHeader({ isLogin }) {
    });
 
    const formSubmit = data => {
-      console.log(data);
-      router.push(`/search?food_name=${data.searchInput}`);
+      router.push(`/search?food_name=${data.searchInput}&page=1`);
       setShowSearchCollapse(false);
    };
 

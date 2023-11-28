@@ -9,13 +9,16 @@ import { FormControl, IconButton, InputAdornment, TextField } from '@mui/materia
 // Assets
 import searchIcon from '../../assets/icons/search-normal.svg';
 
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
+
 // Styles
 import RtlProvider from '../../components/layout/rtlProvider/rtlProvider';
 
 // components
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
 
-function Search() {
+function Search({ searchResultList }) {
    const router = useRouter();
    const foodName = router.query.food_name;
 
@@ -31,8 +34,7 @@ function Search() {
    });
 
    const formSubmit = data => {
-      console.log(data);
-      router.push(`/search?food_name=${data.searchInput}`);
+      router.push(`/search?food_name=${data.searchInput}&page=1`);
    };
 
    useEffect(() => {
@@ -80,19 +82,25 @@ function Search() {
             </form>
          )}
          <div className="mt-14 flex flex-wrap justify-center gap-5">
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
-            <FoodCardFirstTemplate className="w-[200px]" />
+            {searchResultList?.result?.map(item => (
+               <FoodCardFirstTemplate className="w-[250px] customSm:w-[200px]" key={item?.id} detail={item} />
+            ))}
          </div>
       </main>
    );
 }
 
 export default Search;
+
+export async function getServerSideProps(context) {
+   const { query } = context;
+
+   const searchResultList = await axiosInstance('restaurant/foods/list_create/', {
+      params: {
+         search: query?.food_name,
+         page: query?.page,
+      },
+   }).then(res => res.data);
+
+   return { props: { searchResultList } };
+}
