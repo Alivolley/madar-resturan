@@ -13,14 +13,13 @@ import useAddToBasket from '@/apis/basket/useAddToBasket';
 import useRemoveFromBasket from '@/apis/basket/useRemoveFromBasket';
 
 function BasketProductCard({ detail }) {
-   // console.log(detail);
    const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
    const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
 
    const addToBasketHandler = () => {
       const foodObj = {
          food_id: detail?.menu_item?.id,
-         food_count: Number(detail?.count) + 1,
+         food_count: Number(detail?.menu_item?.quantity_in_cart) + 1,
       };
 
       addToBasketTrigger(foodObj);
@@ -29,7 +28,7 @@ function BasketProductCard({ detail }) {
    const removeFromBasketHandler = () => {
       const foodObj = {
          food_id: detail?.menu_item?.id,
-         food_count: Number(detail?.count) - 1,
+         food_count: Number(detail?.menu_item?.quantity_in_cart) - 1,
       };
 
       removeFromBasketTrigger(foodObj);
@@ -64,21 +63,23 @@ function BasketProductCard({ detail }) {
                   sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
                   onClick={addToBasketHandler}
                   disabled={
-                     addToBasketIsMutating || removeFromBasketIsMutating || detail?.menu_item?.stock === detail?.count
+                     addToBasketIsMutating ||
+                     removeFromBasketIsMutating ||
+                     detail?.menu_item?.stock === detail?.menu_item?.quantity_in_cart
                   }
                >
                   <AddIcon color="customOrange" className="text-sm" />
                </IconButton>
                <p className="pt-1.5 font-rokhFaNum text-sm font-bold customMd:text-xl">
-                  {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : detail?.count}
+                  {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : detail?.menu_item?.quantity_in_cart}
                </p>
                <IconButton
-                  className={detail?.count === 1 ? '' : 'border border-solid border-textGray'}
+                  className={detail?.menu_item?.quantity_in_cart === 1 ? '' : 'border border-solid border-textGray'}
                   sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
                   onClick={removeFromBasketHandler}
                   disabled={addToBasketIsMutating || removeFromBasketIsMutating}
                >
-                  {detail?.count === 1 ? (
+                  {detail?.menu_item?.quantity_in_cart === 1 ? (
                      <DeleteOutlineOutlinedIcon />
                   ) : (
                      <RemoveIcon color="textGray" className="text-sm" />

@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { LoadingButton } from '@mui/lab';
 
@@ -12,15 +15,19 @@ import discountShape from '../../../assets/icons/discount-shape.svg';
 
 // Api
 import useAddToBasket from '@/apis/basket/useAddToBasket';
+import useGetBasket from '@/apis/basket/useGetBasket';
 
 function FoodCardSecondTemplate({ className, detail }) {
+   const isLogin = useSelector(state => state?.loginStatusReducer);
    const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
+   const { data: basketData } = useGetBasket(isLogin);
+   const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === detail?.title)?.menu_item
+      ?.quantity_in_cart;
 
-   // console.log(detail);
    const addToBasketHandler = () => {
       const foodObj = {
          food_id: detail?.id,
-         food_count: detail?.quantity_in_cart ? Number(detail?.quantity_in_cart) + 1 : 1,
+         food_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
       };
 
       addToBasketTrigger(foodObj);
@@ -81,6 +88,7 @@ function FoodCardSecondTemplate({ className, detail }) {
                      }}
                      onClick={addToBasketHandler}
                      loading={addToBasketIsMutating}
+                     disabled={detail?.stock === basketQuantity}
                   >
                      <AddIcon color="customOrange" fontSize="small" />
                   </LoadingButton>

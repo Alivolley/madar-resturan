@@ -7,9 +7,18 @@ import { Button, Dialog } from '@mui/material';
 // Assets
 import deleteBasketPic from '../../../../assets/images/deleteBasket.png';
 
+// Apis
+import useDeleteBasket from '@/apis/basket/useDeleteBasket';
+
 function DeleteBasketModal({ show, onClose }) {
+   const { trigger: deleteBasketTrigger, isMutating: deleteBasketIsMutating } = useDeleteBasket();
+
    const deleteBasketHandler = () => {
-      //
+      deleteBasketTrigger(null, {
+         onSuccess: () => {
+            onClose();
+         },
+      });
    };
 
    return (
@@ -24,7 +33,13 @@ function DeleteBasketModal({ show, onClose }) {
                <Button variant="contained" color="buttonBgGray" fullWidth onClick={onClose}>
                   خیر
                </Button>
-               <LoadingButton variant="contained" color="customOrange" fullWidth onClick={deleteBasketHandler}>
+               <LoadingButton
+                  variant="contained"
+                  color="customOrange"
+                  fullWidth
+                  onClick={deleteBasketHandler}
+                  loading={deleteBasketIsMutating}
+               >
                   بله
                </LoadingButton>
             </div>

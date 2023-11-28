@@ -32,8 +32,6 @@ import axiosInstance from '@/configs/axiosInstance';
 function ProductDetail({ productDetail, categoryItems, comments }) {
    const [showAddCommentSection, setShowAddCommentSection] = useState(false);
 
-   console.log(comments);
-
    return (
       <main className="mx-auto max-w-[1300px] px-5 pb-32 pt-14 customMd:px-[60px]">
          <Grid container spacing={{ md: 6 }}>

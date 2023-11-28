@@ -1,17 +1,53 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { IconButton } from '@mui/material';
 
 // Icons
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 // Assets
 import discountShape from '../../../assets/icons/discount-shape.svg';
 
+// Apis
+import useAddToBasket from '@/apis/basket/useAddToBasket';
+import useRemoveFromBasket from '@/apis/basket/useRemoveFromBasket';
+import useGetBasket from '@/apis/basket/useGetBasket';
+
 function FoodCardThirdTemplate({ className, details }) {
+   const isLogin = useSelector(state => state?.loginStatusReducer);
+   const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
+   const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
+   const { data: basketData } = useGetBasket(isLogin);
+   const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === details?.title)?.menu_item
+      ?.quantity_in_cart;
+
+   console.log(basketQuantity);
+
+   const addToBasketHandler = () => {
+      const foodObj = {
+         food_id: details?.id,
+         food_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+      };
+
+      addToBasketTrigger(foodObj);
+   };
+
+   const removeFromBasketHandler = () => {
+      const foodObj = {
+         food_id: details?.id,
+         food_count: Number(basketQuantity) - 1,
+      };
+
+      removeFromBasketTrigger(foodObj);
+   };
+
    return (
       <div className={`flex max-w-[620px] shrink-0 rounded-xl bg-white p-2 ${className}`}>
          <Link
@@ -53,12 +89,28 @@ function FoodCardThirdTemplate({ className, details }) {
             </p>
 
             <div className="mt-4 flex items-center gap-1.5">
-               <IconButton className="border border-solid border-customOrange" sx={{ width: '18px', height: '18px' }}>
+               <IconButton
+                  className="border border-solid border-customOrange"
+                  sx={{ width: '18px', height: '18px' }}
+                  onClick={addToBasketHandler}
+                  disabled={addToBasketIsMutating || removeFromBasketIsMutating || details?.stock === basketQuantity}
+               >
                   <AddIcon color="customOrange" className="text-sm" />
                </IconButton>
-               <p className="pt-1.5 font-rokhFaNum font-bold">{details?.quantity_in_cart || 0}</p>
-               <IconButton className="border border-solid border-textGray" sx={{ width: '18px', height: '18px' }}>
-                  <RemoveIcon color="textGray" className="text-sm" />
+               <p className="pt-1.5 font-rokhFaNum font-bold">
+                  {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
+               </p>
+               <IconButton
+                  className={basketQuantity !== 1 ? 'border border-solid border-textGray' : ''}
+                  sx={{ width: '18px', height: '18px' }}
+                  onClick={removeFromBasketHandler}
+                  disabled={addToBasketIsMutating || removeFromBasketIsMutating || !basketQuantity}
+               >
+                  {basketQuantity === 1 ? (
+                     <DeleteOutlineOutlinedIcon />
+                  ) : (
+                     <RemoveIcon color="textGray" className="text-sm" />
+                  )}
                </IconButton>
             </div>
          </div>
