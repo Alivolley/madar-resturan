@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Button, Grid, IconButton } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -17,6 +20,7 @@ import ForumIcon from '@mui/icons-material/Forum';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 // Assets
 import categoryTitleIcon from '../../assets/icons/categoriesIcon.svg';
@@ -29,8 +33,37 @@ import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
 import axiosInstance from '@/configs/axiosInstance';
 
+// Apis
+import useAddToBasket from '@/apis/basket/useAddToBasket';
+import useRemoveFromBasket from '@/apis/basket/useRemoveFromBasket';
+import useGetBasket from '@/apis/basket/useGetBasket';
+
 function ProductDetail({ productDetail, categoryItems, comments }) {
    const [showAddCommentSection, setShowAddCommentSection] = useState(false);
+   const isLogin = useSelector(state => state?.loginStatusReducer);
+   const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
+   const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
+   const { data: basketData } = useGetBasket(isLogin);
+   const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === productDetail?.title)?.menu_item
+      ?.quantity_in_cart;
+
+   const addToBasketHandler = () => {
+      const foodObj = {
+         food_id: productDetail?.id,
+         food_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+      };
+
+      addToBasketTrigger(foodObj);
+   };
+
+   const removeFromBasketHandler = () => {
+      const foodObj = {
+         food_id: productDetail?.id,
+         food_count: Number(basketQuantity) - 1,
+      };
+
+      removeFromBasketTrigger(foodObj);
+   };
 
    return (
       <main className="mx-auto max-w-[1300px] px-5 pb-32 pt-14 customMd:px-[60px]">
@@ -86,15 +119,29 @@ function ProductDetail({ productDetail, categoryItems, comments }) {
                            <IconButton
                               className="border border-solid border-customOrange"
                               sx={{ width: '22px', height: '22px' }}
+                              onClick={addToBasketHandler}
+                              disabled={
+                                 addToBasketIsMutating ||
+                                 removeFromBasketIsMutating ||
+                                 productDetail?.stock === basketQuantity
+                              }
                            >
                               <AddIcon color="customOrange" className="text-sm" />
                            </IconButton>
-                           <p className="pt-1.5 font-rokhFaNum text-xl font-bold">0</p>
+                           <p className="pt-1.5 font-rokhFaNum text-xl font-bold">
+                              {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
+                           </p>
                            <IconButton
-                              className="border border-solid border-textGray"
+                              className={basketQuantity !== 1 ? 'border border-solid border-textGray' : ''}
                               sx={{ width: '22px', height: '22px' }}
+                              onClick={removeFromBasketHandler}
+                              disabled={addToBasketIsMutating || removeFromBasketIsMutating || !basketQuantity}
                            >
-                              <RemoveIcon color="textGray" className="text-sm" />
+                              {basketQuantity === 1 ? (
+                                 <DeleteOutlineOutlinedIcon />
+                              ) : (
+                                 <RemoveIcon color="textGray" className="text-sm" />
+                              )}{' '}
                            </IconButton>
                         </div>
                         <div className="mt-2 flex items-center gap-1 rounded bg-[#C1F7EE] px-3 pt-1 text-lg font-bold text-[#139983] customMd:text-xl">
@@ -108,9 +155,11 @@ function ProductDetail({ productDetail, categoryItems, comments }) {
                            variant="contained"
                            size="large"
                            color="customOrange2"
-                           loading={false}
+                           loading={addToBasketIsMutating || removeFromBasketIsMutating}
                            fullWidth
                            className="!rounded-10 !p-2"
+                           onClick={addToBasketHandler}
+                           disabled={productDetail?.stock === basketQuantity}
                         >
                            <div className="flex w-full items-center justify-between">
                               <p>افزودن به سبد خرید</p>

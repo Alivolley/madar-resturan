@@ -28,8 +28,6 @@ function FoodCardThirdTemplate({ className, details }) {
    const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === details?.title)?.menu_item
       ?.quantity_in_cart;
 
-   console.log(basketQuantity);
-
    const addToBasketHandler = () => {
       const foodObj = {
          food_id: details?.id,
