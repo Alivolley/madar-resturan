@@ -25,6 +25,7 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 // Assets
 import categoryTitleIcon from '../../assets/icons/categoriesIcon.svg';
 import amazingPic from '../../assets/images/amaz.png';
+import addCommentPic from '../../assets/images/addComment.png';
 
 // Components
 import Comment from '@/components/pages/product-detail/comment/comment';
@@ -47,14 +48,13 @@ function ProductDetail({ productDetail, categoryItems }) {
    const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
    const { data: basketData } = useGetBasket(isLogin);
    const {
+      mutate: commentsMutate,
       data: commentsData,
       isLoading: commentsIsLoading,
       size: commentsSize,
       setSize: commentsSetSize,
       isValidating: commentsIsValidating,
    } = useGetComments(productDetail?.id);
-
-   console.log(commentsIsValidating);
 
    const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === productDetail?.title)?.menu_item
       ?.quantity_in_cart;
@@ -93,10 +93,12 @@ function ProductDetail({ productDetail, categoryItems }) {
                         <div className="text-[#E394AA]">
                            <ForumOutlinedIcon fontSize="inherit" color="inherit" />
                         </div>
-                        <p className="text-[13px] text-[#66839A]">{commentsData?.[0]?.total_objects} دیدگاه</p>
+                        <p className="font-rokhFaNum text-[13px] text-[#66839A]">
+                           {commentsData?.[0]?.total_objects} دیدگاه
+                        </p>
 
                         <div className="flex items-center whitespace-nowrap rounded-md bg-[#FFFAE2] px-1 pt-0.5">
-                           <p className="text-xs text-gold">۴.۵</p>
+                           <p className="font-rokhFaNum text-xs text-gold">{productDetail?.average_score}</p>
                            <div>
                               <StarOutlinedIcon fontSize="inherit" color="gold" />
                            </div>
@@ -153,7 +155,7 @@ function ProductDetail({ productDetail, categoryItems }) {
                                  <DeleteOutlineOutlinedIcon />
                               ) : (
                                  <RemoveIcon color="textGray" className="text-sm" />
-                              )}{' '}
+                              )}
                            </IconButton>
                         </div>
                         <div className="mt-2 flex items-center gap-1 rounded bg-[#C1F7EE] px-3 pt-1 text-lg font-bold text-[#139983] customMd:text-xl">
@@ -204,9 +206,35 @@ function ProductDetail({ productDetail, categoryItems }) {
                         </div>
 
                         <div>
-                           <AddComment setShowAddCommentSection={setShowAddCommentSection} />
+                           <AddComment
+                              setShowAddCommentSection={setShowAddCommentSection}
+                              productDetail={productDetail}
+                              commentsMutate={commentsMutate}
+                           />
                         </div>
                      </>
+                  ) : commentsData?.[Number(commentsData?.length) - 1]?.total_objects === 0 ? (
+                     <div className="flex h-full flex-col items-center justify-center">
+                        <div className="my-8 w-36">
+                           <Image className="h-full w-full" src={addCommentPic} alt="add comment" />
+                        </div>
+                        <p className="text-sm text-[#626E94]">نظری برای این محصول ثبت نشده است</p>
+                        <p className="mb-8 mt-2 text-lg font-bold">همین الان نظر خود را ثبت کنید</p>
+
+                        <Button
+                           variant="contained"
+                           size="small"
+                           color="customOrange2"
+                           className="w-[210px] !rounded-10 !p-2"
+                           onClick={() => setShowAddCommentSection(true)}
+                        >
+                           <div className="flex w-full items-center justify-between">
+                              <p className="pl-7">ثبت نظر جدید</p>
+
+                              <OutboxOutlinedIcon className="rounded-xl bg-white p-1 text-customOrange" />
+                           </div>
+                        </Button>
+                     </div>
                   ) : (
                      <>
                         <div className="mb-7 flex items-center justify-between border-b border-solid border-[#E4EAF0] py-4">
@@ -237,7 +265,9 @@ function ProductDetail({ productDetail, categoryItems }) {
 
                         <div className="space-y-8">
                            {commentsData?.map(item =>
-                              item?.result?.map(innerItem => <Comment key={innerItem?.id} detail={innerItem} />)
+                              item?.result?.map(innerItem => (
+                                 <Comment key={innerItem?.id} detail={innerItem} commentsMutate={commentsMutate} />
+                              ))
                            )}
 
                            {commentsData?.length !== commentsData?.[Number(commentsData?.length) - 1]?.total_pages && (

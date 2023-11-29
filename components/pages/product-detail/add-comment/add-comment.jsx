@@ -7,9 +7,6 @@ import { LoadingButton } from '@mui/lab';
 
 // Icons
 import OutboxOutlinedIcon from '@mui/icons-material/OutboxOutlined';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 
 // Assets
 import addCommentPic from '../../../../assets/images/addComment.png';
@@ -17,7 +14,12 @@ import addCommentPic from '../../../../assets/images/addComment.png';
 // Components
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
-function AddComment({ setShowAddCommentSection }) {
+// Apis
+import useAddComment from '@/apis/comments/useAddComment';
+
+function AddComment({ setShowAddCommentSection, productDetail, commentsMutate }) {
+   const { trigger: addCommentTrigger, isMutating: addCommentIsMutating } = useAddComment();
+
    const {
       register,
       handleSubmit,
@@ -33,7 +35,18 @@ function AddComment({ setShowAddCommentSection }) {
    });
 
    const formSubmit = data => {
-      console.log(data);
+      const newComment = {
+         message: data?.comment,
+         menu_item: productDetail?.id,
+         score: Number(data?.rate),
+      };
+
+      addCommentTrigger(newComment, {
+         onSuccess: () => {
+            setShowAddCommentSection(false);
+            commentsMutate();
+         },
+      });
    };
 
    const rateValue = watch('rate');
@@ -41,20 +54,7 @@ function AddComment({ setShowAddCommentSection }) {
    return (
       <form className="flex flex-col items-center" onSubmit={handleSubmit(formSubmit)}>
          <p className="font-bold text-[#66839A]">امتیاز به سفارش کباب تابه ای غذاخانگی مادر</p>
-         <div className="mt-3 flex items-center gap-10 text-xs">
-            <div className="flex items-start gap-1">
-               <CalendarMonthIcon fontSize="inherit" />
-               <p>شنبه ۲۵ شهریور</p>
-            </div>
-            <div className="flex items-start gap-1">
-               <AccessTimeIcon fontSize="inherit" />
-               <p>14:35</p>
-            </div>
-            <div className="flex items-start gap-1">
-               <LocationOnOutlinedIcon fontSize="inherit" />
-               <p>شهرک دانش</p>
-            </div>
-         </div>
+
          <div className="my-8 hidden w-36 customMd:block">
             <Image className="h-full w-full" src={addCommentPic} alt="add comment" />
          </div>
@@ -78,7 +78,7 @@ function AddComment({ setShowAddCommentSection }) {
             <Controller
                control={control}
                name="rate"
-               render={({ field: { onChange, value } }) => <Rating value={value} onChange={onChange} />}
+               render={({ field: { onChange, value } }) => <Rating value={Number(value)} onChange={onChange} />}
             />
          </div>
 
@@ -104,7 +104,7 @@ function AddComment({ setShowAddCommentSection }) {
                variant="contained"
                size="large"
                color="customOrange2"
-               loading={false}
+               loading={addCommentIsMutating}
                className="min-w-[170px] !rounded-10 !p-2 customXs:min-w-[220px]"
                type="submit"
             >
