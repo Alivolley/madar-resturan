@@ -8,6 +8,7 @@ import { FormControl, IconButton, InputAdornment, TextField } from '@mui/materia
 
 // Assets
 import searchIcon from '../../assets/icons/search-normal.svg';
+import noResult from '../../assets/images/search-not-found.png';
 
 // Configs
 import axiosInstance from '@/configs/axiosInstance';
@@ -40,6 +41,8 @@ function Search({ searchResultList }) {
    useEffect(() => {
       setValue('searchInput', foodName);
    }, [foodName]);
+
+   console.log(searchResultList);
 
    return (
       <main className="px-5 pt-14 customMd:px-[60px]">
@@ -82,9 +85,18 @@ function Search({ searchResultList }) {
             </form>
          )}
          <div className="mt-14 flex flex-wrap justify-center gap-5">
-            {searchResultList?.result?.map(item => (
-               <FoodCardFirstTemplate className="w-[250px] customSm:w-[200px]" key={item?.id} detail={item} />
-            ))}
+            {searchResultList?.total_objects === 0 ? (
+               <div>
+                  <p className="mb-12 mt-[-20px] text-lg font-bold">محصولی با این مشخصات یافت نشد</p>
+                  <div className="w-[250px]">
+                     <Image alt="no result" src={noResult} className="h-full w-full" priority />
+                  </div>
+               </div>
+            ) : (
+               searchResultList?.result?.map(item => (
+                  <FoodCardFirstTemplate className="w-[250px] customSm:w-[200px]" key={item?.id} detail={item} />
+               ))
+            )}
          </div>
       </main>
    );
