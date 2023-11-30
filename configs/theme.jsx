@@ -125,6 +125,14 @@ const getDesignTokens = mode => ({
             },
          },
       },
+
+      MuiPaginationItem: {
+         styleOverrides: {
+            root: {
+               fontFamily: 'rokhFaNum',
+            },
+         },
+      },
    },
 });
 

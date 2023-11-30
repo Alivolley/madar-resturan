@@ -17,20 +17,26 @@ function BasketDescription({ basketStep, setBasketStep, detail }) {
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>تعداد</p>
-            <p className="font-rokhFaNum font-bold">{detail?.orders?.length} کالا</p>
+            <p className="font-rokhFaNum font-bold">{detail?.count} کالا</p>
          </div>
 
-         <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
-            <p>جمع سفارشات</p>
-            <p className="font-rokhFaNum font-bold">{Number(detail?.before_price).toLocaleString('fa-IR')} تومان</p>
-         </div>
+         {detail?.delivery && (
+            <>
+               <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
+                  <p>جمع سفارشات</p>
+                  <p className="font-rokhFaNum font-bold">
+                     {Number(detail?.before_price).toLocaleString('fa-IR')} تومان
+                  </p>
+               </div>
 
-         <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
-            <p>هزینه ارسال</p>
-            <p className="font-rokhFaNum font-bold text-[#FF9F1C]">
-               {Number(detail?.current_shipping_cost).toLocaleString('fa-IR')} تومان
-            </p>
-         </div>
+               <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
+                  <p>هزینه ارسال</p>
+                  <p className="font-rokhFaNum font-bold text-[#FF9F1C]">
+                     {Number(detail?.current_shipping_cost).toLocaleString('fa-IR')} تومان
+                  </p>
+               </div>
+            </>
+         )}
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>مبلغ کل</p>

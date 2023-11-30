@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 // MUI
-import { FormControl, IconButton, InputAdornment, TextField } from '@mui/material';
+import { FormControl, IconButton, InputAdornment, Pagination, TextField } from '@mui/material';
 
 // Assets
 import searchIcon from '../../assets/icons/search-normal.svg';
@@ -42,7 +42,9 @@ function Search({ searchResultList }) {
       setValue('searchInput', foodName);
    }, [foodName]);
 
-   console.log(searchResultList);
+   const changePageHandler = (e, newValue) => {
+      router.push(`/search?food_name=${foodName}&page=${newValue}`);
+   };
 
    return (
       <main className="px-5 pt-14 customMd:px-[60px]">
@@ -98,6 +100,17 @@ function Search({ searchResultList }) {
                ))
             )}
          </div>
+         {searchResultList?.total_objects !== 0 && (
+            <div className="flex items-center justify-center py-16">
+               <Pagination
+                  count={searchResultList?.total_pages}
+                  variant="outlined"
+                  color="customOrange2"
+                  page={Number(router?.query?.page)}
+                  onChange={changePageHandler}
+               />
+            </div>
+         )}
       </main>
    );
 }

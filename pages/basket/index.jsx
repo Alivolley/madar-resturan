@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 // MUI
-import { Button, CircularProgress, Fab, Grid } from '@mui/material';
+import { Backdrop, Button, CircularProgress, Fab, Grid } from '@mui/material';
 
 // Icons
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
@@ -27,6 +27,7 @@ import BasketSecondStep from '@/components/pages/basket/basket-second-step/baske
 
 // Apis
 import useGetBasket from '@/apis/basket/useGetBasket';
+import useChangeDelivery from '@/apis/basket/useChangeDelivery';
 
 function Basket() {
    const [showDeleteBasketModal, setShowDeleteBasketModal] = useState(false);
@@ -34,6 +35,15 @@ function Basket() {
    const [deliveryMethod, setDeliveryMethod] = useState('delivery');
 
    const { data: basketData, isLoading: basketDataIsLoading } = useGetBasket(true);
+   const { trigger: changeDeliveryTrigger, isMutating: changeDeliveryIsMutating } = useChangeDelivery();
+
+   useEffect(() => {
+      const deliveryStatus = {
+         delivery: deliveryMethod === 'delivery',
+      };
+
+      changeDeliveryTrigger(deliveryStatus);
+   }, [deliveryMethod]);
 
    if (basketDataIsLoading) {
       return (
@@ -44,7 +54,7 @@ function Basket() {
    }
 
    return (
-      <main className="px-5 pt-6 customMd:px-[60px]">
+      <main className="px-5 pt-6 customMd:px-[60px] customMd:pb-[50px]">
          {basketData?.orders?.length ? (
             <>
                {basketStep === 1 ? (
@@ -172,6 +182,10 @@ function Basket() {
                </div>
             </div>
          )}
+
+         <Backdrop sx={{ zIndex: 2 }} open={changeDeliveryIsMutating}>
+            <CircularProgress color="inherit" />
+         </Backdrop>
       </main>
    );
 }

@@ -172,7 +172,7 @@ function MobileHeader({ isLogin }) {
                      <IconButton sx={{ border: '1px solid white', width: 32, height: 32 }}>
                         {basketData?.orders?.length ? (
                            <Badge
-                              badgeContent={basketData?.orders?.length}
+                              badgeContent={basketData?.count}
                               color="error"
                               anchorOrigin={{
                                  vertical: 'bottom',

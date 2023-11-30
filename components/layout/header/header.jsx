@@ -173,7 +173,7 @@ function Header({ isLogin }) {
                               >
                                  {basketData?.orders?.length ? (
                                     <Badge
-                                       badgeContent={basketData?.orders?.length}
+                                       badgeContent={basketData?.count}
                                        color="error"
                                        anchorOrigin={{
                                           vertical: 'bottom',
@@ -285,6 +285,8 @@ function Header({ isLogin }) {
                         <RtlProvider>
                            <FormControl variant="outlined">
                               <TextField
+                                 autoFocus
+                                 autoComplete="off"
                                  type="text"
                                  size="small"
                                  className="!min-w-[430px]"

@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Grid, Pagination } from '@mui/material';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -18,6 +18,10 @@ import axiosInstance from '@/configs/axiosInstance';
 
 function Category({ categoryList, categoryItems, dailyMenu }) {
    const router = useRouter();
+
+   const changePageHandler = (e, newValue) => {
+      router.push(`/category/${router?.query?.categoryName}/${newValue}`);
+   };
 
    return (
       <>
@@ -44,23 +48,37 @@ function Category({ categoryList, categoryItems, dailyMenu }) {
                ))}
             </div>
             {router?.query?.categoryName !== 'منوی روز' && (
-               <div className="px-5">
-                  <div>
-                     <p className="mt-4 rounded-10 bg-[#FEE2C9] p-3 text-center font-elMessiri text-lg font-bold">
-                        {router?.query?.categoryName}
-                     </p>
-                     <div className="mt-3 flex flex-col gap-3">
-                        {categoryItems?.result?.length ? (
-                           categoryItems?.result?.map(item => <FoodCardThirdTemplate key={item?.id} details={item} />)
-                        ) : (
-                           <p className="rounded-10 bg-buttonPink p-6 text-center font-bold">
-                              امروز {router?.query?.categoryName} موجود نمیباشد
-                           </p>
-                        )}
+               <>
+                  <div className="px-5">
+                     <div>
+                        <p className="mt-4 rounded-10 bg-[#FEE2C9] p-3 text-center font-elMessiri text-lg font-bold">
+                           {router?.query?.categoryName}
+                        </p>
+                        <div className="mt-3 flex flex-col gap-3">
+                           {categoryItems?.result?.length ? (
+                              categoryItems?.result?.map(item => (
+                                 <FoodCardThirdTemplate key={item?.id} details={item} />
+                              ))
+                           ) : (
+                              <p className="rounded-10 bg-buttonPink p-6 text-center font-bold">
+                                 امروز {router?.query?.categoryName} موجود نمیباشد
+                              </p>
+                           )}
+                        </div>
                      </div>
                   </div>
-               </div>
+                  <div className="my-16 flex items-center justify-center">
+                     <Pagination
+                        count={categoryItems?.total_pages}
+                        variant="outlined"
+                        color="customOrange2"
+                        page={Number(router?.query?.page)}
+                        onChange={changePageHandler}
+                     />
+                  </div>
+               </>
             )}
+
             <div className="px-5">
                <div>
                   <p className="mt-4 rounded-10 bg-[#FEE2C9] p-3 text-center font-elMessiri text-lg font-bold">
@@ -76,6 +94,9 @@ function Category({ categoryList, categoryItems, dailyMenu }) {
                </div>
             </div>
          </main>
+
+         {/* desktop */}
+
          <main className="hidden pb-28 pt-10 customMd:block customMd:px-[60px]">
             <div className="mb-16">
                <Image src={categoryPic} alt="categories" className="h-full w-full" />
@@ -108,6 +129,16 @@ function Category({ categoryList, categoryItems, dailyMenu }) {
                            امروز {router?.query?.categoryName} موجود نمیباشد
                         </p>
                      )}
+                  </div>
+
+                  <div className="mt-16 flex items-center justify-center">
+                     <Pagination
+                        count={categoryItems?.total_pages}
+                        variant="outlined"
+                        color="customOrange2"
+                        page={Number(router?.query?.page)}
+                        onChange={changePageHandler}
+                     />
                   </div>
                </div>
             )}

@@ -8,7 +8,7 @@ const useRemoveFromBasket = () => {
    return useSWRMutation('restaurant/cart/get_update/', (url, data) =>
       axiosInstance.patch(url, data.arg).then(res => {
          if (data?.arg?.food_count === 0) {
-            toast.success('محصول از سبد خرید حذف شد', {
+            toast.warn('محصول از سبد خرید حذف شد', {
                style: {
                   direction: 'rtl',
                   fontFamily: 'rokhRegular',

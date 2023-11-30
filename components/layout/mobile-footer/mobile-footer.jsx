@@ -60,7 +60,7 @@ function MobileFooter({ isLogin }) {
                <Link href="/basket" className="flex flex-1 flex-col items-center">
                   {basketData?.orders?.length ? (
                      <Badge
-                        badgeContent={basketData?.orders?.length}
+                        badgeContent={basketData?.count}
                         color="error"
                         anchorOrigin={{
                            vertical: 'top',
