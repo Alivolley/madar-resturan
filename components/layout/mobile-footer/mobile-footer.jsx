@@ -99,11 +99,11 @@ function MobileFooter({ isLogin }) {
                <Link href="/profile" className="flex flex-1 flex-col items-center">
                   <div>
                      <Image
-                        src={router.pathname === '/profile' ? footerProfileActive : footerProfile}
+                        src={router.pathname.startsWith('/profile') ? footerProfileActive : footerProfile}
                         alt="footer icon"
                      />
                   </div>
-                  {router.pathname === '/profile' && <p className="text-xs text-[#FCA95C]">پروفایل</p>}
+                  {router.pathname.startsWith('/profile') && <p className="text-xs text-[#FCA95C]">پروفایل</p>}
                </Link>
             )}
          </div>

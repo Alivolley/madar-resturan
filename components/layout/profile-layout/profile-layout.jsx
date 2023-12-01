@@ -19,19 +19,28 @@ import profilePic from '../../../assets/images/userProfile.png';
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
+// Apis
+import useGetInformation from '@/apis/profile/useGetInformation';
+
 function ProfileLayout({ children }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const pathName = usePathname();
+
+   const { data: information } = useGetInformation();
 
    return (
       <div className="gap-6 px-5 py-16 customMd:flex customMd:px-[60px]">
          <aside className="hidden w-[378px] shrink-0 rounded-2xl bg-white px-11 py-7 customMd:block">
             <div className="flex flex-col items-center border-b border-solid border-[#E4EAF0] pb-7">
                <div className="h-[75px] w-[75px]">
-                  <Image alt="profile" src={profilePic} className="h-full w-full rounded-full" />
+                  {information?.image ? (
+                     <img alt="profile" src={information?.image} className="h-full w-full rounded-full object-cover" />
+                  ) : (
+                     <Image alt="profile" src={profilePic} className="h-full w-full rounded-full object-cover" />
+                  )}
                </div>
-               <p className="mt-3 text-xl font-bold">علی ازقندی</p>
-               <p className="font-rokhFaNum text-sm">09383935719</p>
+               <p className="mt-3 text-xl font-bold">{information?.name}</p>
+               <p className="font-rokhFaNum text-sm">{information?.phone_number}</p>
             </div>
 
             <div className="mb-3 mt-12 flex flex-col gap-8 border-b border-solid border-[#E4EAF0] pb-16">

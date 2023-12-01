@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 
 // MUI
-import { CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Backdrop, CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // Icons
@@ -21,11 +21,15 @@ import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
 // Apis
 import useGetInformation from '@/apis/profile/useGetInformation';
+import useChangeProfileImage from '@/apis/profile/useChangeProfileImage';
+import useChangeProfileInfo from '@/apis/profile/useChangeProfileInfo';
 
 function Information() {
    const { data: information } = useGetInformation();
+   const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage();
+   const { trigger: changeProfileInfoTrigger, isMutating: changeProfileInfoIsMutating } = useChangeProfileInfo();
 
-   console.log(information);
+   // console.log(information);
 
    const {
       register,
@@ -48,7 +52,17 @@ function Information() {
    }, [information]);
 
    const formSubmit = data => {
-      console.log(data);
+      const newDetail = {
+         name: data?.fullName,
+      };
+
+      changeProfileInfoTrigger(newDetail);
+   };
+
+   const changeProfileImageHandler = e => {
+      const formData = new FormData();
+      formData.append('image', e.target.files[0]);
+      changeProfileTrigger(formData);
    };
 
    return (
@@ -60,11 +74,19 @@ function Information() {
                <>
                   <div className="relative mx-auto mt-14 w-fit cursor-pointer customMd:mx-0">
                      <div className="h-28 w-28 cursor-pointer">
-                        <Image
-                           src={userProfilePic}
-                           alt="user profile"
-                           className="h-full w-full cursor-pointer rounded-full"
-                        />
+                        {information?.image ? (
+                           <img
+                              src={information?.image}
+                              alt="user profile"
+                              className="h-full w-full cursor-pointer rounded-full object-cover"
+                           />
+                        ) : (
+                           <Image
+                              src={userProfilePic}
+                              alt="user profile"
+                              className="h-full w-full cursor-pointer rounded-full object-cover"
+                           />
+                        )}
                      </div>
                      <IconButton
                         className="absolute bottom-0 left-0 cursor-pointer bg-customOrange"
@@ -73,7 +95,12 @@ function Information() {
                         <BorderColorIcon fontSize="small" />
                      </IconButton>
 
-                     <input type="file" className="absolute inset-0 cursor-pointer opacity-0" />
+                     <input
+                        type="file"
+                        className="absolute inset-0 cursor-pointer opacity-0"
+                        onChange={changeProfileImageHandler}
+                        accept="image/*"
+                     />
                   </div>
 
                   <form onSubmit={handleSubmit(formSubmit)} className="mt-10">
@@ -101,6 +128,7 @@ function Information() {
                                  })}
                                  error={!!errors?.fullName}
                                  helperText={errors?.fullName?.message}
+                                 disabled={changeProfileInfoIsMutating}
                               />
                            </div>
 
@@ -140,6 +168,7 @@ function Information() {
                                  })}
                                  error={!!errors?.phoneNumber}
                                  helperText={errors?.phoneNumber?.message}
+                                 disabled
                               />
                            </div>
                         </div>
@@ -150,7 +179,7 @@ function Information() {
                         type="submit"
                         size="large"
                         color="customOrange2"
-                        loading={false}
+                        loading={changeProfileInfoIsMutating}
                         className="w-full !rounded-10 !p-2 customLg:w-auto"
                      >
                         <div className="flex w-full items-center justify-between customLg:w-[330px]">
@@ -166,6 +195,9 @@ function Information() {
                </div>
             )}
          </div>
+         <Backdrop sx={{ zIndex: 2 }} open={changeProfileIsMutating}>
+            <CircularProgress color="customOrange2" />
+         </Backdrop>
       </ProfileLayout>
    );
 }
