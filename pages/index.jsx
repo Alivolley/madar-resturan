@@ -14,8 +14,6 @@ import BestComments from '@/components/pages/home/best-comments/best-comments';
 import axiosInstance from '@/configs/axiosInstance';
 
 export default function Home({ categoryList, foodPartyList, dailyMenuList, lastComments }) {
-   // console.log(lastComments);
-
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
@@ -36,7 +34,7 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
             <DailyMenu dailyMenuList={dailyMenuList} />
          </div>
          <div className="mt-28">
-            <BestComments detail={lastComments?.result} />
+            <BestComments detail={lastComments?.results} />
          </div>
       </div>
    );

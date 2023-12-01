@@ -118,13 +118,19 @@ function Search({ searchResultList }) {
 export default Search;
 
 export async function getServerSideProps(context) {
-   const { query } = context;
+   const { query, req } = context;
+   const accessToken = req?.cookies?.madar_accessToken;
 
    const searchResultList = await axiosInstance('restaurant/foods/list_create/', {
       params: {
          search: query?.food_name,
          page: query?.page,
       },
+      ...(accessToken && {
+         headers: {
+            Authorization: `Bearer ${accessToken}`,
+         },
+      }),
    }).then(res => res.data);
 
    return { props: { searchResultList } };

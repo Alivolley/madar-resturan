@@ -112,16 +112,12 @@ function Header({ isLogin }) {
                         خانه
                      </Link>
 
-                     <Link href="/" className="hidden customMd:block">
-                        تماس با ما
-                     </Link>
-
                      <div id="dropdownWrapper">
                         <div className="flex cursor-pointer items-center gap-1">
                            <p>منو</p>
                            <KeyboardArrowDownOutlinedIcon />
                         </div>
-                        <div id="dropdownBox" className="w-52">
+                        <div id="dropdownBox" className="w-36">
                            <div className="flex flex-col rounded-sm bg-buttonPink">
                               <Link
                                  href="/category/منوی روز/1"
@@ -142,15 +138,28 @@ function Header({ isLogin }) {
                         </div>
                      </div>
 
-                     {/* <div className="" id="dropdownWrapper">
+                     <div className="" id="dropdownWrapper">
                         <div className="flex cursor-pointer items-center gap-1">
                            <p>رستوران مادر</p>
                            <KeyboardArrowDownOutlinedIcon />
                         </div>
-                        <div id="dropdownBox" className="h-52 w-52 border border-solid border-customOrange bg-white">
-                           some
+                        <div id="dropdownBox" className="w-40">
+                           <div className="flex flex-col rounded-sm bg-buttonPink">
+                              <Link
+                                 href="/"
+                                 className="px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                              >
+                                 تماس با ما
+                              </Link>
+                              <Link
+                                 href="/"
+                                 className="px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                              >
+                                 در باره ما
+                              </Link>
+                           </div>
                         </div>
-                     </div> */}
+                     </div>
                   </div>
                </Grid>
                <Grid item sm={3} md={2.5}>

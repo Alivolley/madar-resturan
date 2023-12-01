@@ -34,6 +34,7 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
 import useGetBasket from '@/apis/basket/useGetBasket';
 import useSearchHistory from '@/apis/userInfo/useSearchHistory';
+import useClearHistory from '@/apis/useClearHistory';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -61,8 +62,7 @@ function MobileHeader({ isLogin }) {
    const getUserInfo = useGetUserInfo(isLogin);
    const { data: basketData } = useGetBasket(isLogin);
    const { data: searchHistoryData } = useSearchHistory();
-
-   console.log(searchHistoryData);
+   const { trigger: clearHistoryTrigger, isMutating: clearHistoryIsMutating } = useClearHistory();
 
    const { register, handleSubmit, setValue } = useForm({
       defaultValues: {
@@ -78,6 +78,10 @@ function MobileHeader({ isLogin }) {
    useEffect(() => {
       setValue('searchInput', foodName);
    }, [foodName]);
+
+   const clearHistoryHandler = () => {
+      clearHistoryTrigger();
+   };
 
    return (
       <header className="sticky top-0 z-[2] bg-customOrange px-5 pb-11 pt-6">
@@ -225,88 +229,62 @@ function MobileHeader({ isLogin }) {
 
                <Collapse in={showSearchCollapse}>
                   <div className="mt-1 rounded-2xl bg-white p-3">
-                     <div className="border-b border-solid border-[#E4EAF0] pb-4">
-                        <div className="flex items-center justify-between">
+                     {searchHistoryData?.user_searches?.length ? (
+                        <div className="border-b border-solid border-[#E4EAF0] pb-4">
+                           <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-1">
+                                 <div className="text-[#C66204]">
+                                    <HistoryIcon fontSize="small" color="inherit" />
+                                 </div>
+                                 <p className="text-sm">تاریخچه جستجو</p>
+                              </div>
+                              <IconButton onClick={clearHistoryHandler} disabled={clearHistoryIsMutating}>
+                                 <DeleteOutlineIcon />
+                              </IconButton>
+                           </div>
+
+                           <div className="mt-4 flex flex-wrap items-center gap-2">
+                              {searchHistoryData?.user_searches?.map(item => (
+                                 <Link
+                                    key={item?.word}
+                                    href={`/search?food_name=${item?.word}&page=1`}
+                                    className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
+                                 >
+                                    <p>{item?.word}</p>
+                                    <div>
+                                       <ArrowBackIosIcon fontSize="inherit" />
+                                    </div>
+                                 </Link>
+                              ))}
+                           </div>
+                        </div>
+                     ) : null}
+
+                     {searchHistoryData?.popular_searches?.length ? (
+                        <div className="mt-6">
                            <div className="flex items-center gap-1">
                               <div className="text-[#C66204]">
-                                 <HistoryIcon fontSize="small" color="inherit" />
+                                 <Image src={starIcon} alt="favorite" />
                               </div>
-                              <p className="text-sm">تاریخچه جستجو</p>
+                              <p className="text-sm">جستجو های پر طرفدار</p>
                            </div>
-                           <IconButton>
-                              <DeleteOutlineIcon />
-                           </IconButton>
-                        </div>
 
-                        <div className="mt-4 flex flex-wrap items-center gap-2">
-                           <Link
-                              href="/search?food_name=some"
-                              className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
-                           >
-                              <p>راتاتویی</p>
-                              <div>
-                                 <ArrowBackIosIcon fontSize="inherit" />
-                              </div>
-                           </Link>
-                           <Link
-                              href="/search?food_name=some"
-                              className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
-                           >
-                              <p>راتاتویی</p>
-                              <div>
-                                 <ArrowBackIosIcon fontSize="inherit" />
-                              </div>
-                           </Link>
-                           <Link
-                              href="/search?food_name=some"
-                              className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
-                           >
-                              <p>راتاتویی</p>
-                              <div>
-                                 <ArrowBackIosIcon fontSize="inherit" />
-                              </div>
-                           </Link>
-                        </div>
-                     </div>
-
-                     <div className="mt-6">
-                        <div className="flex items-center gap-1">
-                           <div className="text-[#C66204]">
-                              <Image src={starIcon} alt="favorite" />
+                           <div className="mt-4 flex flex-wrap items-center gap-2">
+                              {searchHistoryData?.popular_searches?.map(item => (
+                                 <Link
+                                    key={item?.word}
+                                    href={`/search?food_name=${item?.word}&page=1`}
+                                    className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
+                                 >
+                                    <p>{item?.word}</p>
+                                    <div>
+                                       <ArrowBackIosIcon fontSize="inherit" />
+                                    </div>
+                                 </Link>
+                              ))}
                            </div>
-                           <p className="text-sm">جستجو های پر طرفدار</p>
                         </div>
-
-                        <div className="mt-4 flex flex-wrap items-center gap-2">
-                           <Link
-                              href="/search?food_name=some"
-                              className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
-                           >
-                              <p>راتاتویی</p>
-                              <div>
-                                 <ArrowBackIosIcon fontSize="inherit" />
-                              </div>
-                           </Link>
-                           <Link
-                              href="/search?food_name=some"
-                              className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
-                           >
-                              <p>راتاتویی</p>
-                              <div>
-                                 <ArrowBackIosIcon fontSize="inherit" />
-                              </div>
-                           </Link>
-                           <Link
-                              href="/search?food_name=some"
-                              className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
-                           >
-                              <p>راتاتویی</p>
-                              <div>
-                                 <ArrowBackIosIcon fontSize="inherit" />
-                              </div>
-                           </Link>
-                        </div>
-                     </div>
+                     ) : null}
                   </div>
                </Collapse>
             </div>
