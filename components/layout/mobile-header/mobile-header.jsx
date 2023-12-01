@@ -33,6 +33,7 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
 import useGetBasket from '@/apis/basket/useGetBasket';
+import useSearchHistory from '@/apis/userInfo/useSearchHistory';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -59,6 +60,9 @@ function MobileHeader({ isLogin }) {
    // eslint-disable-next-line no-unused-vars
    const getUserInfo = useGetUserInfo(isLogin);
    const { data: basketData } = useGetBasket(isLogin);
+   const { data: searchHistoryData } = useSearchHistory();
+
+   console.log(searchHistoryData);
 
    const { register, handleSubmit, setValue } = useForm({
       defaultValues: {

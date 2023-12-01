@@ -48,6 +48,7 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
 import useGetBasket from '@/apis/basket/useGetBasket';
+import useCategories from '@/apis/categories/useCategories';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -74,6 +75,7 @@ function Header({ isLogin }) {
    // eslint-disable-next-line no-unused-vars
    const getUserInfo = useGetUserInfo(isLogin);
    const { data: basketData } = useGetBasket(isLogin);
+   const { data: categoryList } = useCategories();
 
    const {
       register,
@@ -105,24 +107,42 @@ function Header({ isLogin }) {
          <HeaderStyle className="flex h-full w-full">
             <Grid container alignItems="center">
                <Grid item sm={4.5} md={4.75}>
-                  <div className="flex items-center gap-3 font-bold text-textOrange customLg:gap-9">
-                     <div className="" id="dropdownWrapper">
+                  <div className="flex items-center gap-7 font-bold text-textOrange customLg:gap-9">
+                     <Link href="/" className="hidden md:block">
+                        خانه
+                     </Link>
+
+                     <Link href="/" className="hidden customMd:block">
+                        تماس با ما
+                     </Link>
+
+                     <div id="dropdownWrapper">
                         <div className="flex cursor-pointer items-center gap-1">
                            <p>منو</p>
                            <KeyboardArrowDownOutlinedIcon />
                         </div>
-                        <div id="dropdownBox" className="h-52 w-52 border border-solid border-customOrange bg-white">
-                           some
+                        <div id="dropdownBox" className="w-52">
+                           <div className="flex flex-col rounded-sm bg-buttonPink">
+                              <Link
+                                 href="/category/منوی روز/1"
+                                 className="px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                              >
+                                 منوی روز
+                              </Link>
+                              {categoryList?.map(item => (
+                                 <Link
+                                    key={item?.id}
+                                    href={`/category/${item?.title}/1`}
+                                    className="border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                 >
+                                    {item?.title}
+                                 </Link>
+                              ))}
+                           </div>
                         </div>
                      </div>
 
-                     <Link href="/" className="hidden md:block">
-                        سفارش آنلاین
-                     </Link>
-                     <Link href="/" className="hidden customMd:block">
-                        تماس با ما
-                     </Link>
-                     <div className="" id="dropdownWrapper">
+                     {/* <div className="" id="dropdownWrapper">
                         <div className="flex cursor-pointer items-center gap-1">
                            <p>رستوران مادر</p>
                            <KeyboardArrowDownOutlinedIcon />
@@ -130,7 +150,7 @@ function Header({ isLogin }) {
                         <div id="dropdownBox" className="h-52 w-52 border border-solid border-customOrange bg-white">
                            some
                         </div>
-                     </div>
+                     </div> */}
                   </div>
                </Grid>
                <Grid item sm={3} md={2.5}>
