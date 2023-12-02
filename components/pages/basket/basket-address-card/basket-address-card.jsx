@@ -13,7 +13,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 import BasketDeleteAddressModal from '../basket-delete-address-modal/basket-delete-address-modal';
 
-function BasketAddressCard({ isClickable = false }) {
+function BasketAddressCard({ isClickable = false, detail }) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const [showDeleteAddressModal, setShowDeleteAddressModal] = useState(false);
 
@@ -28,10 +28,10 @@ function BasketAddressCard({ isClickable = false }) {
                      }`}
                   />
                )}
-               علی ازقندی
+               {detail?.recipient_name}
             </div>
-            <p className="text-xs text-[#7E8AAB] customMd:text-sm">
-               مشهد سر افرازان، بهارستان، بهارستان کنار بهارستان نرسیده به کافی شاپ صدف، پلاک ۴۵
+            <p className="font-rokhFaNum text-xs text-[#7E8AAB] customMd:text-sm">
+               {detail?.address} - {detail?.phone_number}
             </p>
          </button>
 
@@ -44,8 +44,17 @@ function BasketAddressCard({ isClickable = false }) {
             </IconButton>
          </div>
 
-         <BasketAddressModal show={showBasketAddressModal} onClose={() => setShowBasketAddressModal(false)} isEdit />
-         <BasketDeleteAddressModal show={showDeleteAddressModal} onClose={() => setShowDeleteAddressModal(false)} />
+         <BasketAddressModal
+            show={showBasketAddressModal}
+            onClose={() => setShowBasketAddressModal(false)}
+            isEdit
+            detail={detail}
+         />
+         <BasketDeleteAddressModal
+            show={showDeleteAddressModal}
+            onClose={() => setShowDeleteAddressModal(false)}
+            detail={detail}
+         />
       </div>
    );
 }

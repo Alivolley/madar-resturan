@@ -29,8 +29,6 @@ function Information() {
    const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage();
    const { trigger: changeProfileInfoTrigger, isMutating: changeProfileInfoIsMutating } = useChangeProfileInfo();
 
-   // console.log(information);
-
    const {
       register,
       handleSubmit,

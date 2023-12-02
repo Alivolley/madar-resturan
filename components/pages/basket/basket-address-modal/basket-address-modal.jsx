@@ -1,7 +1,8 @@
-import { Controller, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 // MUI
-import { Button, Checkbox, Dialog, FormControlLabel, IconButton, TextField } from '@mui/material';
+import { Button, Dialog, IconButton, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
 // Icons
@@ -14,32 +15,68 @@ import BasketAddressModalStyle from './basket-address-modal.style';
 // Components
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
-function BasketAddressModal({ show, onClose, isEdit = false }) {
+// Apis
+import useAddAddress from '@/apis/profile/useAddAddress';
+import useEditAddress from '@/apis/profile/useEditAddress';
+
+function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
+   const { trigger: addAddressTrigger, isMutating: addAddressIsMutating } = useAddAddress();
+   const { trigger: editAddressTrigger, isMutating: editAddressIsMutating } = useEditAddress();
+
    const {
       register,
       handleSubmit,
       formState: { errors },
       reset,
-      control,
+      setValue,
    } = useForm({
       defaultValues: {
-         addressTitle: '',
          fullAddress: '',
-         selfDeliver: false,
          fullName: '',
          phoneNumber: '',
       },
       mode: 'onSubmit',
    });
 
-   const formSubmit = data => {
-      console.log(data);
-   };
-
    const closeModalHandler = () => {
       onClose();
-      reset();
+      if (!isEdit) {
+         reset();
+      }
    };
+
+   const formSubmit = data => {
+      const newAddress = {
+         address: data?.fullAddress,
+         recipient_name: data?.fullName,
+         phone_number: data?.phoneNumber,
+      };
+
+      if (isEdit) {
+         editAddressTrigger(
+            { newAddress, addressId: detail?.id },
+            {
+               onSuccess: () => {
+                  closeModalHandler();
+               },
+            }
+         );
+      } else {
+         addAddressTrigger(newAddress, {
+            onSuccess: () => {
+               closeModalHandler();
+            },
+         });
+      }
+   };
+
+   useEffect(() => {
+      if (isEdit) {
+         setValue('fullAddress', detail?.address);
+         setValue('fullName', detail?.recipient_name);
+         setValue('phoneNumber', detail?.phone_number);
+      }
+   }, [detail, detail?.id]);
 
    return (
       <Dialog open={show} onClose={closeModalHandler} fullWidth>
@@ -56,23 +93,6 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
             <RtlProvider>
                <form onSubmit={handleSubmit(formSubmit)} className="space-y-6">
                   <div className="flex flex-col gap-1">
-                     <p className="text-sm text-[#7E8AAB]">عنوان آدرس</p>
-                     <TextField
-                        variant="outlined"
-                        fullWidth
-                        color="customOrange"
-                        {...register('addressTitle', {
-                           required: {
-                              value: true,
-                              message: 'این فیلد اجباری است',
-                           },
-                        })}
-                        error={!!errors?.addressTitle}
-                        helperText={errors?.addressTitle?.message}
-                     />
-                  </div>
-
-                  <div className="flex flex-col gap-1">
                      <p className="text-sm text-[#7E8AAB]">آدرس دقیق شما</p>
                      <TextField
                         variant="outlined"
@@ -88,23 +108,11 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
                         })}
                         error={!!errors?.fullAddress}
                         helperText={errors?.fullAddress?.message}
+                        disabled={addAddressIsMutating || editAddressIsMutating}
                      />
                   </div>
 
                   <p className="my-6 rounded-10 bg-[#F5F8FC] px-4 py-3 font-bold">اطلاعات تحویل گیرنده</p>
-
-                  <Controller
-                     control={control}
-                     name="selfDeliver"
-                     render={({ field: { onChange, value } }) => (
-                        <FormControlLabel
-                           control={<Checkbox checked={value} color="success" />}
-                           label="تحویل گیرنده خودم هستم"
-                           value={value}
-                           onChange={onChange}
-                        />
-                     )}
-                  />
 
                   <div className="flex flex-col gap-3 customSm:flex-row customSm:items-center">
                      <div className="flex flex-1 flex-col gap-1">
@@ -121,6 +129,7 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
                            })}
                            error={!!errors?.fullName}
                            helperText={errors?.fullName?.message}
+                           disabled={addAddressIsMutating || editAddressIsMutating}
                         />
                      </div>
 
@@ -153,6 +162,7 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
                            })}
                            error={!!errors?.phoneNumber}
                            helperText={errors?.phoneNumber?.message}
+                           disabled={addAddressIsMutating || editAddressIsMutating}
                         />
                      </div>
                   </div>
@@ -165,6 +175,7 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
                            fullWidth
                            className="h-full !rounded-10 !py-3 !font-bold !text-[#626E94]"
                            color="buttonBgGray"
+                           disabled={addAddressIsMutating || editAddressIsMutating}
                         >
                            بازگشت
                         </Button>
@@ -175,7 +186,7 @@ function BasketAddressModal({ show, onClose, isEdit = false }) {
                            type="submit"
                            size="large"
                            color="customOrange2"
-                           loading={false}
+                           loading={addAddressIsMutating || editAddressIsMutating}
                            fullWidth
                            className="!rounded-10 !p-2"
                         >
