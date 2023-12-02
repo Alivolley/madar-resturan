@@ -13,24 +13,32 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 import BasketDeleteAddressModal from '../basket-delete-address-modal/basket-delete-address-modal';
 
-function BasketAddressCard({ isClickable = false, detail }) {
+function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, isActive = false }) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const [showDeleteAddressModal, setShowDeleteAddressModal] = useState(false);
 
    return (
       <div className="flex items-center justify-between rounded bg-white py-4 customMd:px-8">
-         <button type="button" className="cursor-pointer border-none bg-transparent font-rokhRegular outline-none">
-            <div className="flex items-center gap-2 text-base font-bold customMd:text-lg">
+         <button
+            type="button"
+            className="cursor-pointer border-none bg-transparent font-rokhRegular outline-none"
+            onClick={onClick}
+         >
+            <div
+               className={`flex items-center gap-2 text-base customMd:text-lg ${
+                  isActive ? 'font-bold' : 'text-[#626E94]'
+               }`}
+            >
                {isClickable && (
                   <div
                      className={`h-4 w-4 rounded-full border-[4px] border-solid ${
-                        'inPerson' === 'inPerson' ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
+                        isActive ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
                      }`}
                   />
                )}
                {detail?.recipient_name}
             </div>
-            <p className="font-rokhFaNum text-xs text-[#7E8AAB] customMd:text-sm">
+            <p className={`font-rokhFaNum text-xs customMd:text-sm ${isActive ? '' : 'text-[#626E94]'}`}>
                {detail?.address} - {detail?.phone_number}
             </p>
          </button>
