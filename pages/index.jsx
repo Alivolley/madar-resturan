@@ -14,6 +14,8 @@ import BestComments from '@/components/pages/home/best-comments/best-comments';
 import axiosInstance from '@/configs/axiosInstance';
 
 export default function Home({ categoryList, foodPartyList, dailyMenuList, lastComments }) {
+   console.log(lastComments);
+
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
@@ -34,25 +36,31 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
             <DailyMenu dailyMenuList={dailyMenuList} />
          </div>
          <div className="mt-28">
-            <BestComments detail={lastComments?.results} />
+            <BestComments detail={lastComments?.result} />
          </div>
       </div>
    );
 }
 
 export async function getStaticProps() {
-   const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
-   const foodPartyList = await axiosInstance('restaurant/foods/discounted/').then(res => res.data);
-   const dailyMenuList = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
-   const lastComments = await axiosInstance('restaurant/comments/list_create/?last_five=true').then(res => res.data);
+   try {
+      const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
+      const foodPartyList = await axiosInstance('restaurant/foods/discounted/').then(res => res.data);
+      const dailyMenuList = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
+      const lastComments = await axiosInstance('restaurant/comments/list_create/?last_five=true').then(res => res.data);
 
-   return {
-      props: {
-         categoryList,
-         foodPartyList,
-         dailyMenuList,
-         lastComments,
-      },
-      revalidate: 60,
-   };
+      return {
+         props: {
+            categoryList,
+            foodPartyList,
+            dailyMenuList,
+            lastComments,
+         },
+         revalidate: 60,
+      };
+   } catch (error) {
+      return {
+         notFound: true,
+      };
+   }
 }
