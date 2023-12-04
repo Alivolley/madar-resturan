@@ -81,7 +81,7 @@ function BestComments({ detail }) {
                         <div>
                            <p className="mb-2 font-bold">{item?.menu_item}</p>
 
-                           <pre className="text-sm">{item?.message}</pre>
+                           <pre className="whitespace-normal text-sm">{item?.message}</pre>
                         </div>
                      </div>
                   </div>

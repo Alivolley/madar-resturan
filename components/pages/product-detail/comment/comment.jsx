@@ -86,7 +86,7 @@ function Comment({ detail, commentsMutate }) {
                   {detail?.menu_item}
                </p>
             </div>
-            <pre className="text-base text-textGray">{detail?.message}</pre>
+            <pre className="whitespace-normal text-base text-textGray">{detail?.message}</pre>
          </div>
          {detail?.reply_message && (
             <div className="relative mr-5 mt-6 rounded-b-10 rounded-l-10 bg-[#391C01] p-5 text-white customXs:mr-16 customMd:mr-24">
@@ -103,7 +103,7 @@ function Comment({ detail, commentsMutate }) {
                         <p className="whitespace-nowrap text-sm font-bold">پاسخ مدیر رستوران</p>
                         <p className="font-rokhFaNum text-[8px]">{detail?.reply_elapsed_time}</p>
                      </div>
-                     <pre className="mt-4 text-sm text-[#BDCEDE]">{detail?.reply_message}</pre>
+                     <pre className="mt-4 whitespace-normal text-sm text-[#BDCEDE]">{detail?.reply_message}</pre>
                   </div>
                </div>
                <div className="absolute -top-3 right-0 h-4 w-5 rounded-tr-sm bg-[#391C01]" id="responseShape" />
