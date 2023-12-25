@@ -6,4 +6,4 @@ const nextConfig = {
    reactStrictMode: true,
 };
 
-module.exports = withTM({ nextConfig });
+module.exports = withTM(nextConfig);
