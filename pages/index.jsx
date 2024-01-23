@@ -14,12 +14,10 @@ import BestComments from '@/components/pages/home/best-comments/best-comments';
 import axiosInstance from '@/configs/axiosInstance';
 
 export default function Home({ categoryList, foodPartyList, dailyMenuList, lastComments }) {
-   console.log(lastComments);
-
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
-            <Image src={bannerPic} alt="banner" className="h-full w-full" />
+            <Image src={bannerPic} alt="banner" className="size-full" />
          </div>
          <div className="mt-14 px-5 customMd:px-[60px]">
             <Categories haveTitle categoryList={categoryList} />
