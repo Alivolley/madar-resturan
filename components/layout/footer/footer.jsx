@@ -13,7 +13,7 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 
 // Assets
-import footerLogo from '../../../assets/images/footerLogo.png';
+import footerLogo from '@/assets/images/footerLogo.png';
 
 // Apis
 import useCategories from '@/apis/categories/useCategories';

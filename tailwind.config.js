@@ -34,6 +34,7 @@ module.exports = {
             bgColor: '#f8f8f8',
             gold: '#FBD100',
             buttonBgGray: '#E4EAF0',
+            activeBrown: '#4C2000',
          },
 
          backgroundImage: {

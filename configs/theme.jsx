@@ -49,6 +49,9 @@ const getDesignTokens = mode => ({
       buttonBgGray: {
          main: '#E4EAF0',
       },
+      activeBrown: {
+         main: '#4C2000',
+      },
    },
 
    components: {

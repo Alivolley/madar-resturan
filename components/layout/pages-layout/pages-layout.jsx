@@ -13,17 +13,19 @@ import Footer from '../footer/footer';
 import MobileFooter from '../mobile-footer/mobile-footer';
 
 function PagesLayout({ children }) {
-   const router = useRouter();
+   const { pathname } = useRouter();
    const theme = useTheme();
    const isTablet = useMediaQuery(theme.breakpoints.down('md'));
    const isLogin = useSelector(state => state?.loginStatusReducer);
 
    return (
       <div className="font-rokhRegular">
-         {router.pathname !== '/login' &&
+         {pathname !== '/login' &&
+            !pathname.startsWith('/adminPanel') &&
             (isTablet ? <MobileHeader isLogin={isLogin} /> : <Header isLogin={isLogin} />)}
          <main className="bg-bgColor pb-20 customMd:pb-0">{children}</main>
-         {router.pathname !== '/login' &&
+         {pathname !== '/login' &&
+            !pathname.startsWith('/adminPanel') &&
             (isTablet ? <MobileFooter isLogin={isLogin} /> : <Footer isLogin={isLogin} />)}
       </div>
    );
