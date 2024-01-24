@@ -1,3 +1,6 @@
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import axios from 'axios';
 import Image from 'next/image';
 
 // Assets
@@ -10,10 +13,21 @@ import FoodParty from '@/components/pages/home/food-party/food-party';
 import DailyMenu from '@/components/pages/home/daily-menu/daily-menu';
 import BestComments from '@/components/pages/home/best-comments/best-comments';
 
-// Configs
-import axiosInstance from '@/configs/axiosInstance';
+export default function Home({ categoryList, foodPartyList, dailyMenuList, lastComments, error }) {
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: 'rtl',
+               fontFamily: 'rokhRegular',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
-export default function Home({ categoryList, foodPartyList, dailyMenuList, lastComments }) {
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
@@ -41,11 +55,15 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
 }
 
 export async function getStaticProps() {
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
    try {
-      const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
-      const foodPartyList = await axiosInstance('restaurant/foods/discounted/').then(res => res.data);
-      const dailyMenuList = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
-      const lastComments = await axiosInstance('restaurant/comments/list_create/?last_five=true').then(res => res.data);
+      const categoryList = await axios(`${baseURL}api/restaurant/categories/list_create/`).then(res => res.data);
+      const foodPartyList = await axios(`${baseURL}api/restaurant/foods/discounted/`).then(res => res.data);
+      const dailyMenuList = await axios(`${baseURL}api/restaurant/today-menu/get_update_delete/`).then(res => res.data);
+      const lastComments = await axios(`${baseURL}api/restaurant/comments/list_create/?last_five=true`).then(
+         res => res.data
+      );
 
       return {
          props: {
@@ -54,11 +72,13 @@ export async function getStaticProps() {
             dailyMenuList,
             lastComments,
          },
-         revalidate: 60,
+         revalidate: 30,
       };
    } catch (error) {
       return {
-         notFound: true,
+         props: {
+            error: error?.message,
+         },
       };
    }
 }

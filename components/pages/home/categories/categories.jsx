@@ -8,7 +8,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import categoryTitleIcon from '../../../../assets/icons/categoriesIcon.svg';
 import dailyMenuPic from '../../../../assets/images/categories/Group 34827.png';
 
-function Categories({ haveTitle, categoryList, activeCategory }) {
+function Categories({ haveTitle, categoryList, activeCategory, shouldNotScroll }) {
    return (
       <section>
          {haveTitle && (
@@ -38,12 +38,15 @@ function Categories({ haveTitle, categoryList, activeCategory }) {
                      ? 'customMd:bg-crimson customMd:text-white'
                      : 'customMd:bg-white customMd:hover:bg-crimson customMd:hover:text-white'
                }`}
+               {...(shouldNotScroll && {
+                  scroll: false,
+               })}
             >
                <div
-                  className="flex h-[65px] w-[65px] items-center justify-center rounded-10
-                bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
+                  className="flex size-[65px] items-center justify-center rounded-10 bg-crimson
+                customXs:size-[70px] customMd:bg-transparent"
                >
-                  <Image src={dailyMenuPic} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
+                  <Image src={dailyMenuPic} alt="category" className="size-12 customMd:size-16" />
                </div>
                <p className="text-center text-xs customLg:text-base">منوی روز</p>
             </Link>
@@ -56,12 +59,15 @@ function Categories({ haveTitle, categoryList, activeCategory }) {
                         ? 'customMd:bg-crimson customMd:text-white'
                         : 'customMd:bg-white customMd:hover:bg-crimson customMd:hover:text-white'
                   }`}
+                  {...(shouldNotScroll && {
+                     scroll: false,
+                  })}
                >
                   <div
-                     className="flex h-[65px] w-[65px] items-center justify-center rounded-10
-                bg-crimson customXs:h-[70px] customXs:w-[70px] customMd:bg-transparent"
+                     className="flex size-[65px] items-center justify-center rounded-10 bg-crimson
+                customXs:size-[70px] customMd:bg-transparent"
                   >
-                     <img src={item?.cover} alt="category" className="h-12 w-12 customMd:h-16 customMd:w-16" />
+                     <img src={item?.cover} alt="category" className="size-12 customMd:size-16" />
                   </div>
                   <p className="text-center text-xs customLg:text-base">{item?.title}</p>
                </Link>

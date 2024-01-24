@@ -1,7 +1,14 @@
-import { Grid, Pagination } from '@mui/material';
-import Image from 'next/image';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Link from 'next/link';
+
+// Configs
+import axios from 'axios';
+
+// MUI
+import { Grid, Pagination } from '@mui/material';
 
 // Icons
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -13,11 +20,22 @@ import categoryPic from '../../../assets/images/categories/categoryPic.png';
 import FoodCardThirdTemplate from '@/components/templates/food-card-third-template/food-card-third-template';
 import Categories from '@/components/pages/home/categories/categories';
 
-// Configs
-import axiosInstance from '@/configs/axiosInstance';
-
-function Category({ categoryList, categoryItems, dailyMenu }) {
+function Category({ categoryList, categoryItems, dailyMenu, error }) {
    const router = useRouter();
+
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: 'rtl',
+               fontFamily: 'rokhRegular',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
    const changePageHandler = (e, newValue) => {
       router.push(`/category/${router?.query?.categoryName}/${newValue}`);
@@ -99,9 +117,9 @@ function Category({ categoryList, categoryItems, dailyMenu }) {
 
          <main className="hidden pb-28 pt-10 customMd:block customMd:px-[60px]">
             <div className="mb-16">
-               <Image src={categoryPic} alt="categories" className="h-full w-full" />
+               <Image src={categoryPic} alt="categories" className="size-full" />
             </div>
-            <Categories categoryList={categoryList} activeCategory={router?.query?.categoryName} />
+            <Categories categoryList={categoryList} activeCategory={router?.query?.categoryName} shouldNotScroll />
             {router?.query?.categoryName !== 'منوی روز' && (
                <div className="mt-16">
                   <div className="mb-6 flex items-center justify-between space-y-1 border-b border-solid border-b-[#E4EAF0] text-center">
@@ -175,29 +193,21 @@ function Category({ categoryList, categoryItems, dailyMenu }) {
 
 export default Category;
 
-export async function getStaticPaths() {
-   return {
-      paths: [
-         {
-            params: {
-               categoryName: 'چلو ها',
-               page: '1',
-            },
-         },
-      ],
-      fallback: 'blocking',
-   };
-}
+export async function getServerSideProps(context) {
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function getStaticProps(context) {
    try {
-      const categoryList = await axiosInstance('restaurant/categories/list_create/').then(res => res.data);
-      const categoryItems = await axiosInstance(
-         `restaurant/foods/list_create/?category__title=${
-            context?.params?.categoryName === 'همه غذاها' ? '' : context?.params?.categoryName
-         }&page=${context?.params?.page}`
-      ).then(res => res.data);
-      const dailyMenu = await axiosInstance('restaurant/today-menu/get_update_delete/').then(res => res.data);
+      const categoryList = await axios(`${baseURL}api/restaurant/categories/list_create/`).then(res => res.data);
+      const categoryItems = await axios(`${baseURL}api/restaurant/foods/list_create/`, {
+         params: {
+            page: context?.params?.page,
+
+            ...(context?.params?.categoryName !== 'همه غذاها' && {
+               category__title: context?.params?.categoryName,
+            }),
+         },
+      }).then(res => res.data);
+      const dailyMenu = await axios(`${baseURL}api/restaurant/today-menu/get_update_delete/`).then(res => res.data);
 
       return {
          props: {
@@ -205,11 +215,12 @@ export async function getStaticProps(context) {
             categoryItems,
             dailyMenu,
          },
-         revalidate: 60,
       };
    } catch (error) {
       return {
-         notFound: true,
+         props: {
+            error: error?.message,
+         },
       };
    }
 }

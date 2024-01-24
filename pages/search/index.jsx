@@ -1,7 +1,11 @@
+import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+
+// Configs
+import axios from 'axios';
 
 // MUI
 import { FormControl, IconButton, InputAdornment, Pagination, TextField } from '@mui/material';
@@ -10,18 +14,29 @@ import { FormControl, IconButton, InputAdornment, Pagination, TextField } from '
 import searchIcon from '../../assets/icons/search-normal.svg';
 import noResult from '../../assets/images/search-not-found.png';
 
-// Configs
-import axiosInstance from '@/configs/axiosInstance';
-
 // Styles
 import RtlProvider from '../../components/layout/rtlProvider/rtlProvider';
 
 // components
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
 
-function Search({ searchResultList }) {
+function Search({ searchResultList, error }) {
    const router = useRouter();
    const foodName = router.query.food_name;
+
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: 'rtl',
+               fontFamily: 'rokhRegular',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
    const {
       register,
@@ -91,7 +106,7 @@ function Search({ searchResultList }) {
                <div>
                   <p className="mb-12 mt-[-20px] text-lg font-bold">محصولی با این مشخصات یافت نشد</p>
                   <div className="w-[250px]">
-                     <Image alt="no result" src={noResult} className="h-full w-full" priority />
+                     <Image alt="no result" src={noResult} className="size-full" priority />
                   </div>
                </div>
             ) : (
@@ -120,18 +135,26 @@ export default Search;
 export async function getServerSideProps(context) {
    const { query, req } = context;
    const accessToken = req?.cookies?.madar_accessToken;
-
-   const searchResultList = await axiosInstance('restaurant/foods/list_create/', {
-      params: {
-         search: query?.food_name,
-         page: query?.page,
-      },
-      ...(accessToken && {
-         headers: {
-            Authorization: `Bearer ${accessToken}`,
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
+   try {
+      const searchResultList = await axios(`${baseURL}api/restaurant/foods/list_create/`, {
+         params: {
+            search: query?.food_name,
+            page: query?.page,
          },
-      }),
-   }).then(res => res.data);
+         ...(accessToken && {
+            headers: {
+               Authorization: `Bearer ${accessToken}`,
+            },
+         }),
+      }).then(res => res.data);
 
-   return { props: { searchResultList } };
+      return { props: { searchResultList } };
+   } catch (error) {
+      return {
+         props: {
+            error: error?.message,
+         },
+      };
+   }
 }

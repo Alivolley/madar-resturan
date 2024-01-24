@@ -1,5 +1,7 @@
+import { toast } from 'react-toastify';
+import axios from 'axios';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 // Redux
@@ -32,7 +34,6 @@ import Comment from '@/components/pages/product-detail/comment/comment';
 import AddComment from '@/components/pages/product-detail/add-comment/add-comment';
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
-import axiosInstance from '@/configs/axiosInstance';
 
 // Apis
 import useAddToBasket from '@/apis/basket/useAddToBasket';
@@ -40,9 +41,23 @@ import useRemoveFromBasket from '@/apis/basket/useRemoveFromBasket';
 import useGetBasket from '@/apis/basket/useGetBasket';
 import useGetComments from '@/apis/comments/useGetComments';
 
-function ProductDetail({ productDetail, categoryItems }) {
+function ProductDetail({ productDetail, categoryItems, error }) {
    const [showAddCommentSection, setShowAddCommentSection] = useState(false);
    const isLogin = useSelector(state => state?.loginStatusReducer);
+
+   useEffect(() => {
+      if (error) {
+         toast.error(error, {
+            style: {
+               direction: 'rtl',
+               fontFamily: 'rokhRegular',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
+      }
+   }, [error]);
 
    const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
    const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
@@ -82,7 +97,7 @@ function ProductDetail({ productDetail, categoryItems }) {
          <Grid container spacing={{ md: 6 }}>
             <Grid item xs={12} md={6}>
                <div className="h-full rounded-10">
-                  <img alt="food" src={productDetail?.cover} className="h-full w-full rounded-10 object-cover" />
+                  <img alt="food" src={productDetail?.cover} className="size-full rounded-10 object-cover" />
                </div>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -216,7 +231,7 @@ function ProductDetail({ productDetail, categoryItems }) {
                   ) : commentsData?.[Number(commentsData?.length) - 1]?.total_objects === 0 ? (
                      <div className="flex h-full flex-col items-center justify-center">
                         <div className="my-8 w-36">
-                           <Image className="h-full w-full" src={addCommentPic} alt="add comment" />
+                           <Image className="size-full" src={addCommentPic} alt="add comment" />
                         </div>
                         <p className="text-sm text-[#626E94]">نظری برای این محصول ثبت نشده است</p>
                         <p className="mb-8 mt-2 text-lg font-bold">همین الان نظر خود را ثبت کنید</p>
@@ -291,10 +306,10 @@ function ProductDetail({ productDetail, categoryItems }) {
                <Grid item xs={12} md={5}>
                   <div className="hidden flex-col gap-5 customMd:flex">
                      <div>
-                        <Image src={amazingPic} alt="amazing" className="h-full w-full" priority />
+                        <Image src={amazingPic} alt="amazing" className="size-full" priority />
                      </div>
                      <div>
-                        <Image src={amazingPic} alt="amazing" className="h-full w-full" priority />
+                        <Image src={amazingPic} alt="amazing" className="size-full" priority />
                      </div>
                   </div>
                </Grid>
@@ -333,28 +348,17 @@ function ProductDetail({ productDetail, categoryItems }) {
 
 export default ProductDetail;
 
-export async function getStaticPaths() {
-   return {
-      paths: [
-         {
-            params: {
-               productName: 'نوشابه',
-            },
-         },
-      ],
-      fallback: 'blocking',
-   };
-}
+export async function getServerSideProps(context) {
+   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function getStaticProps(context) {
    try {
-      const productDetail = await axiosInstance('restaurant/foods/get_update_delete/', {
+      const productDetail = await axios(`${baseURL}api/restaurant/foods/get_update_delete/`, {
          params: {
             title: context?.params?.productName,
          },
       }).then(res => res.data);
 
-      const categoryItems = await axiosInstance(`restaurant/foods/list_create/`, {
+      const categoryItems = await axios(`${baseURL}api/restaurant/foods/list_create/`, {
          params: {
             category__title: productDetail?.category,
          },
@@ -365,11 +369,12 @@ export async function getStaticProps(context) {
             productDetail,
             categoryItems,
          },
-         revalidate: 60,
       };
    } catch (error) {
       return {
-         notFound: true,
+         props: {
+            error: error?.message,
+         },
       };
    }
 }
