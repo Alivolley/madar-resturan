@@ -13,7 +13,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 // Assets
-import discountShape from '../../../assets/icons/discount-shape.svg';
+import discountShape from '@/assets/icons/discount-shape.svg';
+import noImage from '@/assets/images/noImage.png';
 
 // Apis
 import useAddToBasket from '@/apis/basket/useAddToBasket';
@@ -53,7 +54,7 @@ function FoodCardThirdTemplate({ className, details }) {
             className="relative aspect-square h-[134px] shrink-0"
             title={details?.title}
          >
-            <img src={details?.cover} alt="food" className="h-full w-full rounded-xl object-cover" />
+            <Image src={details?.cover || noImage} alt="food" className="size-full rounded-xl object-cover" fill />
             {details?.percentage !== 0 && (
                <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1 pt-1 text-10">
                   <div>

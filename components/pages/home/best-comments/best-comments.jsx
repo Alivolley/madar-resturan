@@ -58,16 +58,13 @@ function BestComments({ detail }) {
                   <div className="flex justify-center">
                      <div className="flex flex-col gap-4 rounded-10 bg-white p-3 customMd:w-[650px] customMd:flex-row customMd:px-14 customMd:py-9">
                         <div className="flex flex-col items-center">
-                           <div className="flex h-20 w-20 items-center justify-center rounded-full border border-solid border-stone-300">
-                              {item?.user_image ? (
-                                 <img
-                                    src={item?.user_image}
-                                    alt="user profile"
-                                    className="h-full w-full rounded-full"
-                                 />
-                              ) : (
-                                 <Image src={userProfile} alt="user profile" className="h-full w-full rounded-full" />
-                              )}
+                           <div className="relative flex size-20 items-center justify-center rounded-full border border-solid border-stone-300">
+                              <Image
+                                 src={item?.user_image || userProfile}
+                                 alt="user profile"
+                                 className="size-full rounded-full"
+                                 fill
+                              />
                            </div>
                            <p className="mt-2 whitespace-nowrap text-lg font-bold">{item?.user}</p>
                            <div className="flex items-center gap-2 text-xs">

@@ -71,20 +71,13 @@ function Information() {
             {information ? (
                <>
                   <div className="relative mx-auto mt-14 w-fit cursor-pointer customMd:mx-0">
-                     <div className="h-28 w-28 cursor-pointer">
-                        {information?.image ? (
-                           <img
-                              src={information?.image}
-                              alt="user profile"
-                              className="h-full w-full cursor-pointer rounded-full object-cover"
-                           />
-                        ) : (
-                           <Image
-                              src={userProfilePic}
-                              alt="user profile"
-                              className="h-full w-full cursor-pointer rounded-full object-cover"
-                           />
-                        )}
+                     <div className="relative size-28 cursor-pointer">
+                        <Image
+                           src={information?.image || userProfilePic}
+                           alt="user profile"
+                           className="size-full cursor-pointer rounded-full object-cover"
+                           fill
+                        />
                      </div>
                      <IconButton
                         className="absolute bottom-0 left-0 cursor-pointer bg-customOrange"

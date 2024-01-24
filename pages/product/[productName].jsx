@@ -25,9 +25,10 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 // Assets
-import categoryTitleIcon from '../../assets/icons/categoriesIcon.svg';
-import amazingPic from '../../assets/images/amaz.png';
-import addCommentPic from '../../assets/images/addComment.png';
+import categoryTitleIcon from '@/assets/icons/categoriesIcon.svg';
+import amazingPic from '@/assets/images/amaz.png';
+import addCommentPic from '@/assets/images/addComment.png';
+import noImage from '@/assets/images/noImage.png';
 
 // Components
 import Comment from '@/components/pages/product-detail/comment/comment';
@@ -96,8 +97,13 @@ function ProductDetail({ productDetail, categoryItems, error }) {
       <main className="mx-auto max-w-[1300px] px-5 pb-32 pt-14 customMd:px-[60px]">
          <Grid container spacing={{ md: 6 }}>
             <Grid item xs={12} md={6}>
-               <div className="h-full rounded-10">
-                  <img alt="food" src={productDetail?.cover} className="size-full rounded-10 object-cover" />
+               <div className="relative h-full rounded-10">
+                  <Image
+                     alt="food"
+                     src={productDetail?.cover || noImage}
+                     className="size-full rounded-10 object-cover"
+                     fill
+                  />
                </div>
             </Grid>
             <Grid item xs={12} md={6}>

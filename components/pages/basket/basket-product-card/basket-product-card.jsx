@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 // MUI
@@ -7,6 +8,9 @@ import { IconButton } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
+// Assets
+import noImage from '@/assets/images/noImage.png';
 
 // Apis
 import useAddToBasket from '@/apis/basket/useAddToBasket';
@@ -39,9 +43,14 @@ function BasketProductCard({ detail }) {
          <div className="flex flex-1 gap-3">
             <Link
                href={`/product/${detail?.menu_item?.title}`}
-               className="hidden h-32 w-32 shrink-0 rounded-10 customMd:block"
+               className="relative hidden size-32 shrink-0 rounded-10 customMd:block"
             >
-               <img src={detail?.menu_item?.cover} alt="food" className="h-full w-full rounded-10 object-cover" />
+               <Image
+                  src={detail?.menu_item?.cover || noImage}
+                  alt="food"
+                  className="size-full rounded-10 object-cover"
+                  fill
+               />
             </Link>
             <div className="flex flex-col gap-3 customMd:mt-4">
                <Link href={`/product/${detail?.menu_item?.title}`} className="text-sm font-bold customMd:text-base">

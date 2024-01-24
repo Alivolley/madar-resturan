@@ -11,7 +11,8 @@ import { LoadingButton } from '@mui/lab';
 import AddIcon from '@mui/icons-material/Add';
 
 // Assets
-import discountShape from '../../../assets/icons/discount-shape.svg';
+import discountShape from '@/assets/icons/discount-shape.svg';
+import noImage from '@/assets/images/noImage.png';
 
 // Apis
 import useAddToBasket from '@/apis/basket/useAddToBasket';
@@ -36,7 +37,7 @@ function FoodCardFirstTemplate({ className, detail }) {
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
          <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full" title={detail?.title}>
-            <img src={detail?.cover} alt="food" className="h-full w-full rounded-10 object-cover" />
+            <Image src={detail?.cover || noImage} alt="food" className="size-full rounded-10 object-cover" fill />
             {detail?.percentage !== 0 && (
                <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5  pt-1 text-xs">
                   <div>

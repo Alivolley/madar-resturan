@@ -5,8 +5,9 @@ import Image from 'next/image';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
-import categoryTitleIcon from '../../../../assets/icons/categoriesIcon.svg';
-import dailyMenuPic from '../../../../assets/images/categories/Group 34827.png';
+import categoryTitleIcon from '@/assets/icons/categoriesIcon.svg';
+import dailyMenuPic from '@/assets/images/categories/Group 34827.png';
+import noImage from '@/assets/images/noImage.png';
 
 function Categories({ haveTitle, categoryList, activeCategory, shouldNotScroll }) {
    return (
@@ -64,10 +65,10 @@ function Categories({ haveTitle, categoryList, activeCategory, shouldNotScroll }
                   })}
                >
                   <div
-                     className="flex size-[65px] items-center justify-center rounded-10 bg-crimson
+                     className="relative flex size-[65px] items-center justify-center rounded-10 bg-crimson
                 customXs:size-[70px] customMd:bg-transparent"
                   >
-                     <img src={item?.cover} alt="category" className="size-12 customMd:size-16" />
+                     <Image src={item?.cover || noImage} alt="category" className="size-12 customMd:size-16" fill />
                   </div>
                   <p className="text-center text-xs customLg:text-base">{item?.title}</p>
                </Link>
