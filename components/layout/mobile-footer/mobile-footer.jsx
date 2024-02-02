@@ -58,31 +58,23 @@ function MobileFooter({ isLogin }) {
 
             {isLogin && (
                <Link href="/basket" className="flex flex-1 flex-col items-center">
-                  {basketData?.orders?.length ? (
-                     <Badge
-                        badgeContent={basketData?.count}
-                        color="error"
-                        anchorOrigin={{
-                           vertical: 'top',
-                           horizontal: 'right',
-                        }}
-                        sx={badgeStyles}
-                     >
-                        <div>
-                           <Image
-                              src={router.pathname === '/basket' ? footerBasketActive : footerBasket}
-                              alt="footer icon"
-                           />
-                        </div>
-                     </Badge>
-                  ) : (
+                  <Badge
+                     badgeContent={basketData?.all_orders_count}
+                     color="error"
+                     anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                     }}
+                     sx={badgeStyles}
+                  >
                      <div>
                         <Image
                            src={router.pathname === '/basket' ? footerBasketActive : footerBasket}
                            alt="footer icon"
                         />
                      </div>
-                  )}
+                  </Badge>
+
                   {router.pathname === '/basket' && <p className="text-xs text-[#FCA95C]">سبد خرید</p>}
                </Link>
             )}

@@ -20,9 +20,9 @@ function DailyMenu({ dailyMenuList }) {
 
    useEffect(() => {
       const updatedList = [];
-      for (let i = 0; i < dailyMenuList?.foods.length; i += 2) {
-         const firstItem = dailyMenuList?.foods[i];
-         const secondItem = dailyMenuList?.foods[i + 1];
+      for (let i = 0; i < dailyMenuList?.products?.length; i += 2) {
+         const firstItem = dailyMenuList?.products[i];
+         const secondItem = dailyMenuList?.products[i + 1];
 
          const newItem = {
             first: firstItem,
@@ -33,7 +33,7 @@ function DailyMenu({ dailyMenuList }) {
       }
 
       setNewList(updatedList);
-   }, [dailyMenuList?.foods]);
+   }, [dailyMenuList?.products]);
 
    return (
       <section>
@@ -48,7 +48,7 @@ function DailyMenu({ dailyMenuList }) {
          </div>
          <div className="customMd:hidden">
             <Grid container spacing={1}>
-               {dailyMenuList?.foods?.map(item => (
+               {dailyMenuList?.products?.map(item => (
                   <Grid item xs={6} key={item?.id}>
                      <FoodCardFirstTemplate className="mx-auto custom400:w-[178px] customMd:w-[200px]" detail={item} />
                   </Grid>
@@ -60,7 +60,7 @@ function DailyMenu({ dailyMenuList }) {
             <div className="flex items-center gap-9">
                <div className="relative flex shrink-0 flex-col rounded-2xl bg-white">
                   <div className="h-[338px] w-[314px]">
-                     <Image src={testPic1} alt="daily menu" className="h-full w-full object-cover" />
+                     <Image src={testPic1} alt="daily menu" className="size-full object-cover" />
                   </div>
 
                   <Link href="/category/منوی روز/1" className="flex items-center px-6 py-5 font-bold text-[#050F2C]">

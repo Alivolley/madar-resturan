@@ -27,6 +27,7 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import IsoIcon from '@mui/icons-material/Iso';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -104,7 +105,7 @@ function Header({ isLogin }) {
 
    return (
       <header className="sticky top-0 z-[2] h-32 bg-white px-6 shadow-searchBoxShadow customMd:px-[60px]">
-         <HeaderStyle className="flex h-full w-full">
+         <HeaderStyle className="flex size-full">
             <Grid container alignItems="center">
                <Grid item sm={4.5} md={4.75}>
                   <div className="flex items-center gap-7 font-bold text-textOrange customLg:gap-9">
@@ -200,28 +201,24 @@ function Header({ isLogin }) {
                                     borderRadius: '10px',
                                  }}
                               >
-                                 {basketData?.orders?.length ? (
-                                    <Badge
-                                       badgeContent={basketData?.count}
-                                       color="error"
-                                       anchorOrigin={{
-                                          vertical: 'bottom',
-                                          horizontal: 'right',
-                                       }}
-                                       sx={badgeStyles}
-                                    >
-                                       <Image src={basketIconOrange} alt="basket Icon" />
-                                    </Badge>
-                                 ) : (
+                                 <Badge
+                                    badgeContent={basketData?.all_orders_count}
+                                    color="error"
+                                    anchorOrigin={{
+                                       vertical: 'bottom',
+                                       horizontal: 'right',
+                                    }}
+                                    sx={badgeStyles}
+                                 >
                                     <Image src={basketIconOrange} alt="basket Icon" />
-                                 )}
+                                 </Badge>
                               </Fab>
                            </Link>
 
                            <Button
                               variant="contained"
                               color="buttonPink"
-                              className="h-full font-rokhFaNum font-bold text-textOrange"
+                              className="!h-full !min-w-[172px] !font-rokhFaNum !font-bold !text-textOrange"
                               ref={profileRef}
                               onMouseEnter={() => setProfileDropDown(true)}
                               onMouseLeave={() => setProfileDropDown(false)}
@@ -252,9 +249,20 @@ function Header({ isLogin }) {
                                  >
                                     <Paper>
                                        <div className="flex flex-col bg-buttonPink">
+                                          {/* {isAdmin && ( */}
+                                          <Link
+                                             href="/adminPanel/products"
+                                             className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <IsoIcon fontSize="small" color="customOrange" />
+                                             پنل ادمین
+                                          </Link>
+                                          {/* // )} */}
+
                                           <Link
                                              href="/profile/information"
-                                             className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
                                              onClick={() => setProfileDropDown(false)}
                                           >
                                              <PersonOutlinedIcon fontSize="small" color="customOrange" />

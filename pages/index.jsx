@@ -36,7 +36,7 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
          <div className="mt-14 px-5 customMd:px-[60px]">
             <Categories haveTitle categoryList={categoryList} />
          </div>
-         {foodPartyList?.length ? (
+         {foodPartyList?.result?.length ? (
             <div className="mt-28 customMd:px-[60px]">
                <FoodParty foodPartyList={foodPartyList} />
             </div>
@@ -58,10 +58,12 @@ export async function getStaticProps() {
    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const categoryList = await axios(`${baseURL}api/restaurant/categories/list_create/`).then(res => res.data);
-      const foodPartyList = await axios(`${baseURL}api/restaurant/foods/discounted/`).then(res => res.data);
-      const dailyMenuList = await axios(`${baseURL}api/restaurant/today-menu/get_update_delete/`).then(res => res.data);
-      const lastComments = await axios(`${baseURL}api/restaurant/comments/list_create/?last_five=true`).then(
+      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`).then(res => res.data);
+      const foodPartyList = await axios(`${baseURL}api/store/products/list_create/?has_discount=True`).then(
+         res => res.data
+      );
+      const dailyMenuList = await axios(`${baseURL}api/store/today-menu/get_update_delete/`).then(res => res.data);
+      const lastComments = await axios(`${baseURL}api/store/comments/list_create/?last_five=true`).then(
          res => res.data
       );
 

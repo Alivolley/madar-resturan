@@ -70,7 +70,9 @@ function Categories({ haveTitle, categoryList, activeCategory, shouldNotScroll }
                   >
                      <Image src={item?.cover || noImage} alt="category" className="size-12 customMd:size-16" fill />
                   </div>
-                  <p className="text-center text-xs customLg:text-base">{item?.title}</p>
+                  <p className="h-[19px] overflow-hidden text-center text-xs [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box] customLg:text-base">
+                     {item?.title}
+                  </p>
                </Link>
             ))}
          </div>

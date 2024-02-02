@@ -98,10 +98,8 @@ function AdminSideBar({ isMobile, onClose }) {
          </div>
 
          <Button
-            variant="contained"
             size="large"
-            color="activeBrown"
-            className="!rounded-10 !px-3 !py-2 !text-white"
+            className="!rounded-10 !bg-none !px-3 !py-2 !text-black !shadow-none"
             fullWidth
             onClick={() => setShowLogoutModal(true)}
          >

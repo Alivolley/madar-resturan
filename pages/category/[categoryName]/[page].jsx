@@ -103,8 +103,8 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                      منوی روز
                   </p>
                   <div className="mt-3 flex flex-col gap-3">
-                     {dailyMenu?.foods?.length ? (
-                        dailyMenu?.foods?.map(item => <FoodCardThirdTemplate key={item.id} details={item} />)
+                     {dailyMenu?.products?.length ? (
+                        dailyMenu?.products?.map(item => <FoodCardThirdTemplate key={item.id} details={item} />)
                      ) : (
                         <p className="rounded-10 bg-buttonPink p-6 text-center font-bold">منوی روز خالی میباشد</p>
                      )}
@@ -173,9 +173,9 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                   )}
                </div>
                <div>
-                  {dailyMenu?.foods?.length ? (
+                  {dailyMenu?.products?.length ? (
                      <Grid container spacing={2}>
-                        {dailyMenu?.foods?.map(item => (
+                        {dailyMenu?.products?.map(item => (
                            <Grid item md={6} xl={4} key={item?.id}>
                               <FoodCardThirdTemplate details={item} />
                            </Grid>
@@ -197,17 +197,17 @@ export async function getServerSideProps(context) {
    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const categoryList = await axios(`${baseURL}api/restaurant/categories/list_create/`).then(res => res.data);
-      const categoryItems = await axios(`${baseURL}api/restaurant/foods/list_create/`, {
+      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`).then(res => res.data);
+      const categoryItems = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
             page: context?.params?.page,
 
             ...(context?.params?.categoryName !== 'همه غذاها' && {
-               category__title: context?.params?.categoryName,
+               category: context?.params?.categoryName,
             }),
          },
       }).then(res => res.data);
-      const dailyMenu = await axios(`${baseURL}api/restaurant/today-menu/get_update_delete/`).then(res => res.data);
+      const dailyMenu = await axios(`${baseURL}api/store/today-menu/get_update_delete/`).then(res => res.data);
 
       return {
          props: {

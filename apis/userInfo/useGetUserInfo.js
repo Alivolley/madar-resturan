@@ -10,7 +10,7 @@ import axiosInstance from '@/configs/axiosInstance';
 const useGetUserInfo = isLogin => {
    const dispatch = useDispatch();
 
-   return useSWR(isLogin ? 'accounts/user-information/' : null, url =>
+   return useSWR(isLogin ? 'accounts/panel/' : null, url =>
       axiosInstance(url).then(res => {
          dispatch(addUserInfo(res.data));
       })

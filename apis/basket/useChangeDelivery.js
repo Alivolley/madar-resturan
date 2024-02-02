@@ -4,9 +4,9 @@ import axiosInstance from '@/configs/axiosInstance';
 
 const useChangeDelivery = () => {
    const { mutate } = useSWRConfig();
-   return useSWRMutation('restaurant/cart/get_update/', (url, data) =>
+   return useSWRMutation('store/cart/get_update/', (url, data) =>
       axiosInstance.patch(url, data.arg).then(res => {
-         mutate('restaurant/cart/get_update/', res.data);
+         mutate('store/cart/get_update/', res.data);
          return res.data;
       })
    );

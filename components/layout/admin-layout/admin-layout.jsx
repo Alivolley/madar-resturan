@@ -18,6 +18,7 @@ import profilePic from '@/assets/images/userProfile.png';
 
 // Components
 import AdminSideBar from '../admin-sideBar/admin-sideBar';
+import AdminLayoutStyle from './admin-layout.style';
 
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
@@ -33,7 +34,7 @@ function AdminLayout({ children }) {
    const jalaliDate = moment().locale('fa').format('D MMMM YYYY', 'jalali');
 
    return (
-      <div className="relative flex bg-[#f5f8fc]">
+      <AdminLayoutStyle className="relative flex bg-[#f5f8fc]">
          <AdminSideBar />
 
          <Drawer
@@ -47,7 +48,7 @@ function AdminLayout({ children }) {
             <AdminSideBar isMobile onClose={() => setShowMobileMenu(false)} />
          </Drawer>
 
-         <div className="w-full customMd:grow">
+         <div className="w-full" id="container">
             <div className="sticky top-0 z-[2] flex w-full items-center justify-between bg-white px-8 py-4 customMd:px-16 customMd:py-8">
                <p className="hidden font-bold tracking-[1px] customMd:block">{jalaliDate}</p>
                <div className="customMd:hidden">
@@ -78,7 +79,7 @@ function AdminLayout({ children }) {
             </div>
             <div className="w-full p-8">{children}</div>
          </div>
-      </div>
+      </AdminLayoutStyle>
    );
 }
 

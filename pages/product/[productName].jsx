@@ -77,8 +77,8 @@ function ProductDetail({ productDetail, categoryItems, error }) {
 
    const addToBasketHandler = () => {
       const foodObj = {
-         food_id: productDetail?.id,
-         food_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+         product_id: productDetail?.id,
+         product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
       };
 
       addToBasketTrigger(foodObj);
@@ -86,8 +86,8 @@ function ProductDetail({ productDetail, categoryItems, error }) {
 
    const removeFromBasketHandler = () => {
       const foodObj = {
-         food_id: productDetail?.id,
-         food_count: Number(basketQuantity) - 1,
+         product_id: productDetail?.id,
+         product_count: Number(basketQuantity) - 1,
       };
 
       removeFromBasketTrigger(foodObj);

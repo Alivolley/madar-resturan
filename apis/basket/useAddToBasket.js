@@ -5,9 +5,9 @@ import axiosInstance from '@/configs/axiosInstance';
 
 const useAddToBasket = () => {
    const { mutate } = useSWRConfig();
-   return useSWRMutation('restaurant/cart/get_update/', (url, data) =>
+   return useSWRMutation('store/cart/get_update/', (url, data) =>
       axiosInstance.patch(url, data.arg).then(res => {
-         if (data?.arg?.food_count === 1) {
+         if (data?.arg?.product_count === 1) {
             toast.success('محصول به سبد خرید اضافه شد', {
                style: {
                   direction: 'rtl',
@@ -18,7 +18,7 @@ const useAddToBasket = () => {
                autoClose: 5000,
             });
          }
-         mutate('restaurant/cart/get_update/', res.data);
+         mutate('store/cart/get_update/', res.data);
          return res.data;
       })
    );

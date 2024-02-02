@@ -88,8 +88,8 @@ function MobileHeader({ isLogin }) {
          <div className="relative">
             <div className="flex items-center justify-between">
                <div className="flex items-center gap-1">
-                  <Link href="/" className="h-11 w-11">
-                     <Image src={headerLogo} alt="header logo" className="h-full w-full" />
+                  <Link href="/" className="size-11">
+                     <Image src={headerLogo} alt="header logo" className="size-full" />
                   </Link>
                   {isLogin && (
                      <div className="space-y-2 text-white">
@@ -178,21 +178,17 @@ function MobileHeader({ isLogin }) {
                {isLogin ? (
                   <Link href="/basket">
                      <IconButton sx={{ border: '1px solid white', width: 32, height: 32 }}>
-                        {basketData?.orders?.length ? (
-                           <Badge
-                              badgeContent={basketData?.count}
-                              color="error"
-                              anchorOrigin={{
-                                 vertical: 'bottom',
-                                 horizontal: 'right',
-                              }}
-                              sx={badgeStyles}
-                           >
-                              <ShoppingBasketOutlinedIcon color="white" fontSize="small" />
-                           </Badge>
-                        ) : (
+                        <Badge
+                           badgeContent={basketData?.all_orders_count}
+                           color="error"
+                           anchorOrigin={{
+                              vertical: 'bottom',
+                              horizontal: 'right',
+                           }}
+                           sx={badgeStyles}
+                        >
                            <ShoppingBasketOutlinedIcon color="white" fontSize="small" />
-                        )}
+                        </Badge>
                      </IconButton>
                   </Link>
                ) : (

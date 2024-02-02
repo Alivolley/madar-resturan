@@ -31,8 +31,8 @@ function FoodCardThirdTemplate({ className, details }) {
 
    const addToBasketHandler = () => {
       const foodObj = {
-         food_id: details?.id,
-         food_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+         product_id: details?.id,
+         product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
       };
 
       addToBasketTrigger(foodObj);
@@ -40,8 +40,8 @@ function FoodCardThirdTemplate({ className, details }) {
 
    const removeFromBasketHandler = () => {
       const foodObj = {
-         food_id: details?.id,
-         food_count: Number(basketQuantity) - 1,
+         product_id: details?.id,
+         product_count: Number(basketQuantity) - 1,
       };
 
       removeFromBasketTrigger(foodObj);

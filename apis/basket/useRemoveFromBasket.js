@@ -5,9 +5,9 @@ import axiosInstance from '@/configs/axiosInstance';
 
 const useRemoveFromBasket = () => {
    const { mutate } = useSWRConfig();
-   return useSWRMutation('restaurant/cart/get_update/', (url, data) =>
+   return useSWRMutation('store/cart/get_update/', (url, data) =>
       axiosInstance.patch(url, data.arg).then(res => {
-         if (data?.arg?.food_count === 0) {
+         if (data?.arg?.product_count === 0) {
             toast.warn('محصول از سبد خرید حذف شد', {
                style: {
                   direction: 'rtl',
@@ -17,7 +17,7 @@ const useRemoveFromBasket = () => {
                autoClose: 5000,
             });
          }
-         mutate('restaurant/cart/get_update/', res.data);
+         mutate('store/cart/get_update/', res.data);
          return res.data;
       })
    );

@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import StarIcon from '@mui/icons-material/Star';
 
 // Assets
-import userProfile from '../../../../assets/images/userProfile.png';
+import userProfile from '@/assets/images/userProfile.png';
 
 // Styles
 import BestCommentsStyle from './best-comments.style';
@@ -76,7 +76,7 @@ function BestComments({ detail }) {
                            </div>
                         </div>
                         <div>
-                           <p className="mb-2 font-bold">{item?.menu_item}</p>
+                           <p className="mb-2 font-bold">{item?.product}</p>
 
                            <pre className="whitespace-normal text-sm">{item?.message}</pre>
                         </div>

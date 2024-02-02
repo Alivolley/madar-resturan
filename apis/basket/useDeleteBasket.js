@@ -4,8 +4,8 @@ import axiosInstance from '@/configs/axiosInstance';
 
 const useDeleteBasket = () => {
    const { mutate } = useSWRConfig();
-   return useSWRMutation('restaurant/cart/empty/', url =>
-      axiosInstance.post(url).then(() => mutate('restaurant/cart/get_update/'))
+   return useSWRMutation('store/cart/empty/', url =>
+      axiosInstance.post(url).then(() => mutate('store/cart/get_update/'))
    );
 };
 

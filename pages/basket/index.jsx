@@ -53,6 +53,8 @@ function Basket() {
       );
    }
 
+   // console.log(basketData);
+
    return (
       <main className="px-5 pt-6 customMd:px-[60px] customMd:pb-[50px]">
          {basketData?.orders?.length ? (
@@ -60,8 +62,8 @@ function Basket() {
                {basketStep === 1 ? (
                   <div className="flex items-center justify-between rounded-2xl rounded-br-none bg-white px-8 py-4">
                      <div className="flex items-end gap-1">
-                        <div className="h-5 w-5 pb-1">
-                           <Image src={basketIcon} alt="basket Icon" className="h-full w-full" />
+                        <div className="size-5 pb-1">
+                           <Image src={basketIcon} alt="basket Icon" className="size-full" />
                         </div>
                         <p className="text-sm font-bold text-[#7E8AAB]">سبد خرید</p>
                      </div>
@@ -92,7 +94,7 @@ function Basket() {
                            }}
                            onClick={() => setBasketStep(1)}
                         >
-                           <Image src={shoppingIcon} alt="basket step" className="h-full w-full" />
+                           <Image src={shoppingIcon} alt="basket step" className="size-full" />
                         </Fab>
                         <p className="text-xs font-bold text-customOrange2">سبد خرید</p>
                      </div>
@@ -100,8 +102,8 @@ function Basket() {
                      <div className="mb-5 h-[1px] w-32 bg-customOrange2 customMd:mx-8" />
 
                      <div className="flex flex-col items-center justify-center gap-3">
-                        <div className="h-[70px] w-[70px] rounded-full bg-buttonPink p-4">
-                           <Image src={infoIcon} alt="basket step" className="h-full w-full" />
+                        <div className="size-[70px] rounded-full bg-buttonPink p-4">
+                           <Image src={infoIcon} alt="basket step" className="size-full" />
                         </div>
                         <p className="text-xs font-bold text-customOrange2">اطلاعات مشتری</p>
                      </div>
@@ -109,8 +111,8 @@ function Basket() {
                      <div className="mb-5 h-[1px] w-32 bg-customOrange2 customMd:mx-8" />
 
                      <div className="flex flex-col items-center justify-center gap-3">
-                        <div className="h-[70px] w-[70px] rounded-full bg-buttonPink p-4">
-                           <Image src={paymentIcon} alt="basket step" className="h-full w-full" />
+                        <div className="size-[70px] rounded-full bg-buttonPink p-4">
+                           <Image src={paymentIcon} alt="basket step" className="size-full" />
                         </div>
                         <p className="text-xs font-bold text-customOrange2">پرداخت</p>
                      </div>
@@ -139,7 +141,7 @@ function Basket() {
 
                               <div className="mt-4 flex flex-col gap-4">
                                  {basketData?.orders?.map(item => (
-                                    <BasketProductCard key={item?.menu_item?.id} detail={item} />
+                                    <BasketProductCard key={item?.product_id} detail={item} />
                                  ))}
                               </div>
                            </>
@@ -157,8 +159,8 @@ function Basket() {
          ) : (
             <div className="mt-10 flex items-center justify-center">
                <div className="flex flex-col items-center">
-                  <div className="h-[200px] w-[200px]">
-                     <Image src={emptyBasketPic} alt="empty basket" className="h-full w-full" />
+                  <div className="size-[200px]">
+                     <Image src={emptyBasketPic} alt="empty basket" className="size-full" />
                   </div>
                   <p className="mt-5 text-center text-lg font-bold">در حال حاضر محصولی در سبد خرید خود ندارید .</p>
                   <p className="mt-2 text-center text-sm text-[#7E8AAB]">

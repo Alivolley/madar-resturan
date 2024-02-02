@@ -22,17 +22,19 @@ function FoodCardFirstTemplate({ className, detail }) {
    const isLogin = useSelector(state => state?.loginStatusReducer);
    const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
    const { data: basketData } = useGetBasket(isLogin);
-   const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === detail?.title)?.menu_item
-      ?.quantity_in_cart;
+   const basketQuantity = basketData?.orders?.find(item => item?.product?.product_title === detail?.title)?.count;
 
    const addToBasketHandler = () => {
       const foodObj = {
-         food_id: detail?.id,
-         food_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+         product_id: detail?.id,
+         product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
       };
 
       addToBasketTrigger(foodObj);
    };
+
+   // console.log(detail);
+   // console.log(basketData);
 
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
@@ -51,17 +53,17 @@ function FoodCardFirstTemplate({ className, detail }) {
             {detail?.title}
          </Link>
          <Link
-            title={detail?.content}
+            title={detail?.description}
             href={`/product/${detail?.title}`}
             className="h-8 overflow-hidden text-xs text-textGray [-webkit-box-orient:vertical] [-webkit-line-clamp:2] [display:-webkit-box]"
          >
-            {detail?.content}
+            {detail?.description}
          </Link>
          <Link
             href={`/product/${detail?.title}`}
             className="mt-2 block h-5 text-left font-rokhFaNum text-xs font-bold text-[#D39090]"
          >
-            {detail?.stock <= 5 ? `${detail?.stock} عدد موجود است` : null}
+            {detail?.stock === 0 ? 'ناموجود' : detail?.stock <= 5 ? `${detail?.stock} عدد موجود است` : null}
          </Link>
          <Link
             href={`/product/${detail?.title}`}
@@ -82,7 +84,7 @@ function FoodCardFirstTemplate({ className, detail }) {
                }}
                onClick={addToBasketHandler}
                loading={addToBasketIsMutating}
-               disabled={detail?.stock === basketQuantity}
+               disabled={detail?.stock === basketQuantity || detail?.stock === 0}
             >
                <AddIcon color="customOrange" fontSize="small" />
             </LoadingButton>
