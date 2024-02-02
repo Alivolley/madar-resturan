@@ -3,6 +3,9 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Button, Fab } from '@mui/material';
 
@@ -19,14 +22,11 @@ import profilePic from '../../../assets/images/userProfile.png';
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
-// Apis
-import useGetInformation from '@/apis/profile/useGetInformation';
-
 function ProfileLayout({ children }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const pathName = usePathname();
 
-   const { data: information } = useGetInformation();
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    return (
       <div className="gap-6 px-5 py-16 customMd:flex customMd:px-[60px]">
@@ -35,13 +35,13 @@ function ProfileLayout({ children }) {
                <div className="relative size-[75px]">
                   <Image
                      alt="profile"
-                     src={information?.image || profilePic}
+                     src={userInfo?.image || profilePic}
                      className="size-full rounded-full object-cover"
                      fill
                   />
                </div>
-               <p className="mt-3 text-xl font-bold">{information?.name}</p>
-               <p className="font-rokhFaNum text-sm">{information?.phone_number}</p>
+               <p className="mt-3 text-xl font-bold">{userInfo?.name}</p>
+               <p className="font-rokhFaNum text-sm">{userInfo?.phone_number}</p>
             </div>
 
             <div className="mb-3 mt-12 flex flex-col gap-8 border-b border-solid border-[#E4EAF0] pb-16">

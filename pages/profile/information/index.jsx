@@ -2,6 +2,9 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Backdrop, CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -13,21 +16,21 @@ import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutli
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 
 // Assets
-import userProfilePic from '../../../assets/images/userProfile.png';
+import userProfilePic from '@/assets/images/userProfile.png';
 
 // Components
 import ProfileLayout from '@/components/layout/profile-layout/profile-layout';
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
 // Apis
-import useGetInformation from '@/apis/profile/useGetInformation';
 import useChangeProfileImage from '@/apis/profile/useChangeProfileImage';
 import useChangeProfileInfo from '@/apis/profile/useChangeProfileInfo';
 
 function Information() {
-   const { data: information } = useGetInformation();
    const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage();
    const { trigger: changeProfileInfoTrigger, isMutating: changeProfileInfoIsMutating } = useChangeProfileInfo();
+
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    const {
       register,
@@ -43,11 +46,11 @@ function Information() {
    });
 
    useEffect(() => {
-      if (information) {
-         setValue('fullName', information?.name);
-         setValue('phoneNumber', information?.phone_number);
+      if (userInfo) {
+         setValue('fullName', userInfo?.name);
+         setValue('phoneNumber', userInfo?.phone_number);
       }
-   }, [information]);
+   }, [userInfo]);
 
    const formSubmit = data => {
       const newDetail = {
@@ -68,12 +71,12 @@ function Information() {
          <div>
             <p className="border-b border-solid border-[#E4EAF0] pb-4 font-bold">اطلاعات کاربری</p>
 
-            {information ? (
+            {userInfo?.phone_number ? (
                <>
                   <div className="relative mx-auto mt-14 w-fit cursor-pointer customMd:mx-0">
                      <div className="relative size-28 cursor-pointer">
                         <Image
-                           src={information?.image || userProfilePic}
+                           src={userInfo?.image || userProfilePic}
                            alt="user profile"
                            className="size-full cursor-pointer rounded-full object-cover"
                            fill
@@ -126,39 +129,16 @@ function Information() {
                            <div className="flex flex-1 flex-col gap-1">
                               <p className="text-sm text-[#7E8AAB]">شماره تلفن همراه</p>
                               <TextField
-                                 variant="outlined"
                                  fullWidth
-                                 color="customOrange"
-                                 type="number"
                                  InputProps={{
+                                    className: '!cursor-not-allowed',
                                     startAdornment: (
                                        <InputAdornment position="start">
                                           <PhoneAndroidIcon />
                                        </InputAdornment>
                                     ),
                                  }}
-                                 sx={{
-                                    input: {
-                                       MozAppearance: 'textfield',
-                                       appearance: 'textfield',
-                                       '&::-webkit-inner-spin-button': {
-                                          WebkitAppearance: 'none',
-                                          appearance: 'none',
-                                       },
-                                    },
-                                 }}
-                                 {...register('phoneNumber', {
-                                    required: {
-                                       value: true,
-                                       message: 'این فیلد اجباری است',
-                                    },
-                                    pattern: {
-                                       value: /^09\d{9}$/,
-                                       message: 'لطفا یک شماره تلفن معتبر ۱۱ رقمی وارد کنید',
-                                    },
-                                 })}
-                                 error={!!errors?.phoneNumber}
-                                 helperText={errors?.phoneNumber?.message}
+                                 {...register('phoneNumber')}
                                  disabled
                               />
                            </div>

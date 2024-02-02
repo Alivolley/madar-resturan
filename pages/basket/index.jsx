@@ -33,16 +33,20 @@ function Basket() {
    const [showDeleteBasketModal, setShowDeleteBasketModal] = useState(false);
    const [basketStep, setBasketStep] = useState(1);
    const [deliveryMethod, setDeliveryMethod] = useState('delivery');
+   const [chosenAddress, setChosenAddress] = useState();
+   const [descriptionValue, setDescriptionValue] = useState('');
 
    const { data: basketData, isLoading: basketDataIsLoading } = useGetBasket(true);
    const { trigger: changeDeliveryTrigger, isMutating: changeDeliveryIsMutating } = useChangeDelivery();
 
    useEffect(() => {
-      const deliveryStatus = {
-         delivery: deliveryMethod === 'delivery',
-      };
+      if (basketStep === 2) {
+         const deliveryStatus = {
+            delivery: deliveryMethod === 'delivery',
+         };
 
-      changeDeliveryTrigger(deliveryStatus);
+         changeDeliveryTrigger(deliveryStatus);
+      }
    }, [deliveryMethod]);
 
    if (basketDataIsLoading) {
@@ -52,8 +56,6 @@ function Basket() {
          </main>
       );
    }
-
-   // console.log(basketData);
 
    return (
       <main className="px-5 pt-6 customMd:px-[60px] customMd:pb-[50px]">
@@ -146,11 +148,24 @@ function Basket() {
                               </div>
                            </>
                         ) : (
-                           <BasketSecondStep deliveryMethod={deliveryMethod} setDeliveryMethod={setDeliveryMethod} />
+                           <BasketSecondStep
+                              deliveryMethod={deliveryMethod}
+                              setDeliveryMethod={setDeliveryMethod}
+                              chosenAddress={chosenAddress}
+                              setChosenAddress={setChosenAddress}
+                              descriptionValue={descriptionValue}
+                              setDescriptionValue={setDescriptionValue}
+                           />
                         )}
                      </Grid>
                      <Grid item xs={12} md={3}>
-                        <BasketDescription basketStep={basketStep} setBasketStep={setBasketStep} detail={basketData} />
+                        <BasketDescription
+                           basketStep={basketStep}
+                           setBasketStep={setBasketStep}
+                           detail={basketData}
+                           chosenAddress={chosenAddress}
+                           descriptionValue={descriptionValue}
+                        />
                      </Grid>
                   </Grid>
                </div>

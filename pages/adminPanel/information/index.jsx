@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Head from 'next/head';
 import Image from 'next/image';
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { Backdrop, CircularProgress, IconButton, TextField } from '@mui/material';
@@ -19,14 +21,14 @@ import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 
 // Apis
-import useGetInformation from '@/apis/profile/useGetInformation';
 import useChangeProfileImage from '@/apis/profile/useChangeProfileImage';
 import useChangeProfileInfo from '@/apis/profile/useChangeProfileInfo';
 
 function Information() {
-   const { data: information, isLoading: informationIsLoading } = useGetInformation();
    const { trigger: changeProfileTrigger, isMutating: changeProfileIsMutating } = useChangeProfileImage();
    const { trigger: changeProfileInfoTrigger, isMutating: changeProfileInfoIsMutating } = useChangeProfileInfo();
+
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    const {
       register,
@@ -42,11 +44,11 @@ function Information() {
    });
 
    useEffect(() => {
-      if (information) {
-         setValue('fullName', information?.name);
-         setValue('phoneNumber', information?.phone_number);
+      if (userInfo) {
+         setValue('fullName', userInfo?.name);
+         setValue('phoneNumber', userInfo?.phone_number);
       }
-   }, [information]);
+   }, [userInfo]);
 
    const formSubmit = data => {
       const newDetail = {
@@ -75,12 +77,12 @@ function Information() {
                </div>
             </div>
 
-            {!informationIsLoading ? (
+            {userInfo?.phone_number ? (
                <div className="mt-6 rounded-10 bg-white px-5 py-8">
                   <div className="relative mx-auto w-fit cursor-pointer customMd:mx-0">
                      <div className="relative size-28 cursor-pointer">
                         <Image
-                           src={information?.image || userProfilePic}
+                           src={userInfo?.image || userProfilePic}
                            alt="user profile"
                            className="size-full cursor-pointer rounded-full object-cover"
                            fill

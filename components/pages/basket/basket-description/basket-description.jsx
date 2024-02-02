@@ -1,15 +1,39 @@
+import { toast } from 'react-toastify';
 // MUI
 import { LoadingButton } from '@mui/lab';
 
 // Icons
 import WestIcon from '@mui/icons-material/West';
 
-function BasketDescription({ basketStep, setBasketStep, detail }) {
+// Apis
+import useSendAddress from '@/apis/basket/useSendAddress';
+
+function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, descriptionValue }) {
+   const { trigger: sendAddressTrigger, isMutating: sendAddressIsMutating } = useSendAddress();
+
    const basketClickHandler = () => {
       if (basketStep === 1) {
          setBasketStep(2);
+      } else if (basketStep === 2 && chosenAddress) {
+         const addressDetail = {
+            address: chosenAddress?.id,
+            order_description: descriptionValue,
+         };
+         sendAddressTrigger(addressDetail);
+      } else if (basketStep === 2) {
+         toast.info('لطفا یک آدرس را انتخاب کنید', {
+            style: {
+               direction: 'rtl',
+               fontFamily: 'rokhRegular',
+               lineHeight: '25px',
+            },
+            theme: 'colored',
+            autoClose: 5000,
+         });
       }
    };
+
+   console.log(detail);
 
    return (
       <div className={`rounded-2xl bg-white ${basketStep === 1 ? 'mt-3' : ''}`}>
@@ -17,7 +41,7 @@ function BasketDescription({ basketStep, setBasketStep, detail }) {
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
             <p>تعداد</p>
-            <p className="font-rokhFaNum font-bold">{detail?.count} کالا</p>
+            <p className="font-rokhFaNum font-bold">{detail?.all_orders_count} کالا</p>
          </div>
 
          {detail?.delivery && (
@@ -25,14 +49,21 @@ function BasketDescription({ basketStep, setBasketStep, detail }) {
                <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
                   <p>جمع سفارشات</p>
                   <p className="font-rokhFaNum font-bold">
-                     {Number(detail?.before_price).toLocaleString('fa-IR')} تومان
+                     {Number(detail?.before_discount_price).toLocaleString('fa-IR')} تومان
+                  </p>
+               </div>
+
+               <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
+                  <p>میزان تخفیف</p>
+                  <p className="font-rokhFaNum font-bold text-[#D14D72]">
+                     {(Number(detail?.before_discount_price) - Number(detail?.final_price)).toLocaleString()} تومان
                   </p>
                </div>
 
                <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
                   <p>هزینه ارسال</p>
                   <p className="font-rokhFaNum font-bold text-[#FF9F1C]">
-                     {Number(detail?.current_shipping_cost).toLocaleString('fa-IR')} تومان
+                     {Number(detail?.shipping_cost).toLocaleString('fa-IR')} تومان
                   </p>
                </div>
             </>
@@ -51,7 +82,7 @@ function BasketDescription({ basketStep, setBasketStep, detail }) {
                type="submit"
                size="large"
                color="customOrange2"
-               loading={false}
+               loading={sendAddressIsMutating}
                fullWidth
                className="!rounded-10 !p-2"
                onClick={basketClickHandler}

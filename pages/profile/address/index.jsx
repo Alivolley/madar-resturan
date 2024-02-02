@@ -20,6 +20,8 @@ function Address() {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
    const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
 
+   console.log(addressData);
+
    return (
       <ProfileLayout>
          <div>

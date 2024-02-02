@@ -18,6 +18,7 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
+import IsoIcon from '@mui/icons-material/Iso';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -132,8 +133,16 @@ function MobileHeader({ isLogin }) {
                                     <ClickAwayListener onClickAway={() => setProfileDropDown(false)}>
                                        <div className="flex flex-col rounded-md bg-buttonPink">
                                           <Link
-                                             href="/profile/information"
+                                             href="/adminPanel/products"
                                              className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             onClick={() => setProfileDropDown(false)}
+                                          >
+                                             <IsoIcon fontSize="small" color="customOrange" />
+                                             پنل ادمین
+                                          </Link>
+                                          <Link
+                                             href="/profile/information"
+                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
                                              onClick={() => setProfileDropDown(false)}
                                           >
                                              <PersonOutlinedIcon fontSize="small" color="customOrange" />

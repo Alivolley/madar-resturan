@@ -118,23 +118,28 @@ function Header({ isLogin }) {
                            <p>منو</p>
                            <KeyboardArrowDownOutlinedIcon />
                         </div>
-                        <div id="dropdownBox" className="w-36">
-                           <div className="flex flex-col rounded-sm bg-buttonPink">
-                              <Link
-                                 href="/category/منوی روز/1"
-                                 className="px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                              >
-                                 منوی روز
-                              </Link>
-                              {categoryList?.map(item => (
-                                 <Link
-                                    key={item?.id}
-                                    href={`/category/${item?.title}/1`}
-                                    className="border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                                 >
-                                    {item?.title}
-                                 </Link>
-                              ))}
+                        <div id="dropdownBox" className="w-80">
+                           <div className="rounded-sm bg-buttonPink">
+                              <Grid container>
+                                 <Grid item xs={6}>
+                                    <Link
+                                       href="/category/منوی روز/1"
+                                       className="block px-2.5 py-2 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                    >
+                                       منوی روز
+                                    </Link>
+                                 </Grid>
+                                 {categoryList?.map(item => (
+                                    <Grid item xs={6} key={item?.id}>
+                                       <Link
+                                          href={`/category/${item?.title}/1`}
+                                          className="block px-2.5 py-2 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                       >
+                                          {item?.title}
+                                       </Link>
+                                    </Grid>
+                                 ))}
+                              </Grid>
                            </div>
                         </div>
                      </div>
@@ -215,22 +220,19 @@ function Header({ isLogin }) {
                               </Fab>
                            </Link>
 
-                           <Button
-                              variant="contained"
-                              color="buttonPink"
-                              className="!h-full !min-w-[172px] !font-rokhFaNum !font-bold !text-textOrange"
+                           <div
+                              className={`flex min-w-[172px] cursor-pointer items-center justify-center gap-5 rounded-md bg-buttonPink
+                              font-rokhFaNum font-bold text-textOrange transition-all duration-200 ${profileDropDown ? 'bg-buttonPink2' : ''}`}
                               ref={profileRef}
                               onMouseEnter={() => setProfileDropDown(true)}
                               onMouseLeave={() => setProfileDropDown(false)}
                            >
-                              <p className="flex gap-1">
-                                 <PersonOutlinedIcon fontSize="small" />
-                                 {userInfo?.name || userInfo?.phone_number}
-                                 <KeyboardArrowDownIcon
-                                    className={`transition-all duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
-                                 />
-                              </p>
-                           </Button>
+                              <PersonOutlinedIcon fontSize="small" />
+                              {userInfo?.name || userInfo?.phone_number}
+                              <KeyboardArrowDownIcon
+                                 className={`transition-all duration-200 ${profileDropDown ? 'rotate-180' : ''}`}
+                              />
+                           </div>
 
                            <Popper
                               open={profileDropDown}
@@ -249,16 +251,16 @@ function Header({ isLogin }) {
                                  >
                                     <Paper>
                                        <div className="flex flex-col bg-buttonPink">
-                                          {/* {isAdmin && ( */}
-                                          <Link
-                                             href="/adminPanel/products"
-                                             className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                                             onClick={() => setProfileDropDown(false)}
-                                          >
-                                             <IsoIcon fontSize="small" color="customOrange" />
-                                             پنل ادمین
-                                          </Link>
-                                          {/* // )} */}
+                                          {userInfo?.is_admin && (
+                                             <Link
+                                                href="/adminPanel/products"
+                                                className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                                onClick={() => setProfileDropDown(false)}
+                                             >
+                                                <IsoIcon fontSize="small" color="customOrange" />
+                                                پنل ادمین
+                                             </Link>
+                                          )}
 
                                           <Link
                                              href="/profile/information"

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // MUI
 import { Button, CircularProgress, TextField } from '@mui/material';
@@ -16,14 +16,24 @@ import BasketAddressModal from '../basket-address-modal/basket-address-modal';
 // Apis
 import useGetAddress from '@/apis/profile/useGetAddress';
 
-function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
+function BasketSecondStep({
+   deliveryMethod,
+   setDeliveryMethod,
+   chosenAddress,
+   setChosenAddress,
+   descriptionValue,
+   setDescriptionValue,
+}) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
-   const [chosenAddress, setChosenAddress] = useState();
    const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
 
-   const setBasketAddress = item => {
-      setChosenAddress(item);
-   };
+   useEffect(() => {
+      if (addressData?.length === 1) {
+         setChosenAddress(addressData?.[0]);
+      } else {
+         setChosenAddress();
+      }
+   }, [addressData]);
 
    return (
       <section className="mb-7 customMd:mb-0">
@@ -41,7 +51,7 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                onClick={() => setDeliveryMethod('delivery')}
             >
                <div
-                  className={`h-4 w-4 rounded-full border-[4px] border-solid ${
+                  className={`size-4 rounded-full border-[4px] border-solid ${
                      deliveryMethod === 'delivery' ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
                   }`}
                />
@@ -59,7 +69,7 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                onClick={() => setDeliveryMethod('inPerson')}
             >
                <div
-                  className={`h-4 w-4 rounded-full border-[4px] border-solid ${
+                  className={`size-4 rounded-full border-[4px] border-solid ${
                      deliveryMethod === 'inPerson' ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
                   }`}
                />
@@ -108,7 +118,7 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                                  key={item?.id}
                                  detail={item}
                                  isClickable
-                                 onClick={() => setBasketAddress(item)}
+                                 onClick={() => setChosenAddress(item)}
                                  isActive={item === chosenAddress}
                               />
                            ))
@@ -152,6 +162,8 @@ function BasketSecondStep({ deliveryMethod, setDeliveryMethod }) {
                      multiline
                      rows={4}
                      color="customOrange"
+                     value={descriptionValue}
+                     onChange={e => setDescriptionValue(e.target.value)}
                   />
                </RtlProvider>
             </div>
