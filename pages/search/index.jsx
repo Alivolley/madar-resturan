@@ -137,7 +137,7 @@ export async function getServerSideProps(context) {
    const accessToken = req?.cookies?.madar_accessToken;
    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
    try {
-      const searchResultList = await axios(`${baseURL}api/restaurant/foods/list_create/`, {
+      const searchResultList = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
             search: query?.food_name,
             page: query?.page,

@@ -33,8 +33,6 @@ function FoodCardSecondTemplate({ className, detail }) {
       addToBasketTrigger(foodObj);
    };
 
-   // console.log(detail);
-
    return (
       <div className={`flex shrink-0 gap-3 rounded-xl bg-white p-2 ${className}`} title={detail?.title}>
          <Link href={`/product/${detail?.title}`} className="relative block h-[175px] w-[184px]">

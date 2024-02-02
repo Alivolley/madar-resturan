@@ -9,7 +9,7 @@ import { LoadingButton } from '@mui/lab';
 import OutboxOutlinedIcon from '@mui/icons-material/OutboxOutlined';
 
 // Assets
-import addCommentPic from '../../../../assets/images/addComment.png';
+import addCommentPic from '@/assets/images/addComment.png';
 
 // Components
 import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
@@ -37,7 +37,7 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
    const formSubmit = data => {
       const newComment = {
          message: data?.comment,
-         menu_item: productDetail?.id,
+         product: productDetail?.id,
          score: Number(data?.rate),
       };
 
@@ -56,7 +56,7 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
          <p className="font-bold text-[#66839A]">امتیاز به سفارش کباب تابه ای غذاخانگی مادر</p>
 
          <div className="my-8 hidden w-36 customMd:block">
-            <Image className="h-full w-full" src={addCommentPic} alt="add comment" />
+            <Image className="size-full" src={addCommentPic} alt="add comment" />
          </div>
 
          <p className="mb-4 mt-20 customMd:mt-0">به سفارشتان به رستوران مادر چه امتیازی میدهید ؟</p>
@@ -64,14 +64,14 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
             {rateValue === '5'
                ? 'خیلی خوب'
                : rateValue === '4'
-               ? 'خوب'
-               : rateValue === '3'
-               ? 'معمولی'
-               : rateValue === '2'
-               ? 'بد'
-               : rateValue === '1'
-               ? 'خیلی بد'
-               : null}
+                 ? 'خوب'
+                 : rateValue === '3'
+                   ? 'معمولی'
+                   : rateValue === '2'
+                     ? 'بد'
+                     : rateValue === '1'
+                       ? 'خیلی بد'
+                       : null}
          </p>
 
          <div className="mb-16">

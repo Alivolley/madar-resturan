@@ -2,7 +2,7 @@ import useSWRMutation from 'swr/mutation';
 import axiosInstance from '@/configs/axiosInstance';
 
 const useDeleteComment = () =>
-   useSWRMutation('restaurant/comments/delete/', (url, data) =>
+   useSWRMutation('store/comments/delete/', (url, data) =>
       axiosInstance
          .delete(url, {
             params: {

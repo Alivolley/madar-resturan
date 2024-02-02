@@ -44,6 +44,7 @@ import useGetComments from '@/apis/comments/useGetComments';
 
 function ProductDetail({ productDetail, categoryItems, error }) {
    const [showAddCommentSection, setShowAddCommentSection] = useState(false);
+   const [chosenPicture, setChosenPicture] = useState(productDetail?.images?.[0] || '');
    const isLogin = useSelector(state => state?.loginStatusReducer);
 
    useEffect(() => {
@@ -72,8 +73,9 @@ function ProductDetail({ productDetail, categoryItems, error }) {
       isValidating: commentsIsValidating,
    } = useGetComments(productDetail?.id);
 
-   const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === productDetail?.title)?.menu_item
-      ?.quantity_in_cart;
+   const basketQuantity = basketData?.orders?.find(
+      item => item?.product?.product_title === productDetail?.title
+   )?.count;
 
    const addToBasketHandler = () => {
       const foodObj = {
@@ -97,13 +99,96 @@ function ProductDetail({ productDetail, categoryItems, error }) {
       <main className="mx-auto max-w-[1300px] px-5 pb-32 pt-14 customMd:px-[60px]">
          <Grid container spacing={{ md: 6 }}>
             <Grid item xs={12} md={6}>
-               <div className="relative h-full rounded-10">
-                  <Image
-                     alt="food"
-                     src={productDetail?.cover || noImage}
-                     className="size-full rounded-10 object-cover"
-                     fill
-                  />
+               <div className="customMd:h-[470px]">
+                  <Grid container height="100%" spacing={{ md: 1.5 }}>
+                     <Grid item xs={12} md={9} height="100%">
+                        <div className="relative size-full h-[250px] rounded-10 customMd:h-full">
+                           <Image
+                              alt="food"
+                              src={chosenPicture?.image || noImage}
+                              className="rounded-10 object-cover"
+                              fill
+                           />
+                        </div>
+                     </Grid>
+
+                     <Grid item xs={12} md={3} height="100%">
+                        <div className="mt-2 flex h-[75px] gap-1 customMd:mt-0 customMd:grid customMd:size-full customMd:gap-2">
+                           {productDetail?.images?.[0]?.image && (
+                              <button
+                                 type="button"
+                                 className={`relative size-full border-none bg-none outline-none ${
+                                    productDetail?.images?.[0]?.id === chosenPicture?.id
+                                       ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
+                                       : ''
+                                 }`}
+                                 onClick={() => setChosenPicture(productDetail?.images?.[0])}
+                              >
+                                 <Image
+                                    alt="food"
+                                    src={productDetail?.images?.[0]?.image || noImage}
+                                    className="rounded-lg object-cover"
+                                    fill
+                                 />
+                              </button>
+                           )}
+                           {productDetail?.images?.[1]?.image && (
+                              <button
+                                 type="button"
+                                 className={`relative size-full border-none bg-none outline-none ${
+                                    productDetail?.images?.[1]?.id === chosenPicture?.id
+                                       ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
+                                       : ''
+                                 }`}
+                                 onClick={() => setChosenPicture(productDetail?.images?.[1])}
+                              >
+                                 <Image
+                                    alt="food"
+                                    src={productDetail?.images?.[1]?.image || noImage}
+                                    className="rounded-lg object-cover"
+                                    fill
+                                 />
+                              </button>
+                           )}
+                           {productDetail?.images?.[2]?.image && (
+                              <button
+                                 type="button"
+                                 className={`relative size-full border-none bg-none outline-none ${
+                                    productDetail?.images?.[2]?.id === chosenPicture?.id
+                                       ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
+                                       : ''
+                                 }`}
+                                 onClick={() => setChosenPicture(productDetail?.images?.[2])}
+                              >
+                                 <Image
+                                    alt="food"
+                                    src={productDetail?.images?.[2]?.image || noImage}
+                                    className="rounded-lg object-cover"
+                                    fill
+                                 />
+                              </button>
+                           )}
+                           {productDetail?.images?.[3]?.image && (
+                              <button
+                                 type="button"
+                                 className={`relative size-full border-none bg-none outline-none ${
+                                    productDetail?.images?.[3]?.id === chosenPicture?.id
+                                       ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
+                                       : ''
+                                 }`}
+                                 onClick={() => setChosenPicture(productDetail?.images?.[3])}
+                              >
+                                 <Image
+                                    alt="food"
+                                    src={productDetail?.images?.[3]?.image || noImage}
+                                    className="rounded-lg object-cover"
+                                    fill
+                                 />
+                              </button>
+                           )}
+                        </div>
+                     </Grid>
+                  </Grid>
                </div>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -128,13 +213,17 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                   </div>
 
                   <div className="mt-4 customMd:mt-5">
-                     <p className="text-sm text-[#66839A] customMd:text-lg">{productDetail?.content}</p>
+                     <p className="text-sm text-[#66839A] customMd:text-lg">{productDetail?.description}</p>
                   </div>
 
                   <div className="mt-5 border-t border-solid border-[#B1B5C4] pt-5 customMd:mt-auto customMd:border-none">
                      <div className="mb-2 items-center">
                         <p className="font-rokhFaNum text-xs font-bold text-[#8F0E0E]">
-                           {productDetail?.stock <= 5 ? `${productDetail?.stock} عدد موجود است` : null}
+                           {productDetail?.stock === 0
+                              ? 'ناموجود'
+                              : productDetail?.stock <= 5
+                                ? `${productDetail?.stock} عدد موجود است`
+                                : null}
                         </p>
                      </div>
 
@@ -158,7 +247,8 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                               disabled={
                                  addToBasketIsMutating ||
                                  removeFromBasketIsMutating ||
-                                 productDetail?.stock === basketQuantity
+                                 productDetail?.stock === basketQuantity ||
+                                 productDetail?.stock === 0
                               }
                            >
                               <AddIcon color="customOrange" className="text-sm" />
@@ -194,7 +284,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            fullWidth
                            className="!rounded-10 !p-2"
                            onClick={addToBasketHandler}
-                           disabled={productDetail?.stock === basketQuantity}
+                           disabled={productDetail?.stock === basketQuantity || productDetail?.stock === 0}
                         >
                            <div className="flex w-full items-center justify-between">
                               <p>افزودن به سبد خرید</p>
@@ -341,7 +431,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
 
          {categoryItems?.length ? (
             <div className="mt-5 flex flex-wrap items-center justify-center gap-5">
-               {categoryItems?.map(item => (
+               {categoryItems?.slice(0, 6)?.map(item => (
                   <FoodCardFirstTemplate className="w-[200px]" key={item?.id} detail={item} />
                ))}
             </div>
@@ -358,15 +448,15 @@ export async function getServerSideProps(context) {
    const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
    try {
-      const productDetail = await axios(`${baseURL}api/restaurant/foods/get_update_delete/`, {
+      const productDetail = await axios(`${baseURL}api/store/products/get_update_destroy/`, {
          params: {
             title: context?.params?.productName,
          },
       }).then(res => res.data);
 
-      const categoryItems = await axios(`${baseURL}api/restaurant/foods/list_create/`, {
+      const categoryItems = await axios(`${baseURL}api/store/products/list_create/`, {
          params: {
-            category__title: productDetail?.category,
+            category: productDetail?.category,
          },
       }).then(res => res.data.result?.filter(item => item?.title !== productDetail?.title));
 

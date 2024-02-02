@@ -84,7 +84,7 @@ function Comment({ detail, commentsMutate }) {
 
             <div className="mb-7 mt-9 flex flex-wrap items-center gap-2 rounded-10 bg-[#FEF1E4] p-2 customMd:gap-5">
                <p className="rounded-lg bg-[#FEE2C9] px-3 pb-0.5 pt-1.5 text-xs text-[#AA5403] customMd:px-7 customMd:text-sm">
-                  {detail?.menu_item}
+                  {detail?.product}
                </p>
             </div>
             <pre className="whitespace-normal text-base text-textGray">{detail?.message}</pre>

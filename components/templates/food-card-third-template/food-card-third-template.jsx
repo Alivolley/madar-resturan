@@ -26,8 +26,7 @@ function FoodCardThirdTemplate({ className, details }) {
    const { isMutating: addToBasketIsMutating, trigger: addToBasketTrigger } = useAddToBasket();
    const { isMutating: removeFromBasketIsMutating, trigger: removeFromBasketTrigger } = useRemoveFromBasket();
    const { data: basketData } = useGetBasket(isLogin);
-   const basketQuantity = basketData?.orders?.find(item => item?.menu_item?.title === details?.title)?.menu_item
-      ?.quantity_in_cart;
+   const basketQuantity = basketData?.orders?.find(item => item?.product?.product_title === details?.title)?.count;
 
    const addToBasketHandler = () => {
       const foodObj = {
@@ -73,18 +72,18 @@ function FoodCardThirdTemplate({ className, details }) {
                {details?.title}
             </Link>
             <Link
-               title={details?.content}
+               title={details?.description}
                href={`/product/${details?.title}`}
                className="h-8 overflow-hidden text-[11px] leading-4 text-textGray [-webkit-box-orient:vertical] [display:-webkit-box] [-webkit-line-clamp:2]"
             >
-               {details?.content}
+               {details?.description}
             </Link>
 
             <p
                href={`/product/${details?.title}`}
                className="mt-2 h-4 font-rokhFaNum text-[11px] font-bold text-[#D39090]"
             >
-               {details?.stock <= 5 ? `${details?.stock} عدد موجود است` : null}
+               {details?.stock === 0 ? 'ناموجود' : details?.stock <= 5 ? `${details?.stock} عدد موجود است` : null}
             </p>
 
             <div className="mt-4 flex items-center gap-1.5">
@@ -92,7 +91,12 @@ function FoodCardThirdTemplate({ className, details }) {
                   className="border border-solid border-customOrange"
                   sx={{ width: '18px', height: '18px' }}
                   onClick={addToBasketHandler}
-                  disabled={addToBasketIsMutating || removeFromBasketIsMutating || details?.stock === basketQuantity}
+                  disabled={
+                     addToBasketIsMutating ||
+                     removeFromBasketIsMutating ||
+                     details?.stock === basketQuantity ||
+                     details?.stock === 0
+                  }
                >
                   <AddIcon color="customOrange" className="text-sm" />
                </IconButton>

@@ -14,7 +14,7 @@ import { Grid, Pagination } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
-import categoryPic from '../../../assets/images/categories/categoryPic.png';
+import categoryPic from '@/assets/images/categories/categoryPic.png';
 
 // Components
 import FoodCardThirdTemplate from '@/components/templates/food-card-third-template/food-card-third-template';

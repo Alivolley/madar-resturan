@@ -33,9 +33,6 @@ function FoodCardFirstTemplate({ className, detail }) {
       addToBasketTrigger(foodObj);
    };
 
-   // console.log(detail);
-   // console.log(basketData);
-
    return (
       <div className={`shrink-0 rounded-10 bg-white p-2 ${className}`}>
          <Link href={`/product/${detail?.title}`} className="relative block h-32 w-full" title={detail?.title}>
