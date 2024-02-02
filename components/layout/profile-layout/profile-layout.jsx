@@ -29,8 +29,8 @@ function ProfileLayout({ children }) {
    const userInfo = useSelector(state => state?.userInfoReducer);
 
    return (
-      <div className="gap-6 px-5 py-16 customMd:flex customMd:px-[60px]">
-         <aside className="hidden w-[378px] shrink-0 rounded-2xl bg-white px-11 py-7 customMd:block">
+      <div className="relative gap-6 px-5 py-16 customMd:flex customMd:px-[60px]">
+         <aside className="sticky top-[150px] hidden h-fit w-[378px] shrink-0 rounded-2xl bg-white px-11 py-7 customMd:block">
             <div className="flex flex-col items-center border-b border-solid border-[#E4EAF0] pb-7">
                <div className="relative size-[75px]">
                   <Image

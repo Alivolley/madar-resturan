@@ -32,8 +32,8 @@ function Profile() {
 
          <div className="px-5 pt-12 customMd:hidden">
             <div className="flex items-center gap-4">
-               <div className="h-20 w-20 rounded-full border-[3px] border-solid border-customOrange2">
-                  <Image className="h-full w-full rounded-full" src={userProfilePic} alt="profile" />
+               <div className="size-20 rounded-full border-[3px] border-solid border-customOrange2">
+                  <Image className="size-full rounded-full" src={userProfilePic} alt="profile" />
                </div>
                <div className="space-y-1">
                   <p className="text-lg text-customOrange2">علی ازقندی</p>
@@ -143,7 +143,7 @@ function Profile() {
                   onClick={() => setShowLogoutModal(true)}
                >
                   <div className="flex w-full items-center gap-4">
-                     <div className="flex h-[44px] w-[44px] items-center justify-center rounded-10 bg-buttonPink p-2 text-customOrange2">
+                     <div className="flex size-[44px] items-center justify-center rounded-10 bg-buttonPink p-2 text-customOrange2">
                         <LogoutOutlinedIcon />
                      </div>
                      <p className="text-sm">خروج از حساب کاربری</p>

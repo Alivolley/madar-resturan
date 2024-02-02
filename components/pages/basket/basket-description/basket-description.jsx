@@ -14,13 +14,7 @@ function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, d
    const basketClickHandler = () => {
       if (basketStep === 1) {
          setBasketStep(2);
-      } else if (basketStep === 2 && chosenAddress) {
-         const addressDetail = {
-            address: chosenAddress?.id,
-            order_description: descriptionValue,
-         };
-         sendAddressTrigger(addressDetail);
-      } else if (basketStep === 2) {
+      } else if (basketStep === 2 && !detail?.delivery && !chosenAddress) {
          toast.info('لطفا یک آدرس را انتخاب کنید', {
             style: {
                direction: 'rtl',
@@ -30,10 +24,14 @@ function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, d
             theme: 'colored',
             autoClose: 5000,
          });
+      } else if (basketStep === 2 && chosenAddress) {
+         const addressDetail = {
+            address: chosenAddress?.id,
+            order_description: descriptionValue,
+         };
+         sendAddressTrigger(addressDetail);
       }
    };
-
-   console.log(detail);
 
    return (
       <div className={`rounded-2xl bg-white ${basketStep === 1 ? 'mt-3' : ''}`}>
@@ -44,29 +42,26 @@ function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, d
             <p className="font-rokhFaNum font-bold">{detail?.all_orders_count} کالا</p>
          </div>
 
+         <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
+            <p>جمع سفارشات</p>
+            <p className="font-rokhFaNum font-bold">
+               {Number(detail?.before_discount_price).toLocaleString('fa-IR')} تومان
+            </p>
+         </div>
+
+         <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
+            <p>میزان تخفیف</p>
+            <p className="font-rokhFaNum font-bold text-[#D14D72]">
+               {(Number(detail?.before_discount_price) - Number(detail?.final_price)).toLocaleString()} تومان
+            </p>
+         </div>
          {detail?.delivery && (
-            <>
-               <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
-                  <p>جمع سفارشات</p>
-                  <p className="font-rokhFaNum font-bold">
-                     {Number(detail?.before_discount_price).toLocaleString('fa-IR')} تومان
-                  </p>
-               </div>
-
-               <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
-                  <p>میزان تخفیف</p>
-                  <p className="font-rokhFaNum font-bold text-[#D14D72]">
-                     {(Number(detail?.before_discount_price) - Number(detail?.final_price)).toLocaleString()} تومان
-                  </p>
-               </div>
-
-               <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
-                  <p>هزینه ارسال</p>
-                  <p className="font-rokhFaNum font-bold text-[#FF9F1C]">
-                     {Number(detail?.shipping_cost).toLocaleString('fa-IR')} تومان
-                  </p>
-               </div>
-            </>
+            <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">
+               <p>هزینه ارسال</p>
+               <p className="font-rokhFaNum font-bold text-[#FF9F1C]">
+                  {Number(detail?.shipping_cost).toLocaleString('fa-IR')} تومان
+               </p>
+            </div>
          )}
 
          <div className="flex items-center justify-between border-b border-solid border-[#E4EAF0] p-5">

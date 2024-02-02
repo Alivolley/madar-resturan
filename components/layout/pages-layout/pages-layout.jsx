@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 // MUi
@@ -20,6 +21,9 @@ function PagesLayout({ children }) {
 
    return (
       <div className="font-rokhRegular">
+         <Head>
+            <link rel="icon" href="/madar2.svg" />
+         </Head>
          {pathname !== '/login' &&
             !pathname.startsWith('/adminPanel') &&
             (isTablet ? <MobileHeader isLogin={isLogin} /> : <Header isLogin={isLogin} />)}
