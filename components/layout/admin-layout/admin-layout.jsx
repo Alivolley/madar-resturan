@@ -22,6 +22,7 @@ import AdminLayoutStyle from './admin-layout.style';
 
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
+import RtlProvider from '../rtlProvider/rtlProvider';
 
 function AdminLayout({ children }) {
    const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -35,50 +36,47 @@ function AdminLayout({ children }) {
 
    return (
       <AdminLayoutStyle className="relative flex bg-[#f5f8fc]">
-         <AdminSideBar />
+         <RtlProvider>
+            <AdminSideBar />
 
-         <Drawer
-            anchor="right"
-            SlideProps={{
-               direction: 'left',
-            }}
-            open={showMobileMenu}
-            onClose={() => setShowMobileMenu(false)}
-         >
-            <AdminSideBar isMobile onClose={() => setShowMobileMenu(false)} />
-         </Drawer>
+            <Drawer anchor="left" open={showMobileMenu} onClose={() => setShowMobileMenu(false)}>
+               <AdminSideBar isMobile onClose={() => setShowMobileMenu(false)} />
+            </Drawer>
 
-         <div className="w-full" id="container">
-            <div className="sticky top-0 z-[2] flex w-full items-center justify-between bg-white px-8 py-4 customMd:px-16 customMd:py-8">
-               <p className="hidden font-bold tracking-[1px] customMd:block">{jalaliDate}</p>
-               <div className="customMd:hidden">
-                  <IconButton onClick={() => setShowMobileMenu(true)}>
-                     <MenuOutlinedIcon className="!text-3xl" />
-                  </IconButton>
-               </div>
-               <div className="flex items-center gap-3 customMd:gap-6">
-                  <div className="flex items-center gap-2 rounded-10 border border-solid border-[#E4E9F2] px-2 py-1 customMd:px-4">
-                     <div className="relative size-9 customMd:size-10">
-                        <Image
-                           alt="profile"
-                           src={userInfo?.image || profilePic}
-                           className="rounded-full object-cover"
-                           fill
-                        />
+            <div className="w-full" id="container">
+               <div className="sticky top-0 z-[2] flex w-full items-center justify-between bg-white px-8 py-4 customMd:px-16 customMd:py-8">
+                  <p className="hidden font-bold tracking-[1px] customMd:block">{jalaliDate}</p>
+                  <div className="customMd:hidden">
+                     <IconButton onClick={() => setShowMobileMenu(true)}>
+                        <MenuOutlinedIcon className="!text-3xl" />
+                     </IconButton>
+                  </div>
+                  <div className="flex items-center gap-3 customMd:gap-6">
+                     <div className="flex items-center gap-2 rounded-10 border border-solid border-[#E4E9F2] px-2 py-1 customMd:px-4">
+                        <div className="relative size-9 customMd:size-10">
+                           <Image
+                              alt="profile"
+                              src={userInfo?.image || profilePic}
+                              className="rounded-full object-cover"
+                              fill
+                           />
+                        </div>
+
+                        <p className="text-sm">{userInfo?.name || userInfo?.phone_number}</p>
                      </div>
 
-                     <p className="text-sm">{userInfo?.name || userInfo?.phone_number}</p>
+                     <Link href="/">
+                        <IconButton
+                           sx={{ backgroundColor: '#F5F8FC', border: '1px solid #E4E9F2', borderRadius: '10px' }}
+                        >
+                           <HomeOutlinedIcon className="!text-[28px]" />
+                        </IconButton>
+                     </Link>
                   </div>
-
-                  <Link href="/">
-                     <IconButton sx={{ backgroundColor: '#F5F8FC', border: '1px solid #E4E9F2', borderRadius: '10px' }}>
-                        <HomeOutlinedIcon className="!text-[28px]" />
-                     </IconButton>
-                  </Link>
                </div>
+               <div className="w-full p-8">{children}</div>
             </div>
-            <div className="w-full p-8">{children}</div>
-         </div>
+         </RtlProvider>
       </AdminLayoutStyle>
    );
 }

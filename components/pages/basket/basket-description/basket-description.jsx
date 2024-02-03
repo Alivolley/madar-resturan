@@ -15,15 +15,7 @@ function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, d
       if (basketStep === 1) {
          setBasketStep(2);
       } else if (basketStep === 2 && !detail?.delivery && !chosenAddress) {
-         toast.info('لطفا یک آدرس را انتخاب کنید', {
-            style: {
-               direction: 'rtl',
-               fontFamily: 'rokhRegular',
-               lineHeight: '25px',
-            },
-            theme: 'colored',
-            autoClose: 5000,
-         });
+         toast.info('لطفا یک آدرس را انتخاب کنید');
       } else if (basketStep === 2 && chosenAddress) {
          const addressDetail = {
             address: chosenAddress?.id,

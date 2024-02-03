@@ -42,15 +42,7 @@ function ReplyModal({ closeModal, open, detail, commentsMutate }) {
             onSuccess: () => {
                closeModalHandler();
                commentsMutate();
-               toast.success('پاسخ شما با موفقیت ثبت شد', {
-                  style: {
-                     direction: 'rtl',
-                     fontFamily: 'rokhRegular',
-                     lineHeight: '25px',
-                  },
-                  theme: 'colored',
-                  autoClose: 5000,
-               });
+               toast.success('پاسخ شما با موفقیت ثبت شد');
             },
          }
       );

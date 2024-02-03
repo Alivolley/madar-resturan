@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme, Backdrop } from '@mui/material';
 
 // Redux
 import { Provider } from 'react-redux';
-import store from '../../../store/store';
+import store from '@/store/store';
 
 // Components
 import PagesLayout from '../pages-layout/pages-layout';
@@ -46,7 +46,7 @@ function AppLayout({ children }) {
    return (
       <Provider store={store}>
          <ThemeProvider theme={themeConfig}>
-            <ToastContainer />
+            <ToastContainer theme="colored" autoClose="15000" rtl />
             <Loading />
             <PagesLayout>{children}</PagesLayout>
          </ThemeProvider>

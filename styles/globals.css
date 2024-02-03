@@ -17,6 +17,11 @@
       src: url('../assets/fonts/ElMessiri-Regular.ttf') format('truetype');
    }
 
+   .Toastify__toast-body {
+      font-family: rokhRegular !important;
+      line-height: 25px;
+   }
+
    .Toastify__toast-container--top-right {
       right: 0 !important;
    }

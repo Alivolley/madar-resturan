@@ -52,13 +52,22 @@ const getDesignTokens = mode => ({
       activeBrown: {
          main: '#4C2000',
       },
+      customYellow: {
+         main: '#FFAE30',
+      },
+      black: {
+         main: '#000',
+      },
    },
 
    components: {
       MuiTooltip: {
          styleOverrides: {
             tooltip: {
-               // fontFamily: 'vazir',
+               backgroundColor: '#F5F8FC',
+               padding: '5px',
+               border: '1px solid #DFEBF1',
+               boxShadow: '0px 5px 20px 0px #B0C3D31A',
             },
          },
       },

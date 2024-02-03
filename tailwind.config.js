@@ -35,11 +35,7 @@ module.exports = {
             gold: '#FBD100',
             buttonBgGray: '#E4EAF0',
             activeBrown: '#4C2000',
-         },
-
-         backgroundImage: {
-            // lineLinear:
-            //    'linear-gradient(90deg, rgba(224, 225, 226, 0) 0%, rgb(224, 225, 226) 49.52%, rgba(224, 225, 226, 0) 100%)',
+            customYellow: '#FFAE30',
          },
 
          fontFamily: {
@@ -55,6 +51,9 @@ module.exports = {
          },
          fontSize: {
             10: '10px',
+         },
+         width: {
+            calculated: 'calc(100% - 310px)',
          },
       },
    },

@@ -30,7 +30,7 @@ function AdminSideBar({ isMobile, onClose }) {
 
    return (
       <aside
-         className={`shrink-0 min-h-screen bg-customOrange px-8 py-4 transition-all duration-500 customMd:p-8 customXs:w-[330px] font-rokhRegular
+         className={`shrink-0 h-screen bg-customOrange px-8 py-4 transition-all duration-500 customMd:p-8 customXs:w-[330px] font-rokhRegular
           ${isMobile ? 'customMd:hidden' : 'sticky top-0 z-[2] hidden customMd:block'}`}
       >
          <div className="flex justify-end customMd:hidden">

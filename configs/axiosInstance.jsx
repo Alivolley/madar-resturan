@@ -25,15 +25,7 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
    res => {
       if (res?.data?.detail) {
-         toast.success(res?.data?.detail, {
-            style: {
-               direction: 'rtl',
-               fontFamily: 'rokhRegular',
-               lineHeight: '25px',
-            },
-            theme: 'colored',
-            autoClose: 5000,
-         });
+         toast.success(res?.data?.detail);
       }
 
       return res;
@@ -64,15 +56,7 @@ axiosInstance.interceptors.response.use(
          Cookies.remove('madar_isLogin');
          location.href = '/login';
       } else if (error?.response?.data?.detail) {
-         toast.error(error?.response?.data?.detail, {
-            style: {
-               direction: 'rtl',
-               fontFamily: 'rokhRegular',
-               lineHeight: '25px',
-            },
-            theme: 'colored',
-            autoClose: 5000,
-         });
+         toast.error(error?.response?.data?.detail);
       }
 
       return Promise.reject(error);

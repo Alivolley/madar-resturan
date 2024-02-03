@@ -8,38 +8,38 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // MUI
-import { Button, CircularProgress, Grid, IconButton, Tooltip } from '@mui/material';
+import { Button, CircularProgress, IconButton, Tooltip } from '@mui/material';
 
 // Icons
-import QrCodeOutlinedIcon from '@mui/icons-material/QrCodeOutlined';
-import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import PercentIcon from '@mui/icons-material/Percent';
-import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 // Assets
 import noImage from '@/assets/images/noImage.png';
 
 // Components
 import AdminLayout from '@/components/layout/admin-layout/admin-layout';
-// import Table from '@/components/templates/table/table';
+import Table from '@/components/templates/table/table';
 import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
-// import AddEditProductModal from '@/components/pages/adminPanel/addEditProductModal/addEditProductModal';
+import AddEditProductModal from '@/components/pages/adminPanel/addEditProductModal/addEditProductModal';
 // import AddEditCategoryModalList from '@/components/pages/adminPanel/addEditCategoryModalList/addEditCategoryModalList';
 
 // Apis
-// import useGetProducts from '@/apis/pAdmin/products/useGetProducts';
-// import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
-// import useCategories from '@/apis/categories/useCategories';
+import useGetProducts from '@/apis/pAdmin/products/useGetProducts';
+import useCategories from '@/apis/categories/useCategories';
+import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
 
 // Utils
 // import permissions from '@/utils/permission';
 
 function Products() {
-   const { locale, back, pathname } = useRouter();
+   const { back, pathname } = useRouter();
    const [showDeleteProductModal, setShowDeleteProductModal] = useState(false);
    const [showAddEditProductModal, setShowAddEditProductModal] = useState(false);
    const [showAddEditCategoryModal, setShowAddEditCategoryModal] = useState(false);
@@ -50,13 +50,13 @@ function Products() {
    const [countValue, setCountValue] = useState(6);
 
    const userInfo = useSelector(state => state?.userInfoReducer);
-   // const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
-   // const {
-   //    data: productsData,
-   //    isLoading: productIsLoading,
-   //    mutate: productsMutate,
-   // } = useGetProducts(pageStatus, countValue, chosenCategory);
-   // const { trigger: deleteProductTrigger, isMutating: deleteProductIsMutating } = useDeleteProduct(productsMutate);
+   const { data: categoryList, isLoading: categoryIsLoading } = useCategories();
+   const {
+      data: productsData,
+      isLoading: productIsLoading,
+      mutate: productsMutate,
+   } = useGetProducts(pageStatus, countValue, chosenCategory);
+   const { trigger: deleteProductTrigger, isMutating: deleteProductIsMutating } = useDeleteProduct(productsMutate);
 
    const closeAddEditProductModalHandler = () => {
       setShowAddEditProductModal(false);
@@ -68,266 +68,211 @@ function Products() {
       setChosenProductForDelete();
    };
 
-   // const deleteProductHandler = () => {
-   //    deleteProductTrigger(chosenProductForDelete, {
-   //       onSuccess: () => closeDeleteProductModalHandler(),
-   //    });
-   // };
+   const deleteProductHandler = () => {
+      deleteProductTrigger(chosenProductForDelete, {
+         onSuccess: () => closeDeleteProductModalHandler(),
+      });
+   };
 
    useEffect(() => {
-      // if (userInfo?.phone_number && !userInfo?.is_admin) {
-      //    back();
-      //    toast.warn(t("You don't have permission to visit this page"), {
-      //       style: {
-      //          direction: locale === 'en' ? 'ltr' : 'rtl',
-      //          fontFamily:
-      //             locale === 'en' ? 'poppins' : locale === 'fa' ? 'dana' : locale === 'ar' ? 'rubik' : 'poppins',
-      //          lineHeight: '25px',
-      //       },
-      //       theme: 'colored',
-      //       autoClose: 5000,
-      //    });
-      // }
+      if (userInfo?.phone_number && !userInfo?.is_admin) {
+         back();
+         toast.warn('شما مجاز به دسترسی به این صفحه نیستید');
+      }
    }, [userInfo, pathname]);
 
-   // const columns = [
-   //    { id: 1, title: t('Row'), key: 'index' },
-   //    {
-   //       id: 2,
-   //       title: t('Name'),
-   //       key: 'title',
-   //       renderCell: data => (
-   //          <div className="flex items-center gap-1">
-   //             <div className="relative size-9 rounded-full bg-[#f5f8fc]">
-   //                <Image src={data.cover || noImage} alt="product" className="rounded-full object-cover" fill />
-   //             </div>
-   //             <p>{data.title}</p>
-   //          </div>
-   //       ),
-   //    },
-   //    {
-   //       id: 3,
-   //       title: t('Color'),
-   //       key: 'colors',
-   //       renderCell: data =>
-   //          data?.colors?.length ? (
-   //             <div className="flex items-center justify-center gap-1">
-   //                {data?.colors?.map(
-   //                   (item, index) =>
-   //                      index < 3 && (
-   //                         <div className="size-4 rounded-full" style={{ backgroundColor: item.color }} key={item.id} />
-   //                      )
-   //                )}
-   //                {data?.colors?.length > 3 && (
-   //                   <Tooltip
-   //                      dir={locale === 'en' ? 'ltr' : 'rtl'}
-   //                      title={
-   //                         <div className="flex max-w-[90px] flex-wrap items-center gap-2">
-   //                            {data?.colors?.map(
-   //                               (item, index) =>
-   //                                  index >= 3 && (
-   //                                     <div
-   //                                        className="size-4 rounded-full"
-   //                                        style={{ backgroundColor: item.color }}
-   //                                        key={item.id}
-   //                                     />
-   //                                  )
-   //                            )}
-   //                         </div>
-   //                      }
-   //                   >
-   //                      <IconButton size="small">
-   //                         <MoreHorizIcon />
-   //                      </IconButton>
-   //                   </Tooltip>
-   //                )}
-   //             </div>
-   //          ) : (
-   //             <p>{t('Unavailable')}</p>
-   //          ),
-   //    },
-   //    {
-   //       id: 4,
-   //       title: t('Available (all colors)'),
-   //       key: 'stock',
-   //       renderCell: data => (
-   //          <p>
-   //             {data?.colors?.reduce((sum, item) => sum + item.stock, 0) || 0} {t('Count')}
-   //          </p>
-   //       ),
-   //    },
-   //    { id: 5, title: t('Category'), key: 'category' },
-   //    {
-   //       id: 6,
-   //       title: t('Price'),
-   //       key: 'before_discount_price',
-   //       renderCell: data => (
-   //          <p>
-   //             {Number(data.before_discount_price).toLocaleString()} {t('unit')}
-   //          </p>
-   //       ),
-   //    },
-   //    {
-   //       id: 7,
-   //       title: t('Actions'),
-   //       key: 'actions',
-   //       renderCell: data => (
-   //          <div className="flex items-center gap-2">
-   //             <Tooltip
-   //                title={
-   //                   <p
-   //                      className={`flex items-center justify-center ${
-   //                         data?.discount_percent ? 'rounded-full bg-green-500 p-0.5 text-sm' : 'text-base text-black'
-   //                      }`}
-   //                      dir={locale === 'en' ? 'ltr' : 'rtl'}
-   //                   >
-   //                      <PercentIcon fontSize="inherit" />
-   //                   </p>
-   //                }
-   //             >
-   //                <IconButton size="small">
-   //                   <MoreVertOutlinedIcon fontSize="small" />
-   //                </IconButton>
-   //             </Tooltip>
+   const columns = [
+      { id: 1, title: 'ردیف', key: 'index' },
+      {
+         id: 2,
+         title: 'نام غذا',
+         key: 'title',
+         renderCell: data => (
+            <div className="flex items-center gap-1">
+               <div className="relative size-9 rounded-full bg-[#f5f8fc]">
+                  <Image src={data.cover || noImage} alt="product" className="rounded-full object-cover" fill />
+               </div>
+               <p>{data.title}</p>
+            </div>
+         ),
+      },
+      {
+         id: 3,
+         title: 'موجودی',
+         key: 'stock',
+         renderCell: data => <p className="font-rokhFaNum">{data?.stock} عدد</p>,
+      },
+      { id: 4, title: 'دسته بندی', key: 'category' },
+      {
+         id: 5,
+         title: 'قیمت',
+         key: 'before_discount_price',
+         renderCell: data => <p>{Number(data.before_discount_price).toLocaleString()} تومان</p>,
+      },
+      {
+         id: 6,
+         title: 'عملیات',
+         key: 'actions',
+         renderCell: data => (
+            <div className="flex items-center gap-2">
+               <Tooltip
+                  title={
+                     <p
+                        className={`flex items-center justify-center ${
+                           data?.percentage ? 'rounded-full bg-green-500 p-0.5 text-sm' : 'text-base text-black'
+                        }`}
+                     >
+                        <PercentIcon fontSize="inherit" />
+                     </p>
+                  }
+               >
+                  <IconButton size="small">
+                     <MoreVertOutlinedIcon fontSize="small" />
+                  </IconButton>
+               </Tooltip>
 
-   //             <IconButton
-   //                size="small"
-   //                onClick={() => {
-   //                   setChosenProductForEdit(data);
-   //                   setShowAddEditProductModal(true);
-   //                }}
-   //                disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
-   //             >
-   //                <BorderColorOutlinedIcon fontSize="inherit" />
-   //             </IconButton>
-   //             <IconButton
-   //                size="small"
-   //                onClick={() => {
-   //                   setChosenProductForDelete(data?.title);
-   //                   setShowDeleteProductModal(true);
-   //                }}
-   //                disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
-   //             >
-   //                <DeleteOutlineOutlinedIcon fontSize="small" />
-   //             </IconButton>
-   //          </div>
-   //       ),
-   //    },
-   // ];
+               <IconButton
+                  size="small"
+                  onClick={() => {
+                     setChosenProductForEdit(data);
+                     setShowAddEditProductModal(true);
+                  }}
+                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
+               >
+                  <BorderColorOutlinedIcon fontSize="inherit" />
+               </IconButton>
+               <IconButton
+                  size="small"
+                  onClick={() => {
+                     setChosenProductForDelete(data?.title);
+                     setShowDeleteProductModal(true);
+                  }}
+                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
+               >
+                  <DeleteOutlineOutlinedIcon fontSize="small" />
+               </IconButton>
+            </div>
+         ),
+      },
+   ];
 
    return (
       <AdminLayout>
          <Head>
             <title>مادر</title>
          </Head>
-         <div className="bg-white p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-               <div className="flex items-center gap-1.5">
-                  <ListAltOutlinedIcon fontSize="small" />
-                  <p className="font-bold">سام</p>
-               </div>
 
-               <Button
-                  startIcon={<AddCircleOutlinedIcon />}
-                  color="customOrange"
-                  onClick={() => setShowAddEditCategoryModal(true)}
-               >
-                  شت
-               </Button>
-            </div>
-
-            {/* {categoryIsLoading ? (
+         <div className="flex gap-5">
+            {categoryIsLoading ? (
                <div className="mt-10 flex w-full items-center justify-center">
-                  <CircularProgress color="customPink" />
+                  <CircularProgress color="customOrange" />
                </div>
             ) : (
-               <div className="mt-10">
-                  <Grid container rowSpacing={{ xs: 2, md: 4 }} columnSpacing={1}>
-                     <Grid item xs={6} sm={4} md={3} lg={2}>
+               <div className="shrink-0 basis-[286px] rounded-2xl bg-white p-5">
+                  <div className="flex items-end gap-2 font-bold">
+                     <LibraryBooksOutlinedIcon color="textGray" />
+                     <p>دسته بندی غذاها</p>
+                  </div>
+                  <div className="my-5">
+                     <Button
+                        variant="contained"
+                        fullWidth
+                        className="!min-w-0 !justify-normal !rounded-10 !bg-[#F7F9FC] !px-0 !font-bold !text-[#713802]"
+                     >
+                        <div className="flex w-full items-center justify-between px-1 py-3">
+                           <div className="flex items-center gap-2">
+                              <PlaylistAddIcon />
+                              <p>افزودن دسته بندی</p>
+                           </div>
+                           <AddIcon />
+                        </div>
+                     </Button>
+                  </div>
+                  <div className="flex flex-col items-start gap-7">
+                     <Button
+                        className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                        color="black"
+                        onClick={() => {
+                           setChosenCategory('');
+                           setPageStatus(1);
+                        }}
+                     >
+                        <div
+                           className={`size-4 shrink-0 rounded-full ${
+                              !chosenCategory
+                                 ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
+                                 : 'bg-[#E4EAF0]'
+                           }`}
+                        />
+                        <p className={!chosenCategory ? 'font-bold text-customOrange' : ''}>کلیه غذاها</p>
+                     </Button>
+                     {categoryList?.map(item => (
                         <Button
-                           className="!flex !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                           key={item?.id}
+                           className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
                            color="black"
                            onClick={() => {
-                              setChosenCategory('');
+                              setChosenCategory(item.title);
                               setPageStatus(1);
                            }}
                         >
                            <div
                               className={`size-4 shrink-0 rounded-full ${
-                                 !chosenCategory
+                                 chosenCategory === item.title
                                     ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
                                     : 'bg-[#E4EAF0]'
                               }`}
                            />
-                           <p>سام</p>
+                           <p className={chosenCategory === item.title ? 'font-bold text-customOrange' : ''}>
+                              {item?.title}
+                           </p>
                         </Button>
-                     </Grid>
-                     {categoryList?.map(item => (
-                        <Grid item xs={6} sm={4} md={3} lg={2} key={item?.id}>
-                           <Button
-                              className="!flex !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
-                              color="black"
-                              onClick={() => {
-                                 setChosenCategory(item.title);
-                                 setPageStatus(1);
-                              }}
-                           >
-                              <div
-                                 className={`size-4 shrink-0 rounded-full ${
-                                    chosenCategory === item.title
-                                       ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
-                                       : 'bg-[#E4EAF0]'
-                                 }`}
-                              />
-                              <p>{item?.title}</p>
-                           </Button>
-                        </Grid>
                      ))}
-                  </Grid>
+                  </div>
                </div>
-            )} */}
-         </div>
-         <div className="mt-6 w-full bg-white p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-               <div className="flex items-center gap-1.5">
-                  <QrCodeOutlinedIcon fontSize="small" />
-                  <p className="font-bold">شت</p>
+            )}
+            <div className="w-calculated rounded-2xl bg-white p-5">
+               <div className="flex items-center justify-between">
+                  <div className="flex items-end gap-2 font-bold">
+                     <FastfoodIcon fontSize="small" className="pb-1" />
+                     <p>لیست غذاها</p>
+                  </div>
+
+                  <Button
+                     startIcon={<AddIcon />}
+                     onClick={() => setShowAddEditProductModal(true)}
+                     variant="contained"
+                     className="!rounded-10 !text-white"
+                     color="customYellow"
+                  >
+                     افزودن غذا
+                  </Button>
                </div>
-
-               <Button
-                  startIcon={<AddCircleOutlinedIcon />}
-                  color="customOrange"
-                  onClick={() => setShowAddEditProductModal(true)}
-                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.POST)}
-               >
-                  سام
-               </Button>
-            </div>
-
-            <div className="mx-auto mt-6 w-full">
-               {/* <Table
-                  columns={columns}
-                  rows={productsData?.result}
-                  pageStatus={pageStatus}
-                  setPageStatus={setPageStatus}
-                  totalPages={productsData?.total_pages}
-                  totalObjects={productsData?.total_objects}
-                  loading={productIsLoading}
-                  countValue={countValue}
-                  setCountValue={setCountValue}
-               /> */}
+               <div className="mt-2">
+                  <Table
+                     columns={columns}
+                     rows={productsData?.result}
+                     pageStatus={pageStatus}
+                     setPageStatus={setPageStatus}
+                     totalPages={productsData?.total_pages}
+                     totalObjects={productsData?.total_objects}
+                     loading={productIsLoading}
+                     countValue={countValue}
+                     setCountValue={setCountValue}
+                  />
+               </div>
             </div>
          </div>
 
          <ConfirmModal
             open={showDeleteProductModal}
             closeModal={closeDeleteProductModalHandler}
-            title="Are you sure to delete this product?"
-            // confirmHandler={deleteProductHandler}
-            // confirmLoading={deleteProductIsMutating}
+            title="آیا از حذف محصول مطمئن هستید ؟"
+            confirmHandler={deleteProductHandler}
+            confirmLoading={deleteProductIsMutating}
          />
 
-         {/* <AddEditProductModal
+         <AddEditProductModal
             show={showAddEditProductModal}
             onClose={closeAddEditProductModalHandler}
             isEdit={!!chosenProductForEdit}
@@ -335,6 +280,7 @@ function Products() {
             productsMutate={productsMutate}
          />
 
+         {/*
          <AddEditCategoryModalList show={showAddEditCategoryModal} onClose={() => setShowAddEditCategoryModal(false)} /> */}
       </AdminLayout>
    );
