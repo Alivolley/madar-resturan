@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
-import axios from 'axios';
 import Image from 'next/image';
+import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
 import bannerPic from '../assets/images/banner.png';
@@ -47,17 +47,11 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
 }
 
 export async function getStaticProps() {
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
    try {
-      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`).then(res => res.data);
-      const foodPartyList = await axios(`${baseURL}api/store/products/list_create/?has_discount=True`).then(
-         res => res.data
-      );
-      const dailyMenuList = await axios(`${baseURL}api/store/today-menu/get_update_delete/`).then(res => res.data);
-      const lastComments = await axios(`${baseURL}api/store/comments/list_create/?last_five=true`).then(
-         res => res.data
-      );
+      const categoryList = await axiosInstance(`store/categories/list_create/`).then(res => res.data);
+      const foodPartyList = await axiosInstance(`store/products/list_create/?has_discount=True`).then(res => res.data);
+      const dailyMenuList = await axiosInstance(`store/today-menu/get_update_delete/`).then(res => res.data);
+      const lastComments = await axiosInstance(`store/comments/list_create/?last_five=true`).then(res => res.data);
 
       return {
          props: {

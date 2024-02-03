@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 // MUI
-import { Button, CircularProgress, IconButton, Tooltip } from '@mui/material';
+import { Button, CircularProgress, Grid, IconButton, Tooltip } from '@mui/material';
 
 // Icons
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
@@ -28,7 +28,7 @@ import AdminLayout from '@/components/layout/admin-layout/admin-layout';
 import Table from '@/components/templates/table/table';
 import ConfirmModal from '@/components/templates/confirm-modal/confirm-modal';
 import AddEditProductModal from '@/components/pages/adminPanel/addEditProductModal/addEditProductModal';
-// import AddEditCategoryModalList from '@/components/pages/adminPanel/addEditCategoryModalList/addEditCategoryModalList';
+import AddEditCategoryModalList from '@/components/pages/adminPanel/addEditCategoryModalList/addEditCategoryModalList';
 
 // Apis
 import useGetProducts from '@/apis/pAdmin/products/useGetProducts';
@@ -162,7 +162,7 @@ function Products() {
             <title>مادر</title>
          </Head>
 
-         <div className="flex gap-5">
+         <div className="customLg:flex customLg:gap-5">
             {categoryIsLoading ? (
                <div className="mt-10 flex w-full items-center justify-center">
                   <CircularProgress color="customOrange" />
@@ -178,6 +178,7 @@ function Products() {
                         variant="contained"
                         fullWidth
                         className="!min-w-0 !justify-normal !rounded-10 !bg-[#F7F9FC] !px-0 !font-bold !text-[#713802]"
+                        onClick={() => setShowAddEditCategoryModal(true)}
                      >
                         <div className="flex w-full items-center justify-between px-1 py-3">
                            <div className="flex items-center gap-2">
@@ -188,50 +189,56 @@ function Products() {
                         </div>
                      </Button>
                   </div>
-                  <div className="flex flex-col items-start gap-7">
-                     <Button
-                        className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
-                        color="black"
-                        onClick={() => {
-                           setChosenCategory('');
-                           setPageStatus(1);
-                        }}
-                     >
-                        <div
-                           className={`size-4 shrink-0 rounded-full ${
-                              !chosenCategory
-                                 ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
-                                 : 'bg-[#E4EAF0]'
-                           }`}
-                        />
-                        <p className={!chosenCategory ? 'font-bold text-customOrange' : ''}>کلیه غذاها</p>
-                     </Button>
-                     {categoryList?.map(item => (
-                        <Button
-                           key={item?.id}
-                           className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
-                           color="black"
-                           onClick={() => {
-                              setChosenCategory(item.title);
-                              setPageStatus(1);
-                           }}
-                        >
-                           <div
-                              className={`size-4 shrink-0 rounded-full ${
-                                 chosenCategory === item.title
-                                    ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
-                                    : 'bg-[#E4EAF0]'
-                              }`}
-                           />
-                           <p className={chosenCategory === item.title ? 'font-bold text-customOrange' : ''}>
-                              {item?.title}
-                           </p>
-                        </Button>
-                     ))}
+                  <div>
+                     <Grid container spacing={2}>
+                        <Grid item xs={6} sm={4} lg={12}>
+                           <Button
+                              className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                              color="black"
+                              onClick={() => {
+                                 setChosenCategory('');
+                                 setPageStatus(1);
+                              }}
+                           >
+                              <div
+                                 className={`size-4 shrink-0 rounded-full ${
+                                    !chosenCategory
+                                       ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
+                                       : 'bg-[#E4EAF0]'
+                                 }`}
+                              />
+                              <p className={!chosenCategory ? 'font-bold text-customOrange' : ''}>کلیه غذاها</p>
+                           </Button>
+                        </Grid>
+
+                        {categoryList?.map(item => (
+                           <Grid item xs={6} sm={4} lg={12} key={item?.id}>
+                              <Button
+                                 className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                                 color="black"
+                                 onClick={() => {
+                                    setChosenCategory(item.title);
+                                    setPageStatus(1);
+                                 }}
+                              >
+                                 <div
+                                    className={`size-4 shrink-0 rounded-full ${
+                                       chosenCategory === item.title
+                                          ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
+                                          : 'bg-[#E4EAF0]'
+                                    }`}
+                                 />
+                                 <p className={chosenCategory === item.title ? 'font-bold text-customOrange' : ''}>
+                                    {item?.title}
+                                 </p>
+                              </Button>
+                           </Grid>
+                        ))}
+                     </Grid>
                   </div>
                </div>
             )}
-            <div className="w-calculated rounded-2xl bg-white p-5">
+            <div className="mt-5 rounded-2xl bg-white p-5 customLg:mt-0 customLg:w-calculated">
                <div className="flex items-center justify-between">
                   <div className="flex items-end gap-2 font-bold">
                      <FastfoodIcon fontSize="small" className="pb-1" />
@@ -280,8 +287,7 @@ function Products() {
             productsMutate={productsMutate}
          />
 
-         {/*
-         <AddEditCategoryModalList show={showAddEditCategoryModal} onClose={() => setShowAddEditCategoryModal(false)} /> */}
+         <AddEditCategoryModalList show={showAddEditCategoryModal} onClose={() => setShowAddEditCategoryModal(false)} />
       </AdminLayout>
    );
 }

@@ -1,5 +1,4 @@
 import { toast } from 'react-toastify';
-import axios from 'axios';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -23,6 +22,9 @@ import AddCommentIcon from '@mui/icons-material/AddComment';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
 import categoryTitleIcon from '@/assets/icons/categoriesIcon.svg';
@@ -437,16 +439,14 @@ function ProductDetail({ productDetail, categoryItems, error }) {
 export default ProductDetail;
 
 export async function getServerSideProps(context) {
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
    try {
-      const productDetail = await axios(`${baseURL}api/store/products/get_update_destroy/`, {
+      const productDetail = await axiosInstance(`store/products/get_update_destroy/`, {
          params: {
             title: context?.params?.productName,
          },
       }).then(res => res.data);
 
-      const categoryItems = await axios(`${baseURL}api/store/products/list_create/`, {
+      const categoryItems = await axiosInstance(`store/products/list_create/`, {
          params: {
             category: productDetail?.category,
          },

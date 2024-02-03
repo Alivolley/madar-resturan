@@ -38,7 +38,7 @@ function Table({
                         ))}
                      </tr>
                   </thead>
-                  <tbody className="pe-2">
+                  <tbody>
                      {rows?.map((row, rowIndex) => (
                         <tr
                            key={row?.id || crypto.randomUUID()}

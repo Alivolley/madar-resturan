@@ -117,11 +117,14 @@ function AddEditProductModal({ show, onClose, isEdit = false, detail, productsMu
       setDeletedIds([]);
       reset();
    };
+
    const formSubmit = data => {
       if (!coverImage) {
          toast.info('لطفا یک کاور برای غذا انتخاب کنید');
       } else if (!pictures?.length && !EditPictures?.length) {
          toast.info('لطفا برای غذای خود عکس انتخاب کنید');
+      } else if (pictures?.length > 4) {
+         toast.info('بیشترین تعداد عکس مجاز 4 عدد میباشد');
       } else {
          setUploadPercent(0);
 

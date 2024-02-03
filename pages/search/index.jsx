@@ -4,18 +4,18 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 
-// Configs
-import axios from 'axios';
-
 // MUI
 import { FormControl, IconButton, InputAdornment, Pagination, TextField } from '@mui/material';
 
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
+
 // Assets
-import searchIcon from '../../assets/icons/search-normal.svg';
-import noResult from '../../assets/images/search-not-found.png';
+import searchIcon from '@/assets/icons/search-normal.svg';
+import noResult from '@/assets/images/search-not-found.png';
 
 // Styles
-import RtlProvider from '../../components/layout/rtlProvider/rtlProvider';
+import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 
 // components
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
@@ -127,9 +127,8 @@ export default Search;
 export async function getServerSideProps(context) {
    const { query, req } = context;
    const accessToken = req?.cookies?.madar_accessToken;
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
    try {
-      const searchResultList = await axios(`${baseURL}api/store/products/list_create/`, {
+      const searchResultList = await axiosInstance(`store/products/list_create/`, {
          params: {
             search: query?.food_name,
             page: query?.page,

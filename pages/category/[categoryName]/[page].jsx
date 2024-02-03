@@ -4,14 +4,14 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 
-// Configs
-import axios from 'axios';
-
 // MUI
 import { Grid, Pagination } from '@mui/material';
 
 // Icons
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+
+// Configs
+import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
 import categoryPic from '@/assets/images/categories/categoryPic.png';
@@ -186,11 +186,9 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
 export default Category;
 
 export async function getServerSideProps(context) {
-   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
    try {
-      const categoryList = await axios(`${baseURL}api/store/categories/list_create/`).then(res => res.data);
-      const categoryItems = await axios(`${baseURL}api/store/products/list_create/`, {
+      const categoryList = await axiosInstance(`store/categories/list_create/`).then(res => res.data);
+      const categoryItems = await axiosInstance(`store/products/list_create/`, {
          params: {
             page: context?.params?.page,
 
@@ -199,7 +197,7 @@ export async function getServerSideProps(context) {
             }),
          },
       }).then(res => res.data);
-      const dailyMenu = await axios(`${baseURL}api/store/today-menu/get_update_delete/`).then(res => res.data);
+      const dailyMenu = await axiosInstance(`store/today-menu/get_update_delete/`).then(res => res.data);
 
       return {
          props: {
