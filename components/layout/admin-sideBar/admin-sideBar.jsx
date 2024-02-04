@@ -99,7 +99,7 @@ function AdminSideBar({ isMobile, onClose }) {
 
          <Button
             size="large"
-            className="!rounded-10 !bg-none !px-3 !py-2 !text-black !shadow-none"
+            className="!rounded-10 !bg-none !px-3 !py-2 !text-black !shadow-none hover:!bg-activeBrown hover:!text-white"
             fullWidth
             onClick={() => setShowLogoutModal(true)}
          >

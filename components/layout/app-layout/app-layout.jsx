@@ -46,7 +46,7 @@ function AppLayout({ children }) {
    return (
       <Provider store={store}>
          <ThemeProvider theme={themeConfig}>
-            <ToastContainer theme="colored" autoClose="15000" rtl />
+            <ToastContainer theme="colored" autoClose="5000" rtl />
             <Loading />
             <PagesLayout>{children}</PagesLayout>
          </ThemeProvider>
