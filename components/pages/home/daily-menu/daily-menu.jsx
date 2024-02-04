@@ -20,9 +20,9 @@ function DailyMenu({ dailyMenuList }) {
 
    useEffect(() => {
       const updatedList = [];
-      for (let i = 0; i < dailyMenuList?.products?.length; i += 2) {
-         const firstItem = dailyMenuList?.products[i];
-         const secondItem = dailyMenuList?.products[i + 1];
+      for (let i = 0; i < dailyMenuList?.length; i += 2) {
+         const firstItem = dailyMenuList?.[i];
+         const secondItem = dailyMenuList?.[i + 1];
 
          const newItem = {
             first: firstItem,
@@ -33,7 +33,7 @@ function DailyMenu({ dailyMenuList }) {
       }
 
       setNewList(updatedList);
-   }, [dailyMenuList?.products]);
+   }, [dailyMenuList]);
 
    return (
       <section>
@@ -48,7 +48,7 @@ function DailyMenu({ dailyMenuList }) {
          </div>
          <div className="customMd:hidden">
             <Grid container spacing={1}>
-               {dailyMenuList?.products?.map(item => (
+               {dailyMenuList?.map(item => (
                   <Grid item xs={6} key={item?.id}>
                      <FoodCardFirstTemplate className="mx-auto custom400:w-[178px] customMd:w-[200px]" detail={item} />
                   </Grid>

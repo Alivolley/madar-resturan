@@ -95,8 +95,8 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                      منوی روز
                   </p>
                   <div className="mt-3 flex flex-col gap-3">
-                     {dailyMenu?.products?.length ? (
-                        dailyMenu?.products?.map(item => <FoodCardThirdTemplate key={item.id} details={item} />)
+                     {dailyMenu?.length ? (
+                        dailyMenu?.map(item => <FoodCardThirdTemplate key={item.id} details={item} />)
                      ) : (
                         <p className="rounded-10 bg-buttonPink p-6 text-center font-bold">منوی روز خالی میباشد</p>
                      )}
@@ -165,9 +165,9 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                   )}
                </div>
                <div>
-                  {dailyMenu?.products?.length ? (
+                  {dailyMenu?.length ? (
                      <Grid container spacing={2}>
-                        {dailyMenu?.products?.map(item => (
+                        {dailyMenu?.map(item => (
                            <Grid item md={6} xl={4} key={item?.id}>
                               <FoodCardThirdTemplate details={item} />
                            </Grid>

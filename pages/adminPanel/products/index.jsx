@@ -168,107 +168,110 @@ function Products() {
                   <CircularProgress color="customOrange" />
                </div>
             ) : (
-               <div className="shrink-0 basis-[286px] rounded-2xl bg-white p-5">
-                  <div className="flex items-end gap-2 font-bold">
-                     <LibraryBooksOutlinedIcon color="textGray" />
-                     <p>دسته بندی غذاها</p>
-                  </div>
-                  <div className="my-5">
-                     <Button
-                        variant="contained"
-                        fullWidth
-                        className="!min-w-0 !justify-normal !rounded-10 !bg-[#F7F9FC] !px-0 !font-bold !text-[#713802]"
-                        onClick={() => setShowAddEditCategoryModal(true)}
-                     >
-                        <div className="flex w-full items-center justify-between px-1 py-3">
-                           <div className="flex items-center gap-2">
-                              <PlaylistAddIcon />
-                              <p>افزودن دسته بندی</p>
+               <>
+                  <div className="shrink-0 basis-[286px] rounded-2xl bg-white p-5">
+                     <div className="flex items-end gap-2 font-bold">
+                        <LibraryBooksOutlinedIcon color="textGray" />
+                        <p>دسته بندی غذاها</p>
+                     </div>
+                     <div className="my-5">
+                        <Button
+                           variant="contained"
+                           fullWidth
+                           className="!min-w-0 !justify-normal !rounded-10 !bg-[#F7F9FC] !px-0 !font-bold !text-[#713802]"
+                           onClick={() => setShowAddEditCategoryModal(true)}
+                        >
+                           <div className="flex w-full items-center justify-between px-1 py-3">
+                              <div className="flex items-center gap-2">
+                                 <PlaylistAddIcon />
+                                 <p>افزودن دسته بندی</p>
+                              </div>
+                              <AddIcon />
                            </div>
-                           <AddIcon />
-                        </div>
-                     </Button>
-                  </div>
-                  <div>
-                     <Grid container spacing={2}>
-                        <Grid item xs={6} sm={4} lg={12}>
-                           <Button
-                              className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
-                              color="black"
-                              onClick={() => {
-                                 setChosenCategory('');
-                                 setPageStatus(1);
-                              }}
-                           >
-                              <div
-                                 className={`size-4 shrink-0 rounded-full ${
-                                    !chosenCategory
-                                       ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
-                                       : 'bg-[#E4EAF0]'
-                                 }`}
-                              />
-                              <p className={!chosenCategory ? 'font-bold text-customOrange' : ''}>کلیه غذاها</p>
-                           </Button>
-                        </Grid>
-
-                        {categoryList?.map(item => (
-                           <Grid item xs={6} sm={4} lg={12} key={item?.id}>
+                        </Button>
+                     </div>
+                     <div>
+                        <Grid container spacing={2}>
+                           <Grid item xs={6} sm={4} lg={12}>
                               <Button
                                  className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
                                  color="black"
                                  onClick={() => {
-                                    setChosenCategory(item.title);
+                                    setChosenCategory('');
                                     setPageStatus(1);
                                  }}
                               >
                                  <div
                                     className={`size-4 shrink-0 rounded-full ${
-                                       chosenCategory === item.title
+                                       !chosenCategory
                                           ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
                                           : 'bg-[#E4EAF0]'
                                     }`}
                                  />
-                                 <p className={chosenCategory === item.title ? 'font-bold text-customOrange' : ''}>
-                                    {item?.title}
-                                 </p>
+                                 <p className={!chosenCategory ? 'font-bold text-customOrange' : ''}>کلیه غذاها</p>
                               </Button>
                            </Grid>
-                        ))}
-                     </Grid>
-                  </div>
-               </div>
-            )}
-            <div className="mt-5 rounded-2xl bg-white p-5 customLg:mt-0 customLg:w-calculated">
-               <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-end gap-2 font-bold">
-                     <FastfoodIcon fontSize="small" className="pb-1" />
-                     <p>لیست غذاها</p>
+
+                           {categoryList?.map(item => (
+                              <Grid item xs={6} sm={4} lg={12} key={item?.id}>
+                                 <Button
+                                    className="!flex !min-w-0 !items-start !gap-1 !p-0 !text-xs customMd:!text-sm"
+                                    color="black"
+                                    onClick={() => {
+                                       setChosenCategory(item.title);
+                                       setPageStatus(1);
+                                    }}
+                                 >
+                                    <div
+                                       className={`size-4 shrink-0 rounded-full ${
+                                          chosenCategory === item.title
+                                             ? 'border-[3px] border-solid border-[#E4EAF0] bg-customOrange'
+                                             : 'bg-[#E4EAF0]'
+                                       }`}
+                                    />
+                                    <p className={chosenCategory === item.title ? 'font-bold text-customOrange' : ''}>
+                                       {item?.title}
+                                    </p>
+                                 </Button>
+                              </Grid>
+                           ))}
+                        </Grid>
+                     </div>
                   </div>
 
-                  <Button
-                     startIcon={<AddIcon />}
-                     onClick={() => setShowAddEditProductModal(true)}
-                     variant="contained"
-                     className="!rounded-10 !text-white"
-                     color="customYellow"
-                  >
-                     افزودن غذا
-                  </Button>
-               </div>
-               <div className="mt-2">
-                  <Table
-                     columns={columns}
-                     rows={productsData?.result}
-                     pageStatus={pageStatus}
-                     setPageStatus={setPageStatus}
-                     totalPages={productsData?.total_pages}
-                     totalObjects={productsData?.total_objects}
-                     loading={productIsLoading}
-                     countValue={countValue}
-                     setCountValue={setCountValue}
-                  />
-               </div>
-            </div>
+                  <div className="mt-5 rounded-2xl bg-white p-5 customLg:mt-0 customLg:w-calculated">
+                     <div className="flex flex-wrap items-center justify-between gap-3">
+                        <div className="flex items-end gap-2 font-bold">
+                           <FastfoodIcon fontSize="small" className="pb-1" />
+                           <p>لیست غذاها</p>
+                        </div>
+
+                        <Button
+                           startIcon={<AddIcon />}
+                           onClick={() => setShowAddEditProductModal(true)}
+                           variant="contained"
+                           className="!rounded-10 !text-white"
+                           color="customYellow"
+                        >
+                           افزودن غذا
+                        </Button>
+                     </div>
+                     <div className="mt-2">
+                        <Table
+                           columns={columns}
+                           rows={productsData?.result}
+                           pageStatus={pageStatus}
+                           setPageStatus={setPageStatus}
+                           totalPages={productsData?.total_pages}
+                           totalObjects={productsData?.total_objects}
+                           loading={productIsLoading}
+                           countValue={countValue}
+                           setCountValue={setCountValue}
+                        />
+                     </div>
+                  </div>
+               </>
+            )}
          </div>
 
          <ConfirmModal
