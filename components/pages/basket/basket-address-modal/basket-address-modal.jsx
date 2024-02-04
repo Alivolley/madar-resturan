@@ -19,8 +19,8 @@ import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import useAddAddress from '@/apis/profile/useAddAddress';
 import useEditAddress from '@/apis/profile/useEditAddress';
 
-function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
-   const { trigger: addAddressTrigger, isMutating: addAddressIsMutating } = useAddAddress();
+function BasketAddressModal({ show, onClose, isEdit = false, detail, userId }) {
+   const { trigger: addAddressTrigger, isMutating: addAddressIsMutating } = useAddAddress(userId);
    const { trigger: editAddressTrigger, isMutating: editAddressIsMutating } = useEditAddress();
 
    const {
@@ -114,7 +114,7 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail }) {
 
                   <p className="my-6 rounded-10 bg-[#F5F8FC] px-4 py-3 font-bold">اطلاعات تحویل گیرنده</p>
 
-                  <div className="flex flex-col gap-3 customSm:flex-row customSm:items-center">
+                  <div className="flex flex-col gap-3 customSm:flex-row">
                      <div className="flex flex-1 flex-col gap-1">
                         <p className="text-sm text-[#7E8AAB]">نام و نام خانوادگی تحویل گیرنده</p>
                         <TextField

@@ -12,11 +12,16 @@ const useEditAddress = () => {
             },
          })
          .then(res => {
+            // eslint-disable-next-line consistent-return
             mutate('accounts/address/list_create/', prevData => {
-               const newData = prevData.filter(item => item?.id !== data.arg?.addressId);
-               newData.push(res.data);
-               return newData;
+               if (prevData) {
+                  const newData = prevData?.filter(item => item?.id !== data.arg?.addressId);
+                  newData.push(res.data);
+                  return newData;
+               }
             });
+            mutate(key => typeof key === 'string' && key.startsWith('accounts/users'));
+
             return res.data;
          })
    );

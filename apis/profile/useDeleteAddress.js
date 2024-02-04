@@ -17,6 +17,8 @@ const useDeleteAddress = () => {
                const newData = prevData?.filter(item => item?.id !== data?.arg);
                return newData;
             });
+            mutate(key => typeof key === 'string' && key.startsWith('accounts/users'));
+
             return res.data;
          })
    );

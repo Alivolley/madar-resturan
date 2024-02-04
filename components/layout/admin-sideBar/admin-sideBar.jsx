@@ -61,9 +61,9 @@ function AdminSideBar({ isMobile, onClose }) {
             </Link>
 
             <Link
-               href="/adminPanel/orders"
+               href="/adminPanel/users"
                className={`flex w-full items-center gap-3 rounded-10 px-3 py-2 transition-all duration-150 hover:bg-activeBrown hover:text-white ${
-                  pathname === '/adminPanel/orders' ? 'bg-activeBrown text-white' : ''
+                  pathname === '/adminPanel/users' ? 'bg-activeBrown text-white' : ''
                }`}
             >
                <div>

@@ -6,7 +6,7 @@ import { addUserInfo } from '@/store/reducers/userInfoReducer';
 
 import axiosInstance from '@/configs/axiosInstance';
 
-const useChangeProfileImage = () => {
+const useChangeProfileImage = phoneNumber => {
    const { mutate } = useSWRConfig();
    const dispatch = useDispatch();
 
@@ -15,6 +15,11 @@ const useChangeProfileImage = () => {
          .patch(url, data.arg, {
             headers: {
                'Content-Type': 'multipart/form-data',
+            },
+            params: {
+               ...(phoneNumber && {
+                  phone_number: phoneNumber,
+               }),
             },
          })
          .then(res => {
