@@ -81,8 +81,6 @@ function UserDetailModal({ show, onClose, detail, usersMutate }) {
       }
    }, [detail]);
 
-   console.log(detail);
-
    return (
       <Dialog open={show} onClose={closeModalHandler} fullWidth dir="rtl" maxWidth="xl">
          <div className="relative p-5 pt-0 font-rokhRegular">

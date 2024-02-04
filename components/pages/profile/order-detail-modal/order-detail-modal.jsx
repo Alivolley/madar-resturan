@@ -15,8 +15,6 @@ import MoneyOffCsredOutlinedIcon from '@mui/icons-material/MoneyOffCsredOutlined
 import noImage from '@/assets/images/noImage.png';
 
 function OrderDetailModal({ show, onClose, detail }) {
-   console.log(detail);
-
    return (
       <Dialog open={show} onClose={onClose} fullWidth dir="rtl">
          <div className="relative p-3 pt-0 font-rokhFaNum customMd:p-5">

@@ -73,12 +73,23 @@ function Orders() {
       { id: 3, title: 'کد سفارش', key: 'order_code' },
       {
          id: 4,
+         title: 'زمان سفارش',
+         key: 'Total price',
+         renderCell: data => (
+            <div className="font-rokhFaNum font-bold tracking-[1px]" dir="ltr">
+               <p>{data?.pay_time?.slice(0, 10)}</p>
+               <p>{data?.pay_time?.slice(10, 19)}</p>
+            </div>
+         ),
+      },
+      {
+         id: 5,
          title: 'مبلغ کل',
          key: 'Total price',
          renderCell: data => <p className="font-rokhFaNum">{Number(data?.final_price).toLocaleString()} تومان</p>,
       },
       {
-         id: 5,
+         id: 6,
          title: 'وضعیت',
          key: 'status',
          renderCell: data =>
@@ -100,7 +111,7 @@ function Orders() {
             ) : null,
       },
       {
-         id: 6,
+         id: 7,
          title: 'عملیات',
          key: 'actions',
          renderCell: data => (

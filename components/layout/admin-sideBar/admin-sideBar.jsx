@@ -13,6 +13,7 @@ import TakeoutDiningOutlinedIcon from '@mui/icons-material/TakeoutDiningOutlined
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import RecentActorsOutlinedIcon from '@mui/icons-material/RecentActorsOutlined';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 // Assets
 import footerLogo from '@/assets/images/footerLogo.png';
@@ -82,6 +83,17 @@ function AdminSideBar({ isMobile, onClose }) {
                   <TakeoutDiningOutlinedIcon />
                </div>
                <p>سفارشات</p>
+            </Link>
+            <Link
+               href="/adminPanel/reports"
+               className={`flex w-full items-center gap-3 rounded-10 px-3 py-2 transition-all duration-150 hover:bg-activeBrown hover:text-white ${
+                  pathname === '/adminPanel/reports' ? 'bg-activeBrown text-white' : ''
+               }`}
+            >
+               <div>
+                  <TrendingUpIcon />
+               </div>
+               <p>گزارشات</p>
             </Link>
 
             <Link
