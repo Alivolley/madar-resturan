@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+
 // MUI
 import { LoadingButton } from '@mui/lab';
 
@@ -14,16 +15,27 @@ function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, d
    const basketClickHandler = () => {
       if (basketStep === 1) {
          setBasketStep(2);
-      } else if (basketStep === 2 && !detail?.delivery && !chosenAddress) {
-         toast.info('لطفا یک آدرس را انتخاب کنید');
-      } else if (basketStep === 2 && chosenAddress) {
-         const addressDetail = {
-            address: chosenAddress?.id,
-            order_description: descriptionValue,
-         };
-         sendAddressTrigger(addressDetail);
+      } else if (basketStep === 2) {
+         if (detail?.delivery && !chosenAddress) {
+            toast.info('لطفا یک آدرس را انتخاب کنید');
+         } else if (detail?.delivery && chosenAddress) {
+            const addressDetail = {
+               address: chosenAddress?.id,
+               order_description: descriptionValue,
+            };
+            sendAddressTrigger(
+               addressDetail
+               //     {
+               //    onSuccess : ()=> // payment api
+               // }
+            );
+         } else if (!detail?.delivery) {
+            // payment api
+         }
       }
    };
+
+   console.log(detail);
 
    return (
       <div className={`rounded-2xl bg-white ${basketStep === 1 ? 'mt-3' : ''}`}>

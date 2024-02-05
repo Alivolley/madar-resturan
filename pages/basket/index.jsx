@@ -40,13 +40,11 @@ function Basket() {
    const { trigger: changeDeliveryTrigger, isMutating: changeDeliveryIsMutating } = useChangeDelivery();
 
    useEffect(() => {
-      if (basketStep === 2) {
-         const deliveryStatus = {
-            delivery: deliveryMethod === 'delivery',
-         };
+      const deliveryStatus = {
+         delivery: deliveryMethod === 'delivery',
+      };
 
-         changeDeliveryTrigger(deliveryStatus);
-      }
+      changeDeliveryTrigger(deliveryStatus);
    }, [deliveryMethod]);
 
    if (basketDataIsLoading) {
@@ -201,7 +199,7 @@ function Basket() {
          )}
 
          <Backdrop sx={{ zIndex: 2 }} open={changeDeliveryIsMutating}>
-            <CircularProgress color="inherit" />
+            <CircularProgress color="customOrange2" />
          </Backdrop>
       </main>
    );
