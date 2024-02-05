@@ -36,7 +36,7 @@ import useCategories from '@/apis/categories/useCategories';
 import useDeleteProduct from '@/apis/pAdmin/products/useDeleteProduct';
 
 // Utils
-// import permissions from '@/utils/permission';
+import permissions from '@/utils/permission';
 
 function Products() {
    const { back, pathname } = useRouter();
@@ -137,7 +137,7 @@ function Products() {
                      setChosenProductForEdit(data);
                      setShowAddEditProductModal(true);
                   }}
-                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
+                  disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -147,7 +147,7 @@ function Products() {
                      setChosenProductForDelete(data?.title);
                      setShowDeleteProductModal(true);
                   }}
-                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
+                  disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
                >
                   <DeleteOutlineOutlinedIcon fontSize="small" />
                </IconButton>
@@ -252,6 +252,9 @@ function Products() {
                            variant="contained"
                            className="!rounded-10 !text-white"
                            color="customYellow"
+                           disabled={
+                              !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.POST)
+                           }
                         >
                            افزودن غذا
                         </Button>

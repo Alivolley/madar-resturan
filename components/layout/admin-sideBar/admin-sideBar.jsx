@@ -3,6 +3,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Button, IconButton } from '@mui/material';
 
@@ -23,10 +26,11 @@ import footerLogo from '@/assets/images/footerLogo.png';
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 // Utils
-// import permissions from '@/utils/permission';
+import permissions from '@/utils/permission';
 
 function AdminSideBar({ isMobile, onClose }) {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    const { pathname } = useRouter();
 
@@ -97,17 +101,20 @@ function AdminSideBar({ isMobile, onClose }) {
                </div>
                <p>سفارشات</p>
             </Link>
-            <Link
-               href="/adminPanel/reports"
-               className={`flex w-full items-center gap-3 rounded-10 px-3 py-2 transition-all duration-150 hover:bg-activeBrown hover:text-white ${
-                  pathname === '/adminPanel/reports' ? 'bg-activeBrown text-white' : ''
-               }`}
-            >
-               <div>
-                  <TrendingUpIcon />
-               </div>
-               <p>گزارشات</p>
-            </Link>
+
+            {(userInfo?.is_super_admin || userInfo?.permissions?.includes(permissions?.VIEW_REPORTS?.LIST)) && (
+               <Link
+                  href="/adminPanel/reports"
+                  className={`flex w-full items-center gap-3 rounded-10 px-3 py-2 transition-all duration-150 hover:bg-activeBrown hover:text-white ${
+                     pathname === '/adminPanel/reports' ? 'bg-activeBrown text-white' : ''
+                  }`}
+               >
+                  <div>
+                     <TrendingUpIcon />
+                  </div>
+                  <p>گزارشات</p>
+               </Link>
+            )}
 
             <Link
                href="/adminPanel/information"

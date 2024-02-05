@@ -49,6 +49,9 @@ import useGetCategoryFull from '@/apis/pAdmin/dailyMenu/useGetCategoryFull';
 import useAddMenu from '@/apis/pAdmin/dailyMenu/useAddMenu';
 import useGetFullDailyMenu from '@/apis/pAdmin/dailyMenu/useGetFullDailyMenu';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function DailyMenu() {
    const [chosenProductForDelete, setChosenProductForDelete] = useState();
    const [chosenProductForEdit, setChosenProductForEdit] = useState();
@@ -178,7 +181,9 @@ function DailyMenu() {
                      setChosenProductForEdit(data);
                      setShowEditStockModal(true);
                   }}
-                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.PATCH)}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.TODAY_MENU?.PATCH)
+                  }
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -188,7 +193,9 @@ function DailyMenu() {
                      setChosenProductForDelete(data);
                      setShowDeleteProductModal(true);
                   }}
-                  // disabled={!userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.PRODUCT?.DELETE)}
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.TODAY_MENU?.DELETE)
+                  }
                >
                   <PlaylistRemoveIcon fontSize="small" />
                </IconButton>
@@ -275,6 +282,10 @@ function DailyMenu() {
                            fullWidth
                            startIcon={<AddIcon />}
                            loading={addMenuIsMutating}
+                           disabled={
+                              !userInfo?.is_super_admin &&
+                              !userInfo?.permissions?.includes(permissions?.TODAY_MENU?.PATCH)
+                           }
                         >
                            افزودن به منوی روز
                         </LoadingButton>
@@ -292,6 +303,10 @@ function DailyMenu() {
                            variant="contained"
                            className="!rounded-10 !text-white"
                            color="customYellow"
+                           disabled={
+                              !userInfo?.is_super_admin &&
+                              !userInfo?.permissions?.includes(permissions?.TODAY_MENU?.DELETE)
+                           }
                         >
                            خالی کردن منو
                         </Button>

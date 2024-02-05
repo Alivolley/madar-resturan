@@ -28,7 +28,7 @@ import EditShippingCostModal from '@/components/pages/adminPanel/editShippingCos
 import useGetAllCards from '@/apis/pAdmin/orders/useGetAllCards';
 
 // Utils
-// import permissions from '@/utils/permission';
+import permissions from '@/utils/permission';
 
 function Orders() {
    const [chosenFilter, setChosenFilter] = useState('');
@@ -122,10 +122,10 @@ function Orders() {
                      setChosenOrderForEdit(data);
                      setShowEditStatusModal(true);
                   }}
-                  // disabled={
-                  //    !userInfo?.is_super_admin &&
-                  //    !userInfo?.permissions?.includes(permissions?.CHANGE_CART_STATUS?.PATCH)
-                  // }
+                  disabled={
+                     !userInfo?.is_super_admin &&
+                     !userInfo?.permissions?.includes(permissions?.CHANGE_CART_STATUS?.PATCH)
+                  }
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -231,9 +231,9 @@ function Orders() {
                   color="customYellow"
                   variant="contained"
                   onClick={() => setShowEditShippingCostModal(true)}
-                  // disabled={
-                  //    !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.SHIPPING_COST?.PATCH)
-                  // }
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.SHIPPING_COST?.PATCH)
+                  }
                >
                   تغییر هزینه ی ارسال
                </Button>

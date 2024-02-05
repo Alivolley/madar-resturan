@@ -34,7 +34,7 @@ import useGetAllUsers from '@/apis/pAdmin/users/useGetAllUsers';
 import useBlockUser from '@/apis/pAdmin/users/useBlockUser';
 
 // Utils
-// import permissions from '@/utils/permission';
+import permissions from '@/utils/permission';
 
 function Users() {
    const [chosenCategory, setChosenCategory] = useState('');
@@ -152,7 +152,7 @@ function Users() {
                      setChosenUserForEdit(data);
                      setShowAddEditUserModal(true);
                   }}
-                  // disabled={!userInfo?.is_super_admin}
+                  disabled={!userInfo?.is_super_admin}
                >
                   <PersonAddAltOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -163,9 +163,9 @@ function Users() {
                      setChosenUserForDetail(data);
                      setShowUserDetailModal(true);
                   }}
-                  // disabled={
-                  //    !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.EDIT_USERS_INFO?.PATCH)
-                  // }
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.EDIT_USERS_INFO?.PATCH)
+                  }
                >
                   <BorderColorOutlinedIcon fontSize="inherit" />
                </IconButton>
@@ -176,9 +176,9 @@ function Users() {
                      setChosenUserForBlock(data);
                      setShowBlockUserModal(true);
                   }}
-                  // disabled={
-                  //    !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.BLOCK_USERS?.PATCH)
-                  // }
+                  disabled={
+                     !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.BLOCK_USERS?.PATCH)
+                  }
                >
                   {data?.role === 'blocked' ? (
                      <RemoveCircleIcon fontSize="small" color="error" />
@@ -317,7 +317,7 @@ function Users() {
                      className="!rounded-10 !text-white"
                      color="customYellow"
                      onClick={() => setShowAddEditUserModal(true)}
-                     // disabled={!userInfo?.is_super_admin}
+                     disabled={!userInfo?.is_super_admin}
                   >
                      افزودن کاربر
                   </Button>

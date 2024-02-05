@@ -21,7 +21,7 @@ import useCategories from '@/apis/categories/useCategories';
 import useDeleteCategory from '@/apis/pAdmin/categories/useDeleteCategory';
 
 // Utils
-// import permissions from '@/utils/permission';
+import permissions from '@/utils/permission';
 
 function AddEditCategoryModalList({ show, onClose }) {
    const [showDeleteCategoryModal, setShowDeleteCategoryModal] = useState(false);
@@ -66,9 +66,9 @@ function AddEditCategoryModalList({ show, onClose }) {
                      color="customOrange"
                      variant="contained"
                      onClick={() => setShowAddEditModal(true)}
-                     // disabled={
-                     //    !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.CATEGORY?.POST)
-                     // }
+                     disabled={
+                        !userInfo?.is_super_admin && !userInfo?.permissions?.includes(permissions?.CATEGORY?.POST)
+                     }
                   >
                      افزودن دسته بندی
                   </Button>
@@ -96,10 +96,10 @@ function AddEditCategoryModalList({ show, onClose }) {
                                  setShowAddEditModal(true);
                                  setChosenCategoryForEdit(item?.id);
                               }}
-                              // disabled={
-                              //    !userInfo?.is_super_admin &&
-                              //    !userInfo?.permissions?.includes(permissions?.CATEGORY?.PATCH)
-                              // }
+                              disabled={
+                                 !userInfo?.is_super_admin &&
+                                 !userInfo?.permissions?.includes(permissions?.CATEGORY?.PATCH)
+                              }
                            >
                               <BorderColorOutlinedIcon fontSize="inherit" />
                            </IconButton>
@@ -109,10 +109,10 @@ function AddEditCategoryModalList({ show, onClose }) {
                                  setShowDeleteCategoryModal(true);
                                  setChosenCategoryForDelete(item?.id);
                               }}
-                              // disabled={
-                              //    !userInfo?.is_super_admin &&
-                              //    !userInfo?.permissions?.includes(permissions?.CATEGORY?.DELETE)
-                              // }
+                              disabled={
+                                 !userInfo?.is_super_admin &&
+                                 !userInfo?.permissions?.includes(permissions?.CATEGORY?.DELETE)
+                              }
                            >
                               <DeleteOutlineOutlinedIcon fontSize="small" />
                            </IconButton>

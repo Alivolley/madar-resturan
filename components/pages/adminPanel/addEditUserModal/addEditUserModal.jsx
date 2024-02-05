@@ -14,24 +14,21 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import useAddUser from '@/apis/pAdmin/users/useAddUser';
 
 const permissionList = [
-   { title: 'Edit contact us', code: 101 },
-   { title: 'Add category', code: 102 },
-   { title: 'Edit category', code: 103 },
-   { title: 'Delete category', code: 104 },
-   { title: 'Add product', code: 105 },
-   { title: 'Edit product', code: 106 },
-   { title: 'Delete product', code: 107 },
-   { title: 'Edit shipping cost', code: 108 },
-   { title: 'Show discount code', code: 109 },
-   { title: 'Add discount code', code: 110 },
-   { title: 'Edit discount code', code: 111 },
-   { title: 'Delete discount code', code: 112 },
-   { title: 'Change order status', code: 113 },
-   { title: 'Reply to comment', code: 114 },
-   { title: 'Delete comment', code: 115 },
-   { title: 'Show reports', code: 116 },
-   { title: 'Edit users info', code: 117 },
-   { title: 'Block users', code: 118 },
+   { title: 'افزودن دسته بندی', code: 102 },
+   { title: 'ویرایش دسته بندی', code: 103 },
+   { title: 'حذف دسته بندی', code: 104 },
+   { title: 'افزودن محصول', code: 105 },
+   { title: 'ویرایش محصول', code: 106 },
+   { title: 'حذف محصول', code: 107 },
+   { title: 'ویرایش هزینه ارسال', code: 108 },
+   { title: 'ویرایش منوی روز', code: 113 },
+   { title: 'حذف منوی روز', code: 114 },
+   { title: 'تغییر وضعیت سفارش', code: 115 },
+   { title: 'پاسخ به کامنت', code: 116 },
+   { title: 'حذف کامنت', code: 117 },
+   { title: 'نمایش گزارشات', code: 118 },
+   { title: 'ویرایش اطلاعات کاربران', code: 119 },
+   { title: 'بلاک کردن کاربران', code: 120 },
 ];
 
 function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }) {
@@ -127,6 +124,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                      type="number"
                      sx={{
                         input: {
+                           cursor: isEdit && 'not-allowed',
                            MozAppearance: 'textfield',
                            appearance: 'textfield',
                            '&::-webkit-inner-spin-button': {
@@ -147,6 +145,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                      })}
                      error={!!errors?.phoneNumber}
                      helperText={errors?.phoneNumber?.message}
+                     disabled={isEdit}
                   />
                </div>
 
@@ -184,7 +183,7 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                                     onChange={(e, newValue) => onChange(newValue)}
                                     getOptionLabel={option => option.title}
                                     renderOption={(props, option, { selected }) => (
-                                       <li {...props} dir="rtl">
+                                       <li {...props} dir="rtl" className="font-rokhRegular">
                                           <Checkbox
                                              icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
                                              checkedIcon={<CheckBoxIcon fontSize="small" />}
@@ -195,7 +194,15 @@ function AddEditUserModal({ show, onClose, isEdit = false, detail, usersMutate }
                                        </li>
                                     )}
                                     renderInput={params => (
-                                       <TextField {...params} error={!!errors?.permissions?.message} />
+                                       <TextField
+                                          {...params}
+                                          error={!!errors?.permissions?.message}
+                                          sx={{
+                                             '*': {
+                                                fontFamily: 'rokhRegular',
+                                             },
+                                          }}
+                                       />
                                     )}
                                  />
 

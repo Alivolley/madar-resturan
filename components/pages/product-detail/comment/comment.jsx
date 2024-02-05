@@ -24,6 +24,9 @@ import ReplyModal from '../reply-modal/reply-modal';
 // Apis
 import useDeleteComment from '@/apis/comments/useDeleteComment';
 
+// Utils
+import permissions from '@/utils/permission';
+
 function Comment({ detail, commentsMutate }) {
    const [showReplyModal, setShowReplyModal] = useState(false);
    const [showDeleteCommentModal, setShowDeleteCommentModal] = useState(false);
@@ -68,6 +71,10 @@ function Comment({ detail, commentsMutate }) {
                         color="customOrange"
                         className="!bg-buttonPink2"
                         onClick={() => setShowReplyModal(true)}
+                        disabled={
+                           !userInfo?.is_super_admin &&
+                           !userInfo?.permissions?.includes(permissions?.REPLY_ON_COMMENT?.PATCH)
+                        }
                      >
                         <QuickreplyOutlinedIcon className="!text-base" />
                      </IconButton>
@@ -75,6 +82,10 @@ function Comment({ detail, commentsMutate }) {
                         color="customOrange"
                         className="!bg-buttonPink2"
                         onClick={() => setShowDeleteCommentModal(true)}
+                        disabled={
+                           !userInfo?.is_super_admin &&
+                           !userInfo?.permissions?.includes(permissions?.DELETE_COMMENT?.DELETE)
+                        }
                      >
                         <DeleteForeverOutlinedIcon className="!text-base" />
                      </IconButton>
