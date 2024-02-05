@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Button, Fab } from '@mui/material';
 
@@ -22,6 +25,7 @@ import LogoutModal from '@/components/templates/logout-modal/logout-modal';
 
 function Profile() {
    const [showLogoutModal, setShowLogoutModal] = useState(false);
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    return (
       <main>
@@ -31,12 +35,17 @@ function Profile() {
 
          <div className="px-5 pt-12 customMd:hidden">
             <div className="flex items-center gap-4">
-               <div className="size-20 rounded-full border-[3px] border-solid border-customOrange2">
-                  <Image className="size-full rounded-full" src={userProfilePic} alt="profile" />
+               <div className="relative size-20 rounded-full border-[3px] border-solid border-customOrange2">
+                  <Image
+                     className="size-full rounded-full"
+                     src={userInfo?.image || userProfilePic}
+                     alt="profile"
+                     fill
+                  />
                </div>
                <div className="space-y-1">
-                  <p className="text-lg text-customOrange2">علی ازقندی</p>
-                  <p>۰۹۳۸۳۹۳۵۷۱۹</p>
+                  <p className="text-lg text-customOrange2">{userInfo?.name}</p>
+                  <p className="font-rokhFaNum">{userInfo?.phone_number}</p>
                </div>
             </div>
 
