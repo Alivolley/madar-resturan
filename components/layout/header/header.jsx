@@ -268,13 +268,14 @@ function Header({ isLogin }) {
                                              پیگیری سفارش ها
                                           </Link>
                                           <Button
-                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                             className="!flex !gap-1 !border-t !border-solid !border-[#E4EAF0] !px-4 !py-3 !text-sm
+                                              !text-textOrange !transition-all !duration-150 hover:!bg-buttonPink2"
                                              onClick={() => setShowLogoutModal(true)}
                                           >
                                              <LogoutOutlinedIcon
                                                 fontSize="small"
                                                 color="customOrange"
-                                                className="rotate-180"
+                                                className="!rotate-180"
                                              />
                                              خروج از حساب کاربری
                                           </Button>

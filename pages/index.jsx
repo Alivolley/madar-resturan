@@ -49,7 +49,9 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
 export async function getStaticProps() {
    try {
       const categoryList = await axiosInstance(`store/categories/list_create/`).then(res => res.data);
-      const foodPartyList = await axiosInstance(`store/products/list_create/?has_discount=True`).then(res => res.data);
+      const foodPartyList = await axiosInstance(`store/products/list_create/?has_discount=True&page_size=1000`).then(
+         res => res.data
+      );
       const dailyMenuList = await axiosInstance(`store/today-menu/get_update_delete/`).then(res => res.data);
       const lastComments = await axiosInstance(`store/comments/list_create/?last_five=true`).then(res => res.data);
 

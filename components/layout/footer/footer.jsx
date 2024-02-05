@@ -111,7 +111,7 @@ function Footer() {
                      </div>
                   </div>
                   <div className="flex flex-col gap-8">
-                     <address className="h-8">
+                     <address className="h-8 text-base">
                         کرمانشاه - کارمندان - ایستگاه ۵ - خیابان عصر انقلاب - روبروی استخر پاسارگاد
                      </address>
                      <a className="text-right hover:font-bold hover:text-[#B31111]" href="tel:09376028877" dir="ltr">

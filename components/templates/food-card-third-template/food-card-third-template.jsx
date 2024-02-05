@@ -88,7 +88,7 @@ function FoodCardThirdTemplate({ className, details }) {
 
             <div className="mt-4 flex items-center gap-1.5">
                <IconButton
-                  className="border border-solid border-customOrange"
+                  className="!border !border-solid !border-customOrange"
                   sx={{ width: '18px', height: '18px' }}
                   onClick={addToBasketHandler}
                   disabled={
@@ -98,13 +98,13 @@ function FoodCardThirdTemplate({ className, details }) {
                      details?.stock === 0
                   }
                >
-                  <AddIcon color="customOrange" className="text-sm" />
+                  <AddIcon color="customOrange" className="!text-sm" />
                </IconButton>
                <p className="pt-1.5 font-rokhFaNum font-bold">
                   {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
                </p>
                <IconButton
-                  className={basketQuantity !== 1 ? 'border border-solid border-textGray' : ''}
+                  className={basketQuantity !== 1 ? '!border !border-solid !border-textGray' : ''}
                   sx={{ width: '18px', height: '18px' }}
                   onClick={removeFromBasketHandler}
                   disabled={addToBasketIsMutating || removeFromBasketIsMutating || !basketQuantity}
@@ -112,7 +112,7 @@ function FoodCardThirdTemplate({ className, details }) {
                   {basketQuantity === 1 ? (
                      <DeleteOutlineOutlinedIcon />
                   ) : (
-                     <RemoveIcon color="textGray" className="text-sm" />
+                     <RemoveIcon color="textGray" className="!text-sm" />
                   )}
                </IconButton>
             </div>

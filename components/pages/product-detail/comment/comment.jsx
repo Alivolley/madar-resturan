@@ -66,17 +66,17 @@ function Comment({ detail, commentsMutate }) {
                   <div className="flex items-center gap-2">
                      <IconButton
                         color="customOrange"
-                        className="bg-buttonPink2"
+                        className="!bg-buttonPink2"
                         onClick={() => setShowReplyModal(true)}
                      >
-                        <QuickreplyOutlinedIcon className="text-base" />
+                        <QuickreplyOutlinedIcon className="!text-base" />
                      </IconButton>
                      <IconButton
                         color="customOrange"
-                        className="bg-buttonPink2"
+                        className="!bg-buttonPink2"
                         onClick={() => setShowDeleteCommentModal(true)}
                      >
-                        <DeleteForeverOutlinedIcon className="text-base" />
+                        <DeleteForeverOutlinedIcon className="!text-base" />
                      </IconButton>
                   </div>
                )}

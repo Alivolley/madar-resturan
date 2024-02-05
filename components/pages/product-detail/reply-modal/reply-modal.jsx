@@ -76,7 +76,7 @@ function ReplyModal({ closeModal, open, detail, commentsMutate }) {
                      size="large"
                      color="customOrange2"
                      loading={addReplyIsMutating}
-                     className="!rounded-10 !p-2 customXs:min-w-[120px] customSm:min-w-[220px]"
+                     className="!rounded-10 !p-2 customXs:!min-w-[120px] customSm:!min-w-[220px]"
                      type="submit"
                   >
                      <p>ثبت پاسخ</p>
@@ -85,7 +85,7 @@ function ReplyModal({ closeModal, open, detail, commentsMutate }) {
                      onClick={closeModalHandler}
                      color="buttonBgGray"
                      variant="contained"
-                     className="!rounded-10 text-[#7E8AAB]"
+                     className="!rounded-10 !text-[#7E8AAB]"
                   >
                      بازگشت
                   </Button>

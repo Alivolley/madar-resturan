@@ -105,7 +105,7 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
                size="large"
                color="customOrange2"
                loading={addCommentIsMutating}
-               className="min-w-[170px] !rounded-10 !p-2 customXs:min-w-[220px]"
+               className="!min-w-[170px] !rounded-10 !p-2 customXs:!min-w-[220px]"
                type="submit"
             >
                <div className="flex w-full items-center justify-between">
@@ -118,7 +118,7 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
                onClick={() => setShowAddCommentSection(false)}
                color="buttonBgGray"
                variant="contained"
-               className="!rounded-10 text-[#7E8AAB]"
+               className="!rounded-10 !text-[#7E8AAB]"
             >
                رد کردن
             </Button>

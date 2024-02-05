@@ -46,13 +46,17 @@ function FoodCardFirstTemplate({ className, detail }) {
                </div>
             )}
          </Link>
-         <Link href={`/product/${detail?.title}`} className="my-3 block font-elMessiri font-bold" title={detail?.title}>
+         <Link
+            href={`/product/${detail?.title}`}
+            className="my-3 h-4 overflow-hidden font-elMessiri font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]"
+            title={detail?.title}
+         >
             {detail?.title}
          </Link>
          <Link
             title={detail?.description}
             href={`/product/${detail?.title}`}
-            className="h-8 overflow-hidden text-xs text-textGray [-webkit-box-orient:vertical] [-webkit-line-clamp:2] [display:-webkit-box]"
+            className="h-8 overflow-hidden text-xs text-textGray [-webkit-box-orient:vertical] [display:-webkit-box] [-webkit-line-clamp:2]"
          >
             {detail?.description}
          </Link>

@@ -83,7 +83,7 @@ function Information() {
                         />
                      </div>
                      <IconButton
-                        className="absolute bottom-0 left-0 cursor-pointer bg-customOrange"
+                        className="!absolute !bottom-0 !left-0 !cursor-pointer !bg-customOrange"
                         sx={{ width: '33px', height: '33px' }}
                      >
                         <BorderColorIcon fontSize="small" />
@@ -151,10 +151,10 @@ function Information() {
                         size="large"
                         color="customOrange2"
                         loading={changeProfileInfoIsMutating}
-                        className="w-full !rounded-10 !p-2 customLg:w-auto"
+                        className="!w-full !rounded-10 !p-2 customLg:!w-auto"
                      >
                         <div className="flex w-full items-center justify-between customLg:w-[330px]">
-                           <KeyboardTabIcon className="rotate-90 rounded-xl bg-white p-2 text-customOrange" />
+                           <KeyboardTabIcon className="!rotate-90 !rounded-xl !bg-white p-2 !text-customOrange" />
                            <p>ثبت اطلاعات</p>
                         </div>
                      </LoadingButton>

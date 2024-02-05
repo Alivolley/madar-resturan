@@ -235,7 +235,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                      <div className="flex items-end justify-between">
                         <div className="flex items-center gap-1.5">
                            <IconButton
-                              className="border border-solid border-customOrange"
+                              className="!border !border-solid !border-customOrange"
                               sx={{ width: '22px', height: '22px' }}
                               onClick={addToBasketHandler}
                               disabled={
@@ -245,13 +245,13 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                                  productDetail?.stock === 0
                               }
                            >
-                              <AddIcon color="customOrange" className="text-sm" />
+                              <AddIcon color="customOrange" className="!text-sm" />
                            </IconButton>
                            <p className="pt-1.5 font-rokhFaNum text-xl font-bold">
                               {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
                            </p>
                            <IconButton
-                              className={basketQuantity !== 1 ? 'border border-solid border-textGray' : ''}
+                              className={basketQuantity !== 1 ? '!border !border-solid !border-textGray' : ''}
                               sx={{ width: '22px', height: '22px' }}
                               onClick={removeFromBasketHandler}
                               disabled={addToBasketIsMutating || removeFromBasketIsMutating || !basketQuantity}
@@ -259,7 +259,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                               {basketQuantity === 1 ? (
                                  <DeleteOutlineOutlinedIcon />
                               ) : (
-                                 <RemoveIcon color="textGray" className="text-sm" />
+                                 <RemoveIcon color="textGray" className="!text-sm" />
                               )}
                            </IconButton>
                         </div>
