@@ -31,7 +31,7 @@ function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, is
             >
                {isClickable && (
                   <div
-                     className={`h-4 w-4 rounded-full border-[4px] border-solid ${
+                     className={`size-4 rounded-full border-[4px] border-solid ${
                         isActive ? 'border-[#D14D72]' : 'border-[#BDCEDE]'
                      }`}
                   />
@@ -45,10 +45,10 @@ function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, is
 
          <div className="flex items-center">
             <IconButton onClick={() => setShowBasketAddressModal(true)}>
-               <BorderColorIcon className="text-sm" />
+               <BorderColorIcon className="!text-sm" />
             </IconButton>
             <IconButton onClick={() => setShowDeleteAddressModal(true)}>
-               <DeleteForeverOutlinedIcon className="text-base" />
+               <DeleteForeverOutlinedIcon className="!text-base" />
             </IconButton>
          </div>
 

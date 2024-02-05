@@ -26,7 +26,7 @@ function BasketDeleteAddressModal({ show, onClose, detail }) {
          <div className="flex flex-col gap-3 bg-white px-10 py-5">
             <p className="text-center font-rokhRegular text-base font-bold">آیا از حذف این آدرس مطمئن هستید ؟</p>
             <div>
-               <Image src={deleteAddressPic} alt="delete basket" className="h-full w-full" />
+               <Image src={deleteAddressPic} alt="delete basket" className="size-full" />
             </div>
 
             <div className="flex items-center gap-3">

@@ -173,7 +173,7 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail, userId }) {
                            onClick={closeModalHandler}
                            variant="contained"
                            fullWidth
-                           className="h-full !rounded-10 !py-3 !font-bold !text-[#626E94]"
+                           className="!h-full !rounded-10 !py-3 !font-bold !text-[#626E94]"
                            color="buttonBgGray"
                            disabled={addAddressIsMutating || editAddressIsMutating}
                         >
@@ -193,7 +193,7 @@ function BasketAddressModal({ show, onClose, isEdit = false, detail, userId }) {
                            <div className="flex w-full items-center justify-between">
                               <p>{isEdit ? 'ویرایش آدرس' : 'افزودن آدرس'}</p>
 
-                              <AutoStoriesOutlinedIcon className="rounded-xl bg-white p-2 text-customOrange" />
+                              <AutoStoriesOutlinedIcon className="!rounded-xl !bg-white !p-2 !text-customOrange" />
                            </div>
                         </LoadingButton>
                      </div>

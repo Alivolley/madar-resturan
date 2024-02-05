@@ -71,7 +71,7 @@ function BasketProductCard({ detail }) {
             </p>
             <div className="flex items-center justify-center gap-2">
                <IconButton
-                  className="border border-solid border-customOrange"
+                  className="!border !border-solid !border-customOrange"
                   sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
                   onClick={addToBasketHandler}
                   disabled={
@@ -80,13 +80,13 @@ function BasketProductCard({ detail }) {
                      detail?.product?.product_stock === detail?.count
                   }
                >
-                  <AddIcon color="customOrange" className="text-sm" />
+                  <AddIcon color="customOrange" className="!text-sm" />
                </IconButton>
                <p className="pt-1.5 font-rokhFaNum text-sm font-bold customMd:text-xl">
                   {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : detail?.count}
                </p>
                <IconButton
-                  className={detail?.count === 1 ? '' : 'border border-solid border-textGray'}
+                  className={detail?.count === 1 ? '' : '!border !border-solid !border-textGray'}
                   sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
                   onClick={removeFromBasketHandler}
                   disabled={addToBasketIsMutating || removeFromBasketIsMutating}
@@ -94,7 +94,7 @@ function BasketProductCard({ detail }) {
                   {detail?.count === 1 ? (
                      <DeleteOutlineOutlinedIcon />
                   ) : (
-                     <RemoveIcon color="textGray" className="text-sm" />
+                     <RemoveIcon color="textGray" className="!text-sm" />
                   )}
                </IconButton>
             </div>
