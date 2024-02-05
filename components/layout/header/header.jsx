@@ -202,7 +202,7 @@ function Header({ isLogin }) {
                            </Link>
 
                            <div
-                              className={`flex min-w-[172px] cursor-pointer items-center justify-center gap-5 rounded-md bg-buttonPink
+                              className={`flex min-w-[172px] px-1 cursor-pointer items-center justify-center gap-5 rounded-md bg-buttonPink
                               font-rokhFaNum font-bold text-textOrange transition-all duration-200 ${profileDropDown ? 'bg-buttonPink2' : ''}`}
                               ref={profileRef}
                               onMouseEnter={() => setProfileDropDown(true)}

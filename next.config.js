@@ -8,7 +8,7 @@ const nextConfig = {
    images: {
       remotePatterns: [
          {
-            hostname: 'madarbackend.pythonanywhere.com',
+            hostname: 'madar.liara.run',
          },
       ],
    },
