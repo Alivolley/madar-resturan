@@ -72,12 +72,16 @@ function ProductDetail({ productDetail, categoryItems, error }) {
    )?.count;
 
    const addToBasketHandler = () => {
-      const foodObj = {
-         product_id: productDetail?.id,
-         product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
-      };
+      if (isLogin) {
+         const foodObj = {
+            product_id: productDetail?.id,
+            product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+         };
 
-      addToBasketTrigger(foodObj);
+         addToBasketTrigger(foodObj);
+      } else {
+         toast.info('برای افزودن به سبد خرید ابتدا وارد حساب خود شوید');
+      }
    };
 
    const removeFromBasketHandler = () => {

@@ -19,7 +19,7 @@
 
    .Toastify__toast-body {
       font-family: rokhRegular !important;
-      line-height: 25px;
+      line-height: 25px !important;
    }
 
    .Toastify__toast-container--top-right {

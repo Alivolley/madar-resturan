@@ -1,5 +1,9 @@
+import { toast } from 'react-toastify';
 import { Controller, useForm } from 'react-hook-form';
 import Image from 'next/image';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // MUI
 import { Button, Rating, TextField } from '@mui/material';
@@ -18,6 +22,8 @@ import RtlProvider from '@/components/layout/rtlProvider/rtlProvider';
 import useAddComment from '@/apis/comments/useAddComment';
 
 function AddComment({ setShowAddCommentSection, productDetail, commentsMutate }) {
+   const isLogin = useSelector(state => state?.loginStatusReducer);
+
    const { trigger: addCommentTrigger, isMutating: addCommentIsMutating } = useAddComment();
 
    const {
@@ -35,18 +41,22 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
    });
 
    const formSubmit = data => {
-      const newComment = {
-         message: data?.comment,
-         product: productDetail?.id,
-         score: Number(data?.rate),
-      };
+      if (isLogin) {
+         const newComment = {
+            message: data?.comment,
+            product: productDetail?.id,
+            score: Number(data?.rate),
+         };
 
-      addCommentTrigger(newComment, {
-         onSuccess: () => {
-            setShowAddCommentSection(false);
-            commentsMutate();
-         },
-      });
+         addCommentTrigger(newComment, {
+            onSuccess: () => {
+               setShowAddCommentSection(false);
+               commentsMutate();
+            },
+         });
+      } else {
+         toast.info('برای افزودن نظر جدید ابتدا وارد حساب خود شوید');
+      }
    };
 
    const rateValue = watch('rate');

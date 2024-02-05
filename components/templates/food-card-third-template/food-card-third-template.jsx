@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -29,12 +30,16 @@ function FoodCardThirdTemplate({ className, details }) {
    const basketQuantity = basketData?.orders?.find(item => item?.product?.product_title === details?.title)?.count;
 
    const addToBasketHandler = () => {
-      const foodObj = {
-         product_id: details?.id,
-         product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
-      };
+      if (isLogin) {
+         const foodObj = {
+            product_id: details?.id,
+            product_count: basketQuantity ? Number(basketQuantity) + 1 : 1,
+         };
 
-      addToBasketTrigger(foodObj);
+         addToBasketTrigger(foodObj);
+      } else {
+         toast.info('برای افزودن به سبد خرید ابتدا وارد حساب خود شوید');
+      }
    };
 
    const removeFromBasketHandler = () => {

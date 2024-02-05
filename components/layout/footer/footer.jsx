@@ -22,7 +22,7 @@ function Footer() {
    const { data: categoryList } = useCategories();
 
    return (
-      <footer className="mt-7 px-5 pb-11 customMd:px-[60px]">
+      <footer className="mt-7 px-5 pb-6 customMd:px-[60px]">
          <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-3">
                <Image src={footerLogo} alt="footer logo" />
@@ -79,16 +79,10 @@ function Footer() {
                   <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">اطلاعات رستوران مادر</p>
                   <div className="flex flex-col gap-4">
                      <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                        درباره ما
+                        خانه
                      </Link>
-                     <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                        تماس با ما
-                     </Link>
-                     <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                        گواهی ها
-                     </Link>
-                     <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
-                        سوالات متداول
+                     <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/contactUs">
+                        ارتباط با ما
                      </Link>
                   </div>
                </div>

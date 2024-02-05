@@ -12,7 +12,6 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import PhoneEnabledIcon from '@mui/icons-material/PhoneEnabled';
-import GroupsIcon from '@mui/icons-material/Groups';
 
 // Assets
 import userProfilePic from '../../assets/images/userProfile.png';
@@ -96,7 +95,7 @@ function Profile() {
                      <ArrowBackIosNewOutlinedIcon fontSize="inherit" color="textGray" />
                   </div>
                </Link>
-               <Link href="/" className="flex items-center gap-4 rounded-xl bg-white px-4 py-2.5">
+               <Link href="/contactUs" className="flex items-center gap-4 rounded-xl bg-white px-4 py-2.5">
                   <Fab
                      color="buttonPink"
                      sx={{
@@ -108,25 +107,7 @@ function Profile() {
                      <PhoneEnabledIcon color="customOrange2" />
                   </Fab>
 
-                  <p className="text-sm">تماس با ما</p>
-
-                  <div className="mr-auto">
-                     <ArrowBackIosNewOutlinedIcon fontSize="inherit" color="textGray" />
-                  </div>
-               </Link>
-               <Link href="/" className="flex items-center gap-4 rounded-xl bg-white px-4 py-2.5">
-                  <Fab
-                     color="buttonPink"
-                     sx={{
-                        width: '44px',
-                        height: '44px',
-                        borderRadius: '10px',
-                     }}
-                  >
-                     <GroupsIcon color="customOrange2" />
-                  </Fab>
-
-                  <p className="text-sm">درباره ی ما</p>
+                  <p className="text-sm">ارتباط با ما</p>
 
                   <div className="mr-auto">
                      <ArrowBackIosNewOutlinedIcon fontSize="inherit" color="textGray" />
