@@ -113,6 +113,10 @@ function Header({ isLogin }) {
                         خانه
                      </Link>
 
+                     <Link href="/contactUs" className="hidden md:block">
+                        ارتباط با ما
+                     </Link>
+
                      <div id="dropdownWrapper">
                         <div className="flex cursor-pointer items-center gap-1">
                            <p>منو</p>
@@ -140,29 +144,6 @@ function Header({ isLogin }) {
                                     </Grid>
                                  ))}
                               </Grid>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div className="" id="dropdownWrapper">
-                        <div className="flex cursor-pointer items-center gap-1">
-                           <p>رستوران مادر</p>
-                           <KeyboardArrowDownOutlinedIcon />
-                        </div>
-                        <div id="dropdownBox" className="w-40">
-                           <div className="flex flex-col rounded-sm bg-buttonPink">
-                              <Link
-                                 href="/"
-                                 className="px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                              >
-                                 تماس با ما
-                              </Link>
-                              <Link
-                                 href="/"
-                                 className="px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                              >
-                                 در باره ما
-                              </Link>
                            </div>
                         </div>
                      </div>
