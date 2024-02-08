@@ -2,10 +2,9 @@ import Image from 'next/image';
 
 // Swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+import { Navigation, Autoplay, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 
 // Icon
 import StarIcon from '@mui/icons-material/Star';
@@ -24,8 +23,7 @@ function BestComments({ detail }) {
          </p>
          <Swiper
             navigation
-            pagination={{ clickable: true }}
-            modules={[Navigation, Pagination, Autoplay, EffectCoverflow]}
+            modules={[Navigation, Autoplay, EffectCoverflow]}
             effect="coverflow"
             centeredSlides
             coverflowEffect={{
@@ -71,8 +69,8 @@ function BestComments({ detail }) {
                            <p className="mt-2 whitespace-nowrap text-lg font-bold">{item?.user}</p>
                            <div className="flex items-center gap-2 text-xs">
                               <p className="whitespace-nowrap">{item?.elapsed_time}</p>
-                              <p className="flex items-end gap-1 whitespace-nowrap font-rokhFaNum">
-                                 <StarIcon fontSize="inherit" className="fill-[#f4b740] pb-1" />
+                              <p className="flex items-center gap-1 whitespace-nowrap font-rokhFaNum">
+                                 <StarIcon fontSize="inherit" className="fill-[#f4b740]" />
                                  {item?.score}
                               </p>
                            </div>

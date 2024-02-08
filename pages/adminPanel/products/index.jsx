@@ -241,8 +241,8 @@ function Products() {
 
                   <div className="mt-5 rounded-2xl bg-white p-5 customLg:mt-0 customLg:w-calculated">
                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <div className="flex items-end gap-2 font-bold">
-                           <FastfoodIcon fontSize="small" className="pb-1" />
+                        <div className="flex items-center gap-2 font-bold">
+                           <FastfoodIcon fontSize="small" />
                            <p>لیست غذاها</p>
                         </div>
 

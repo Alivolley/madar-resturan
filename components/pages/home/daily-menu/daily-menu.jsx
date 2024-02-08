@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
-import testPic1 from '@/assets/images/some.png';
+import dailyMenuBig from '@/assets/images/dailyMenuBig.png';
 
 // Components
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';
@@ -41,7 +41,10 @@ function DailyMenu({ dailyMenuList }) {
             <p className="w-fit border-b-[3px] border-solid border-customOrange font-elMessiri text-2xl font-bold">
                منوی روز
             </p>
-            <Link href="/category/منوی روز/1" className="flex items-center gap-2 text-sm text-textGray">
+            <Link
+               href="/category/منوی روز/1"
+               className="flex items-center gap-2 text-sm text-textGray hover:text-[#E27005]"
+            >
                مشاهده همه
                <KeyboardArrowLeftIcon fontSize="small" />
             </Link>
@@ -57,10 +60,10 @@ function DailyMenu({ dailyMenuList }) {
          </div>
 
          <div className="hidden customMd:block">
-            <div className="flex items-center gap-9">
-               <div className="relative flex shrink-0 flex-col rounded-2xl bg-white">
-                  <div className="h-[338px] w-[314px]">
-                     <Image src={testPic1} alt="daily menu" className="size-full object-cover" />
+            <div className="flex items-start gap-9">
+               <div className="relative flex shrink-0 flex-col gap-12 rounded-2xl bg-white p-4">
+                  <div className="">
+                     <Image src={dailyMenuBig} alt="daily menu" className="size-full object-cover" />
                   </div>
 
                   <Link href="/category/منوی روز/1" className="flex items-center px-6 py-5 font-bold text-[#050F2C]">

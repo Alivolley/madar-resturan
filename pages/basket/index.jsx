@@ -62,7 +62,7 @@ function Basket() {
                {basketStep === 1 ? (
                   <div className="flex items-center justify-between rounded-2xl rounded-br-none bg-white px-8 py-4">
                      <div className="flex items-end gap-1">
-                        <div className="size-5 pb-1">
+                        <div className="size-5">
                            <Image src={basketIcon} alt="basket Icon" className="size-full" />
                         </div>
                         <p className="text-sm font-bold text-[#7E8AAB]">سبد خرید</p>

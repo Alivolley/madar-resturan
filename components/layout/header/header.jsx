@@ -128,7 +128,7 @@ function Header({ isLogin }) {
                                  <Grid item xs={6}>
                                     <Link
                                        href="/category/منوی روز/1"
-                                       className="block px-2.5 py-2 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                       className="block rounded px-2.5 py-2 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
                                     >
                                        منوی روز
                                     </Link>
@@ -137,7 +137,7 @@ function Header({ isLogin }) {
                                     <Grid item xs={6} key={item?.id}>
                                        <Link
                                           href={`/category/${item?.title}/1`}
-                                          className="block px-2.5 py-2 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
+                                          className="block rounded px-2.5 py-2 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
                                        >
                                           {item?.title}
                                        </Link>
@@ -162,6 +162,9 @@ function Header({ isLogin }) {
                            width: '47px',
                            height: '47px',
                            borderRadius: '10px',
+                           ':hover': {
+                              backgroundColor: '#FEE2C9',
+                           },
                         }}
                         onClick={() => setShowSearch(true)}
                      >
@@ -185,6 +188,9 @@ function Header({ isLogin }) {
                                     width: '47px',
                                     height: '47px',
                                     borderRadius: '10px',
+                                    ':hover': {
+                                       backgroundColor: '#FEE2C9',
+                                    },
                                  }}
                               >
                                  <Badge
