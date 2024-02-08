@@ -129,7 +129,7 @@ function Login() {
             <div className="mx-auto max-w-md customMd:flex customMd:h-full customMd:flex-col customMd:justify-center">
                {step === 1 && (
                   <div className="mb-10">
-                     <p className="font-elMessiri text-xl font-bold text-[#713802]">ورود یا ثبت نام</p>
+                     <p className="mb-1 text-xl font-bold text-[#713802]">ورود یا ثبت نام</p>
                      <p className="text-sm text-[#626E94]">
                         برای ورود به رستوران مادر ابتدا شماره همراه خود را وارد کنید
                      </p>
@@ -138,7 +138,7 @@ function Login() {
 
                {step === 2 && (
                   <div className="mb-10">
-                     <p className="font-elMessiri text-xl font-bold text-[#713802]">تایید کد ارسالی</p>
+                     <p className="mb-1 text-xl font-bold text-[#713802]">تایید کد ارسالی</p>
                      <p className="text-sm text-[#626E94]">
                         لطفا کد تایید که به شماره{' '}
                         <span className="px-1 font-rokhFaNum">{getValues('phone_number')}</span> ارسال شده است را وارد
@@ -149,7 +149,7 @@ function Login() {
 
                {step === 3 && (
                   <div className="mb-10">
-                     <p className="font-elMessiri text-xl font-bold text-[#713802]">شماره شما یک ادمین است</p>
+                     <p className="mb-1 text-xl font-bold text-[#713802]">شماره شما یک ادمین است</p>
                      <p className="text-sm text-[#626E94]">لطفا برای ورود به عنوان ادمین رمز عبور خود را وارد کنید</p>
                   </div>
                )}

@@ -73,7 +73,7 @@ function Information() {
             <div className="flex flex-wrap items-center justify-between gap-4 rounded-10 bg-white px-5 py-8">
                <div className="flex items-center gap-1.5">
                   <RecentActorsOutlinedIcon />
-                  <p className="pt-1 font-bold">اطلاعات حساب</p>
+                  <p className="font-bold">اطلاعات حساب</p>
                </div>
             </div>
 

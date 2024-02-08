@@ -17,8 +17,8 @@ function FoodParty({ foodPartyList }) {
                   <div className="flex size-11 items-center justify-center rounded-full bg-white">
                      <Image src={foodPartyIcon} alt="food party" />
                   </div>
-                  <div className="space-y-2">
-                     <p className="font-elMessiri">فود پارتی</p>
+                  <div className="space-y-3">
+                     <p>فود پارتی</p>
                      <p className="text-[9px] [word-spacing:1px]">جدیدترین تخفیفات غذاها</p>
                   </div>
                </div>
@@ -29,8 +29,8 @@ function FoodParty({ foodPartyList }) {
                <div className="absolute inset-0 opacity-[15%]">
                   <Image src={shapeIcon} alt="food party" className="size-full" />
                </div>
-               <div className="space-y-1 text-center">
-                  <p className="font-elMessiri text-xl font-bold text-white">فود پارتی</p>
+               <div className="space-y-2 text-center">
+                  <p className="text-xl font-bold text-white">فود پارتی</p>
                   <p className="text-sm text-[#713802]">تخفیفات ویژه در رستوران مادر</p>
                </div>
                <div className="">

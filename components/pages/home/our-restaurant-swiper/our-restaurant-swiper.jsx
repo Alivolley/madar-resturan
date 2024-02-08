@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 // Assets
-import testPic from '../../../../assets/images/branchPicture.png';
+import testPic from '@/assets/images/branchPicture.png';
 
 // Styles
 import OurRestaurantSwiperStyle from './our-restaurant-swiper.style';
@@ -33,47 +33,47 @@ function OurRestaurantSwiper() {
             >
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
                <SwiperSlide>
                   <div className="h-80">
-                     <Image src={testPic} alt="our restaurant" className="h-full w-full object-cover" />
+                     <Image src={testPic} alt="our restaurant" className="size-full object-cover" />
                   </div>
                </SwiperSlide>
             </Swiper>

@@ -82,7 +82,7 @@ function BasketProductCard({ detail }) {
                >
                   <AddIcon color="customOrange" className="!text-sm" />
                </IconButton>
-               <p className="pt-1.5 font-rokhFaNum text-sm font-bold customMd:text-xl">
+               <p className="font-rokhFaNum text-sm font-bold customMd:text-xl">
                   {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : detail?.count}
                </p>
                <IconButton
@@ -103,7 +103,7 @@ function BasketProductCard({ detail }) {
          <div className="flex flex-1 flex-col items-end">
             {detail?.percentage !== 0 ? (
                <div className="flex items-center gap-0.5 customMd:gap-2">
-                  <p className="rounded-md bg-[#FCB777] px-1 pt-1 font-rokhFaNum text-[8px] customMd:text-10">
+                  <p className="rounded-md bg-[#FCB777] px-1 py-0.5 font-rokhFaNum text-[8px] customMd:text-10">
                      {detail?.percentage}٪
                   </p>
                   <p className="font-rokhFaNum text-10 font-bold text-[#D39090] line-through">

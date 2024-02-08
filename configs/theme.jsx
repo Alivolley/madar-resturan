@@ -77,6 +77,21 @@ const getDesignTokens = mode => ({
             root: {
                boxShadow: 'none',
                zIndex: 1,
+               '&:hover': {
+                  boxShadow: 'none',
+                  backgroundColor: '#FCB777',
+                  color: '#fff !important',
+               },
+            },
+         },
+      },
+
+      MuiIconButton: {
+         styleOverrides: {
+            root: {
+               '&:hover': {
+                  color: '#E27005 !important',
+               },
             },
          },
       },
@@ -86,12 +101,21 @@ const getDesignTokens = mode => ({
             root: props => ({
                fontFamily: 'rokhRegular',
                boxShadow: 'none',
-               '&:hover': {
-                  boxShadow: '0px 4px 7px 0px #C2C2C236',
-               },
                ...((props.ownerState.color === 'customOrange' || props.ownerState.color === 'customOrange2') && {
                   color: 'white',
                }),
+               '&:hover': {
+                  boxShadow: 'none',
+                  ...(props?.ownerState?.variant !== 'contained'
+                     ? {
+                          backgroundColor: 'transparent',
+                          color: '#E27005',
+                       }
+                     : {
+                          backgroundColor: '#FCB777',
+                          color: '#fff !important',
+                       }),
+               },
             }),
          },
       },

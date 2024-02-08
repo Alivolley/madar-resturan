@@ -70,7 +70,7 @@ function AddComment({ setShowAddCommentSection, productDetail, commentsMutate })
          </div>
 
          <p className="mb-4 mt-20 customMd:mt-0">به سفارشتان به رستوران مادر چه امتیازی میدهید ؟</p>
-         <p className="mb-3 rounded bg-[#C1F7EE] px-4 pb-0.5 pt-1.5 text-sm text-[#139983]">
+         <p className="mb-3 rounded bg-[#C1F7EE] px-4 py-1 text-sm text-[#139983]">
             {rateValue === '5'
                ? 'خیلی خوب'
                : rateValue === '4'

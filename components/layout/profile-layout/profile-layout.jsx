@@ -40,8 +40,8 @@ function ProfileLayout({ children }) {
                      fill
                   />
                </div>
-               <p className="mt-3 text-xl font-bold">{userInfo?.name}</p>
-               <p className="font-rokhFaNum text-sm">{userInfo?.phone_number}</p>
+               <p className="mt-2 text-xl font-bold">{userInfo?.name}</p>
+               <p className="mt-1 font-rokhFaNum text-sm text-[#626E94]">{userInfo?.phone_number}</p>
             </div>
 
             <div className="mb-3 mt-12 flex flex-col gap-8 border-b border-solid border-[#E4EAF0] pb-16">
@@ -62,7 +62,7 @@ function ProfileLayout({ children }) {
                      <PersonOutlineIcon color={pathName === '/profile/information' ? 'customOrange2' : 'inherit'} />
                   </Fab>
 
-                  <p className="text-[15px] font-bold">اطلاعات حساب کاربری</p>
+                  <p className="text-[15px]">اطلاعات حساب کاربری</p>
 
                   <div className="mr-auto">
                      <ArrowBackIosNewOutlinedIcon fontSize="inherit" />
@@ -86,7 +86,7 @@ function ProfileLayout({ children }) {
                      <LocationOnOutlinedIcon color={pathName === '/profile/address' ? 'customOrange2' : 'inherit'} />
                   </Fab>
 
-                  <p className="text-[15px] font-bold">آدرس های من</p>
+                  <p className="text-[15px]">آدرس های من</p>
 
                   <div className="mr-auto">
                      <ArrowBackIosNewOutlinedIcon fontSize="inherit" />
@@ -112,7 +112,7 @@ function ProfileLayout({ children }) {
                      />
                   </Fab>
 
-                  <p className="text-[15px] font-bold">پیگیری سفارش ها</p>
+                  <p className="text-[15px]">پیگیری سفارش ها</p>
 
                   <div className="mr-auto">
                      <ArrowBackIosNewOutlinedIcon fontSize="inherit" />
@@ -130,7 +130,7 @@ function ProfileLayout({ children }) {
             >
                <div className="flex w-full items-center gap-3">
                   <LogoutOutlinedIcon className="rotate-180 rounded-xl bg-customOrange2 p-2 text-white" />
-                  <p className="pt-1 font-bold text-customOrange2">خروج از حساب کاربری</p>
+                  <p className="text-customOrange2">خروج از حساب کاربری</p>
                </div>
             </Button>
          </aside>

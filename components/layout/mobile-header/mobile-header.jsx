@@ -24,9 +24,9 @@ import IsoIcon from '@mui/icons-material/Iso';
 import { useSelector } from 'react-redux';
 
 // Assets
-import searchIcon from '../../../assets/icons/search-normal.svg';
-import headerLogo from '../../../assets/images/momLogo.png';
-import starIcon from '../../../assets/icons/star.svg';
+import searchIcon from '@/assets/icons/search-normal.svg';
+import headerLogo from '@/assets/images/momLogo2.png';
+import starIcon from '@/assets/icons/star.svg';
 
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
@@ -88,15 +88,13 @@ function MobileHeader({ isLogin }) {
       <header className="sticky top-0 z-[2] bg-customOrange px-5 pb-11 pt-6">
          <div className="relative">
             <div className="flex items-center justify-between">
-               <div className="flex items-center gap-1">
-                  <Link href="/" className="size-11">
+               <div className="flex items-center gap-2">
+                  <Link href="/" className="h-10 w-11">
                      <Image src={headerLogo} alt="header logo" className="size-full" />
                   </Link>
                   {isLogin && (
-                     <div className="space-y-2 text-white">
-                        <p className="font-rokhFaNum text-[13px] font-bold customXs:text-base">
-                           سلام {userInfo?.name || userInfo?.phone_number}
-                        </p>
+                     <div className="space-y-1 text-white">
+                        <p className="font-rokhFaNum text-[13px]">سلام {userInfo?.name || userInfo?.phone_number}</p>
                         <button
                            type="button"
                            className="flex items-center gap-1 border-none bg-transparent p-0 font-rokhRegular text-[8px] text-inherit [word-spacing:1px]"
@@ -104,7 +102,7 @@ function MobileHeader({ isLogin }) {
                            onClick={() => setProfileDropDown(true)}
                         >
                            <FmdGoodOutlinedIcon fontSize="inherit" />
-                           <p className="max-w-[120px] truncate pt-1 customXs:max-w-[160px] ">
+                           <p className="max-w-[120px] truncate customXs:max-w-[160px] ">
                               {userInfo?.default_address || 'آدرس های من'}
                            </p>
                            <KeyboardArrowDownOutlinedIcon
@@ -254,12 +252,10 @@ function MobileHeader({ isLogin }) {
                                  <Link
                                     key={item?.word}
                                     href={`/search?food_name=${item?.word}&page=1`}
-                                    className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
+                                    className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 py-1 text-xs text-[#626E94]"
                                  >
                                     <p>{item?.word}</p>
-                                    <div>
-                                       <ArrowBackIosIcon fontSize="inherit" />
-                                    </div>
+                                    <ArrowBackIosIcon fontSize="inherit" />
                                  </Link>
                               ))}
                            </div>
@@ -280,12 +276,10 @@ function MobileHeader({ isLogin }) {
                                  <Link
                                     key={item?.word}
                                     href={`/search?food_name=${item?.word}&page=1`}
-                                    className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 pb-0.5 pt-1.5 text-xs text-[#626E94]"
+                                    className="flex items-center rounded-lg border border-solid border-[#E0D9C7] bg-bgColor px-3 py-1 text-xs text-[#626E94]"
                                  >
                                     <p>{item?.word}</p>
-                                    <div>
-                                       <ArrowBackIosIcon fontSize="inherit" />
-                                    </div>
+                                    <ArrowBackIosIcon fontSize="inherit" />
                                  </Link>
                               ))}
                            </div>

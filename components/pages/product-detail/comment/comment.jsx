@@ -61,7 +61,7 @@ function Comment({ detail, commentsMutate }) {
                      <div>
                         <Rating value={Number(detail?.score)} max={Number(detail?.score)} size="small" readOnly />
                      </div>
-                     <p className="font-bold">{detail?.user}</p>
+                     <p>{detail?.user}</p>
                   </div>
                </div>
 
@@ -93,12 +93,7 @@ function Comment({ detail, commentsMutate }) {
                )}
             </div>
 
-            <div className="mb-7 mt-9 flex flex-wrap items-center gap-2 rounded-10 bg-[#FEF1E4] p-2 customMd:gap-5">
-               <p className="rounded-lg bg-[#FEE2C9] px-3 pb-0.5 pt-1.5 text-xs text-[#AA5403] customMd:px-7 customMd:text-sm">
-                  {detail?.product}
-               </p>
-            </div>
-            <pre className="whitespace-normal text-base text-textGray">{detail?.message}</pre>
+            <pre className="m-6 whitespace-normal text-base text-textGray">{detail?.message}</pre>
          </div>
          {detail?.reply_message && (
             <div className="relative mr-5 mt-6 rounded-b-10 bg-[#391C01] p-5 text-white customXs:mr-16 customMd:mr-24">

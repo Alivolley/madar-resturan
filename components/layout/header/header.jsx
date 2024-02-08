@@ -34,10 +34,10 @@ import { useSelector } from 'react-redux';
 
 // Assets
 import { useForm } from 'react-hook-form';
-import searchIconOrange from '../../../assets/icons/search-normal-orange.svg';
-import searchIcon from '../../../assets/icons/search-normal.svg';
-import basketIconOrange from '../../../assets/icons/basketIconOrange.svg';
-import headerLogo from '../../../assets/images/momLogo.png';
+import searchIconOrange from '@/assets/icons/search-normal-orange.svg';
+import searchIcon from '@/assets/icons/search-normal.svg';
+import basketIconOrange from '@/assets/icons/basketIconOrange.svg';
+import headerLogo from '@/assets/images/momLogo.png';
 
 // Styles
 import HeaderStyle from './header.style';
@@ -104,26 +104,26 @@ function Header({ isLogin }) {
    }, [isLogin]);
 
    return (
-      <header className="sticky top-0 z-[2] h-32 bg-white px-6 shadow-searchBoxShadow customMd:px-[60px]">
+      <header className="sticky top-0 z-[2] h-20 bg-white px-6 shadow-searchBoxShadow customMd:px-[60px]">
          <HeaderStyle className="flex size-full">
             <Grid container alignItems="center">
                <Grid item sm={4.5} md={4.75}>
-                  <div className="flex items-center gap-7 font-bold text-textOrange customLg:gap-9">
-                     <Link href="/" className="hidden md:block">
+                  <div className="flex items-center gap-7 text-textOrange customLg:gap-9">
+                     <Link href="/" className="hidden hover:text-[#E27005] md:block">
                         خانه
                      </Link>
 
-                     <Link href="/contactUs" className="hidden md:block">
+                     <Link href="/contactUs" className="hidden hover:text-[#E27005] md:block">
                         ارتباط با ما
                      </Link>
 
                      <div id="dropdownWrapper">
-                        <div className="flex cursor-pointer items-center gap-1">
+                        <div className="flex cursor-pointer items-center gap-1 hover:text-[#E27005]">
                            <p>منو</p>
                            <KeyboardArrowDownOutlinedIcon />
                         </div>
                         <div id="dropdownBox" className="w-80">
-                           <div className="rounded-sm bg-buttonPink">
+                           <div className="rounded-sm bg-buttonPink p-2">
                               <Grid container>
                                  <Grid item xs={6}>
                                     <Link
@@ -170,7 +170,7 @@ function Header({ isLogin }) {
 
                      {!isUserLogin && (
                         <Link href="/login" className="text-textOrange">
-                           <Button variant="contained" color="buttonPink" className="h-full font-bold">
+                           <Button variant="contained" color="buttonPink" className="!h-full !rounded-10">
                               ورود / ثبت نام
                            </Button>
                         </Link>
@@ -202,8 +202,8 @@ function Header({ isLogin }) {
                            </Link>
 
                            <div
-                              className={`flex min-w-[172px] px-1 cursor-pointer items-center justify-center gap-5 rounded-md bg-buttonPink
-                              font-rokhFaNum font-bold text-textOrange transition-all duration-200 ${profileDropDown ? 'bg-buttonPink2' : ''}`}
+                              className={`flex min-w-[172px] px-1 cursor-pointer items-center justify-center gap-5 rounded-10 bg-buttonPink
+                              font-rokhFaNum text-textOrange transition-all duration-200 ${profileDropDown ? 'bg-buttonPink2' : ''}`}
                               ref={profileRef}
                               onMouseEnter={() => setProfileDropDown(true)}
                               onMouseLeave={() => setProfileDropDown(false)}
@@ -294,7 +294,7 @@ function Header({ isLogin }) {
             <div className="">
                <div className="flex items-center justify-between bg-[#EDEDED] p-2">
                   <div />
-                  <p className="font-elMessiri font-bold">جستجو</p>
+                  <p className="font-rokhRegular font-bold">جستجو</p>
                   <IconButton onClick={closeModalHandler}>
                      <CloseIcon />
                   </IconButton>

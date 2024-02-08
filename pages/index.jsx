@@ -4,7 +4,8 @@ import Image from 'next/image';
 import axiosInstance from '@/configs/axiosInstance';
 
 // Assets
-import bannerPic from '../assets/images/banner.png';
+import bannerPicLarge from '@/assets/images/bannerLarge.png';
+import bannerPicSmall from '@/assets/images/bannerSmall.png';
 
 // Components
 import Categories from '@/components/pages/home/categories/categories';
@@ -23,7 +24,8 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
    return (
       <div className="pb-20">
          <div className="customMd:bg-customOrange customMd:p-[60px]">
-            <Image src={bannerPic} alt="banner" className="size-full" />
+            <Image src={bannerPicLarge} alt="banner" className="hidden size-full customMd:block" />
+            <Image src={bannerPicSmall} alt="banner" className="mt-7 size-full customMd:hidden" />
          </div>
          <div className="mt-14 px-5 customMd:px-[60px]">
             <Categories haveTitle categoryList={categoryList} />

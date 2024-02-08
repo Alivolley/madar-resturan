@@ -19,7 +19,9 @@ import BestCommentsStyle from './best-comments.style';
 function BestComments({ detail }) {
    return (
       <BestCommentsStyle>
-         <p className="mb-8 text-center font-elMessiri text-3xl font-bold">نظر مشتریان رستوران مادر چیست ؟</p>
+         <p className="mb-8 text-center font-elMessiri text-lg font-bold customMd:text-3xl">
+            نظر مشتریان رستوران مادر چیست ؟
+         </p>
          <Swiper
             navigation
             pagination={{ clickable: true }}

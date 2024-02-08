@@ -43,10 +43,8 @@ function FoodCardSecondTemplate({ className, detail }) {
          <Link href={`/product/${detail?.title}`} className="relative block h-[175px] w-[184px]">
             <Image src={detail?.cover || noImage} alt="food" className="size-full rounded-xl object-cover" fill />
             {detail?.percentage !== 0 && (
-               <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5 pt-1 text-xs">
-                  <div>
-                     <Image src={discountShape} alt="discount" />
-                  </div>
+               <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1.5 py-0.5 text-xs">
+                  <Image src={discountShape} alt="discount" />
                   <p>{detail?.percentage.toLocaleString('fa-IR')}٪</p>
                </div>
             )}
@@ -54,7 +52,7 @@ function FoodCardSecondTemplate({ className, detail }) {
          <div className="w-[184px]">
             <Link
                href={`/product/${detail?.title}`}
-               className="my-3 h-4 overflow-hidden font-elMessiri font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]"
+               className="mb-3 mt-1 h-[29px] overflow-hidden text-base font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]"
                title={detail?.title}
             >
                {detail?.title}

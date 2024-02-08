@@ -192,7 +192,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
             <Grid item xs={12} md={6}>
                <div className="mt-14 flex h-full flex-col customMd:mt-0">
                   <div className="flex items-center justify-between customMd:flex-col-reverse customMd:items-start customMd:gap-3">
-                     <p className="font-elMessiri text-lg font-bold customMd:text-2xl">{productDetail?.title}</p>
+                     <p className="text-lg font-bold customMd:text-3xl">{productDetail?.title}</p>
                      <div className="flex items-center gap-2 whitespace-nowrap">
                         <div className="text-[#E394AA]">
                            <ForumOutlinedIcon fontSize="inherit" color="inherit" />
@@ -201,11 +201,9 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            {commentsData?.[0]?.total_objects} دیدگاه
                         </p>
 
-                        <div className="flex items-center whitespace-nowrap rounded-md bg-[#FFFAE2] px-1 pt-0.5">
+                        <div className="flex items-center whitespace-nowrap rounded-md bg-[#FFFAE2] px-1 py-0.5">
                            <p className="font-rokhFaNum text-xs text-gold">{productDetail?.average_score}</p>
-                           <div>
-                              <StarOutlinedIcon fontSize="inherit" color="gold" />
-                           </div>
+                           <StarOutlinedIcon fontSize="inherit" color="gold" />
                         </div>
                      </div>
                   </div>
@@ -227,10 +225,10 @@ function ProductDetail({ productDetail, categoryItems, error }) {
 
                      {productDetail?.percentage ? (
                         <div className="flex items-center justify-end gap-2">
-                           <p className="rounded-md bg-[#C1F7EE] px-1 pt-1 font-rokhFaNum text-xs text-[#139983]">
+                           <p className="rounded-md bg-[#C1F7EE] px-1 py-0.5 font-rokhFaNum text-xs text-[#139983]">
                               {productDetail?.percentage}٪
                            </p>
-                           <p className="font-rokhFaNum text-sm font-bold text-[#8F0E0E] line-through">
+                           <p className="font-rokhFaNum text-xs font-bold text-[#8F0E0E] line-through">
                               {Number(productDetail?.before_discount_price).toLocaleString('fa-IR')} تومان
                            </p>
                         </div>
@@ -251,7 +249,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            >
                               <AddIcon color="customOrange" className="!text-sm" />
                            </IconButton>
-                           <p className="pt-1.5 font-rokhFaNum text-xl font-bold">
+                           <p className="font-rokhFaNum text-xl font-bold">
                               {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
                            </p>
                            <IconButton
@@ -267,7 +265,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                               )}
                            </IconButton>
                         </div>
-                        <div className="mt-2 flex items-center gap-1 rounded bg-[#C1F7EE] px-3 pt-1 text-lg font-bold text-[#139983] customMd:text-xl">
+                        <div className="mt-2 flex items-center gap-1 rounded bg-[#C1F7EE] px-3 py-0.5 text-lg font-bold text-[#139983]">
                            <p>{Number(productDetail?.price).toLocaleString('fa-IR')}</p>
                            <p>تومان</p>
                         </div>

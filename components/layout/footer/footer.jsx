@@ -37,11 +37,11 @@ function Footer() {
          <div className="mt-10 flex justify-between gap-10 customLg:gap-[300px]">
             <div className="flex gap-32 2xl:gap-[400px]">
                <div>
-                  <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">دسته بندی های رستوران</p>
+                  <p className="mb-6 whitespace-nowrap font-bold">دسته بندی های رستوران</p>
                   <div className="flex gap-10">
                      <div className="flex flex-col gap-4">
                         <Link
-                           className="whitespace-nowrap hover:font-bold hover:text-[#B31111]"
+                           className="whitespace-nowrap text-sm hover:font-bold hover:text-[#B31111]"
                            href="/category/منوی روز/1"
                         >
                            منوی روز
@@ -50,7 +50,7 @@ function Footer() {
                            (item, index) =>
                               index < 4 && (
                                  <Link
-                                    className="whitespace-nowrap hover:font-bold hover:text-[#B31111]"
+                                    className="whitespace-nowrap text-sm hover:font-bold hover:text-[#B31111]"
                                     href={`/category/${item?.title}/1`}
                                     key={item?.id}
                                  >
@@ -64,7 +64,7 @@ function Footer() {
                            (item, index) =>
                               index >= 4 && (
                                  <Link
-                                    className="whitespace-nowrap hover:font-bold hover:text-[#B31111]"
+                                    className="whitespace-nowrap text-sm hover:font-bold hover:text-[#B31111]"
                                     href={`/category/${item?.title}/1`}
                                     key={item?.id}
                                  >
@@ -76,46 +76,50 @@ function Footer() {
                   </div>
                </div>
                <div>
-                  <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">اطلاعات رستوران مادر</p>
+                  <p className="mb-6 whitespace-nowrap font-bold">اطلاعات رستوران مادر</p>
                   <div className="flex flex-col gap-4">
-                     <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/">
+                     <Link className="whitespace-nowrap text-sm hover:font-bold hover:text-[#B31111]" href="/">
                         خانه
                      </Link>
-                     <Link className="whitespace-nowrap hover:font-bold hover:text-[#B31111]" href="/contactUs">
+                     <Link className="whitespace-nowrap text-sm hover:font-bold hover:text-[#B31111]" href="/contactUs">
                         ارتباط با ما
                      </Link>
                   </div>
                </div>
             </div>
             <div className="customXl:grow">
-               <p className="mb-6 whitespace-nowrap font-elMessiri font-bold">اطلاعات تماس</p>
+               <p className="mb-6 whitespace-nowrap font-bold">اطلاعات تماس</p>
                <div className="flex gap-10">
                   <div className="flex flex-col gap-9">
-                     <div className="flex items-center gap-2 whitespace-nowrap">
-                        <p className="text-[#8F0E0E]">
+                     <div className="flex items-center gap-2 whitespace-nowrap text-sm">
+                        <p className="flex items-center justify-center text-[#8F0E0E]">
                            <MyLocationIcon color="inherit" fontSize="inherit" />
                         </p>
                         آدرس :
                      </div>
-                     <div className="flex items-center gap-2 whitespace-nowrap">
-                        <p className="text-[#8F0E0E]">
+                     <div className="flex items-center gap-2 whitespace-nowrap text-sm">
+                        <p className="flex items-center justify-center text-[#8F0E0E]">
                            <PhoneOutlinedIcon color="inherit" fontSize="inherit" />
                         </p>
                         شماره تماس :
                      </div>
                   </div>
-                  <div className="flex flex-col gap-8">
-                     <address className="h-8 text-base">
+                  <div className="flex flex-col gap-6">
+                     <address className="h-8 text-sm">
                         کرمانشاه - کارمندان - ایستگاه ۵ - خیابان عصر انقلاب - روبروی استخر پاسارگاد
                      </address>
-                     <a className="text-right hover:font-bold hover:text-[#B31111]" href="tel:09376028877" dir="ltr">
+                     <a
+                        className="text-right text-sm hover:font-bold hover:text-[#B31111]"
+                        href="tel:09376028877"
+                        dir="ltr"
+                     >
                         ۰۹۳۷ ۶۰۲ ۸۸۷۷
                      </a>
                   </div>
                </div>
             </div>
          </div>
-         <div className="mt-12 flex items-center justify-between">
+         <div className="mt-8 flex items-center justify-between">
             <p className="text-xs text-[#7E8AAB]">
                طراحی و توسعه این سایت توسط تیم{' '}
                <a

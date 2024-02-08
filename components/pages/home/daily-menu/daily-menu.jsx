@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 // Assets
-import testPic1 from '../../../../assets/images/some.png';
+import testPic1 from '@/assets/images/some.png';
 
 // Components
 import FoodCardFirstTemplate from '@/components/templates/food-card-first-template/food-card-first-template';

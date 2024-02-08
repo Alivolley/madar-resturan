@@ -60,10 +60,8 @@ function FoodCardThirdTemplate({ className, details }) {
          >
             <Image src={details?.cover || noImage} alt="food" className="size-full rounded-xl object-cover" fill />
             {details?.percentage !== 0 && (
-               <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1 pt-1 text-10">
-                  <div>
-                     <Image src={discountShape} alt="discount" />
-                  </div>
+               <div className="absolute right-1 top-1 flex items-center rounded-10 bg-[#C1F7EE] px-1 py-0.5 text-10">
+                  <Image src={discountShape} alt="discount" />
                   <p>{details?.percentage?.toLocaleString('fa-IR')}٪</p>
                </div>
             )}
@@ -71,7 +69,7 @@ function FoodCardThirdTemplate({ className, details }) {
          <div className="mr-2 grow">
             <Link
                href={`/product/${details?.title}`}
-               className="my-3 h-4 overflow-hidden font-elMessiri text-sm font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]"
+               className="mb-3 mt-1 h-[23px] overflow-hidden text-sm font-bold [-webkit-box-orient:vertical] [-webkit-line-clamp:1] [display:-webkit-box]"
                title={details?.title}
             >
                {details?.title}
@@ -105,7 +103,7 @@ function FoodCardThirdTemplate({ className, details }) {
                >
                   <AddIcon color="customOrange" className="!text-sm" />
                </IconButton>
-               <p className="pt-1.5 font-rokhFaNum font-bold">
+               <p className="font-rokhFaNum font-bold">
                   {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
                </p>
                <IconButton
