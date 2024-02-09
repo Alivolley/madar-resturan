@@ -2,21 +2,25 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Redux
+import { useSelector } from 'react-redux';
+
 // MUI
 import { Badge } from '@mui/material';
 
 // Icons
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import IsoIcon from '@mui/icons-material/Iso';
 
 // Assets
-import footerBasket from '../../../assets/icons/footer/footer-basket.svg';
-import footerBasketActive from '../../../assets/icons/footer/footer-basket-active.svg';
-import footerHome from '../../../assets/icons/footer/footer-home.svg';
-import footerHomeActive from '../../../assets/icons/footer/footer-home-active.svg';
-import footerMenu from '../../../assets/icons/footer/footer-menu.svg';
-import footerMenuActive from '../../../assets/icons/footer/footer-menu-active.svg';
-import footerProfile from '../../../assets/icons/footer/footer-profile.svg';
-import footerProfileActive from '../../../assets/icons/footer/footer-profile-active.svg';
+import footerBasket from '@/assets/icons/footer/footer-basket.svg';
+import footerBasketActive from '@/assets/icons/footer/footer-basket-active.svg';
+import footerHome from '@/assets/icons/footer/footer-home.svg';
+import footerHomeActive from '@/assets/icons/footer/footer-home-active.svg';
+import footerMenu from '@/assets/icons/footer/footer-menu.svg';
+import footerMenuActive from '@/assets/icons/footer/footer-menu-active.svg';
+import footerProfile from '@/assets/icons/footer/footer-profile.svg';
+import footerProfileActive from '@/assets/icons/footer/footer-profile-active.svg';
 
 // Apis
 import useGetBasket from '@/apis/basket/useGetBasket';
@@ -37,6 +41,7 @@ const badgeStyles = {
 function MobileFooter({ isLogin }) {
    const router = useRouter();
    const { data: basketData } = useGetBasket(isLogin);
+   const userInfo = useSelector(state => state?.userInfoReducer);
 
    return (
       <footer className="fixed inset-x-0 bottom-0 z-[2] bg-white">
@@ -96,6 +101,15 @@ function MobileFooter({ isLogin }) {
                      />
                   </div>
                   {router.pathname.startsWith('/profile') && <p className="text-xs text-[#FCA95C]">پروفایل</p>}
+               </Link>
+            )}
+
+            {userInfo?.is_admin && (
+               <Link href="/adminPanel/products" className="flex flex-1 flex-col items-center">
+                  <div className="text-[#626E94]">
+                     <IsoIcon />
+                  </div>
+                  {router.pathname.startsWith('/adminPanel') && <p className="text-xs text-[#FCA95C]">پنل ادمین</p>}
                </Link>
             )}
          </div>

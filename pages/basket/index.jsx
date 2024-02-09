@@ -60,7 +60,7 @@ function Basket() {
          {basketData?.orders?.length ? (
             <>
                {basketStep === 1 ? (
-                  <div className="flex items-center justify-between rounded-2xl rounded-br-none bg-white px-8 py-4">
+                  <div className="flex items-center justify-between rounded-2xl rounded-br-none bg-white px-8 py-2">
                      <div className="flex items-end gap-1">
                         <div className="size-5">
                            <Image src={basketIcon} alt="basket Icon" className="size-full" />
@@ -74,10 +74,11 @@ function Basket() {
                               width: '40px',
                               height: '40px',
                               borderRadius: '10px',
+                              color: '#7E8AAB',
                            }}
                            onClick={() => setShowDeleteBasketModal(true)}
                         >
-                           <DeleteForeverOutlinedIcon sx={{ color: '#7E8AAB' }} />
+                           <DeleteForeverOutlinedIcon />
                         </Fab>
                      </div>
                   </div>
@@ -105,7 +106,7 @@ function Basket() {
                         <div className="size-[70px] rounded-full bg-buttonPink p-4">
                            <Image src={infoIcon} alt="basket step" className="size-full" />
                         </div>
-                        <p className="text-xs font-bold text-customOrange2">اطلاعات مشتری</p>
+                        <p className="text-center text-xs font-bold text-customOrange2">اطلاعات مشتری</p>
                      </div>
 
                      <div className="mb-5 h-[1px] w-32 bg-customOrange2 customMd:mx-8" />

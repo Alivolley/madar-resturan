@@ -18,7 +18,7 @@ import useGetAddress from '@/apis/profile/useGetAddress';
 
 function Address() {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
-   const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
+   const { data: addressData, isLoading: addressIsLoading } = useGetAddress(true);
 
    return (
       <ProfileLayout>
@@ -37,9 +37,9 @@ function Address() {
                      <div className="hidden customMd:block">
                         <RtlProvider>
                            <Button
-                              className="!text-customOrange2"
                               startIcon={<AddIcon />}
                               onClick={() => setShowBasketAddressModal(true)}
+                              color="black"
                            >
                               افزودن آدرس جدید
                            </Button>

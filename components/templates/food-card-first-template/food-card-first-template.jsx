@@ -71,7 +71,7 @@ function FoodCardFirstTemplate({ className, detail }) {
          </Link>
          <Link
             href={`/product/${detail?.title}`}
-            className="mt-2 block h-5 text-left font-rokhFaNum text-sm font-bold text-[#D39090] line-through"
+            className="mt-2 block h-5 text-left font-rokhFaNum text-xs font-bold text-[#D39090] line-through customSm:text-sm"
          >
             {detail?.percentage ? Number(detail?.before_discount_price).toLocaleString('fa-IR') : null}
          </Link>
@@ -85,16 +85,17 @@ function FoodCardFirstTemplate({ className, detail }) {
                   padding: 0,
                   height: 25,
                   width: 30,
+                  color: '#FB9B40',
                }}
                onClick={addToBasketHandler}
                loading={addToBasketIsMutating}
                disabled={detail?.stock === basketQuantity || detail?.stock === 0}
             >
-               <AddIcon color="customOrange" fontSize="small" />
+               <AddIcon fontSize="small" />
             </LoadingButton>
             <Link
                href={`/product/${detail?.title}`}
-               className="mt-2 flex h-[25px] items-center gap-1 rounded bg-[#C1F7EE] px-2 text-sm text-[#139983]"
+               className="mt-2 flex h-[25px] items-center gap-1 rounded bg-[#C1F7EE] px-1 text-xs text-[#139983] customSm:px-2 customSm:text-sm"
             >
                <p>{Number(detail?.price).toLocaleString('fa-IR')}</p>
                <p>تومان</p>

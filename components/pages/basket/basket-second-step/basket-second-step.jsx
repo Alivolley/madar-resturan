@@ -25,7 +25,7 @@ function BasketSecondStep({
    setDescriptionValue,
 }) {
    const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
-   const { data: addressData, isLoading: addressIsLoading } = useGetAddress();
+   const { data: addressData, isLoading: addressIsLoading } = useGetAddress(true);
 
    useEffect(() => {
       if (addressData?.length === 1) {
@@ -37,7 +37,7 @@ function BasketSecondStep({
 
    return (
       <section className="mb-7 customMd:mb-0">
-         <div className="flex flex-col gap-7 rounded-2xl bg-white px-8 py-4 customMd:flex-row customMd:justify-between">
+         <div className="flex flex-col gap-7 rounded-t-2xl border-b-[5px] border-solid border-[#E4EAF0] bg-white px-8 py-4 customMd:flex-row customMd:justify-between">
             <div>
                <p className="flex items-center font-bold">
                   <LocalShippingOutlinedIcon fontSize="small" className="ml-2" /> روش تحویل سفارش
@@ -90,7 +90,7 @@ function BasketSecondStep({
                   </div>
                ) : (
                   <>
-                     <div className="flex items-center justify-between border-t-[5px] border-solid border-[#E4EAF0] px-8 py-4">
+                     <div className="my-4 flex items-center justify-between rounded-10 bg-white px-8 py-4">
                         <div>
                            <div className="flex items-center gap-2 font-bold">
                               <MyLocationIcon fontSize="small" />
@@ -101,9 +101,9 @@ function BasketSecondStep({
                         <div className="hidden customMd:block">
                            <RtlProvider>
                               <Button
-                                 className="!text-[#626E94]"
                                  endIcon={<AddIcon />}
                                  onClick={() => setShowBasketAddressModal(true)}
+                                 color="textGray"
                               >
                                  افزودن آدرس جدید
                               </Button>
@@ -153,7 +153,7 @@ function BasketSecondStep({
                   </>
                ))}
 
-            <div className="mt-4 border-t-[5px] border-solid border-[#E4EAF0] bg-white px-1 py-4">
+            <div className="mt-4 rounded-b-10 border-t-[5px] border-solid border-[#E4EAF0] bg-white px-6 py-4">
                <RtlProvider>
                   <TextField
                      label="توضیحات سفارش ( اختیاری )"

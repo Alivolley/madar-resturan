@@ -34,11 +34,12 @@ function Categories({ haveTitle, categoryList, activeCategory, shouldNotScroll }
          <div className="flex flex-wrap items-center justify-center gap-1.5 customSm:gap-2 customMd:gap-4">
             <Link
                href="/category/منوی روز/1"
-               className={`flex flex-col items-center space-y-4 transition-all duration-200 customMd:flex-1 customMd:space-y-5 customMd:rounded-10 customMd:py-2 ${
-                  activeCategory === 'منوی روز'
-                     ? 'customMd:bg-crimson customMd:text-white'
-                     : 'customMd:bg-white customMd:hover:bg-crimson customMd:hover:text-white'
-               }`}
+               className={`mt-[-8px] flex flex-col items-center space-y-2 transition-all duration-200
+                customMd:mt-0 customMd:flex-1 customMd:space-y-5 customMd:rounded-10 customMd:py-2 ${
+                   activeCategory === 'منوی روز'
+                      ? 'customMd:bg-crimson customMd:text-white'
+                      : 'customMd:bg-white customMd:hover:bg-crimson customMd:hover:text-white'
+                }`}
                {...(shouldNotScroll && {
                   scroll: false,
                })}
@@ -55,7 +56,7 @@ function Categories({ haveTitle, categoryList, activeCategory, shouldNotScroll }
                <Link
                   key={item?.id}
                   href={`/category/${item?.title}/1`}
-                  className={`flex flex-col items-center space-y-4 transition-all duration-200 customMd:flex-1 customMd:space-y-5 customMd:rounded-10 customMd:py-2 ${
+                  className={`flex flex-col items-center space-y-2 transition-all duration-200 customMd:flex-1 customMd:space-y-5 customMd:rounded-10 customMd:py-2 ${
                      activeCategory === item?.title
                         ? 'customMd:bg-crimson customMd:text-white'
                         : 'customMd:bg-white customMd:hover:bg-crimson customMd:hover:text-white'

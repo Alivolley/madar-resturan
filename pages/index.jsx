@@ -27,21 +27,21 @@ export default function Home({ categoryList, foodPartyList, dailyMenuList, lastC
             <Image src={bannerPicLarge} alt="banner" className="hidden size-full customMd:block" />
             <Image src={bannerPicSmall} alt="banner" className="mt-7 size-full customMd:hidden" />
          </div>
-         <div className="mt-14 px-5 customMd:px-[60px]">
+         <div className="mt-10 px-5 customMd:mt-14 customMd:px-[60px]">
             <Categories haveTitle categoryList={categoryList} />
          </div>
          {foodPartyList?.result?.length ? (
-            <div className="mt-28 customMd:px-[60px]">
+            <div className="mt-16 customMd:mt-28 customMd:px-[60px]">
                <FoodParty foodPartyList={foodPartyList} />
             </div>
          ) : null}
-         <div className="mt-28">
+         <div className="mt-16 customMd:mt-28">
             <OurRestaurantSwiper />
          </div>
-         <div className="mt-28 px-5 customMd:px-[60px]">
+         <div className="mt-16 px-5 customMd:mt-28 customMd:px-[60px]">
             <DailyMenu dailyMenuList={dailyMenuList} />
          </div>
-         <div className="mt-28">
+         <div className="mt-20 customMd:mt-28">
             <BestComments detail={lastComments?.result} />
          </div>
       </div>

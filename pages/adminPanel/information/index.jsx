@@ -89,7 +89,7 @@ function Information() {
                         />
                      </div>
                      <IconButton
-                        className="absolute bottom-0 left-0 cursor-pointer bg-customOrange"
+                        className="!absolute !bottom-0 !left-0 !cursor-pointer !bg-customOrange"
                         sx={{ width: '33px', height: '33px' }}
                      >
                         <BorderColorIcon fontSize="small" />

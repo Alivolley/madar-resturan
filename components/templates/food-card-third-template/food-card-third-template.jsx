@@ -92,7 +92,7 @@ function FoodCardThirdTemplate({ className, details }) {
             <div className="mt-4 flex items-center gap-1.5">
                <IconButton
                   className="!border !border-solid !border-customOrange"
-                  sx={{ width: '18px', height: '18px' }}
+                  sx={{ width: '20px', height: '20px', color: '#FB9B40' }}
                   onClick={addToBasketHandler}
                   disabled={
                      addToBasketIsMutating ||
@@ -101,26 +101,22 @@ function FoodCardThirdTemplate({ className, details }) {
                      details?.stock === 0
                   }
                >
-                  <AddIcon color="customOrange" className="!text-sm" />
+                  <AddIcon className="!text-xl" />
                </IconButton>
                <p className="font-rokhFaNum font-bold">
                   {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
                </p>
                <IconButton
                   className={basketQuantity !== 1 ? '!border !border-solid !border-textGray' : ''}
-                  sx={{ width: '18px', height: '18px' }}
+                  sx={{ width: '20px', height: '20px', color: '#6E7E85' }}
                   onClick={removeFromBasketHandler}
                   disabled={addToBasketIsMutating || removeFromBasketIsMutating || !basketQuantity}
                >
-                  {basketQuantity === 1 ? (
-                     <DeleteOutlineOutlinedIcon />
-                  ) : (
-                     <RemoveIcon color="textGray" className="!text-sm" />
-                  )}
+                  {basketQuantity === 1 ? <DeleteOutlineOutlinedIcon /> : <RemoveIcon className="!text-xl" />}
                </IconButton>
             </div>
          </div>
-         <div className="flex flex-col justify-end">
+         <div className="flex flex-col justify-end customSm:pe-3">
             <Link
                href={`/product/${details?.title}`}
                className="block h-4 text-left font-rokhFaNum text-xs font-bold text-[#D39090] line-through"

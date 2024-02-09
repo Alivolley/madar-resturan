@@ -76,7 +76,7 @@ function Comment({ detail, commentsMutate }) {
                            !userInfo?.permissions?.includes(permissions?.REPLY_ON_COMMENT?.PATCH)
                         }
                      >
-                        <QuickreplyOutlinedIcon className="!text-base" />
+                        <QuickreplyOutlinedIcon className="!text-lg" />
                      </IconButton>
                      <IconButton
                         color="customOrange"
@@ -87,7 +87,7 @@ function Comment({ detail, commentsMutate }) {
                            !userInfo?.permissions?.includes(permissions?.DELETE_COMMENT?.DELETE)
                         }
                      >
-                        <DeleteForeverOutlinedIcon className="!text-base" />
+                        <DeleteForeverOutlinedIcon className="!text-lg" />
                      </IconButton>
                   </div>
                )}
@@ -96,7 +96,7 @@ function Comment({ detail, commentsMutate }) {
             <pre className="m-6 whitespace-normal text-base text-textGray">{detail?.message}</pre>
          </div>
          {detail?.reply_message && (
-            <div className="relative mr-5 mt-6 rounded-b-10 bg-[#391C01] p-5 text-white customXs:mr-16 customMd:mr-24">
+            <div className="relative mr-5 mt-6 rounded-b-10 rounded-tl-10 bg-[#391C01] p-5 text-white customXs:mr-16 customMd:mr-24">
                <div className="flex gap-3">
                   <div className="relative size-10 shrink-0 rounded-full border border-solid border-gray-400 customMd:size-14">
                      <Image

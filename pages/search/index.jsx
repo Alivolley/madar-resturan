@@ -107,8 +107,8 @@ function Search({ searchResultList, error }) {
                ))
             )}
          </div>
-         {searchResultList?.total_objects !== 0 && (
-            <div className="flex items-center justify-center py-16">
+         <div className="flex items-center justify-center py-16">
+            {searchResultList?.total_objects !== 0 && searchResultList?.total_pages > 1 && (
                <Pagination
                   count={searchResultList?.total_pages}
                   variant="outlined"
@@ -116,8 +116,8 @@ function Search({ searchResultList, error }) {
                   page={Number(router?.query?.page)}
                   onChange={changePageHandler}
                />
-            </div>
-         )}
+            )}
+         </div>
       </main>
    );
 }

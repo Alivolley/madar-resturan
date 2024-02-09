@@ -35,8 +35,6 @@ function BasketDescription({ basketStep, setBasketStep, detail, chosenAddress, d
       }
    };
 
-   console.log(detail);
-
    return (
       <div className={`rounded-2xl bg-white ${basketStep === 1 ? 'mt-3' : ''}`}>
          <p className="p-5 text-center">خلاصه سفارش</p>

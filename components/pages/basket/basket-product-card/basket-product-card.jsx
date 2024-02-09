@@ -72,7 +72,7 @@ function BasketProductCard({ detail }) {
             <div className="flex items-center justify-center gap-2">
                <IconButton
                   className="!border !border-solid !border-customOrange"
-                  sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
+                  sx={{ width: { xs: '15px', md: '24px' }, height: { xs: '15px', md: '24px' }, color: '#FB9B40' }}
                   onClick={addToBasketHandler}
                   disabled={
                      addToBasketIsMutating ||
@@ -80,34 +80,30 @@ function BasketProductCard({ detail }) {
                      detail?.product?.product_stock === detail?.count
                   }
                >
-                  <AddIcon color="customOrange" className="!text-sm" />
+                  <AddIcon className="!text-xl" />
                </IconButton>
                <p className="font-rokhFaNum text-sm font-bold customMd:text-xl">
                   {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : detail?.count}
                </p>
                <IconButton
                   className={detail?.count === 1 ? '' : '!border !border-solid !border-textGray'}
-                  sx={{ width: { xs: '15px', md: '22px' }, height: { xs: '15px', md: '22px' } }}
+                  sx={{ width: { xs: '15px', md: '24px' }, height: { xs: '15px', md: '24px' }, color: '#6E7E85' }}
                   onClick={removeFromBasketHandler}
                   disabled={addToBasketIsMutating || removeFromBasketIsMutating}
                >
-                  {detail?.count === 1 ? (
-                     <DeleteOutlineOutlinedIcon />
-                  ) : (
-                     <RemoveIcon color="textGray" className="!text-sm" />
-                  )}
+                  {detail?.count === 1 ? <DeleteOutlineOutlinedIcon /> : <RemoveIcon className="!text-xl" />}
                </IconButton>
             </div>
          </div>
 
-         <div className="flex flex-1 flex-col items-end">
+         <div className="flex flex-1 flex-col items-end customMd:pe-4">
             {detail?.percentage !== 0 ? (
                <div className="flex items-center gap-0.5 customMd:gap-2">
                   <p className="rounded-md bg-[#FCB777] px-1 py-0.5 font-rokhFaNum text-[8px] customMd:text-10">
                      {detail?.percentage}٪
                   </p>
                   <p className="font-rokhFaNum text-10 font-bold text-[#D39090] line-through">
-                     {Number(detail?.before_discount_price).toLocaleString('fa-IR')} تومان
+                     {Number(detail?.before_discount_price).toLocaleString('fa-IR')}
                   </p>
                </div>
             ) : null}

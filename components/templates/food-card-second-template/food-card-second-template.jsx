@@ -88,12 +88,13 @@ function FoodCardSecondTemplate({ className, detail }) {
                         padding: 0,
                         height: 25,
                         width: 30,
+                        color: '#FB9B40',
                      }}
                      onClick={addToBasketHandler}
                      loading={addToBasketIsMutating}
                      disabled={detail?.stock === basketQuantity || detail?.stock === 0}
                   >
-                     <AddIcon color="customOrange" fontSize="small" />
+                     <AddIcon fontSize="small" />
                   </LoadingButton>
                   <Link
                      href={`/product/${detail?.title}`}

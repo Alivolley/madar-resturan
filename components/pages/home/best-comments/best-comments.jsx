@@ -56,7 +56,7 @@ function BestComments({ detail }) {
             {detail?.map(item => (
                <SwiperSlide key={item?.id}>
                   <div className="flex justify-center">
-                     <div className="flex flex-col gap-4 rounded-10 bg-white p-3 customMd:w-[650px] customMd:flex-row customMd:px-14 customMd:py-9">
+                     <div className="flex min-w-[230px] flex-col gap-4 rounded-10 bg-white p-3 customMd:w-[650px] customMd:flex-row customMd:px-14 customMd:py-9">
                         <div className="flex flex-col items-center">
                            <div className="relative flex size-20 items-center justify-center rounded-full border border-solid border-stone-300">
                               <Image

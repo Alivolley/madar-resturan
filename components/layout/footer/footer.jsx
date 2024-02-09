@@ -22,16 +22,16 @@ function Footer() {
    const { data: categoryList } = useCategories();
 
    return (
-      <footer className="mt-7 px-5 pb-6 customMd:px-[60px]">
+      <footer className="bg-[#FDD4AD] px-5 pb-6 pt-7 customMd:px-[60px]">
          <div className="flex items-center gap-4">
             <Link href="/" className="flex items-center gap-3">
                <Image src={footerLogo} alt="footer logo" />
                <div className="space-y-1">
                   <p className="font-elMessiri text-lg font-bold text-[#8F0E0E]">رستوران مادر</p>
-                  <p className="text-sm text-[#626E94]">غذاهای لذیذ و خانگی</p>
+                  <p className="text-sm">غذاهای لذیذ و خانگی</p>
                </div>
             </Link>
-            <div className="h-[1px] grow bg-[#BDCEDE]" />
+            <div className="h-[1px] grow bg-white" />
          </div>
 
          <div className="mt-10 flex justify-between gap-10 customLg:gap-[300px]">
@@ -120,7 +120,7 @@ function Footer() {
             </div>
          </div>
          <div className="mt-8 flex items-center justify-between">
-            <p className="text-xs text-[#7E8AAB]">
+            <p className="text-xs">
                طراحی و توسعه این سایت توسط تیم{' '}
                <a
                   href="https://neuro-code.ir/"

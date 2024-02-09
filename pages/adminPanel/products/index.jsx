@@ -181,7 +181,7 @@ function Products() {
                            className="!min-w-0 !justify-normal !rounded-10 !bg-[#F7F9FC] !px-0 !font-bold !text-[#713802]"
                            onClick={() => setShowAddEditCategoryModal(true)}
                         >
-                           <div className="flex w-full items-center justify-between px-1 py-3">
+                           <div className="flex w-full items-center justify-between px-1 py-3 !text-[#713802]">
                               <div className="flex items-center gap-2">
                                  <PlaylistAddIcon />
                                  <p>افزودن دسته بندی</p>

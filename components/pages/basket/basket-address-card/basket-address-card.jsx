@@ -45,10 +45,10 @@ function BasketAddressCard({ isClickable = false, detail, onClick = () => {}, is
 
          <div className="flex items-center">
             <IconButton onClick={() => setShowBasketAddressModal(true)}>
-               <BorderColorIcon className="!text-sm" />
+               <BorderColorIcon className="!text-base" />
             </IconButton>
             <IconButton onClick={() => setShowDeleteAddressModal(true)}>
-               <DeleteForeverOutlinedIcon className="!text-base" />
+               <DeleteForeverOutlinedIcon className="!text-lg" />
             </IconButton>
          </div>
 

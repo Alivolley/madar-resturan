@@ -20,10 +20,15 @@ const BestCommentsStyle = styled.div(() => ({
    '.swiper-button-prev,.swiper-button-next': {
       backgroundColor: '#ffffff',
       color: '#ff6600',
-      width: '60px',
-      height: '60px',
+      width: '35px',
+      height: '35px',
       borderRadius: '50%',
-      boxShadow: '0px 4px 25px 0px #93939314',
+      boxShadow: '0px 0px 15px 0px #00000050',
+
+      '@media screen and (min-width:900px)': {
+         width: '60px',
+         height: '60px',
+      },
 
       ':after': {
          fontSize: '16px',
@@ -32,12 +37,12 @@ const BestCommentsStyle = styled.div(() => ({
 
    '.swiper-button-next': {
       '@media screen and (min-width:1000px)': {
-         left: '20% !important',
+         left: '25% !important',
       },
    },
    '.swiper-button-prev': {
       '@media screen and (min-width:1000px)': {
-         right: '20% !important',
+         right: '25% !important',
       },
    },
 

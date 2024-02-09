@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 // MUI
-import { Badge, IconButton, Collapse, Button, Popper, Grow, Paper, ClickAwayListener } from '@mui/material';
+import { Badge, IconButton, Collapse, Button, Drawer, CircularProgress } from '@mui/material';
 
 // Icons
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
@@ -13,12 +13,8 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 import HistoryIcon from '@mui/icons-material/History';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
-import IsoIcon from '@mui/icons-material/Iso';
+import Add from '@mui/icons-material/Add';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -30,12 +26,16 @@ import starIcon from '@/assets/icons/star.svg';
 
 // Components
 import LogoutModal from '@/components/templates/logout-modal/logout-modal';
+import BasketAddressModal from '@/components/pages/basket/basket-address-modal/basket-address-modal';
+import RtlProvider from '../rtlProvider/rtlProvider';
 
 // Apis
 import useGetUserInfo from '@/apis/userInfo/useGetUserInfo';
 import useGetBasket from '@/apis/basket/useGetBasket';
 import useSearchHistory from '@/apis/userInfo/useSearchHistory';
 import useClearHistory from '@/apis/useClearHistory';
+import useGetAddress from '@/apis/profile/useGetAddress';
+import BasketAddressCard from '@/components/pages/basket/basket-address-card/basket-address-card';
 
 const badgeStyles = {
    '& .MuiBadge-badge': {
@@ -55,12 +55,15 @@ function MobileHeader({ isLogin }) {
    const [showSearchCollapse, setShowSearchCollapse] = useState(false);
    const [showLogoutModal, setShowLogoutModal] = useState(false);
    const [profileDropDown, setProfileDropDown] = useState(false);
+   const [showBasketAddressModal, setShowBasketAddressModal] = useState(false);
+
    const profileRef = useRef();
    const router = useRouter();
    const foodName = router.query.food_name;
    const userInfo = useSelector(state => state?.userInfoReducer);
    // eslint-disable-next-line no-unused-vars
    const getUserInfo = useGetUserInfo(isLogin);
+   const { data: addressData, isLoading: addressIsLoading } = useGetAddress(profileDropDown);
    const { data: basketData } = useGetBasket(isLogin);
    const { data: searchHistoryData } = useSearchHistory();
    const { trigger: clearHistoryTrigger, isMutating: clearHistoryIsMutating } = useClearHistory();
@@ -111,75 +114,49 @@ function MobileHeader({ isLogin }) {
                            />
                         </button>
 
-                        <Popper
-                           open={profileDropDown}
-                           anchorEl={profileRef.current}
-                           transition
-                           disablePortal
-                           sx={{
-                              zIndex: 1,
-                           }}
-                        >
-                           {({ TransitionProps, placement }) => (
-                              <Grow
-                                 {...TransitionProps}
-                                 style={{
-                                    transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-                                 }}
-                              >
-                                 <Paper>
-                                    <ClickAwayListener onClickAway={() => setProfileDropDown(false)}>
-                                       <div className="flex flex-col rounded-md bg-buttonPink">
-                                          <Link
-                                             href="/adminPanel/products"
-                                             className="flex gap-1 px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                                             onClick={() => setProfileDropDown(false)}
-                                          >
-                                             <IsoIcon fontSize="small" color="customOrange" />
-                                             پنل ادمین
-                                          </Link>
-                                          <Link
-                                             href="/profile/information"
-                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                                             onClick={() => setProfileDropDown(false)}
-                                          >
-                                             <PersonOutlinedIcon fontSize="small" color="customOrange" />
-                                             اطلاعات حساب
-                                          </Link>
-                                          <Link
-                                             href="/profile/address"
-                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                                             onClick={() => setProfileDropDown(false)}
-                                          >
-                                             <LocationOnOutlinedIcon fontSize="small" color="customOrange" />
-                                             آدرس های من
-                                          </Link>
-                                          <Link
-                                             href="/profile/orders"
-                                             className="flex gap-1 border-t border-solid border-[#E4EAF0] px-4 py-3 text-sm text-textOrange transition-all duration-150 hover:bg-buttonPink2"
-                                             onClick={() => setProfileDropDown(false)}
-                                          >
-                                             <AccountBalanceWalletOutlinedIcon fontSize="small" color="customOrange" />
-                                             پیگیری سفارش ها
-                                          </Link>
-                                          <Button
-                                             className="!flex !gap-1 !border-t !border-solid !border-[#E4EAF0] !px-4 !py-3 !text-sm 
-                                             !text-textOrange !transition-all !duration-150 hover:!bg-buttonPink2"
-                                             onClick={() => setShowLogoutModal(true)}
-                                          >
-                                             <LogoutOutlinedIcon
-                                                fontSize="small"
-                                                color="customOrange"
-                                                className="rotate-180"
-                                             />
-                                             خروج از حساب کاربری
-                                          </Button>
+                        <RtlProvider>
+                           <Drawer anchor="bottom" open={profileDropDown} onClose={() => setProfileDropDown(false)}>
+                              <div className="h-[350px] bg-white p-5 font-rokhRegular">
+                                 <div className="flex items-center justify-between">
+                                    <p>انتخاب آدرس</p>
+                                    <Button
+                                       size="small"
+                                       startIcon={<Add />}
+                                       color="black"
+                                       onClick={() => setShowBasketAddressModal(true)}
+                                    >
+                                       آدرس جدید
+                                    </Button>
+                                 </div>
+
+                                 <div className="mt-2 border-t border-solid border-[#B1B5C4]">
+                                    {addressIsLoading ? (
+                                       <div className="mt-4 flex items-center justify-center">
+                                          <CircularProgress color="customOrange2" />
                                        </div>
-                                    </ClickAwayListener>
-                                 </Paper>
-                              </Grow>
-                           )}
-                        </Popper>
+                                    ) : (
+                                       <div className="flex flex-col">
+                                          {addressData?.length ? (
+                                             addressData?.map(item => (
+                                                <BasketAddressCard key={item?.id} detail={item} />
+                                             ))
+                                          ) : (
+                                             <div className="my-10 space-y-3 text-center">
+                                                <p className="text-base font-bold">
+                                                   شما در حال حاضر آدرسی ثبت نکرده اید{' '}
+                                                </p>
+                                                <p className="text-xs">
+                                                   آدرس خود را به لیست آدرس ها اضافه کنید تا در زمان سفارش به راحتی،
+                                                   همیشه از آن استفاده کنید
+                                                </p>
+                                             </div>
+                                          )}
+                                       </div>
+                                    )}
+                                 </div>
+                              </div>
+                           </Drawer>
+                        </RtlProvider>
                      </div>
                   )}
                </div>
@@ -290,6 +267,7 @@ function MobileHeader({ isLogin }) {
             </div>
          </div>
          <LogoutModal show={showLogoutModal} onClose={() => setShowLogoutModal(false)} />
+         <BasketAddressModal show={showBasketAddressModal} onClose={() => setShowBasketAddressModal(false)} />
       </header>
    );
 }

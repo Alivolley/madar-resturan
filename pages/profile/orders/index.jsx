@@ -23,9 +23,9 @@ function Orders() {
 
    return (
       <ProfileLayout>
-         <p className="border-b border-solid border-[#E4EAF0] pb-4 font-bold">پیگیری سفارش</p>
+         <p className="pb-4 font-bold">پیگیری سفارش</p>
 
-         <div>
+         <div className="rounded-10 bg-[#F5F8FC] customLg:px-3">
             <RtlProvider>
                <Tabs
                   value={tabsValue}
@@ -73,7 +73,7 @@ function Orders() {
                   </p>
                )}
 
-               {cardsData?.total_objects !== 0 && (
+               {cardsData?.total_objects !== 0 && cardsData?.total_pages > 1 && (
                   <div className="flex items-center justify-center py-6">
                      <Pagination
                         count={cardsData?.total_pages}

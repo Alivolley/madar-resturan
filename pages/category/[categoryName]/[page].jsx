@@ -77,15 +77,17 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                         </div>
                      </div>
                   </div>
-                  <div className="my-16 flex items-center justify-center">
-                     <Pagination
-                        count={categoryItems?.total_pages}
-                        variant="outlined"
-                        color="customOrange2"
-                        page={Number(router?.query?.page)}
-                        onChange={changePageHandler}
-                     />
-                  </div>
+                  {categoryItems?.total_pages > 1 && (
+                     <div className="my-16 flex items-center justify-center">
+                        <Pagination
+                           count={categoryItems?.total_pages}
+                           variant="outlined"
+                           color="customOrange2"
+                           page={Number(router?.query?.page)}
+                           onChange={changePageHandler}
+                        />
+                     </div>
+                  )}
                </>
             )}
 
@@ -119,7 +121,10 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                         {router?.query?.categoryName}
                      </p>
                      {router?.query?.categoryName !== 'همه غذاها' && (
-                        <Link href="/category/همه غذاها/1" className="flex items-center gap-2 text-sm text-textGray">
+                        <Link
+                           href="/category/همه غذاها/1"
+                           className="flex items-center gap-2 text-sm text-textGray hover:text-[#FB9B40]"
+                        >
                            مشاهده همه غذاها
                            <KeyboardArrowLeftIcon fontSize="small" />
                         </Link>
@@ -140,16 +145,17 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                         </p>
                      )}
                   </div>
-
-                  <div className="mt-16 flex items-center justify-center">
-                     <Pagination
-                        count={categoryItems?.total_pages}
-                        variant="outlined"
-                        color="customOrange2"
-                        page={Number(router?.query?.page)}
-                        onChange={changePageHandler}
-                     />
-                  </div>
+                  {categoryItems?.total_pages > 1 && (
+                     <div className="mt-16 flex items-center justify-center">
+                        <Pagination
+                           count={categoryItems?.total_pages}
+                           variant="outlined"
+                           color="customOrange2"
+                           page={Number(router?.query?.page)}
+                           onChange={changePageHandler}
+                        />
+                     </div>
+                  )}
                </div>
             )}
             <div className="mt-16">
@@ -158,7 +164,10 @@ function Category({ categoryList, categoryItems, dailyMenu, error }) {
                      منوی روز
                   </p>
                   {router?.query?.categoryName !== 'همه غذاها' && (
-                     <Link href="/category/همه غذاها/1" className="flex items-center gap-2 text-sm text-textGray">
+                     <Link
+                        href="/category/همه غذاها/1"
+                        className="flex items-center gap-2 text-sm text-textGray hover:text-[#FB9B40]"
+                     >
                         مشاهده همه غذاها
                         <KeyboardArrowLeftIcon fontSize="small" />
                      </Link>

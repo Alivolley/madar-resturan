@@ -96,7 +96,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
    return (
       <main className="mx-auto max-w-[1300px] px-5 pb-32 pt-14 customMd:px-[60px]">
          <Grid container spacing={{ md: 6 }}>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={7}>
                <div className="customMd:h-[470px]">
                   <Grid container height="100%" spacing={{ md: 1.5 }}>
                      <Grid item xs={12} md={9} height="100%">
@@ -115,7 +115,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            {productDetail?.images?.[0]?.image && (
                               <button
                                  type="button"
-                                 className={`relative size-full border-none bg-none outline-none ${
+                                 className={`relative size-full cursor-pointer border-none bg-none outline-none ${
                                     productDetail?.images?.[0]?.id === chosenPicture?.id
                                        ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
                                        : ''
@@ -133,7 +133,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            {productDetail?.images?.[1]?.image && (
                               <button
                                  type="button"
-                                 className={`relative size-full border-none bg-none outline-none ${
+                                 className={`relative size-full cursor-pointer border-none bg-none outline-none ${
                                     productDetail?.images?.[1]?.id === chosenPicture?.id
                                        ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
                                        : ''
@@ -151,7 +151,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            {productDetail?.images?.[2]?.image && (
                               <button
                                  type="button"
-                                 className={`relative size-full border-none bg-none outline-none ${
+                                 className={`relative size-full cursor-pointer border-none bg-none outline-none ${
                                     productDetail?.images?.[2]?.id === chosenPicture?.id
                                        ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
                                        : ''
@@ -169,7 +169,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                            {productDetail?.images?.[3]?.image && (
                               <button
                                  type="button"
-                                 className={`relative size-full border-none bg-none outline-none ${
+                                 className={`relative size-full cursor-pointer border-none bg-none outline-none ${
                                     productDetail?.images?.[3]?.id === chosenPicture?.id
                                        ? 'rounded-lg !border-2 !border-solid !border-customOrange2'
                                        : ''
@@ -189,7 +189,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                   </Grid>
                </div>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={5}>
                <div className="mt-14 flex h-full flex-col customMd:mt-0">
                   <div className="flex items-center justify-between customMd:flex-col-reverse customMd:items-start customMd:gap-3">
                      <p className="text-lg font-bold customMd:text-3xl">{productDetail?.title}</p>
@@ -212,7 +212,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                      <p className="text-sm text-[#66839A] customMd:text-lg">{productDetail?.description}</p>
                   </div>
 
-                  <div className="mt-5 border-t border-solid border-[#B1B5C4] pt-5 customMd:mt-auto customMd:border-none">
+                  <div className="mt-5 border-t border-solid border-[#e4eaf0] pt-5 customMd:mt-auto customMd:border-none">
                      <div className="mb-2 items-center">
                         <p className="font-rokhFaNum text-xs font-bold text-[#8F0E0E]">
                            {productDetail?.stock === 0
@@ -238,7 +238,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                         <div className="flex items-center gap-1.5">
                            <IconButton
                               className="!border !border-solid !border-customOrange"
-                              sx={{ width: '22px', height: '22px' }}
+                              sx={{ width: '24px', height: '24px', color: '#FB9B40' }}
                               onClick={addToBasketHandler}
                               disabled={
                                  addToBasketIsMutating ||
@@ -247,21 +247,21 @@ function ProductDetail({ productDetail, categoryItems, error }) {
                                  productDetail?.stock === 0
                               }
                            >
-                              <AddIcon color="customOrange" className="!text-sm" />
+                              <AddIcon className="!text-xl" />
                            </IconButton>
                            <p className="font-rokhFaNum text-xl font-bold">
                               {addToBasketIsMutating || removeFromBasketIsMutating ? '...' : basketQuantity || 0}
                            </p>
                            <IconButton
                               className={basketQuantity !== 1 ? '!border !border-solid !border-textGray' : ''}
-                              sx={{ width: '22px', height: '22px' }}
+                              sx={{ width: '24px', height: '24px', color: '#6E7E85' }}
                               onClick={removeFromBasketHandler}
                               disabled={addToBasketIsMutating || removeFromBasketIsMutating || !basketQuantity}
                            >
                               {basketQuantity === 1 ? (
                                  <DeleteOutlineOutlinedIcon />
                               ) : (
-                                 <RemoveIcon color="textGray" className="!text-sm" />
+                                 <RemoveIcon className="!text-xl" />
                               )}
                            </IconButton>
                         </div>
@@ -418,7 +418,7 @@ function ProductDetail({ productDetail, categoryItems, error }) {
             </p>
             <Link
                href={`/category/${productDetail?.category}/1`}
-               className="hidden items-center gap-2 text-sm text-textGray customMd:flex"
+               className="hidden items-center gap-2 text-sm text-textGray hover:text-[#FB9B40] customMd:flex"
             >
                مشاهده همه
                <KeyboardArrowLeftIcon fontSize="small" />

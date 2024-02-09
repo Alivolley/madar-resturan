@@ -127,10 +127,11 @@ function ProfileLayout({ children }) {
                color="white"
                className="!rounded-10 !p-2"
                onClick={() => setShowLogoutModal(true)}
+               fullWidth
             >
-               <div className="flex w-full items-center gap-3">
+               <div className="flex w-full items-center gap-3 text-customOrange2 transition-all duration-200 hover:text-white">
                   <LogoutOutlinedIcon className="rotate-180 rounded-xl bg-customOrange2 p-2 text-white" />
-                  <p className="text-customOrange2">خروج از حساب کاربری</p>
+                  <p>خروج از حساب کاربری</p>
                </div>
             </Button>
          </aside>
