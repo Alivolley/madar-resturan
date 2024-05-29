@@ -9,7 +9,8 @@ const nextConfig = {
    images: {
       remotePatterns: [
          {
-            hostname: 'madarbackend.pythonanywhere.com',
+            protocol: 'https',
+            hostname: '**',
          },
       ],
    },
