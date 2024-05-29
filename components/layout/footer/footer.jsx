@@ -123,12 +123,12 @@ function Footer() {
             <p className="text-xs">
                طراحی و توسعه این سایت توسط تیم{' '}
                <a
-                  href="https://neuro-code.ir/"
+                  href="https://roadgraph.studio/"
                   target="_blank"
                   rel="noreferrer"
                   className="px-1 font-bold text-[#B31111]"
                >
-                  نورو کد
+                  رودگراف
                </a>{' '}
                میباشد .
             </p>
